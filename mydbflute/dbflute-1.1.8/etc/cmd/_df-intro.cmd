@@ -13,5 +13,5 @@ call %DBFLUTE_HOME%\ant\bin\ant -Ddfenv=%DBFLUTE_ENVIRONMENT_TYPE% -f %DBFLUTE_H
 call %DBFLUTE_HOME%\etc\cmd\_df-delete-extlib.cmd
 
 pushd ..\
-start /b cmd /c java -jar filmarks.dbflute-intro.jar
+start /b cmd /c java -jar dbflute-intro.jar
 popd

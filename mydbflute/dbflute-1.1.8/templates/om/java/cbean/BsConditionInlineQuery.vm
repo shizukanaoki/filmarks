@@ -18,12 +18,12 @@ ${database.allClassCopyright}package ${glPackageCIQ};
 #set ($myCQClassName = "${myBaseConditionQueryClassName}")
 
 import java.util.Map;
-import org.filmarks.dbflute.cbean.*;
-import org.filmarks.dbflute.cbean.ckey.*;
-import org.filmarks.dbflute.cbean.coption.ConditionOption;
-import org.filmarks.dbflute.cbean.cvalue.ConditionValue;
-import org.filmarks.dbflute.cbean.sqlclause.SqlClause;
-import org.filmarks.dbflute.exception.IllegalConditionBeanOperationException;
+import org.dbflute.cbean.*;
+import org.dbflute.cbean.ckey.*;
+import org.dbflute.cbean.coption.ConditionOption;
+import org.dbflute.cbean.cvalue.ConditionValue;
+import org.dbflute.cbean.sqlclause.SqlClause;
+import org.dbflute.exception.IllegalConditionBeanOperationException;
 import ${glPackageCB}.*;
 import ${glPackageBaseCQ}.*;
 import ${glPackageCQ}.*;

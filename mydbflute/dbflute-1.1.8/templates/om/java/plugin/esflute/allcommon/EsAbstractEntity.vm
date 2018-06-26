@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-import org.filmarks.dbflute.Entity;
-import org.filmarks.dbflute.FunCustodial;
-import org.filmarks.dbflute.dbmeta.accessory.EntityModifiedProperties;
-import org.filmarks.dbflute.dbmeta.accessory.EntityUniqueDrivenProperties;
-import org.filmarks.dbflute.util.DfCollectionUtil;
+import org.dbflute.Entity;
+import org.dbflute.FunCustodial;
+import org.dbflute.dbmeta.accessory.EntityModifiedProperties;
+import org.dbflute.dbmeta.accessory.EntityUniqueDrivenProperties;
+import org.dbflute.util.DfCollectionUtil;
 import org.elasticsearch.action.delete.DeleteRequestBuilder;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 

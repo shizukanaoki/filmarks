@@ -1,6 +1,6 @@
 ${manager.allClassCopyright}package ${request.package}.allcommon;
 
-import org.filmarks.dbflute.cbean.result.PagingResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.search.aggregations.Aggregations;
 

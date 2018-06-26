@@ -17,7 +17,7 @@ ${database.allClassCopyright}package ${glPackageBaseCommon};
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.filmarks.dbflute.dbway.DBDef;
+import org.dbflute.dbway.DBDef;
 
 /**
  * @author ${database.classAuthor}

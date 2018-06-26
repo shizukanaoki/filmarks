@@ -19,15 +19,15 @@ ${database.allClassCopyright}package ${myDBMetaPackageName};
 import java.util.List;
 import java.util.Map;
 
-import org.filmarks.dbflute.Entity;
+import org.dbflute.Entity;
 #if ($table.needsRelationOptionalEntityImport())
 import ${database.relationOptionalEntityClassName};
 #end
-import org.filmarks.dbflute.dbmeta.AbstractDBMeta;
-import org.filmarks.dbflute.dbmeta.info.*;
-import org.filmarks.dbflute.dbmeta.name.*;
-import org.filmarks.dbflute.dbmeta.property.PropertyGateway;
-import org.filmarks.dbflute.dbway.DBDef;
+import org.dbflute.dbmeta.AbstractDBMeta;
+import org.dbflute.dbmeta.info.*;
+import org.dbflute.dbmeta.name.*;
+import org.dbflute.dbmeta.property.PropertyGateway;
+import org.dbflute.dbway.DBDef;
 import ${glPackageBaseCommon}.*;
 import ${myExtendedEntityPackageName}.*;
 

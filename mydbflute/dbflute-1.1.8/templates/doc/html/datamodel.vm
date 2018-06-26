@@ -708,10 +708,10 @@ $generator.parse("doc/html/table.vm", null, "table", $table)
 
 <h2 id="thanks">Thanks</h2>
 <p>
-	Created by <a href="http://filmarks.dbflute.org/">DBFlute(AutoGenerator)</a>
+	Created by <a href="http://dbflute.org/">DBFlute(AutoGenerator)</a>
 </p>
 
-<!-- Only used by filmarks.dbflute intro http://filmarks.dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
+<!-- Only used by dbflute intro http://dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
 <div id="decomment-modal" class="decommentmodal">
 	<div class="decommentmodalcontent">
 		<div id="decomment-close" class="decommentmodal-close-btn"><span>x</span></div>
@@ -1235,7 +1235,7 @@ var DecommentUtil = new function(){
  * @author deco
  */
 function StoreClient() {
-	// setup from filmarks.dbflute if decomment pickup exists
+	// setup from dbflute if decomment pickup exists
 	this.embeddedPickup = {
 		'tables': [
 #foreach($table in $database.embeddedPickup.tableList)

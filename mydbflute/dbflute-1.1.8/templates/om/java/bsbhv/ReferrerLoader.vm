@@ -18,9 +18,9 @@ ${database.allClassCopyright}package ${myReferrerLoaderPackageName};
 
 import java.util.List;
 
-import org.filmarks.dbflute.bhv.*;
+import org.dbflute.bhv.*;
 #if ($table.hasLoadReferrer())
-import org.filmarks.dbflute.bhv.referrer.*;
+import org.dbflute.bhv.referrer.*;
 #end
 import ${glPackageExtendedBhv}.*;
 import ${glPackageExtendedEntity}.*;

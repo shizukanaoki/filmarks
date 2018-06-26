@@ -24,13 +24,13 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.filmarks.dbflute.bhv.BehaviorReadable;
-import org.filmarks.dbflute.bhv.BehaviorSelector;
-import org.filmarks.dbflute.dbmeta.DBMeta;
-import org.filmarks.dbflute.exception.IllegalBehaviorStateException;
-import org.filmarks.dbflute.util.DfTraceViewUtil;
-import org.filmarks.dbflute.util.DfTypeUtil;
-import org.filmarks.dbflute.util.Srl;
+import org.dbflute.bhv.BehaviorReadable;
+import org.dbflute.bhv.BehaviorSelector;
+import org.dbflute.dbmeta.DBMeta;
+import org.dbflute.exception.IllegalBehaviorStateException;
+import org.dbflute.util.DfTraceViewUtil;
+import org.dbflute.util.DfTypeUtil;
+import org.dbflute.util.Srl;
 
 #if ($database.isTargetContainerSeasar())
 import org.seasar.framework.container.S2Container;
@@ -156,8 +156,8 @@ public class ${glImplementedBehaviorSelector} implements BehaviorSelector {
      * Select behavior (as readable type) by name.
      * @param tableFlexibleName The flexible-name of table. (NotNull)
      * @return The instance of found behavior. (NotNull)
-     * @throws org.filmarks.dbflute.exception.DBMetaNotFoundException When the table is not found.
-     * @throws org.filmarks.dbflute.exception.IllegalBehaviorStateException When the behavior class is suppressed.
+     * @throws org.dbflute.exception.DBMetaNotFoundException When the table is not found.
+     * @throws org.dbflute.exception.IllegalBehaviorStateException When the behavior class is suppressed.
      */
     public BehaviorReadable byName(String tableFlexibleName) {
         assertStringNotNullAndNotTrimmedEmpty("tableFlexibleName", tableFlexibleName);
@@ -169,7 +169,7 @@ public class ${glImplementedBehaviorSelector} implements BehaviorSelector {
      * Get behavior-type by DB meta.
      * @param dbmeta The instance of DB meta for the behavior. (NotNull)
      * @return The type of behavior (as readable type). (NotNull)
-     * @throws org.filmarks.dbflute.exception.IllegalBehaviorStateException When the behavior class is suppressed.
+     * @throws org.dbflute.exception.IllegalBehaviorStateException When the behavior class is suppressed.
      */
     @SuppressWarnings("unchecked")
     protected Class<BehaviorReadable> getBehaviorType(DBMeta dbmeta) {

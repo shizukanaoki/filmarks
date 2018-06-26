@@ -15,11 +15,11 @@
 ##
 ${database.allClassCopyright}package ${glPackageBaseCommon};
 
-import org.filmarks.dbflute.cbean.ConditionBean;
-import org.filmarks.dbflute.cbean.cipher.GearedCipherManager;
-import org.filmarks.dbflute.cbean.sqlclause.*;
-import org.filmarks.dbflute.dbmeta.DBMetaProvider;
-import org.filmarks.dbflute.dbway.DBDef;
+import org.dbflute.cbean.ConditionBean;
+import org.dbflute.cbean.cipher.GearedCipherManager;
+import org.dbflute.cbean.sqlclause.*;
+import org.dbflute.dbmeta.DBMetaProvider;
+import org.dbflute.dbway.DBDef;
 
 /**
  * The creator of SQL clause.

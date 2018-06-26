@@ -23,18 +23,18 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.filmarks.dbflute.Entity;
+import org.dbflute.Entity;
 #if ($table.hasOptionalRelation() || $table.hasReverseOptionalRelation())
 import ${database.relationOptionalEntityClassName};
 #end
-import org.filmarks.dbflute.dbmeta.DBMeta;
-import org.filmarks.dbflute.dbmeta.InstanceKeyEntity;
-import org.filmarks.dbflute.dbmeta.dtomap.DtoMapper;
-import org.filmarks.dbflute.dbmeta.dtomap.InstanceKeyDto;
-import org.filmarks.dbflute.helper.beans.DfBeanDesc;
-import org.filmarks.dbflute.helper.beans.DfPropertyDesc;
-import org.filmarks.dbflute.helper.beans.factory.DfBeanDescFactory;
-import org.filmarks.dbflute.jdbc.Classification;
+import org.dbflute.dbmeta.DBMeta;
+import org.dbflute.dbmeta.InstanceKeyEntity;
+import org.dbflute.dbmeta.dtomap.DtoMapper;
+import org.dbflute.dbmeta.dtomap.InstanceKeyDto;
+import org.dbflute.helper.beans.DfBeanDesc;
+import org.dbflute.helper.beans.DfPropertyDesc;
+import org.dbflute.helper.beans.factory.DfBeanDescFactory;
+import org.dbflute.jdbc.Classification;
 #if ($table.hasClassification())
 import ${glPackageBaseCommon}.${glCDef};
 #end

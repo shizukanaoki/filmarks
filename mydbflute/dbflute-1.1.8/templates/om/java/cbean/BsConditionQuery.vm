@@ -18,16 +18,16 @@ ${database.allClassCopyright}package ${glPackageBaseCQ};
 
 import java.util.Map;
 
-import org.filmarks.dbflute.cbean.*;
-import org.filmarks.dbflute.cbean.chelper.*;
-import org.filmarks.dbflute.cbean.coption.*;
+import org.dbflute.cbean.*;
+import org.dbflute.cbean.chelper.*;
+import org.dbflute.cbean.coption.*;
 #if (${table.hasCompoundKeyReferrer()})
-import org.filmarks.dbflute.cbean.scoping.*;
+import org.dbflute.cbean.scoping.*;
 #end
-import org.filmarks.dbflute.cbean.cvalue.ConditionValue;
-import org.filmarks.dbflute.cbean.sqlclause.SqlClause;
+import org.dbflute.cbean.cvalue.ConditionValue;
+import org.dbflute.cbean.sqlclause.SqlClause;
 #if ($table.isAvailableMyselfInlineView())
-import org.filmarks.dbflute.exception.IllegalConditionBeanOperationException;
+import org.dbflute.exception.IllegalConditionBeanOperationException;
 import ${glPackageCIQ}.*;
 #end
 import ${glPackageCB}.*;

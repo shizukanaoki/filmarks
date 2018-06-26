@@ -19,13 +19,13 @@ ${database.allClassCopyright}package ${glPackageBaseCommon};
 import java.util.TimeZone;
 #end
 #if ($database.isTargetContainerSeasar())
-import org.filmarks.dbflute.bhv.core.context.ConditionBeanContext;
+import org.dbflute.bhv.core.context.ConditionBeanContext;
 #end
-import org.filmarks.dbflute.dbway.DBDef;
+import org.dbflute.dbway.DBDef;
 #if ($database.isTargetContainerSpring())
-import org.filmarks.dbflute.jdbc.DataSourceHandler;
+import org.dbflute.jdbc.DataSourceHandler;
 #end
-import org.filmarks.dbflute.system.DBFluteSystem;
+import org.dbflute.system.DBFluteSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

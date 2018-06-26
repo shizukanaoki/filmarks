@@ -17,13 +17,13 @@ ${database.allClassCopyright}package ${glPackageBaseCommon};
 
 import java.util.*;
 
-import org.filmarks.dbflute.exception.ClassificationNotFoundException;
-import org.filmarks.dbflute.jdbc.Classification;
-import org.filmarks.dbflute.jdbc.ClassificationCodeType;
-import org.filmarks.dbflute.jdbc.ClassificationMeta;
-import org.filmarks.dbflute.jdbc.ClassificationUndefinedHandlingType;
-import org.filmarks.dbflute.optional.OptionalThing;
-import static org.filmarks.dbflute.util.DfTypeUtil.emptyStrings;
+import org.dbflute.exception.ClassificationNotFoundException;
+import org.dbflute.jdbc.Classification;
+import org.dbflute.jdbc.ClassificationCodeType;
+import org.dbflute.jdbc.ClassificationMeta;
+import org.dbflute.jdbc.ClassificationUndefinedHandlingType;
+import org.dbflute.optional.OptionalThing;
+import static org.dbflute.util.DfTypeUtil.emptyStrings;
 
 /**
  * The definition of classification.

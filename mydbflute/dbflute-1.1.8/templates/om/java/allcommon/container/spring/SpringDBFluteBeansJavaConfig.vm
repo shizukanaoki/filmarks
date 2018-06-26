@@ -28,8 +28,8 @@ import org.springframework.context.annotation.Bean;
 #if ($database.isDBFluteBeansJavaConfigLazy())
 import org.springframework.context.annotation.Lazy;
 #end
-import org.filmarks.dbflute.bhv.core.BehaviorCommandInvoker;
-import org.filmarks.dbflute.bhv.core.InvokerAssistant;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
+import org.dbflute.bhv.core.InvokerAssistant;
 #if (!$database.needsDBFluteBeansHybritScanConfig())
 import ${glPackageExtendedBhv}.*;
 #end

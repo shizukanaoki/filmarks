@@ -18,10 +18,10 @@ ${database.allClassCopyright}package ${glPackageBaseCommon};
 import javax.sql.DataSource;
 
 import com.google.inject.AbstractModule;
-import org.filmarks.dbflute.bhv.BehaviorSelector;
-import org.filmarks.dbflute.bhv.core.BehaviorCommandInvoker;
-import org.filmarks.dbflute.bhv.core.InvokerAssistant;
-import org.filmarks.dbflute.hook.CommonColumnAutoSetupper;
+import org.dbflute.bhv.BehaviorSelector;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
+import org.dbflute.bhv.core.InvokerAssistant;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import ${glPackageExtendedBhv}.*;
 
 /**

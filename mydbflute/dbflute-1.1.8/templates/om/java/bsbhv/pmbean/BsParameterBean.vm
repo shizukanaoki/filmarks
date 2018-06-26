@@ -19,29 +19,29 @@ ${database.allClassCopyright}package ${glPackageBaseParameterBean};
 import java.util.*;
 
 #if ($database.isPmbMetaDataForProcedure($pmbClassName))
-import org.filmarks.dbflute.outsidesql.ProcedurePmb;
+import org.dbflute.outsidesql.ProcedurePmb;
 #else
 #if ($database.hasPmbMetaDataPagingExtension($pmbClassName))
-import org.filmarks.dbflute.outsidesql.paging.SimplePagingBean;
+import org.dbflute.outsidesql.paging.SimplePagingBean;
 #end
 #if ($database.isPmbMetaDataTypedParameterBean($pmbClassName))
-import org.filmarks.dbflute.outsidesql.typed.*;
+import org.dbflute.outsidesql.typed.*;
 #else
-import org.filmarks.dbflute.twowaysql.pmbean.ParameterBean;
+import org.dbflute.twowaysql.pmbean.ParameterBean;
 #end
 #end
-import org.filmarks.dbflute.jdbc.*;
+import org.dbflute.jdbc.*;
 #if ($database.hasPmbMetaDataPropertyOptionAnyLikeSearch($pmbClassName))
-import org.filmarks.dbflute.cbean.coption.LikeSearchOption;
+import org.dbflute.cbean.coption.LikeSearchOption;
 #end
 #if ($database.hasPmbMetaDataPropertyOptionAnyFromTo($pmbClassName))
-import org.filmarks.dbflute.cbean.coption.FromToOption;
+import org.dbflute.cbean.coption.FromToOption;
 #end
-import org.filmarks.dbflute.outsidesql.PmbCustodial;
+import org.dbflute.outsidesql.PmbCustodial;
 #if ($database.isShortCharHandlingValid() && $database.hasPmbMetaDataPropertyRefColumnChar($pmbClassName))
-import org.filmarks.dbflute.outsidesql.PmbCustodial.PmbShortCharHandlingMode;
+import org.dbflute.outsidesql.PmbCustodial.PmbShortCharHandlingMode;
 #end
-import org.filmarks.dbflute.util.DfTypeUtil;
+import org.dbflute.util.DfTypeUtil;
 import ${glPackageBaseCommon}.*;
 #if ($database.isPmbMetaDataTypedParameterBean($pmbClassName))
 #if ($database.isApplicationBehaviorProject())

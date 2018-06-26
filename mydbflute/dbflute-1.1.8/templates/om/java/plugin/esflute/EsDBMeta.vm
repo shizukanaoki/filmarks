@@ -6,14 +6,14 @@ import java.util.Map;
 
 import ${request.package}.exentity.${table.camelizedName};
 
-import org.filmarks.dbflute.Entity;
-import org.filmarks.dbflute.dbmeta.AbstractDBMeta;
-import org.filmarks.dbflute.dbmeta.info.ColumnInfo;
-import org.filmarks.dbflute.dbmeta.info.UniqueInfo;
-import org.filmarks.dbflute.dbmeta.name.TableSqlName;
-import org.filmarks.dbflute.dbmeta.property.PropertyGateway;
-import org.filmarks.dbflute.dbway.DBDef;
-import org.filmarks.dbflute.util.DfTypeUtil;
+import org.dbflute.Entity;
+import org.dbflute.dbmeta.AbstractDBMeta;
+import org.dbflute.dbmeta.info.ColumnInfo;
+import org.dbflute.dbmeta.info.UniqueInfo;
+import org.dbflute.dbmeta.name.TableSqlName;
+import org.dbflute.dbmeta.property.PropertyGateway;
+import org.dbflute.dbway.DBDef;
+import org.dbflute.util.DfTypeUtil;
 
 /**
  * @author ESFlute (using FreeGen)
@@ -65,7 +65,7 @@ public class ${table.camelizedName}Dbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-#set ($tableMetaSettings = ${table.indexSettings.settings.index.filmarks.dbflute.get($table.name)})
+#set ($tableMetaSettings = ${table.indexSettings.settings.index.dbflute.get($table.name)})
 #foreach ($col in $table.columnList)
 #if ($col.isNormalColumn)
 #if (${col.type} == "keyword" || ${col.type} == "text")#set ($javaNative = "String")#else#set ($javaNative = ${col.type})#end

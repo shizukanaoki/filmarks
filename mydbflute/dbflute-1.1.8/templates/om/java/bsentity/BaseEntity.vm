@@ -20,20 +20,20 @@ import java.util.List;
 import java.util.ArrayList;
 
 #if ($table.hasOptionalRelation())
-import org.filmarks.dbflute.Entity;
+import org.dbflute.Entity;
 #end
-import org.filmarks.dbflute.dbmeta.DBMeta;
-import org.filmarks.dbflute.dbmeta.AbstractEntity;
+import org.dbflute.dbmeta.DBMeta;
+import org.dbflute.dbmeta.AbstractEntity;
 #if (${table.canBeColumnNullObject()})
-import org.filmarks.dbflute.dbmeta.accessory.ColumnNullObjectable;
+import org.dbflute.dbmeta.accessory.ColumnNullObjectable;
 #end
 #if ($isSql2Entity)
-import org.filmarks.dbflute.dbmeta.accessory.CustomizeEntity;
+import org.dbflute.dbmeta.accessory.CustomizeEntity;
 #else
-import org.filmarks.dbflute.dbmeta.accessory.DomainEntity;
+import org.dbflute.dbmeta.accessory.DomainEntity;
 #end
 #if ($table.needsMappingValueType())
-import org.filmarks.dbflute.dbmeta.accessory.MappingValueType;
+import org.dbflute.dbmeta.accessory.MappingValueType;
 #end
 #if ($table.needsRelationOptionalEntityImport())
 import ${database.relationOptionalEntityClassName};

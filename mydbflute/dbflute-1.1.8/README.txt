@@ -32,7 +32,7 @@ which generates classes for your DBFlute programming.
  |  |  |-ControlSql2EntityCSharp.vm  // velocity control file for generate task of C#
  |  |  |-ControlSql2EntityJava.vm    // velocity control file for sql2entity task of Java
  |-build-torque.xml              // setting for ant task (DBFlute task)
- |-product-is-filmarks.dbflute-[version]  // mark file for the DBFlute version
+ |-product-is-dbflute-[version]  // mark file for the DBFlute version
  |-LICENSE                       // LICENSE file for this project
  |-NOTICE                        // NOTICE file for this project
  |-README.txt                    // README file for this project

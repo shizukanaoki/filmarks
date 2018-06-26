@@ -17,7 +17,7 @@ ${database.allClassCopyright}package ${myExtendedDtoMapperPackageName};
 #set ($myClassName = "${myExtendedDtoMapperClassName}")
 
 import java.util.Map;
-import org.filmarks.dbflute.Entity;
+import org.dbflute.Entity;
 import ${myBaseDtoMapperPackageName}.${myBaseDtoMapperClassName};
 
 /**

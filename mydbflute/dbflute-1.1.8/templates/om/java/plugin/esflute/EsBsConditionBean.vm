@@ -11,7 +11,7 @@ import ${request.package}.cbean.cq.${table.camelizedName}CQ;
 import ${request.package}.cbean.cq.bs.Bs${table.camelizedName}CQ;
 import ${request.package}.cbean.ca.${table.camelizedName}CA;
 import ${request.package}.cbean.ca.bs.Bs${table.camelizedName}CA;
-import org.filmarks.dbflute.cbean.ConditionQuery;
+import org.dbflute.cbean.ConditionQuery;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 

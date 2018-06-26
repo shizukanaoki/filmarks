@@ -18,25 +18,25 @@ ${database.allClassCopyright}package ${myBaseBhvPackageName};
 
 import java.util.List;
 
-import org.filmarks.dbflute.*;
-import org.filmarks.dbflute.bhv.*;
+import org.dbflute.*;
+import org.dbflute.bhv.*;
 #if ($database.needsBehaviorSpringAutowired())
-import org.filmarks.dbflute.bhv.core.BehaviorCommandInvoker;
+import org.dbflute.bhv.core.BehaviorCommandInvoker;
 #end
-import org.filmarks.dbflute.bhv.readable.*;
+import org.dbflute.bhv.readable.*;
 #if ($table.isWritable() || $table.hasBehaviorFilterBeforeColumn())
-import org.filmarks.dbflute.bhv.writable.*;
+import org.dbflute.bhv.writable.*;
 #end
-import org.filmarks.dbflute.bhv.referrer.*;
-import org.filmarks.dbflute.cbean.*;
-import org.filmarks.dbflute.cbean.chelper.HpSLSFunction;
-import org.filmarks.dbflute.cbean.result.*;
+import org.dbflute.bhv.referrer.*;
+import org.dbflute.cbean.*;
+import org.dbflute.cbean.chelper.HpSLSFunction;
+import org.dbflute.cbean.result.*;
 #if ($table.needsBehaviorCBeanScopingCallbackImport())
-import org.filmarks.dbflute.cbean.scoping.SpecifyQuery;
+import org.dbflute.cbean.scoping.SpecifyQuery;
 #end
-import org.filmarks.dbflute.exception.*;
+import org.dbflute.exception.*;
 #if ($table.isWritable() && $database.needsBehaviorSpringAutowired())
-import org.filmarks.dbflute.hook.CommonColumnAutoSetupper;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 #end
 #if ($table.needsBasicOptionalEntityImport())
 import ${database.basicOptionalEntityClassName};
@@ -44,7 +44,7 @@ import ${database.basicOptionalEntityClassName};
 #if ($table.needsRelationOptionalEntityNextImport())
 import ${database.relationOptionalEntityClassName};
 #end
-import org.filmarks.dbflute.outsidesql.executor.*;
+import org.dbflute.outsidesql.executor.*;
 #if ($table.hasPrimaryKeyForcedClassificationSetting())
 import ${glPackageBaseCommon}.${glCDef};
 #end
@@ -1923,7 +1923,7 @@ public abstract class ${myClassName} extends ${table.baseBehaviorExtendsClassNam
     //                                                                     ===============
 #if ($table.hasBehaviorFilterBeforeInsertColumn())
     @Override
-    protected void filterEntityOfInsert(Entity tgt, org.filmarks.dbflute.optional.OptionalThing<InsertOption<? extends ConditionBean>> op) {
+    protected void filterEntityOfInsert(Entity tgt, org.dbflute.optional.OptionalThing<InsertOption<? extends ConditionBean>> op) {
         super.filterEntityOfInsert(tgt, op);
         ${myExtendedObjectClassName} et = downcast(tgt);
 #foreach ($column in $table.behaviorFilterBeforeInsertColumnList)
@@ -1934,7 +1934,7 @@ public abstract class ${myClassName} extends ${table.baseBehaviorExtendsClassNam
 #if ($table.isWritable())
 #if ($table.hasBehaviorFilterBeforeUpdateColumn())
     @Override
-    protected void filterEntityOfUpdate(Entity tgt, org.filmarks.dbflute.optional.OptionalThing<UpdateOption<? extends ConditionBean>> op) {
+    protected void filterEntityOfUpdate(Entity tgt, org.dbflute.optional.OptionalThing<UpdateOption<? extends ConditionBean>> op) {
         super.filterEntityOfUpdate(tgt, op);
         ${myExtendedObjectClassName} et = downcast(tgt);
 #foreach ($column in $table.behaviorFilterBeforeUpdateColumnList)

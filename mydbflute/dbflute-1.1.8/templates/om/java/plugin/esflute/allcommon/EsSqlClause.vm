@@ -1,7 +1,7 @@
 ${manager.allClassCopyright}package ${request.package}.allcommon;
 
-import org.filmarks.dbflute.cbean.sqlclause.AbstractSqlClause;
-import org.filmarks.dbflute.dbway.DBWay;
+import org.dbflute.cbean.sqlclause.AbstractSqlClause;
+import org.dbflute.dbway.DBWay;
 
 /**
  * @author ESFlute (using FreeGen)

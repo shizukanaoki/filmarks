@@ -437,9 +437,9 @@ ${selector.historyHtmlJavaScriptEmbedded}
 
 <h2>Thanks</h2>
 <p>
-	Created by <a href="http://filmarks.dbflute.org/">DBFlute(AutoGenerator)</a>
+	Created by <a href="http://dbflute.org/">DBFlute(AutoGenerator)</a>
 </p>
-<!-- Only used by filmarks.dbflute intro http://filmarks.dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
+<!-- Only used by dbflute intro http://dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
 <div id="hacomment-modal" class="hacommentmodal">
     <div class="hacommentmodalcontent">
         <div id="hacomment-close" class="hacommentmodal-close-btn"><span>x</span></div>

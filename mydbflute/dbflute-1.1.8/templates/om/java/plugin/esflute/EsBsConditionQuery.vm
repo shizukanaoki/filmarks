@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import ${request.package}.allcommon.EsAbstractConditionQuery;
 import ${request.package}.cbean.cq.${table.camelizedName}CQ;
-import org.filmarks.dbflute.cbean.ckey.ConditionKey;
+import org.dbflute.cbean.ckey.ConditionKey;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder.FilterFunctionBuilder;
