@@ -25,6 +25,9 @@ repositories {
 
 
 dependencies {
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('mysql:mysql-connector-java')
+    compile('org.dbflute:dbflute-runtime:1.1.8')
 }
