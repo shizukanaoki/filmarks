@@ -19,7 +19,7 @@ public class HelloWorldController
     @ResponseBody
     public String home() {
         ListResultBean<Product> products = productBhv.selectList(cb -> {
-            cb.query().addOrderBy_Name_Asc();
+
         });
 
         return products.get(0).getName();

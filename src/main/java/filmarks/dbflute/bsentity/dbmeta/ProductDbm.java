@@ -13,7 +13,7 @@ import filmarks.dbflute.allcommon.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The DB meta of Product. (Singleton)
+ * The DB meta of PRODUCT. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
 public class ProductDbm extends AbstractDBMeta {
@@ -50,10 +50,10 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "Product";
-    protected final String _tableDispName = "Product";
+    protected final String _tableDbName = "PRODUCT";
+    protected final String _tableDispName = "PRODUCT";
     protected final String _tablePropertyName = "product";
-    protected final TableSqlName _tableSqlName = new TableSqlName("Product", _tableDbName);
+    protected final TableSqlName _tableSqlName = new TableSqlName("PRODUCT", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
@@ -63,10 +63,10 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnName = cci("name", "name", null, null, String.class, "name", null, false, false, false, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnName = cci("NAME", "NAME", null, null, String.class, "name", null, false, false, false, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnName() { return _columnName; }

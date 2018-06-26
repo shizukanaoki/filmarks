@@ -16,7 +16,7 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The abstract condition-query of Product.
+ * The abstract condition-query of PRODUCT.
  * @author DBFlute(AutoGenerator)
  */
 public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
@@ -37,7 +37,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     }
 
     public String asTableDbName() {
-        return "Product";
+        return "PRODUCT";
     }
 
     // ===================================================================================
@@ -45,7 +45,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_Equal(String name) {
@@ -58,7 +58,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_NotEqual(String name) {
@@ -71,7 +71,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_GreaterThan(String name) {
@@ -80,7 +80,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_LessThan(String name) {
@@ -89,7 +89,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_GreaterEqual(String name) {
@@ -98,7 +98,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_LessEqual(String name) {
@@ -107,7 +107,7 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param nameList The collection of name as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_InScope(Collection<String> nameList) {
@@ -115,12 +115,12 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     }
 
     protected void doSetName_InScope(Collection<String> nameList) {
-        regINS(CK_INS, cTL(nameList), xgetCValueName(), "name");
+        regINS(CK_INS, cTL(nameList), xgetCValueName(), "NAME");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param nameList The collection of name as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setName_NotInScope(Collection<String> nameList) {
@@ -128,12 +128,12 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     }
 
     protected void doSetName_NotInScope(Collection<String> nameList) {
-        regINS(CK_NINS, cTL(nameList), xgetCValueName(), "name");
+        regINS(CK_NINS, cTL(nameList), xgetCValueName(), "NAME");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)} <br>
+     * NAME: {VARCHAR(100)} <br>
      * <pre>e.g. setName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -144,19 +144,19 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)} <br>
+     * NAME: {VARCHAR(100)} <br>
      * <pre>e.g. setName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
     protected void setName_LikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(name), xgetCValueName(), "name", likeSearchOption);
+        regLSQ(CK_LS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -167,33 +167,33 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
     protected void setName_NotLikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(name), xgetCValueName(), "name", likeSearchOption);
+        regLSQ(CK_NLS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
     }
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      */
     public void setName_IsNull() { regName(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      */
     public void setName_IsNullOrEmpty() { regName(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      */
     public void setName_IsNotNull() { regName(CK_ISNN, DOBJ); }
 
-    protected void regName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueName(), "name"); }
+    protected void regName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueName(), "NAME"); }
     protected abstract ConditionValue xgetCValueName();
 
     // ===================================================================================

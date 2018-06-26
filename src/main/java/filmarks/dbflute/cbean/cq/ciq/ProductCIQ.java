@@ -12,7 +12,7 @@ import filmarks.dbflute.cbean.cq.bs.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of Product.
+ * The condition-query for in-line of PRODUCT.
  * @author DBFlute(AutoGenerator)
  */
 public class ProductCIQ extends AbstractBsProductCQ {

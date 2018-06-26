@@ -7,13 +7,13 @@ import filmarks.dbflute.exbhv.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The referrer loader of Product as TABLE. <br>
+ * The referrer loader of PRODUCT as TABLE. <br>
  * <pre>
  * [primary key]
  *     
  *
  * [column]
- *     name
+ *     NAME
  *
  * [sequence]
  *     

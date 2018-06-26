@@ -13,7 +13,7 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of Product.
+ * The base condition-query of PRODUCT.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductCQ extends AbstractBsProductCQ {
@@ -35,7 +35,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from Product) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from PRODUCT) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
@@ -58,7 +58,7 @@ public class BsProductCQ extends AbstractBsProductCQ {
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join Product on ... and FOO = [value] ...}
+     * {select ... from ... left outer join PRODUCT on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
@@ -81,17 +81,17 @@ public class BsProductCQ extends AbstractBsProductCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsProductCQ addOrderBy_Name_Asc() { regOBA("name"); return this; }
+    public BsProductCQ addOrderBy_Name_Asc() { regOBA("NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * name: {VARCHAR(100)}
+     * NAME: {VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsProductCQ addOrderBy_Name_Desc() { regOBD("name"); return this; }
+    public BsProductCQ addOrderBy_Name_Desc() { regOBD("NAME"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

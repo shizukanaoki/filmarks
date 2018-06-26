@@ -20,7 +20,7 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of Product.
+ * The base condition-bean of PRODUCT.
  * @author DBFlute(AutoGenerator)
  */
 public class BsProductCB extends AbstractConditionBean {
@@ -73,7 +73,7 @@ public class BsProductCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "Product";
+        return "PRODUCT";
     }
 
     // ===================================================================================
@@ -272,17 +272,17 @@ public class BsProductCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * name: {VARCHAR(100)}
+         * NAME: {VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnName() { return doColumn("name"); }
+        public SpecifiedColumn columnName() { return doColumn("NAME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
         }
         @Override
-        protected String getTableDbName() { return "Product"; }
+        protected String getTableDbName() { return "PRODUCT"; }
     }
 
     // ===================================================================================

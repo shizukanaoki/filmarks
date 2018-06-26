@@ -20,13 +20,13 @@ import filmarks.dbflute.bsentity.dbmeta.*;
 import filmarks.dbflute.cbean.*;
 
 /**
- * The behavior of Product as TABLE. <br>
+ * The behavior of PRODUCT as TABLE. <br>
  * <pre>
  * [primary key]
  *     
  *
  * [column]
- *     name
+ *     NAME
  *
  * [sequence]
  *     
@@ -65,7 +65,7 @@ public abstract class BsProductBhv extends AbstractBehaviorReadable<Product, Pro
     /** {@inheritDoc} */
     public ProductDbm asDBMeta() { return ProductDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "Product"; }
+    public String asTableDbName() { return "PRODUCT"; }
 
     // ===================================================================================
     //                                                                        New Instance

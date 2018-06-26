@@ -83,3 +83,264 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
  {Take Finally}: success=0 failure=0 (in 1 files)
   o take-finally.sql
 _/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-06-26 18:44:31,993 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-06-26 18:44:31,997 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-06-26 18:44:31,997 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-06-26 18:44:32,004 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-06-26 18:44:32,004 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-06-26 18:44:32,005 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-06-26 18:44:33,800 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-06-26 18:44:33,801 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-06-26 18:44:33,801 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-06-26 18:44:33,801 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-06-26 18:44:33,809 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-06-26 18:44:34,473 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.21
+2018-06-26 18:44:34,473 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-06-26 18:44:34,496 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.7.21
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.infra.reps.exception.DfReplaceSchemaExecuteNotAllowedException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Your ReplaceSchema execution was not allowed.
+
+[Advice]
+Not found SQL files for ReplaceSchema,
+so your execution might be mistake...?
+
+[SQL Root Directory]
+playsql
+* * * * * * * * * */
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.throwReplaceSchemaExecuteNotAllowedException(DfRepsExecuteLimitter.java:76)
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.checkExecutableOrNot(DfRepsExecuteLimitter.java:60)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.checkBeforeInitialize(DfCreateSchemaProcess.java:152)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:140)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:301)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:246)
+	at org.dbflute.task.DfReplaceSchemaTask.processReplaceSchema(DfReplaceSchemaTask.java:232)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:158)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2018-06-26 18:44:34,543 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-06-26 18:44:34,573 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s590ms *Abort
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.21)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-06-26 18:45:20,539 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-06-26 18:45:20,543 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-06-26 18:45:20,543 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-06-26 18:45:20,548 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-06-26 18:45:20,549 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-06-26 18:45:20,550 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-06-26 18:45:21,783 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-06-26 18:45:21,784 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-06-26 18:45:21,784 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-06-26 18:45:21,784 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-06-26 18:45:21,794 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-06-26 18:45:22,425 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.21
+2018-06-26 18:45:22,426 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-06-26 18:45:22,439 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.7.21
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.infra.reps.exception.DfReplaceSchemaExecuteNotAllowedException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Your ReplaceSchema execution was not allowed.
+
+[Advice]
+Not found SQL files for ReplaceSchema,
+so your execution might be mistake...?
+
+[SQL Root Directory]
+playsql
+* * * * * * * * * */
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.throwReplaceSchemaExecuteNotAllowedException(DfRepsExecuteLimitter.java:76)
+	at org.dbflute.infra.reps.DfRepsExecuteLimitter.checkExecutableOrNot(DfRepsExecuteLimitter.java:60)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.checkBeforeInitialize(DfCreateSchemaProcess.java:152)
+	at org.dbflute.logic.replaceschema.process.DfCreateSchemaProcess.execute(DfCreateSchemaProcess.java:140)
+	at org.dbflute.task.DfReplaceSchemaTask.createSchema(DfReplaceSchemaTask.java:301)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:246)
+	at org.dbflute.task.DfReplaceSchemaTask.processReplaceSchema(DfReplaceSchemaTask.java:232)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:158)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2018-06-26 18:45:22,485 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-06-26 18:45:22,510 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s966ms *Abort
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.21)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-06-26 18:47:06,157 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-06-26 18:47:06,162 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-06-26 18:47:06,162 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-06-26 18:47:06,166 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-06-26 18:47:06,166 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-06-26 18:47:06,167 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-06-26 18:47:09,744 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-06-26 18:47:09,744 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-06-26 18:47:09,744 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-06-26 18:47:09,745 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-06-26 18:47:09,751 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-06-26 18:47:10,440 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.21
+2018-06-26 18:47:10,441 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-06-26 18:47:10,470 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():229) - 
+2018-06-26 18:47:10,471 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():230) - * * * * * * * * * * *
+2018-06-26 18:47:10,471 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():231) - *                   *
+2018-06-26 18:47:10,472 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():232) - * Initialize Schema *
+2018-06-26 18:47:10,473 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():233) - *                   *
+2018-06-26 18:47:10,473 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():234) - * * * * * * * * * * *
+2018-06-26 18:47:10,549 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-06-26 18:47:10,550 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-06-26 18:47:10,552 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-06-26 18:47:10,602 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table PRODUCT
+2018-06-26 18:47:10,612 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table PRODUCT
+2018-06-26 18:47:10,645 [main] INFO  (DfCreateSchemaProcess#createSchema():266) - 
+2018-06-26 18:47:10,645 [main] INFO  (DfCreateSchemaProcess#createSchema():267) - * * * * * * * * *
+2018-06-26 18:47:10,645 [main] INFO  (DfCreateSchemaProcess#createSchema():268) - *               *
+2018-06-26 18:47:10,646 [main] INFO  (DfCreateSchemaProcess#createSchema():269) - * Create Schema *
+2018-06-26 18:47:10,646 [main] INFO  (DfCreateSchemaProcess#createSchema():270) - *               *
+2018-06-26 18:47:10,647 [main] INFO  (DfCreateSchemaProcess#createSchema():271) - * * * * * * * * *
+2018-06-26 18:47:10,651 [main] INFO  (DfSqlFileFireMan#fire():68) - ...Firing: replace-schema.sql
+2018-06-26 18:47:10,654 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE PRODUCT
+(
+	NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '名前'
+) COMMENT = 'NEW_TABLE'
+2018-06-26 18:47:10,693 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=1 failure=0
+2018-06-26 18:47:10,694 [main] INFO  (DfSqlFileFireMan#fire():93) - {Create Schema}: success=1 failure=0 (in 1 files)
+2018-06-26 18:47:10,760 [main] INFO  (DfLoadDataProcess#execute():130) - 
+2018-06-26 18:47:10,760 [main] INFO  (DfLoadDataProcess#execute():131) - * * * * * * * * * * *
+2018-06-26 18:47:10,760 [main] INFO  (DfLoadDataProcess#execute():132) - *                   *
+2018-06-26 18:47:10,760 [main] INFO  (DfLoadDataProcess#execute():133) - * Load Data         *
+2018-06-26 18:47:10,760 [main] INFO  (DfLoadDataProcess#execute():134) - *                   *
+2018-06-26 18:47:10,761 [main] INFO  (DfLoadDataProcess#execute():135) - * * * * * * * * * * *
+2018-06-26 18:47:10,837 [main] INFO  (DfTakeFinallyProcess#takeFinally():237) - 
+2018-06-26 18:47:10,838 [main] INFO  (DfTakeFinallyProcess#takeFinally():238) - * * * * * * * **
+2018-06-26 18:47:10,838 [main] INFO  (DfTakeFinallyProcess#takeFinally():239) - *              *
+2018-06-26 18:47:10,838 [main] INFO  (DfTakeFinallyProcess#takeFinally():240) - * Take Finally *
+2018-06-26 18:47:10,838 [main] INFO  (DfTakeFinallyProcess#takeFinally():241) - *              *
+2018-06-26 18:47:10,839 [main] INFO  (DfTakeFinallyProcess#takeFinally():242) - * * * * * * * **
+2018-06-26 18:47:10,846 [main] INFO  (DfSqlFileFireMan#fire():68) - ...Firing: take-finally.sql
+2018-06-26 18:47:10,848 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2018-06-26 18:47:10,849 [main] INFO  (DfSqlFileFireMan#fire():93) - {Take Finally}: success=0 failure=0 (in 1 files)
+2018-06-26 18:47:10,850 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-06-26 18:47:10,860 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m04s712ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.21)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=1 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  - (no data file)
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}

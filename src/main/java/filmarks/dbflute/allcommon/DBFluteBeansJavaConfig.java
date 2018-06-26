@@ -18,7 +18,7 @@ import org.dbflute.bhv.core.InvokerAssistant;
  * @author DBFlute(AutoGenerator)
  */
 @Configuration
-@ComponentScan(value= "filmarks.dbflute.exbhv", lazyInit=true)
+@ComponentScan(value="filmarks.dbflute.exbhv", lazyInit=true)
 public class DBFluteBeansJavaConfig {
 
     // ===================================================================================

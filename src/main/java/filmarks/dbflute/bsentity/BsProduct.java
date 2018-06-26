@@ -10,13 +10,13 @@ import filmarks.dbflute.allcommon.DBMetaInstanceHandler;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The entity of Product as TABLE. <br>
+ * The entity of PRODUCT as TABLE. <br>
  * <pre>
  * [primary-key]
  *     
  *
  * [column]
- *     name
+ *     NAME
  *
  * [sequence]
  *     
@@ -58,7 +58,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** name: {VARCHAR(100)} */
+    /** NAME: {VARCHAR(100)} */
     protected String _name;
 
     // ===================================================================================
@@ -71,7 +71,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "Product";
+        return "PRODUCT";
     }
 
     // ===================================================================================
@@ -144,8 +144,8 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] name: {VARCHAR(100)} <br>
-     * @return The value of the column 'name'. (NullAllowed even if selected: for no constraint)
+     * [get] NAME: {VARCHAR(100)} <br>
+     * @return The value of the column 'NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getName() {
         checkSpecifiedProperty("name");
@@ -153,8 +153,8 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] name: {VARCHAR(100)} <br>
-     * @param name The value of the column 'name'. (NullAllowed: null update allowed for no constraint)
+     * [set] NAME: {VARCHAR(100)} <br>
+     * @param name The value of the column 'NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setName(String name) {
         registerModifiedProperty("name");
