@@ -16,6 +16,8 @@
             name="COUNTRY_OF_PRODUCTION" required="true" size="100" type="VARCHAR"/>
         <column comment="????" dbType="INT" javaType="Integer"
             name="RUNNING_TIME" required="true" size="10" type="INTEGER"/>
+        <column comment="?????" dbType="VARCHAR" javaType="String"
+            name="FILE_NAME" required="true" size="200" type="VARCHAR"/>
         <unique name="TITLE">
             <unique-column name="TITLE" position="1"/>
         </unique>

@@ -320,6 +320,11 @@ public class BsProductCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRunningTime() { return doColumn("RUNNING_TIME"); }
+        /**
+         * FILE_NAME: {NotNull, VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFileName() { return doColumn("FILE_NAME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

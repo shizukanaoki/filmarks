@@ -634,6 +634,141 @@ public abstract class AbstractBsProductCQ extends AbstractConditionQuery {
     protected void regRunningTime(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRunningTime(), "RUNNING_TIME"); }
     protected abstract ConditionValue xgetCValueRunningTime();
 
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_Equal(String fileName) {
+        doSetFileName_Equal(fRES(fileName));
+    }
+
+    protected void doSetFileName_Equal(String fileName) {
+        regFileName(CK_EQ, fileName);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_NotEqual(String fileName) {
+        doSetFileName_NotEqual(fRES(fileName));
+    }
+
+    protected void doSetFileName_NotEqual(String fileName) {
+        regFileName(CK_NES, fileName);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_GreaterThan(String fileName) {
+        regFileName(CK_GT, fRES(fileName));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_LessThan(String fileName) {
+        regFileName(CK_LT, fRES(fileName));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_GreaterEqual(String fileName) {
+        regFileName(CK_GE, fRES(fileName));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_LessEqual(String fileName) {
+        regFileName(CK_LE, fRES(fileName));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileNameList The collection of fileName as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_InScope(Collection<String> fileNameList) {
+        doSetFileName_InScope(fileNameList);
+    }
+
+    protected void doSetFileName_InScope(Collection<String> fileNameList) {
+        regINS(CK_INS, cTL(fileNameList), xgetCValueFileName(), "FILE_NAME");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileNameList The collection of fileName as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFileName_NotInScope(Collection<String> fileNameList) {
+        doSetFileName_NotInScope(fileNameList);
+    }
+
+    protected void doSetFileName_NotInScope(Collection<String> fileNameList) {
+        regINS(CK_NINS, cTL(fileNameList), xgetCValueFileName(), "FILE_NAME");
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setFileName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param fileName The value of fileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setFileName_LikeSearch(String fileName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setFileName_LikeSearch(fileName, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setFileName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param fileName The value of fileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setFileName_LikeSearch(String fileName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(fileName), xgetCValueFileName(), "FILE_NAME", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setFileName_NotLikeSearch(String fileName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setFileName_NotLikeSearch(fileName, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param fileName The value of fileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setFileName_NotLikeSearch(String fileName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(fileName), xgetCValueFileName(), "FILE_NAME", likeSearchOption);
+    }
+
+    protected void regFileName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFileName(), "FILE_NAME"); }
+    protected abstract ConditionValue xgetCValueFileName();
+
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============

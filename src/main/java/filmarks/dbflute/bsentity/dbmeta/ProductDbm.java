@@ -47,6 +47,7 @@ public class ProductDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Product)et).getPlayDate(), (et, vl) -> ((Product)et).setPlayDate(ctld(vl)), "playDate");
         setupEpg(_epgMap, et -> ((Product)et).getCountryOfProduction(), (et, vl) -> ((Product)et).setCountryOfProduction((String)vl), "countryOfProduction");
         setupEpg(_epgMap, et -> ((Product)et).getRunningTime(), (et, vl) -> ((Product)et).setRunningTime(cti(vl)), "runningTime");
+        setupEpg(_epgMap, et -> ((Product)et).getFileName(), (et, vl) -> ((Product)et).setFileName((String)vl), "fileName");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -72,6 +73,7 @@ public class ProductDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnPlayDate = cci("PLAY_DATE", "PLAY_DATE", null, null, java.time.LocalDate.class, "playDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCountryOfProduction = cci("COUNTRY_OF_PRODUCTION", "COUNTRY_OF_PRODUCTION", null, null, String.class, "countryOfProduction", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRunningTime = cci("RUNNING_TIME", "RUNNING_TIME", null, null, Integer.class, "runningTime", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnFileName = cci("FILE_NAME", "FILE_NAME", null, null, String.class, "fileName", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * ID: {PK, ID, NotNull, INT(10)}
@@ -98,6 +100,11 @@ public class ProductDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRunningTime() { return _columnRunningTime; }
+    /**
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnFileName() { return _columnFileName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -106,6 +113,7 @@ public class ProductDbm extends AbstractDBMeta {
         ls.add(columnPlayDate());
         ls.add(columnCountryOfProduction());
         ls.add(columnRunningTime());
+        ls.add(columnFileName());
         return ls;
     }
 

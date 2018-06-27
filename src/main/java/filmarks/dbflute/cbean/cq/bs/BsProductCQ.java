@@ -173,6 +173,26 @@ public class BsProductCQ extends AbstractBsProductCQ {
      */
     public BsProductCQ addOrderBy_RunningTime_Desc() { regOBD("RUNNING_TIME"); return this; }
 
+    protected ConditionValue _fileName;
+    public ConditionValue xdfgetFileName()
+    { if (_fileName == null) { _fileName = nCV(); }
+      return _fileName; }
+    protected ConditionValue xgetCValueFileName() { return xdfgetFileName(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_FileName_Asc() { regOBA("FILE_NAME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_FileName_Desc() { regOBD("FILE_NAME"); return this; }
+
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

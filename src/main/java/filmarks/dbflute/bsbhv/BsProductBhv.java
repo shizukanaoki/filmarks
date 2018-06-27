@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     ID
  *
  * [column]
- *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME
+ *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME, FILE_NAME
  *
  * [sequence]
  *     

@@ -66,6 +66,7 @@ public class ProductCIQ extends AbstractBsProductCQ {
     protected ConditionValue xgetCValuePlayDate() { return _myCQ.xdfgetPlayDate(); }
     protected ConditionValue xgetCValueCountryOfProduction() { return _myCQ.xdfgetCountryOfProduction(); }
     protected ConditionValue xgetCValueRunningTime() { return _myCQ.xdfgetRunningTime(); }
+    protected ConditionValue xgetCValueFileName() { return _myCQ.xdfgetFileName(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(ProductCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

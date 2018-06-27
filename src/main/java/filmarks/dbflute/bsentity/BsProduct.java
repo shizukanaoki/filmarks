@@ -17,7 +17,7 @@ import filmarks.dbflute.exentity.*;
  *     ID
  *
  * [column]
- *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME
+ *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME, FILE_NAME
  *
  * [sequence]
  *     
@@ -47,11 +47,13 @@ import filmarks.dbflute.exentity.*;
  * java.time.LocalDate playDate = entity.getPlayDate();
  * String countryOfProduction = entity.getCountryOfProduction();
  * Integer runningTime = entity.getRunningTime();
+ * String fileName = entity.getFileName();
  * entity.setId(id);
  * entity.setTitle(title);
  * entity.setPlayDate(playDate);
  * entity.setCountryOfProduction(countryOfProduction);
  * entity.setRunningTime(runningTime);
+ * entity.setFileName(fileName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -81,6 +83,9 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
 
     /** RUNNING_TIME: {NotNull, INT(10)} */
     protected Integer _runningTime;
+
+    /** FILE_NAME: {NotNull, VARCHAR(200)} */
+    protected String _fileName;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -160,6 +165,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_playDate));
         sb.append(dm).append(xfND(_countryOfProduction));
         sb.append(dm).append(xfND(_runningTime));
+        sb.append(dm).append(xfND(_fileName));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -278,5 +284,25 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     public void setRunningTime(Integer runningTime) {
         registerModifiedProperty("runningTime");
         _runningTime = runningTime;
+    }
+
+    /**
+     * [get] FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * ?????
+     * @return The value of the column 'FILE_NAME'. (basically NotNull if selected: for the constraint)
+     */
+    public String getFileName() {
+        checkSpecifiedProperty("fileName");
+        return _fileName;
+    }
+
+    /**
+     * [set] FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * ?????
+     * @param fileName The value of the column 'FILE_NAME'. (basically NotNull if update: for the constraint)
+     */
+    public void setFileName(String fileName) {
+        registerModifiedProperty("fileName");
+        _fileName = fileName;
     }
 }
