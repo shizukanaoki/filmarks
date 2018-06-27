@@ -6,11 +6,13 @@ import org.dbflute.*;
 import org.dbflute.bhv.*;
 import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
+import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
 import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import filmarks.dbflute.exbhv.*;
@@ -23,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of PRODUCT as TABLE. <br>
  * <pre>
  * [primary key]
- *     
+ *     ID
  *
  * [column]
- *     NAME
+ *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     
@@ -51,7 +53,7 @@ import filmarks.dbflute.cbean.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsProductBhv extends AbstractBehaviorReadable<Product, ProductCB> {
+public abstract class BsProductBhv extends AbstractBehaviorWritable<Product, ProductCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -153,6 +155,60 @@ public abstract class BsProductBhv extends AbstractBehaviorReadable<Product, Pro
      */
     public Product selectEntityWithDeletedCheck(CBCall<ProductCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
+    }
+
+    /**
+     * Select the entity by the primary-key value.
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Product> selectByPK(Integer id) {
+        return facadeSelectByPK(id);
+    }
+
+    protected OptionalEntity<Product> facadeSelectByPK(Integer id) {
+        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Product> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(id), tp);
+    }
+
+    protected <ENTITY extends Product> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(id, tp), id);
+    }
+
+    protected ProductCB xprepareCBAsPK(Integer id) {
+        assertObjectNotNull("id", id);
+        return newConditionBean().acceptPK(id);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Product> selectByUniqueOf(String title) {
+        return facadeSelectByUniqueOf(title);
+    }
+
+    protected OptionalEntity<Product> facadeSelectByUniqueOf(String title) {
+        return doSelectByUniqueOf(title, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Product> OptionalEntity<ENTITY> doSelectByUniqueOf(String title, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(title), tp), title);
+    }
+
+    protected ProductCB xprepareCBAsUniqueOf(String title) {
+        assertObjectNotNull("title", title);
+        return newConditionBean().acceptUniqueOf(title);
     }
 
     // ===================================================================================
@@ -336,6 +392,438 @@ public abstract class BsProductBhv extends AbstractBehaviorReadable<Product, Pro
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
+    /**
+     * Extract the value list of (single) primary key id.
+     * @param productList The list of product. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractIdList(List<Product> productList)
+    { return helpExtractListInternally(productList, "id"); }
+
+    /**
+     * Extract the value list of (single) unique key title.
+     * @param productList The list of product. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<String> extractTitleList(List<Product> productList)
+    { return helpExtractListInternally(productList, "title"); }
+
+    // ===================================================================================
+    //                                                                       Entity Update
+    //                                                                       =============
+    /**
+     * Insert the entity modified-only. (DefaultConstraintsEnabled)
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
+     * product.setFoo...(value);
+     * product.setBar...(value);
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//product.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//product.set...;</span>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">insert</span>(product);
+     * ... = product.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * </pre>
+     * <p>While, when the entity is created by select, all columns are registered.</p>
+     * @param product The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insert(Product product) {
+        doInsert(product, null);
+    }
+
+    /**
+     * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can update by unique keys using entity's uniqueOf().
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * product.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * product.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//product.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//product.set...;</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * product.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">update</span>(product);
+     * </pre>
+     * @param product The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void update(Product product) {
+        doUpdate(product, null);
+    }
+
+    /**
+     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
+     * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
+     * @param product The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insertOrUpdate(Product product) {
+        doInsertOrUpdate(product, null, null);
+    }
+
+    /**
+     * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * product.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * product.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #70226C">try</span> {
+     *     <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">delete</span>(product);
+     * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
+     *     ...
+     * }
+     * </pre>
+     * @param product The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void delete(Product product) {
+        doDelete(product, null);
+    }
+
+    // ===================================================================================
+    //                                                                        Batch Update
+    //                                                                        ============
+    /**
+     * Batch-insert the entity list modified-only of same-set columns. (DefaultConstraintsEnabled) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
+     * <pre>
+     * <span style="color: #70226C">for</span> (... : ...) {
+     *     Product product = <span style="color: #70226C">new</span> Product();
+     *     product.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         product.setFooPrice(123);
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
+     *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
+     *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
+     *     productList.add(product);
+     * }
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">batchInsert</span>(productList);
+     * </pre>
+     * <p>While, when the entities are created by select, all columns are registered.</p>
+     * <p>And if the table has an identity, entities after the process don't have incremented values.
+     * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @return The array of inserted count. (NotNull, EmptyAllowed)
+     */
+    public int[] batchInsert(List<Product> productList) {
+        return doBatchInsert(productList, null);
+    }
+
+    /**
+     * Batch-update the entity list modified-only of same-set columns. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
+     * <pre>
+     * for (... : ...) {
+     *     Product product = <span style="color: #70226C">new</span> Product();
+     *     product.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         product.setFooPrice(123);
+     *     } <span style="color: #70226C">else</span> {
+     *         product.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//product.setFooDate(...); // *not allowed, fragmented</span>
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
+     *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
+     *     productList.add(product);
+     * }
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">batchUpdate</span>(productList);
+     * </pre>
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchUpdate(List<Product> productList) {
+        return doBatchUpdate(productList, null);
+    }
+
+    /**
+     * Batch-delete the entity list. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement.
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchDelete(List<Product> productList) {
+        return doBatchDelete(productList, null);
+    }
+
+    // ===================================================================================
+    //                                                                        Query Update
+    //                                                                        ============
+    /**
+     * Insert the several entities by query (modified-only for fixed value).
+     * <pre>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Product, ProductCB&gt;() {
+     *     public ConditionBean setup(Product entity, ProductCB intoCB) {
+     *         FooCB cb = FooCB();
+     *         cb.setupSelect_Bar();
+     *
+     *         <span style="color: #3F7E5E">// mapping</span>
+     *         intoCB.specify().columnMyName().mappedFrom(cb.specify().columnFooName());
+     *         intoCB.specify().columnMyCount().mappedFrom(cb.specify().columnFooCount());
+     *         intoCB.specify().columnMyDate().mappedFrom(cb.specify().specifyBar().columnBarDate());
+     *         entity.setMyFixedValue("foo"); <span style="color: #3F7E5E">// fixed value</span>
+     *         <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     *         <span style="color: #3F7E5E">//entity.setRegisterUser(value);</span>
+     *         <span style="color: #3F7E5E">//entity.set...;</span>
+     *         <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     *         <span style="color: #3F7E5E">//entity.setVersionNo(value);</span>
+     *
+     *         return cb;
+     *     }
+     * });
+     * </pre>
+     * @param manyArgLambda The callback to set up query-insert. (NotNull)
+     * @return The inserted count.
+     */
+    public int queryInsert(QueryInsertSetupper<Product, ProductCB> manyArgLambda) {
+        return doQueryInsert(manyArgLambda, null);
+    }
+
+    /**
+     * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * <span style="color: #3F7E5E">// you don't need to set PK value</span>
+     * <span style="color: #3F7E5E">//product.setPK...(value);</span>
+     * product.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//product.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//product.set...;</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//product.setVersionNo(value);</span>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">queryUpdate</span>(product, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * });
+     * </pre>
+     * @param product The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of Product. (NotNull)
+     * @return The updated count.
+     * @throws NonQueryUpdateNotAllowedException When the query has no condition.
+     */
+    public int queryUpdate(Product product, CBCall<ProductCB> cbLambda) {
+        return doQueryUpdate(product, createCB(cbLambda), null);
+    }
+
+    /**
+     * Delete the several entities by query. (NonExclusiveControl)
+     * <pre>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">queryDelete</span>(product, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * });
+     * </pre>
+     * @param cbLambda The callback for condition-bean of Product. (NotNull)
+     * @return The deleted count.
+     * @throws NonQueryDeleteNotAllowedException When the query has no condition.
+     */
+    public int queryDelete(CBCall<ProductCB> cbLambda) {
+        return doQueryDelete(createCB(cbLambda), null);
+    }
+
+    // ===================================================================================
+    //                                                                      Varying Update
+    //                                                                      ==============
+    // -----------------------------------------------------
+    //                                         Entity Update
+    //                                         -------------
+    /**
+     * Insert the entity with varying requests. <br>
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
+     * Other specifications are same as insert(entity).
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
+     * product.setFoo...(value);
+     * product.setBar...(value);
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">varyingInsert</span>(product, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
+     *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
+     * });
+     * ... = product.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * </pre>
+     * @param product The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsert(Product product, WritableOptionCall<ProductCB, InsertOption<ProductCB>> opLambda) {
+        doInsert(product, createInsertOption(opLambda));
+    }
+
+    /**
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
+     * Other specifications are same as update(entity).
+     * <pre>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * product.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * product.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * product.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #3F7E5E">// you can update by self calculation values</span>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(product, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param product The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingUpdate(Product product, WritableOptionCall<ProductCB, UpdateOption<ProductCB>> opLambda) {
+        doUpdate(product, createUpdateOption(opLambda));
+    }
+
+    /**
+     * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
+     * Other specifications are same as insertOrUpdate(entity).
+     * @param product The entity of insert or update. (NotNull)
+     * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
+     * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsertOrUpdate(Product product, WritableOptionCall<ProductCB, InsertOption<ProductCB>> insertOpLambda, WritableOptionCall<ProductCB, UpdateOption<ProductCB>> updateOpLambda) {
+        doInsertOrUpdate(product, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Now a valid option does not exist. <br>
+     * Other specifications are same as delete(entity).
+     * @param product The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void varyingDelete(Product product, WritableOptionCall<ProductCB, DeleteOption<ProductCB>> opLambda) {
+        doDelete(product, createDeleteOption(opLambda));
+    }
+
+    // -----------------------------------------------------
+    //                                          Batch Update
+    //                                          ------------
+    /**
+     * Batch-insert the list with varying requests. <br>
+     * For example, disableCommonColumnAutoSetup()
+     * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
+     * Other specifications are same as batchInsert(entityList).
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchInsert(List<Product> productList, WritableOptionCall<ProductCB, InsertOption<ProductCB>> opLambda) {
+        return doBatchInsert(productList, createInsertOption(opLambda));
+    }
+
+    /**
+     * Batch-update the list with varying requests. <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
+     * Other specifications are same as batchUpdate(entityList).
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchUpdate(List<Product> productList, WritableOptionCall<ProductCB, UpdateOption<ProductCB>> opLambda) {
+        return doBatchUpdate(productList, createUpdateOption(opLambda));
+    }
+
+    /**
+     * Batch-delete the list with varying requests. <br>
+     * For example, limitBatchDeleteLogging(). <br>
+     * Other specifications are same as batchDelete(entityList).
+     * @param productList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchDelete(List<Product> productList, WritableOptionCall<ProductCB, DeleteOption<ProductCB>> opLambda) {
+        return doBatchDelete(productList, createDeleteOption(opLambda));
+    }
+
+    // -----------------------------------------------------
+    //                                          Query Update
+    //                                          ------------
+    /**
+     * Insert the several entities by query with varying requests (modified-only for fixed value). <br>
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
+     * Other specifications are same as queryInsert(entity, setupper).
+     * @param manyArgLambda The set-upper of query-insert. (NotNull)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @return The inserted count.
+     */
+    public int varyingQueryInsert(QueryInsertSetupper<Product, ProductCB> manyArgLambda, WritableOptionCall<ProductCB, InsertOption<ProductCB>> opLambda) {
+        return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
+    }
+
+    /**
+     * Update the several entities by query with varying requests non-strictly modified-only. {NonExclusiveControl} <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), allowNonQueryUpdate(). <br>
+     * Other specifications are same as queryUpdate(entity, cb).
+     * <pre>
+     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
+     * Product product = <span style="color: #70226C">new</span> Product();
+     * <span style="color: #3F7E5E">// you don't need to set PK value</span>
+     * <span style="color: #3F7E5E">//product.setPK...(value);</span>
+     * product.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//product.setVersionNo(value);</span>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(product, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">colCB</span>.specify().<span style="color: #CC4747">columnFooCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param product The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of Product. (NotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The updated count.
+     * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryUpdate(Product product, CBCall<ProductCB> cbLambda, WritableOptionCall<ProductCB, UpdateOption<ProductCB>> opLambda) {
+        return doQueryUpdate(product, createCB(cbLambda), createUpdateOption(opLambda));
+    }
+
+    /**
+     * Delete the several entities by query with varying requests non-strictly. <br>
+     * For example, allowNonQueryDelete(). <br>
+     * Other specifications are same as queryDelete(cb).
+     * <pre>
+     * <span style="color: #0000C0">productBhv</span>.<span style="color: #CC4747">queryDelete</span>(product, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>...
+     * });
+     * </pre>
+     * @param cbLambda The callback for condition-bean of Product. (NotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The deleted count.
+     * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryDelete(CBCall<ProductCB> cbLambda, WritableOptionCall<ProductCB, DeleteOption<ProductCB>> opLambda) {
+        return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
+    }
 
     // ===================================================================================
     //                                                                          OutsideSql
@@ -392,5 +880,11 @@ public abstract class BsProductBhv extends AbstractBehaviorReadable<Product, Pro
     @javax.annotation.Resource(name="behaviorSelector")
     public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
         super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
     }
 }

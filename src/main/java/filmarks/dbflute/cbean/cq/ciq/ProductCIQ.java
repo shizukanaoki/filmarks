@@ -61,10 +61,22 @@ public class ProductCIQ extends AbstractBsProductCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueName() { return _myCQ.xdfgetName(); }
+    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
+    protected ConditionValue xgetCValueTitle() { return _myCQ.xdfgetTitle(); }
+    protected ConditionValue xgetCValuePlayDate() { return _myCQ.xdfgetPlayDate(); }
+    protected ConditionValue xgetCValueCountryOfProduction() { return _myCQ.xdfgetCountryOfProduction(); }
+    protected ConditionValue xgetCValueRunningTime() { return _myCQ.xdfgetRunningTime(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(ProductCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
+    public String keepSpecifyMyselfDerived(ProductCQ sq)
+    { throwIICBOE("(Specify)MyselfDerived"); return null;}
+    public String keepQueryMyselfDerived(ProductCQ sq)
+    { throwIICBOE("(Query)MyselfDerived"); return null;}
+    public String keepQueryMyselfDerivedParameter(Object vl)
+    { throwIICBOE("(Query)MyselfDerived"); return null;}
+    public String keepMyselfExists(ProductCQ sq)
+    { throwIICBOE("MyselfExists"); return null;}
 
     protected void throwIICBOE(String name)
     { throw new IllegalConditionBeanOperationException(name + " at InlineView is unsupported."); }

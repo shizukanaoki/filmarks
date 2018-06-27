@@ -79,14 +79,38 @@ public class BsProductCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public ProductCB acceptPK(Integer id) {
+        assertObjectNotNull("id", id);
+        BsProductCB cb = this;
+        cb.query().setId_Equal(id);
+        return (ProductCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return this. (NotNull)
+     */
+    public ProductCB acceptUniqueOf(String title) {
+        assertObjectNotNull("title", title);
+        BsProductCB cb = this;
+        cb.query().setTitle_Equal(title);
+        return (ProductCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_Id_Asc();
+        return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_Id_Desc();
+        return this;
     }
 
     // ===================================================================================
@@ -272,17 +296,47 @@ public class BsProductCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * NAME: {VARCHAR(100)}
+         * ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnName() { return doColumn("NAME"); }
+        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        /**
+         * TITLE: {UQ, NotNull, VARCHAR(100)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnTitle() { return doColumn("TITLE"); }
+        /**
+         * PLAY_DATE: {NotNull, DATE(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnPlayDate() { return doColumn("PLAY_DATE"); }
+        /**
+         * COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnCountryOfProduction() { return doColumn("COUNTRY_OF_PRODUCTION"); }
+        /**
+         * RUNNING_TIME: {NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRunningTime() { return doColumn("RUNNING_TIME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
+            columnId(); // PK
         }
         @Override
         protected String getTableDbName() { return "PRODUCT"; }
+        /**
+         * Prepare for (Specify)MyselfDerived (SubQuery).
+         * @return The object to set up a function for myself table. (NotNull)
+         */
+        public HpSDRFunction<ProductCB, ProductCQ> myselfDerived() {
+            assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<ProductCB> sq, ProductCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
+        }
     }
 
     // ===================================================================================

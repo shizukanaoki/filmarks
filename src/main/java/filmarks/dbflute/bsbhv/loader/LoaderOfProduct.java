@@ -10,16 +10,16 @@ import filmarks.dbflute.exentity.*;
  * The referrer loader of PRODUCT as TABLE. <br>
  * <pre>
  * [primary key]
- *     
+ *     ID
  *
  * [column]
- *     NAME
+ *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     

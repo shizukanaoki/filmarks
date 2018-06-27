@@ -22,6 +22,6 @@ public class HelloWorldController
 
         });
 
-        return products.get(0).getName();
+        return products.get(0).getTitle();
     }
 }

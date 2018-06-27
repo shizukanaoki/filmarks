@@ -73,25 +73,105 @@ public class BsProductCQ extends AbstractBsProductCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _name;
-    public ConditionValue xdfgetName()
-    { if (_name == null) { _name = nCV(); }
-      return _name; }
-    protected ConditionValue xgetCValueName() { return xdfgetName(); }
+    protected ConditionValue _id;
+    public ConditionValue xdfgetId()
+    { if (_id == null) { _id = nCV(); }
+      return _id; }
+    protected ConditionValue xgetCValueId() { return xdfgetId(); }
 
     /**
      * Add order-by as ascend. <br>
-     * NAME: {VARCHAR(100)}
+     * ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsProductCQ addOrderBy_Name_Asc() { regOBA("NAME"); return this; }
+    public BsProductCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NAME: {VARCHAR(100)}
+     * ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsProductCQ addOrderBy_Name_Desc() { regOBD("NAME"); return this; }
+    public BsProductCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+
+    protected ConditionValue _title;
+    public ConditionValue xdfgetTitle()
+    { if (_title == null) { _title = nCV(); }
+      return _title; }
+    protected ConditionValue xgetCValueTitle() { return xdfgetTitle(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_Title_Asc() { regOBA("TITLE"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_Title_Desc() { regOBD("TITLE"); return this; }
+
+    protected ConditionValue _playDate;
+    public ConditionValue xdfgetPlayDate()
+    { if (_playDate == null) { _playDate = nCV(); }
+      return _playDate; }
+    protected ConditionValue xgetCValuePlayDate() { return xdfgetPlayDate(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * PLAY_DATE: {NotNull, DATE(10)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_PlayDate_Asc() { regOBA("PLAY_DATE"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * PLAY_DATE: {NotNull, DATE(10)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_PlayDate_Desc() { regOBD("PLAY_DATE"); return this; }
+
+    protected ConditionValue _countryOfProduction;
+    public ConditionValue xdfgetCountryOfProduction()
+    { if (_countryOfProduction == null) { _countryOfProduction = nCV(); }
+      return _countryOfProduction; }
+    protected ConditionValue xgetCValueCountryOfProduction() { return xdfgetCountryOfProduction(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_CountryOfProduction_Asc() { regOBA("COUNTRY_OF_PRODUCTION"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_CountryOfProduction_Desc() { regOBD("COUNTRY_OF_PRODUCTION"); return this; }
+
+    protected ConditionValue _runningTime;
+    public ConditionValue xdfgetRunningTime()
+    { if (_runningTime == null) { _runningTime = nCV(); }
+      return _runningTime; }
+    protected ConditionValue xgetCValueRunningTime() { return xdfgetRunningTime(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * RUNNING_TIME: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_RunningTime_Asc() { regOBA("RUNNING_TIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * RUNNING_TIME: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsProductCQ addOrderBy_RunningTime_Desc() { regOBD("RUNNING_TIME"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -146,6 +226,30 @@ public class BsProductCQ extends AbstractBsProductCQ {
     //                                                                     ===============
     public Map<String, ProductCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
     public String keepScalarCondition(ProductCQ sq) { return xkeepSQue("scalarCondition", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfDerived
+    //                                                                       =============
+    public Map<String, ProductCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
+    public String keepSpecifyMyselfDerived(ProductCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
+
+    public Map<String, ProductCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerived(ProductCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
+    public Map<String, Object> xdfgetQueryMyselfDerivedParameter() { return xgetSQuePmMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerivedParameter(Object pm) { return xkeepSQuePm("queryMyselfDerived", pm); }
+
+    // ===================================================================================
+    //                                                                        MyselfExists
+    //                                                                        ============
+    protected Map<String, ProductCQ> _myselfExistsMap;
+    public Map<String, ProductCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
+    public String keepMyselfExists(ProductCQ sq) { return xkeepSQue("myselfExists", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfInScope
+    //                                                                       =============
+    public Map<String, ProductCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
+    public String keepMyselfInScope(ProductCQ sq) { return xkeepSQue("myselfInScope", sq); }
 
     // ===================================================================================
     //                                                                       Very Internal

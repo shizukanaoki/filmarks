@@ -1,4 +1,19 @@
 map:{
+    ; 2018/06/27 09:56:26 = map:{
+        ; diffDate = 2018/06/27 09:56:26
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = ADD
+            }
+            ; Product = map:{
+                ; tableName = Product
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2018/06/26 11:51:02 = map:{
         ; diffDate = 2018/06/26 11:51:02
         ; tableCount = map:{

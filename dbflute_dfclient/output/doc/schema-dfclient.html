@@ -433,23 +433,23 @@ dl.procedurelist dd.column pre {
 	<tbody id="table-list-body">
 	<tr>
 		<td class="rownumcell">1</td>
-		<td class="namecell" data-name="Product"><a href="#product" title="type=TABLE, primaryKey={}, nameLength=7, columnCount=1">Product</a></td>
+		<td class="namecell" data-name="PRODUCT"><a href="#product" title="type=TABLE, primaryKey={ID}, nameLength=7, columnCount=5">PRODUCT</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell Product_comment"><pre>&nbsp;</pre></td>
+		<td class="commentcell PRODUCT_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Product</td>
 		<td class="subcell">2018/06/26</td>
 	</tr>
 	</tbody>
 </table>
 
-<h2 id="product" title="type=TABLE, primaryKey={}, nameLength=7, columnCount=1">
-Product
+<h2 id="product" title="type=TABLE, primaryKey={ID}, nameLength=7, columnCount=5">
+PRODUCT
 &nbsp;<span class="tablefirstdatetitle">since 2018/06/26</span>
 </h2>
-<div class="tablecomment Product_comment" data-name="Product"><pre></pre></div>
-<input type="hidden" value="Product">
+<div class="tablecomment PRODUCT_comment" data-name="PRODUCT"><pre>NEW_TABLE</pre></div>
+<input type="hidden" value="PRODUCT">
 <table class="tablecontent">
 	<thead>
 	<tr>
@@ -474,20 +474,92 @@ Product
 	<tbody id="product-body">
 	<tr>
 		<td class="rownumcell">1</td>
+		<td class="flgcell" title="PRIMARY">o</td>
+		<td class="flgcell">o</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="product_id">ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>ID</pre></td>
+		<td class="subcell">id</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="TITLE(TITLE)">o</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class=" columnnamecell" id="product_name">name</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="product_title">TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>&nbsp;</pre></td>
-		<td class="subcell">name</td>
+		<td class="commentcell"><pre>????</pre></td>
+		<td class="subcell">title</td>
 		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="product_play_date">PLAY_DATE</td>
+		<td class="typecell">DATE</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>???</pre></td>
+		<td class="subcell">playDate</td>
+		<td class="subcell">LocalDate</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="product_country_of_production">COUNTRY_OF_PRODUCTION</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 100 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>???</pre></td>
+		<td class="subcell">countryOfProduction</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="product_running_time">RUNNING_TIME</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>????</pre></td>
+		<td class="subcell">runningTime</td>
+		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
 	</tr>
 	</tbody>
@@ -498,10 +570,10 @@ Product
 
 <h2 id="thanks">Thanks</h2>
 <p>
-	Created by <a href="http://filmarks.dbflute.org/">DBFlute(AutoGenerator)</a>
+	Created by <a href="http://dbflute.org/">DBFlute(AutoGenerator)</a>
 </p>
 
-<!-- Only used by filmarks.dbflute intro http://filmarks.dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
+<!-- Only used by dbflute intro http://dbflute.seasar.org/ja/manual/function/helper/intro/index.html -->
 <div id="decomment-modal" class="decommentmodal">
 	<div class="decommentmodalcontent">
 		<div id="decomment-close" class="decommentmodal-close-btn"><span>x</span></div>
@@ -1011,17 +1083,29 @@ var DecommentUtil = new function(){
  * @author deco
  */
 function StoreClient() {
-	// setup from filmarks.dbflute if decomment pickup exists
+	// setup from dbflute if decomment pickup exists
 	this.embeddedPickup = {
 		'tables': [
 		]
 	}
 	this.pickupStore = {
-		'Product': {
-			'databaseComment': ''
+		'PRODUCT': {
+			'databaseComment': 'NEW_TABLE'
 			, 'columns': {
-				'name': {
-					'databaseComment': ''
+				'ID': {
+					'databaseComment': 'ID'
+				}
+				, 'TITLE': {
+					'databaseComment': '????'
+				}
+				, 'PLAY_DATE': {
+					'databaseComment': '???'
+				}
+				, 'COUNTRY_OF_PRODUCTION': {
+					'databaseComment': '???'
+				}
+				, 'RUNNING_TIME': {
+					'databaseComment': '????'
 				}
 			}
 		}

@@ -11,18 +11,19 @@ import filmarks.dbflute.exentity.*;
 
 /**
  * The entity of PRODUCT as TABLE. <br>
+ * NEW_TABLE
  * <pre>
  * [primary-key]
- *     
+ *     ID
  *
  * [column]
- *     NAME
+ *     ID, TITLE, PLAY_DATE, COUNTRY_OF_PRODUCTION, RUNNING_TIME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     
@@ -41,8 +42,16 @@ import filmarks.dbflute.exentity.*;
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * String name = entity.getName();
- * entity.setName(name);
+ * Integer id = entity.getId();
+ * String title = entity.getTitle();
+ * java.time.LocalDate playDate = entity.getPlayDate();
+ * String countryOfProduction = entity.getCountryOfProduction();
+ * Integer runningTime = entity.getRunningTime();
+ * entity.setId(id);
+ * entity.setTitle(title);
+ * entity.setPlayDate(playDate);
+ * entity.setCountryOfProduction(countryOfProduction);
+ * entity.setRunningTime(runningTime);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -58,8 +67,20 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** NAME: {VARCHAR(100)} */
-    protected String _name;
+    /** ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _id;
+
+    /** TITLE: {UQ, NotNull, VARCHAR(100)} */
+    protected String _title;
+
+    /** PLAY_DATE: {NotNull, DATE(10)} */
+    protected java.time.LocalDate _playDate;
+
+    /** COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)} */
+    protected String _countryOfProduction;
+
+    /** RUNNING_TIME: {NotNull, INT(10)} */
+    protected Integer _runningTime;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -79,7 +100,19 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        return false;
+        if (_id == null) { return false; }
+        return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
+     */
+    public void uniqueBy(String title) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("title");
+        setTitle(title);
     }
 
     // ===================================================================================
@@ -99,7 +132,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsProduct) {
             BsProduct other = (BsProduct)obj;
-            if (!xSV(_name, other._name)) { return false; }
+            if (!xSV(_id, other._id)) { return false; }
             return true;
         } else {
             return false;
@@ -110,7 +143,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _name);
+        hs = xCH(hs, _id);
         return hs;
     }
 
@@ -122,7 +155,11 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_name));
+        sb.append(dm).append(xfND(_id));
+        sb.append(dm).append(xfND(_title));
+        sb.append(dm).append(xfND(_playDate));
+        sb.append(dm).append(xfND(_countryOfProduction));
+        sb.append(dm).append(xfND(_runningTime));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -144,20 +181,102 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] NAME: {VARCHAR(100)} <br>
-     * @return The value of the column 'NAME'. (NullAllowed even if selected: for no constraint)
+     * [get] ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
      */
-    public String getName() {
-        checkSpecifiedProperty("name");
-        return _name;
+    public Integer getId() {
+        checkSpecifiedProperty("id");
+        return _id;
     }
 
     /**
-     * [set] NAME: {VARCHAR(100)} <br>
-     * @param name The value of the column 'NAME'. (NullAllowed: null update allowed for no constraint)
+     * [set] ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
      */
-    public void setName(String name) {
-        registerModifiedProperty("name");
-        _name = name;
+    public void setId(Integer id) {
+        registerModifiedProperty("id");
+        _id = id;
+    }
+
+    /**
+     * [get] TITLE: {UQ, NotNull, VARCHAR(100)} <br>
+     * ????
+     * @return The value of the column 'TITLE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getTitle() {
+        checkSpecifiedProperty("title");
+        return _title;
+    }
+
+    /**
+     * [set] TITLE: {UQ, NotNull, VARCHAR(100)} <br>
+     * ????
+     * @param title The value of the column 'TITLE'. (basically NotNull if update: for the constraint)
+     */
+    public void setTitle(String title) {
+        registerModifiedProperty("title");
+        _title = title;
+    }
+
+    /**
+     * [get] PLAY_DATE: {NotNull, DATE(10)} <br>
+     * ???
+     * @return The value of the column 'PLAY_DATE'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDate getPlayDate() {
+        checkSpecifiedProperty("playDate");
+        return _playDate;
+    }
+
+    /**
+     * [set] PLAY_DATE: {NotNull, DATE(10)} <br>
+     * ???
+     * @param playDate The value of the column 'PLAY_DATE'. (basically NotNull if update: for the constraint)
+     */
+    public void setPlayDate(java.time.LocalDate playDate) {
+        registerModifiedProperty("playDate");
+        _playDate = playDate;
+    }
+
+    /**
+     * [get] COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)} <br>
+     * ???
+     * @return The value of the column 'COUNTRY_OF_PRODUCTION'. (basically NotNull if selected: for the constraint)
+     */
+    public String getCountryOfProduction() {
+        checkSpecifiedProperty("countryOfProduction");
+        return _countryOfProduction;
+    }
+
+    /**
+     * [set] COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)} <br>
+     * ???
+     * @param countryOfProduction The value of the column 'COUNTRY_OF_PRODUCTION'. (basically NotNull if update: for the constraint)
+     */
+    public void setCountryOfProduction(String countryOfProduction) {
+        registerModifiedProperty("countryOfProduction");
+        _countryOfProduction = countryOfProduction;
+    }
+
+    /**
+     * [get] RUNNING_TIME: {NotNull, INT(10)} <br>
+     * ????
+     * @return The value of the column 'RUNNING_TIME'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getRunningTime() {
+        checkSpecifiedProperty("runningTime");
+        return _runningTime;
+    }
+
+    /**
+     * [set] RUNNING_TIME: {NotNull, INT(10)} <br>
+     * ????
+     * @param runningTime The value of the column 'RUNNING_TIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setRunningTime(Integer runningTime) {
+        registerModifiedProperty("runningTime");
+        _runningTime = runningTime;
     }
 }

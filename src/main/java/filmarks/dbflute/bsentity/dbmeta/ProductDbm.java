@@ -42,7 +42,11 @@ public class ProductDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Product)et).getName(), (et, vl) -> ((Product)et).setName((String)vl), "name");
+        setupEpg(_epgMap, et -> ((Product)et).getId(), (et, vl) -> ((Product)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((Product)et).getTitle(), (et, vl) -> ((Product)et).setTitle((String)vl), "title");
+        setupEpg(_epgMap, et -> ((Product)et).getPlayDate(), (et, vl) -> ((Product)et).setPlayDate(ctld(vl)), "playDate");
+        setupEpg(_epgMap, et -> ((Product)et).getCountryOfProduction(), (et, vl) -> ((Product)et).setCountryOfProduction((String)vl), "countryOfProduction");
+        setupEpg(_epgMap, et -> ((Product)et).getRunningTime(), (et, vl) -> ((Product)et).setRunningTime(cti(vl)), "runningTime");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -63,17 +67,45 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnName = cci("NAME", "NAME", null, null, String.class, "name", null, false, false, false, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnTitle = cci("TITLE", "TITLE", null, null, String.class, "title", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnPlayDate = cci("PLAY_DATE", "PLAY_DATE", null, null, java.time.LocalDate.class, "playDate", null, false, false, true, "DATE", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCountryOfProduction = cci("COUNTRY_OF_PRODUCTION", "COUNTRY_OF_PRODUCTION", null, null, String.class, "countryOfProduction", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRunningTime = cci("RUNNING_TIME", "RUNNING_TIME", null, null, Integer.class, "runningTime", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * NAME: {VARCHAR(100)}
+     * ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnName() { return _columnName; }
+    public ColumnInfo columnId() { return _columnId; }
+    /**
+     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnTitle() { return _columnTitle; }
+    /**
+     * PLAY_DATE: {NotNull, DATE(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnPlayDate() { return _columnPlayDate; }
+    /**
+     * COUNTRY_OF_PRODUCTION: {NotNull, VARCHAR(100)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnCountryOfProduction() { return _columnCountryOfProduction; }
+    /**
+     * RUNNING_TIME: {NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRunningTime() { return _columnRunningTime; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnName());
+        ls.add(columnId());
+        ls.add(columnTitle());
+        ls.add(columnPlayDate());
+        ls.add(columnCountryOfProduction());
+        ls.add(columnRunningTime());
         return ls;
     }
 
@@ -85,11 +117,14 @@ public class ProductDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() {
-        throw new UnsupportedOperationException("The table does not have primary key: " + getTableDbName());
-    }
-    public boolean hasPrimaryKey() { return false; }
+    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnTitle()); }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -107,6 +142,7 @@ public class ProductDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
+    public boolean hasIdentity() { return true; }
 
     // ===================================================================================
     //                                                                           Type Name
