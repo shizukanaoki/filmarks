@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p>hey world</p>
+    <ul th:each="product:${products}">
+        <li th:text="${product.getTitle()}"></li>
+        <li th:text="${product.getCountryOfProduction()}"></li>
+        <li th:text="${product.getPlayDate()}"></li>
+        <li th:text="${product.getRunningTime()}"></li>
+    </ul>
 </body>
 </html>
