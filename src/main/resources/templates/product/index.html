@@ -6,15 +6,27 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet", type="text/css" href="/css/style.css">
 </head>
 <body>
-    <ul th:each="product:${products}">
-        <li th:text="|タイトル: ${product.getTitle()}|"></li>
-        <li th:text="|製作国: ${product.getCountryOfProduction()}|"></li>
-        <li th:text="|公開日: ${product.getPlayDate()}|"></li>
-        <li th:text="|上映時間: ${product.getRunningTime()}|"></li>
-        <li><img th:src="@{'/image/product/' + ${product.getFileName()}}"/></li>
-    </ul>
+    <div class="main">
+        <div class="products">
+            <div class="product" th:each="product:${products}">
+                <div class="product-info">
+                    <div class="product-info-left">
+                        <img th:src="@{'/image/product/' + ${product.getFileName()}}" width="150" height="200"/>
+                    </div>
+                    <div class="product-info-right">
+                        <div class="product-info-title" th:text="|タイトル: ${product.getTitle()}|"></div>
+                        <div class="product-info-country_of_production" th:text="|製作国: ${product.getCountryOfProduction()}|"></div>
+                        <div class="product-info-play_date" th:text="|公開日: ${product.getPlayDate()}|"></div>
+                        <div class="product-info-running_time" th:text="|上映時間: ${product.getRunningTime()}|"></div>
+                    </div>
+                </div>
+                <div class="product-review"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
