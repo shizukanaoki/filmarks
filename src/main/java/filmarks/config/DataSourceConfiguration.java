@@ -14,9 +14,9 @@ public class DataSourceConfiguration {
     @ConfigurationProperties(prefix = "spring.datasource.mysql")
     public DataSource dataSource() {
         DriverManagerDataSource datasource = new DriverManagerDataSource();
-        datasource.setUrl("jdbc:mysql://localhost:13306/filmarks?characterEncoding=UTF-8");
-        datasource.setUsername("root");
-        datasource.setPassword("mysql");
+        datasource.setUrl(System.getenv("FILMARKS_DATABASE_URL"));
+        datasource.setUsername(System.getenv("FILMARKS_DATABASE_USERNAME"));
+        datasource.setPassword(System.getenv("FILMARKS_DATABASE_PASSWORD"));
         return datasource;
     }
 }
