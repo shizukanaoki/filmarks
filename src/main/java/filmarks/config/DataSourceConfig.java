@@ -8,7 +8,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-public class DataSourceConfiguration {
+public class DataSourceConfig {
 
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "spring.datasource.mysql")
