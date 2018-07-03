@@ -16,7 +16,7 @@ public class AlbumController {
     @Autowired
     AlbumBhv albumBhv;
 
-    @RequestMapping("/albums")
+    @RequestMapping(value = {"/", "/albums"})
     @ResponseBody
     public ModelAndView index(ModelAndView mav) {
         ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_Id_Asc());
