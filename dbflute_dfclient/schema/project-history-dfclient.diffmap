@@ -1,4 +1,47 @@
 map:{
+    ; 2018/07/03 13:21:00 = map:{
+        ; diffDate = 2018/07/03 13:21:00
+        ; tableCount = map:{
+            ; next = 7
+            ; previous = 1
+        }
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_user_function
+        ; tableDiff = map:{
+            ; ALBUM = map:{
+                ; tableName = ALBUM
+                ; diffType = ADD
+            }
+            ; ARTIST = map:{
+                ; tableName = ARTIST
+                ; diffType = ADD
+            }
+            ; COMMENT = map:{
+                ; tableName = COMMENT
+                ; diffType = ADD
+            }
+            ; PICK = map:{
+                ; tableName = PICK
+                ; diffType = ADD
+            }
+            ; RELATIONSHIP = map:{
+                ; tableName = RELATIONSHIP
+                ; diffType = ADD
+            }
+            ; SONG = map:{
+                ; tableName = SONG
+                ; diffType = ADD
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = ADD
+            }
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2018/06/27 15:01:41 = map:{
         ; diffDate = 2018/06/27 15:01:41
         ; diffAuthor = naoki.shizuka
