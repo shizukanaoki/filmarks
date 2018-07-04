@@ -1,6 +1,7 @@
 package filmarks.web;
 
 import filmarks.dbflute.exbhv.AlbumBhv;
+import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.Album;
 import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.optional.OptionalEntity;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class AlbumController {
     @Autowired
     AlbumBhv albumBhv;
+
+    @Autowired
+    UserBhv userBhv;
 
     @RequestMapping(value = {"/", "/albums"})
     @ResponseBody

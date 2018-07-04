@@ -130,8 +130,10 @@
             javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="??" dbType="VARCHAR" javaType="String"
-            name="NAME" required="true" size="100" type="VARCHAR"/>
+            name="USERNAME" required="true" size="100" type="VARCHAR"/>
         <column comment="?????" dbType="VARCHAR" javaType="String"
             name="PASSWORD" required="true" size="100" type="VARCHAR"/>
+        <column comment="??" dbType="INT" javaType="Integer"
+            name="AUTHORITY" required="true" size="10" type="INTEGER"/>
     </table>
 </database>

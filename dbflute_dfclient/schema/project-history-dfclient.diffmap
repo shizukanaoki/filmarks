@@ -1,4 +1,42 @@
 map:{
+    ; 2018/07/03 17:58:21 = map:{
+        ; diffDate = 2018/07/03 17:58:21
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_user_function
+        ; tableDiff = map:{
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USERNAME = map:{
+                        ; columnName = USERNAME
+                        ; diffType = ADD
+                    }
+                    ; NAME = map:{
+                        ; columnName = NAME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/07/03 17:54:05 = map:{
+        ; diffDate = 2018/07/03 17:54:05
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_user_function
+        ; tableDiff = map:{
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; AUTHORITY = map:{
+                        ; columnName = AUTHORITY
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/03 13:21:00 = map:{
         ; diffDate = 2018/07/03 13:21:00
         ; tableCount = map:{

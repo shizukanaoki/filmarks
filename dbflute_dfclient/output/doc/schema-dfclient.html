@@ -493,7 +493,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">7</td>
-		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=3">USER</a></td>
+		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=4">USER</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#pick" title="FK_PICK_USER">PICK</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWER">RELATIONSHIP</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWING">RELATIONSHIP</a></td>
@@ -1014,7 +1014,7 @@ SONG
 	</tbody>
 </table>
 
-<h2 id="user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=3">
+<h2 id="user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=4">
 USER
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -1067,16 +1067,16 @@ USER
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="user_name">NAME</td>
+		<td class=" columnnamecell" id="user_username">USERNAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>??</pre></td>
-		<td class="subcell">name</td>
+		<td class="subcell">username</td>
 		<td class="subcell">String</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/03</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
@@ -1095,6 +1095,24 @@ USER
 		<td class="subcell">password</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="user_authority">AUTHORITY</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>??</pre></td>
+		<td class="subcell">authority</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">2018/07/03</td>
 	</tr>
 	</tbody>
 </table>
@@ -1713,11 +1731,14 @@ function StoreClient() {
 				'ID': {
 					'databaseComment': 'ID'
 				}
-				, 'NAME': {
+				, 'USERNAME': {
 					'databaseComment': '??'
 				}
 				, 'PASSWORD': {
 					'databaseComment': '?????'
+				}
+				, 'AUTHORITY': {
+					'databaseComment': '??'
 				}
 			}
 		}

@@ -43,8 +43,9 @@ public class UserDbm extends AbstractDBMeta {
     { xsetupEpg(); }
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((User)et).getId(), (et, vl) -> ((User)et).setId(cti(vl)), "id");
-        setupEpg(_epgMap, et -> ((User)et).getName(), (et, vl) -> ((User)et).setName((String)vl), "name");
+        setupEpg(_epgMap, et -> ((User)et).getUsername(), (et, vl) -> ((User)et).setUsername((String)vl), "username");
         setupEpg(_epgMap, et -> ((User)et).getPassword(), (et, vl) -> ((User)et).setPassword((String)vl), "password");
+        setupEpg(_epgMap, et -> ((User)et).getAuthority(), (et, vl) -> ((User)et).setAuthority(cti(vl)), "authority");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -66,8 +67,9 @@ public class UserDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,pickList,relationshipByFollowerIdList,relationshipByFollowingIdList", null, false);
-    protected final ColumnInfo _columnName = cci("NAME", "NAME", null, null, String.class, "name", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUsername = cci("USERNAME", "USERNAME", null, null, String.class, "username", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, null, String.class, "password", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnAuthority = cci("AUTHORITY", "AUTHORITY", null, null, Integer.class, "authority", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * ID: {PK, ID, NotNull, INT(10)}
@@ -75,21 +77,27 @@ public class UserDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnId() { return _columnId; }
     /**
-     * NAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnName() { return _columnName; }
+    public ColumnInfo columnUsername() { return _columnUsername; }
     /**
      * PASSWORD: {NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnPassword() { return _columnPassword; }
+    /**
+     * AUTHORITY: {NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnAuthority() { return _columnAuthority; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnId());
-        ls.add(columnName());
+        ls.add(columnUsername());
         ls.add(columnPassword());
+        ls.add(columnAuthority());
         return ls;
     }
 

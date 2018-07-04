@@ -17,7 +17,7 @@ import filmarks.dbflute.exentity.*;
  *     ID
  *
  * [column]
- *     ID, NAME, PASSWORD
+ *     ID, USERNAME, PASSWORD, AUTHORITY
  *
  * [sequence]
  *     
@@ -43,11 +43,13 @@ import filmarks.dbflute.exentity.*;
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer id = entity.getId();
- * String name = entity.getName();
+ * String username = entity.getUsername();
  * String password = entity.getPassword();
+ * Integer authority = entity.getAuthority();
  * entity.setId(id);
- * entity.setName(name);
+ * entity.setUsername(username);
  * entity.setPassword(password);
+ * entity.setAuthority(authority);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -66,11 +68,14 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     /** ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _id;
 
-    /** NAME: {NotNull, VARCHAR(100)} */
-    protected String _name;
+    /** USERNAME: {NotNull, VARCHAR(100)} */
+    protected String _username;
 
     /** PASSWORD: {NotNull, VARCHAR(100)} */
     protected String _password;
+
+    /** AUTHORITY: {NotNull, INT(10)} */
+    protected Integer _authority;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -224,8 +229,9 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_id));
-        sb.append(dm).append(xfND(_name));
+        sb.append(dm).append(xfND(_username));
         sb.append(dm).append(xfND(_password));
+        sb.append(dm).append(xfND(_authority));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -279,23 +285,23 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] NAME: {NotNull, VARCHAR(100)} <br>
+     * [get] USERNAME: {NotNull, VARCHAR(100)} <br>
      * ??
-     * @return The value of the column 'NAME'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'USERNAME'. (basically NotNull if selected: for the constraint)
      */
-    public String getName() {
-        checkSpecifiedProperty("name");
-        return _name;
+    public String getUsername() {
+        checkSpecifiedProperty("username");
+        return _username;
     }
 
     /**
-     * [set] NAME: {NotNull, VARCHAR(100)} <br>
+     * [set] USERNAME: {NotNull, VARCHAR(100)} <br>
      * ??
-     * @param name The value of the column 'NAME'. (basically NotNull if update: for the constraint)
+     * @param username The value of the column 'USERNAME'. (basically NotNull if update: for the constraint)
      */
-    public void setName(String name) {
-        registerModifiedProperty("name");
-        _name = name;
+    public void setUsername(String username) {
+        registerModifiedProperty("username");
+        _username = username;
     }
 
     /**
@@ -316,5 +322,25 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     public void setPassword(String password) {
         registerModifiedProperty("password");
         _password = password;
+    }
+
+    /**
+     * [get] AUTHORITY: {NotNull, INT(10)} <br>
+     * ??
+     * @return The value of the column 'AUTHORITY'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getAuthority() {
+        checkSpecifiedProperty("authority");
+        return _authority;
+    }
+
+    /**
+     * [set] AUTHORITY: {NotNull, INT(10)} <br>
+     * ??
+     * @param authority The value of the column 'AUTHORITY'. (basically NotNull if update: for the constraint)
+     */
+    public void setAuthority(Integer authority) {
+        registerModifiedProperty("authority");
+        _authority = authority;
     }
 }

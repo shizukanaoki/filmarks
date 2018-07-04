@@ -149,25 +149,25 @@ public class BsUserCQ extends AbstractBsUserCQ {
      */
     public BsUserCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
 
-    protected ConditionValue _name;
-    public ConditionValue xdfgetName()
-    { if (_name == null) { _name = nCV(); }
-      return _name; }
-    protected ConditionValue xgetCValueName() { return xdfgetName(); }
+    protected ConditionValue _username;
+    public ConditionValue xdfgetUsername()
+    { if (_username == null) { _username = nCV(); }
+      return _username; }
+    protected ConditionValue xgetCValueUsername() { return xdfgetUsername(); }
 
     /**
      * Add order-by as ascend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsUserCQ addOrderBy_Name_Asc() { regOBA("NAME"); return this; }
+    public BsUserCQ addOrderBy_Username_Asc() { regOBA("USERNAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsUserCQ addOrderBy_Name_Desc() { regOBD("NAME"); return this; }
+    public BsUserCQ addOrderBy_Username_Desc() { regOBD("USERNAME"); return this; }
 
     protected ConditionValue _password;
     public ConditionValue xdfgetPassword()
@@ -188,6 +188,26 @@ public class BsUserCQ extends AbstractBsUserCQ {
      * @return this. (NotNull)
      */
     public BsUserCQ addOrderBy_Password_Desc() { regOBD("PASSWORD"); return this; }
+
+    protected ConditionValue _authority;
+    public ConditionValue xdfgetAuthority()
+    { if (_authority == null) { _authority = nCV(); }
+      return _authority; }
+    protected ConditionValue xgetCValueAuthority() { return xdfgetAuthority(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsUserCQ addOrderBy_Authority_Asc() { regOBA("AUTHORITY"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsUserCQ addOrderBy_Authority_Desc() { regOBD("AUTHORITY"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

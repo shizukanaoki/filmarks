@@ -289,15 +289,20 @@ public class BsUserCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnId() { return doColumn("ID"); }
         /**
-         * NAME: {NotNull, VARCHAR(100)}
+         * USERNAME: {NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnName() { return doColumn("NAME"); }
+        public SpecifiedColumn columnUsername() { return doColumn("USERNAME"); }
         /**
          * PASSWORD: {NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
+        /**
+         * AUTHORITY: {NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnAuthority() { return doColumn("AUTHORITY"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

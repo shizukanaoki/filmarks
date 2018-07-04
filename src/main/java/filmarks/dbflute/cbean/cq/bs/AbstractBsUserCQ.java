@@ -466,138 +466,138 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_Equal(String name) {
-        doSetName_Equal(fRES(name));
+    public void setUsername_Equal(String username) {
+        doSetUsername_Equal(fRES(username));
     }
 
-    protected void doSetName_Equal(String name) {
-        regName(CK_EQ, name);
+    protected void doSetUsername_Equal(String username) {
+        regUsername(CK_EQ, username);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_NotEqual(String name) {
-        doSetName_NotEqual(fRES(name));
+    public void setUsername_NotEqual(String username) {
+        doSetUsername_NotEqual(fRES(username));
     }
 
-    protected void doSetName_NotEqual(String name) {
-        regName(CK_NES, name);
+    protected void doSetUsername_NotEqual(String username) {
+        regUsername(CK_NES, username);
     }
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_GreaterThan(String name) {
-        regName(CK_GT, fRES(name));
+    public void setUsername_GreaterThan(String username) {
+        regUsername(CK_GT, fRES(username));
     }
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_LessThan(String name) {
-        regName(CK_LT, fRES(name));
+    public void setUsername_LessThan(String username) {
+        regUsername(CK_LT, fRES(username));
     }
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_GreaterEqual(String name) {
-        regName(CK_GE, fRES(name));
+    public void setUsername_GreaterEqual(String username) {
+        regUsername(CK_GE, fRES(username));
     }
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_LessEqual(String name) {
-        regName(CK_LE, fRES(name));
+    public void setUsername_LessEqual(String username) {
+        regUsername(CK_LE, fRES(username));
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param nameList The collection of name as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param usernameList The collection of username as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_InScope(Collection<String> nameList) {
-        doSetName_InScope(nameList);
+    public void setUsername_InScope(Collection<String> usernameList) {
+        doSetUsername_InScope(usernameList);
     }
 
-    protected void doSetName_InScope(Collection<String> nameList) {
-        regINS(CK_INS, cTL(nameList), xgetCValueName(), "NAME");
+    protected void doSetUsername_InScope(Collection<String> usernameList) {
+        regINS(CK_INS, cTL(usernameList), xgetCValueUsername(), "USERNAME");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param nameList The collection of name as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param usernameList The collection of username as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_NotInScope(Collection<String> nameList) {
-        doSetName_NotInScope(nameList);
+    public void setUsername_NotInScope(Collection<String> usernameList) {
+        doSetUsername_NotInScope(usernameList);
     }
 
-    protected void doSetName_NotInScope(Collection<String> nameList) {
-        regINS(CK_NINS, cTL(nameList), xgetCValueName(), "NAME");
+    protected void doSetUsername_NotInScope(Collection<String> usernameList) {
+        regINS(CK_NINS, cTL(usernameList), xgetCValueUsername(), "USERNAME");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setUsername_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param username The value of username as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setName_LikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setName_LikeSearch(name, xcLSOP(opLambda));
+    public void setUsername_LikeSearch(String username, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setUsername_LikeSearch(username, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setUsername_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param username The value of username as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setName_LikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
+    protected void setUsername_LikeSearch(String username, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(username), xgetCValueUsername(), "USERNAME", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setName_NotLikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setName_NotLikeSearch(name, xcLSOP(opLambda));
+    public void setUsername_NotLikeSearch(String username, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setUsername_NotLikeSearch(username, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USERNAME: {NotNull, VARCHAR(100)}
+     * @param username The value of username as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setName_NotLikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
+    protected void setUsername_NotLikeSearch(String username, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(username), xgetCValueUsername(), "USERNAME", likeSearchOption);
     }
 
-    protected void regName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueName(), "NAME"); }
-    protected abstract ConditionValue xgetCValueName();
+    protected void regUsername(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUsername(), "USERNAME"); }
+    protected abstract ConditionValue xgetCValueUsername();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
@@ -733,6 +733,123 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     protected void regPassword(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValuePassword(), "PASSWORD"); }
     protected abstract ConditionValue xgetCValuePassword();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_Equal(Integer authority) {
+        doSetAuthority_Equal(authority);
+    }
+
+    protected void doSetAuthority_Equal(Integer authority) {
+        regAuthority(CK_EQ, authority);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as notEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_NotEqual(Integer authority) {
+        doSetAuthority_NotEqual(authority);
+    }
+
+    protected void doSetAuthority_NotEqual(Integer authority) {
+        regAuthority(CK_NES, authority);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_GreaterThan(Integer authority) {
+        regAuthority(CK_GT, authority);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_LessThan(Integer authority) {
+        regAuthority(CK_LT, authority);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_GreaterEqual(Integer authority) {
+        regAuthority(CK_GE, authority);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authority The value of authority as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setAuthority_LessEqual(Integer authority) {
+        regAuthority(CK_LE, authority);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param minNumber The min number of authority. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of authority. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setAuthority_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setAuthority_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param minNumber The min number of authority. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of authority. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setAuthority_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueAuthority(), "AUTHORITY", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authorityList The collection of authority as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setAuthority_InScope(Collection<Integer> authorityList) {
+        doSetAuthority_InScope(authorityList);
+    }
+
+    protected void doSetAuthority_InScope(Collection<Integer> authorityList) {
+        regINS(CK_INS, cTL(authorityList), xgetCValueAuthority(), "AUTHORITY");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * AUTHORITY: {NotNull, INT(10)}
+     * @param authorityList The collection of authority as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setAuthority_NotInScope(Collection<Integer> authorityList) {
+        doSetAuthority_NotInScope(authorityList);
+    }
+
+    protected void doSetAuthority_NotInScope(Collection<Integer> authorityList) {
+        regINS(CK_NINS, cTL(authorityList), xgetCValueAuthority(), "AUTHORITY");
+    }
+
+    protected void regAuthority(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAuthority(), "AUTHORITY"); }
+    protected abstract ConditionValue xgetCValueAuthority();
 
     // ===================================================================================
     //                                                                     ScalarCondition

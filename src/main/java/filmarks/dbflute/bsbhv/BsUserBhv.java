@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     ID
  *
  * [column]
- *     ID, NAME, PASSWORD
+ *     ID, USERNAME, PASSWORD, AUTHORITY
  *
  * [sequence]
  *     
