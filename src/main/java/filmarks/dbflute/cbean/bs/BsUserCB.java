@@ -298,11 +298,6 @@ public class BsUserCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
-        /**
-         * AUTHORITY: {NotNull, INT(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnAuthority() { return doColumn("AUTHORITY"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

@@ -133,7 +133,5 @@
             name="USERNAME" required="true" size="100" type="VARCHAR"/>
         <column comment="?????" dbType="VARCHAR" javaType="String"
             name="PASSWORD" required="true" size="100" type="VARCHAR"/>
-        <column comment="??" dbType="INT" javaType="Integer"
-            name="AUTHORITY" required="true" size="10" type="INTEGER"/>
     </table>
 </database>

@@ -8,11 +8,11 @@ public class SessionController {
 
     @RequestMapping("/login")
     public String login() {
-        return "login";
+        return "session/login";
     }
 
     @RequestMapping("/logout")
     public String logout() {
-        return "logout";
+        return "session/logout";
     }
 }

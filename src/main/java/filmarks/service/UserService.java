@@ -26,4 +26,9 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
+
+    public User create(User user) {
+        userRepository.save(user);
+        return user;
+    }
 }

@@ -104,7 +104,6 @@ public class UserCIQ extends AbstractBsUserCQ {
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueUsername() { return _myCQ.xdfgetUsername(); }
     protected ConditionValue xgetCValuePassword() { return _myCQ.xdfgetPassword(); }
-    protected ConditionValue xgetCValueAuthority() { return _myCQ.xdfgetAuthority(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(UserCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

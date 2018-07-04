@@ -189,26 +189,6 @@ public class BsUserCQ extends AbstractBsUserCQ {
      */
     public BsUserCQ addOrderBy_Password_Desc() { regOBD("PASSWORD"); return this; }
 
-    protected ConditionValue _authority;
-    public ConditionValue xdfgetAuthority()
-    { if (_authority == null) { _authority = nCV(); }
-      return _authority; }
-    protected ConditionValue xgetCValueAuthority() { return xdfgetAuthority(); }
-
-    /**
-     * Add order-by as ascend. <br>
-     * AUTHORITY: {NotNull, INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsUserCQ addOrderBy_Authority_Asc() { regOBA("AUTHORITY"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * AUTHORITY: {NotNull, INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsUserCQ addOrderBy_Authority_Desc() { regOBD("AUTHORITY"); return this; }
-
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

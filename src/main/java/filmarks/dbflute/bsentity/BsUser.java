@@ -17,7 +17,7 @@ import filmarks.dbflute.exentity.*;
  *     ID
  *
  * [column]
- *     ID, USERNAME, PASSWORD, AUTHORITY
+ *     ID, USERNAME, PASSWORD
  *
  * [sequence]
  *     
@@ -45,11 +45,9 @@ import filmarks.dbflute.exentity.*;
  * Integer id = entity.getId();
  * String username = entity.getUsername();
  * String password = entity.getPassword();
- * Integer authority = entity.getAuthority();
  * entity.setId(id);
  * entity.setUsername(username);
  * entity.setPassword(password);
- * entity.setAuthority(authority);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -73,9 +71,6 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
 
     /** PASSWORD: {NotNull, VARCHAR(100)} */
     protected String _password;
-
-    /** AUTHORITY: {NotNull, INT(10)} */
-    protected Integer _authority;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -231,7 +226,6 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_id));
         sb.append(dm).append(xfND(_username));
         sb.append(dm).append(xfND(_password));
-        sb.append(dm).append(xfND(_authority));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -322,25 +316,5 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     public void setPassword(String password) {
         registerModifiedProperty("password");
         _password = password;
-    }
-
-    /**
-     * [get] AUTHORITY: {NotNull, INT(10)} <br>
-     * ??
-     * @return The value of the column 'AUTHORITY'. (basically NotNull if selected: for the constraint)
-     */
-    public Integer getAuthority() {
-        checkSpecifiedProperty("authority");
-        return _authority;
-    }
-
-    /**
-     * [set] AUTHORITY: {NotNull, INT(10)} <br>
-     * ??
-     * @param authority The value of the column 'AUTHORITY'. (basically NotNull if update: for the constraint)
-     */
-    public void setAuthority(Integer authority) {
-        registerModifiedProperty("authority");
-        _authority = authority;
     }
 }
