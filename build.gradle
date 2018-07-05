@@ -30,7 +30,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
     compile('mysql:mysql-connector-java')
     compile('org.dbflute:dbflute-runtime:1.1.8')
+    compileOnly('org.projectlombok:lombok:1.18.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
