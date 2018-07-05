@@ -26,6 +26,7 @@ public class AlbumController {
     @ResponseBody
     public ModelAndView index(@ModelAttribute("commentForm") CommentForm commentForm, ModelAndView mav) {
         ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_Id_Asc());
+        albumBhv.loadComment(albums, cb -> {});
         mav.addObject("albums", albums);
         mav.setViewName("album/index");
         return mav;

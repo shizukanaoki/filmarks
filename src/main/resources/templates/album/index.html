@@ -25,6 +25,10 @@
                     </div>
                     <div class="product-info-right">
                         <div class="product-info-title" th:text="|タイトル: ${album.getTitle()}|"></div>
+                        <div class="comment" th:each="comment:${album.getCommentList()}">
+                            <div th:text="${comment.getContent()}"></div>
+                            <div th:text="${comment.getRate()}"></div>
+                        </div>
                     </div>
                     <div>
                         <table>
