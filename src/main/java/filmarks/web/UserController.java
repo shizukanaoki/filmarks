@@ -17,7 +17,7 @@ public class UserController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public ModelAndView form(@ModelAttribute("formmodel") User user, ModelAndView mav) {
-        mav.setViewName("user/form");
+        mav.setViewName("user/new");
         return mav;
     }
 
