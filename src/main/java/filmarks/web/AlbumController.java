@@ -3,10 +3,12 @@ package filmarks.web;
 import filmarks.dbflute.exbhv.AlbumBhv;
 import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.Album;
+import filmarks.web.form.CommentForm;
 import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +24,7 @@ public class AlbumController {
 
     @RequestMapping(value = {"/", "/albums"})
     @ResponseBody
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(@ModelAttribute("commentForm") CommentForm commentForm, ModelAndView mav) {
         ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_Id_Asc());
         mav.addObject("albums", albums);
         mav.setViewName("album/index");
