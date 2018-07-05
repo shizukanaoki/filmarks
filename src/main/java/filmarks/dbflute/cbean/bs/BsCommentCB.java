@@ -246,7 +246,7 @@ public class BsCommentCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * <pre>
      * <span style="color: #0000C0">commentBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Album()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -260,7 +260,7 @@ public class BsCommentCB extends AbstractConditionBean {
     public AlbumNss setupSelect_Album() {
         assertSetupSelectPurpose("album");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnProductId();
+            specify().columnAlbumId();
         }
         doSetupSelect(() -> query().queryAlbum());
         if (_nssAlbum == null || !_nssAlbum.hasConditionQuery())
@@ -346,10 +346,10 @@ public class BsCommentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+         * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnProductId() { return doColumn("PRODUCT_ID"); }
+        public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         /**
          * CONTENT: {NotNull, TEXT(65535)}
          * @return The information object of specified column. (NotNull)
@@ -367,7 +367,7 @@ public class BsCommentCB extends AbstractConditionBean {
             columnId(); // PK
             if (qyCall().qy().hasConditionQueryAlbum()
                     || qyCall().qy().xgetReferrerQuery() instanceof AlbumCQ) {
-                columnProductId(); // FK or one-to-one referrer
+                columnAlbumId(); // FK or one-to-one referrer
             }
             if (qyCall().qy().hasConditionQueryUser()
                     || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
@@ -378,7 +378,7 @@ public class BsCommentCB extends AbstractConditionBean {
         protected String getTableDbName() { return "COMMENT"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * ALBUM by my PRODUCT_ID, named 'album'.
+         * ALBUM by my ALBUM_ID, named 'album'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public AlbumCB.HpSpecification specifyAlbum() {

@@ -493,7 +493,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">7</td>
-		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=4">USER</a></td>
+		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=3">USER</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#pick" title="FK_PICK_USER">PICK</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWER">RELATIONSHIP</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWING">RELATIONSHIP</a></td>
@@ -743,18 +743,18 @@ COMMENT
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="FK_COMMENT_PRODUCT(PRODUCT_ID)">o</td>
+		<td class="flgcell" title="FK_COMMENT_PRODUCT(ALBUM_ID)">o</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="comment_product_id">PRODUCT_ID</td>
+		<td class=" columnnamecell" id="comment_album_id">ALBUM_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell"><a href="#album" title="FK_COMMENT_PRODUCT">ALBUM</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>??ID</pre></td>
-		<td class="subcell">productId</td>
+		<td class="commentcell"><pre>????ID</pre></td>
+		<td class="subcell">albumId</td>
 		<td class="subcell">Integer</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/05</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
@@ -1014,7 +1014,7 @@ SONG
 	</tbody>
 </table>
 
-<h2 id="user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=4">
+<h2 id="user" title="type=TABLE, primaryKey={ID}, nameLength=4, columnCount=3">
 USER
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -1095,24 +1095,6 @@ USER
 		<td class="subcell">password</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">4</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="user_authority">AUTHORITY</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>??</pre></td>
-		<td class="subcell">authority</td>
-		<td class="subcell">Integer</td>
-		<td class="subcell">2018/07/03</td>
 	</tr>
 	</tbody>
 </table>
@@ -1678,8 +1660,8 @@ function StoreClient() {
 				, 'USER_ID': {
 					'databaseComment': '????ID'
 				}
-				, 'PRODUCT_ID': {
-					'databaseComment': '??ID'
+				, 'ALBUM_ID': {
+					'databaseComment': '????ID'
 				}
 				, 'CONTENT': {
 					'databaseComment': '??'
@@ -1736,9 +1718,6 @@ function StoreClient() {
 				}
 				, 'PASSWORD': {
 					'databaseComment': '?????'
-				}
-				, 'AUTHORITY': {
-					'databaseComment': '??'
 				}
 			}
 		}

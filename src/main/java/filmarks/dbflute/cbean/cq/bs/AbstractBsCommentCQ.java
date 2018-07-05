@@ -291,120 +291,120 @@ public abstract class AbstractBsCommentCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as equal. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_Equal(Integer productId) {
-        doSetProductId_Equal(productId);
+    public void setAlbumId_Equal(Integer albumId) {
+        doSetAlbumId_Equal(albumId);
     }
 
-    protected void doSetProductId_Equal(Integer productId) {
-        regProductId(CK_EQ, productId);
+    protected void doSetAlbumId_Equal(Integer albumId) {
+        regAlbumId(CK_EQ, albumId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as notEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_NotEqual(Integer productId) {
-        doSetProductId_NotEqual(productId);
+    public void setAlbumId_NotEqual(Integer albumId) {
+        doSetAlbumId_NotEqual(albumId);
     }
 
-    protected void doSetProductId_NotEqual(Integer productId) {
-        regProductId(CK_NES, productId);
+    protected void doSetAlbumId_NotEqual(Integer albumId) {
+        regAlbumId(CK_NES, albumId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_GreaterThan(Integer productId) {
-        regProductId(CK_GT, productId);
+    public void setAlbumId_GreaterThan(Integer albumId) {
+        regAlbumId(CK_GT, albumId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as lessThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_LessThan(Integer productId) {
-        regProductId(CK_LT, productId);
+    public void setAlbumId_LessThan(Integer albumId) {
+        regAlbumId(CK_LT, albumId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_GreaterEqual(Integer productId) {
-        regProductId(CK_GE, productId);
+    public void setAlbumId_GreaterEqual(Integer albumId) {
+        regAlbumId(CK_GE, albumId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_LessEqual(Integer productId) {
-        regProductId(CK_LE, productId);
+    public void setAlbumId_LessEqual(Integer albumId) {
+        regAlbumId(CK_LE, albumId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setProductId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setProductId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setAlbumId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setProductId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueProductId(), "PRODUCT_ID", rangeOfOption);
+    protected void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueAlbumId(), "ALBUM_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productIdList The collection of productId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setProductId_InScope(Collection<Integer> productIdList) {
-        doSetProductId_InScope(productIdList);
+    public void setAlbumId_InScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_InScope(albumIdList);
     }
 
-    protected void doSetProductId_InScope(Collection<Integer> productIdList) {
-        regINS(CK_INS, cTL(productIdList), xgetCValueProductId(), "PRODUCT_ID");
+    protected void doSetAlbumId_InScope(Collection<Integer> albumIdList) {
+        regINS(CK_INS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productIdList The collection of productId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setProductId_NotInScope(Collection<Integer> productIdList) {
-        doSetProductId_NotInScope(productIdList);
+    public void setAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_NotInScope(albumIdList);
     }
 
-    protected void doSetProductId_NotInScope(Collection<Integer> productIdList) {
-        regINS(CK_NINS, cTL(productIdList), xgetCValueProductId(), "PRODUCT_ID");
+    protected void doSetAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        regINS(CK_NINS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
-    protected void regProductId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueProductId(), "PRODUCT_ID"); }
-    protected abstract ConditionValue xgetCValueProductId();
+    protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
+    protected abstract ConditionValue xgetCValueAlbumId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>

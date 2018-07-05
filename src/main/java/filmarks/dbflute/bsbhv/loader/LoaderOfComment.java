@@ -13,7 +13,7 @@ import filmarks.dbflute.exentity.*;
  *     ID
  *
  * [column]
- *     ID, USER_ID, PRODUCT_ID, CONTENT, RATE
+ *     ID, USER_ID, ALBUM_ID, CONTENT, RATE
  *
  * [sequence]
  *     

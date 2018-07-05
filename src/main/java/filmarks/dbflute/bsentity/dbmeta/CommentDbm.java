@@ -45,7 +45,7 @@ public class CommentDbm extends AbstractDBMeta {
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((Comment)et).getId(), (et, vl) -> ((Comment)et).setId(cti(vl)), "id");
         setupEpg(_epgMap, et -> ((Comment)et).getUserId(), (et, vl) -> ((Comment)et).setUserId(cti(vl)), "userId");
-        setupEpg(_epgMap, et -> ((Comment)et).getProductId(), (et, vl) -> ((Comment)et).setProductId(cti(vl)), "productId");
+        setupEpg(_epgMap, et -> ((Comment)et).getAlbumId(), (et, vl) -> ((Comment)et).setAlbumId(cti(vl)), "albumId");
         setupEpg(_epgMap, et -> ((Comment)et).getContent(), (et, vl) -> ((Comment)et).setContent((String)vl), "content");
         setupEpg(_epgMap, et -> ((Comment)et).getRate(), (et, vl) -> ((Comment)et).setRate(ctb(vl)), "rate");
     }
@@ -83,7 +83,7 @@ public class CommentDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
-    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
+    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnContent = cci("CONTENT", "CONTENT", null, null, String.class, "content", null, false, false, true, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRate = cci("RATE", "RATE", null, null, java.math.BigDecimal.class, "rate", null, false, false, true, "FLOAT", 12, 0, null, null, false, null, null, null, null, null, false);
 
@@ -98,10 +98,10 @@ public class CommentDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnUserId() { return _columnUserId; }
     /**
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnProductId() { return _columnProductId; }
+    public ColumnInfo columnAlbumId() { return _columnAlbumId; }
     /**
      * CONTENT: {NotNull, TEXT(65535)}
      * @return The information object of specified column. (NotNull)
@@ -117,7 +117,7 @@ public class CommentDbm extends AbstractDBMeta {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnId());
         ls.add(columnUserId());
-        ls.add(columnProductId());
+        ls.add(columnAlbumId());
         ls.add(columnContent());
         ls.add(columnRate());
         return ls;
@@ -144,11 +144,11 @@ public class CommentDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignAlbum() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnProductId(), AlbumDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnId());
         return cfi("FK_COMMENT_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "commentList", false);
     }
     /**

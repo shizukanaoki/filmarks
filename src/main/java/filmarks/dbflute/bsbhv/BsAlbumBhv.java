@@ -388,7 +388,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
 
     /**
      * Load referrer of commentList by the set-upper of referrer. <br>
-     * COMMENT by PRODUCT_ID, named 'commentList'.
+     * COMMENT by ALBUM_ID, named 'commentList'.
      * <pre>
      * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadComment</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">commentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">commentCB</span>.setupSelect...
@@ -405,8 +405,8 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
      * <pre>
-     * cb.query().setProductId_InScope(pkList);
-     * cb.query().addOrderBy_ProductId_Asc();
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
      * </pre>
      * @param albumList The entity list of album. (NotNull)
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
@@ -419,7 +419,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
 
     /**
      * Load referrer of commentList by the set-upper of referrer. <br>
-     * COMMENT by PRODUCT_ID, named 'commentList'.
+     * COMMENT by ALBUM_ID, named 'commentList'.
      * <pre>
      * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadComment</span>(<span style="color: #553000">album</span>, <span style="color: #553000">commentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">commentCB</span>.setupSelect...
@@ -434,8 +434,8 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
      * <pre>
-     * cb.query().setProductId_InScope(pkList);
-     * cb.query().addOrderBy_ProductId_Asc();
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
      * </pre>
      * @param album The entity of album. (NotNull)
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)

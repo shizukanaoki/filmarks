@@ -419,7 +419,7 @@ public class BsAlbumCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
          * {select max(FOO) from COMMENT where ...) as FOO_MAX} <br>
-         * COMMENT by PRODUCT_ID, named 'commentList'.
+         * COMMENT by ALBUM_ID, named 'commentList'.
          * <pre>
          * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(commentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
          *     commentCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>

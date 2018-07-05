@@ -160,11 +160,11 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** COMMENT by PRODUCT_ID, named 'commentList'. */
+    /** COMMENT by ALBUM_ID, named 'commentList'. */
     protected List<Comment> _commentList;
 
     /**
-     * [get] COMMENT by PRODUCT_ID, named 'commentList'.
+     * [get] COMMENT by ALBUM_ID, named 'commentList'.
      * @return The entity list of referrer property 'commentList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Comment> getCommentList() {
@@ -173,7 +173,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] COMMENT by PRODUCT_ID, named 'commentList'.
+     * [set] COMMENT by ALBUM_ID, named 'commentList'.
      * @param commentList The entity list of referrer property 'commentList'. (NullAllowed)
      */
     public void setCommentList(List<Comment> commentList) {

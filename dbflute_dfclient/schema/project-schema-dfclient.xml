@@ -39,8 +39,8 @@
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="USER_ID" required="true" size="10" type="INTEGER"/>
-        <column comment="??ID" dbType="INT" javaType="Integer"
-            name="PRODUCT_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="????ID" dbType="INT" javaType="Integer"
+            name="ALBUM_ID" required="true" size="10" type="INTEGER"/>
         <column comment="??" dbType="TEXT" javaType="String"
             name="CONTENT" required="true" size="65535" type="LONGVARCHAR"/>
         <column comment="???" dbType="FLOAT"
@@ -48,14 +48,14 @@
             size="12" type="REAL"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ALBUM" name="FK_COMMENT_PRODUCT">
-            <reference foreign="ID" local="PRODUCT_ID"/>
+            <reference foreign="ID" local="ALBUM_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="USER" name="FK_COMMENT_USER">
             <reference foreign="ID" local="USER_ID"/>
         </foreign-key>
         <index name="FK_COMMENT_PRODUCT">
-            <index-column name="PRODUCT_ID" position="1"/>
+            <index-column name="ALBUM_ID" position="1"/>
         </index>
         <index name="FK_COMMENT_USER">
             <index-column name="USER_ID" position="1"/>

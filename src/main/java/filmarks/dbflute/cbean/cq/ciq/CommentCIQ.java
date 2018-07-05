@@ -63,7 +63,7 @@ public class CommentCIQ extends AbstractBsCommentCQ {
     //                                                                ====================
     protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
-    protected ConditionValue xgetCValueProductId() { return _myCQ.xdfgetProductId(); }
+    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
     protected ConditionValue xgetCValueContent() { return _myCQ.xdfgetContent(); }
     protected ConditionValue xgetCValueRate() { return _myCQ.xdfgetRate(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }

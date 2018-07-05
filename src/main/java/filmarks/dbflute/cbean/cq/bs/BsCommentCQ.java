@@ -113,25 +113,25 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
      */
     public BsCommentCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
 
-    protected ConditionValue _productId;
-    public ConditionValue xdfgetProductId()
-    { if (_productId == null) { _productId = nCV(); }
-      return _productId; }
-    protected ConditionValue xgetCValueProductId() { return xdfgetProductId(); }
+    protected ConditionValue _albumId;
+    public ConditionValue xdfgetAlbumId()
+    { if (_albumId == null) { _albumId = nCV(); }
+      return _albumId; }
+    protected ConditionValue xgetCValueAlbumId() { return xdfgetAlbumId(); }
 
     /**
      * Add order-by as ascend. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_ProductId_Asc() { regOBA("PRODUCT_ID"); return this; }
+    public BsCommentCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_ProductId_Desc() { regOBD("PRODUCT_ID"); return this; }
+    public BsCommentCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
     protected ConditionValue _content;
     public ConditionValue xdfgetContent()
@@ -227,7 +227,7 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The instance of condition-query. (NotNull)
      */
     public AlbumCQ queryAlbum() {

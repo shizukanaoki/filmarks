@@ -19,7 +19,7 @@ import filmarks.dbflute.exentity.*;
  *     ID
  *
  * [column]
- *     ID, USER_ID, PRODUCT_ID, CONTENT, RATE
+ *     ID, USER_ID, ALBUM_ID, CONTENT, RATE
  *
  * [sequence]
  *     
@@ -46,12 +46,12 @@ import filmarks.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer id = entity.getId();
  * Integer userId = entity.getUserId();
- * Integer productId = entity.getProductId();
+ * Integer albumId = entity.getAlbumId();
  * String content = entity.getContent();
  * java.math.BigDecimal rate = entity.getRate();
  * entity.setId(id);
  * entity.setUserId(userId);
- * entity.setProductId(productId);
+ * entity.setAlbumId(albumId);
  * entity.setContent(content);
  * entity.setRate(rate);
  * = = = = = = = = = =/
@@ -75,8 +75,8 @@ public abstract class BsComment extends AbstractEntity implements DomainEntity {
     /** USER_ID: {IX, NotNull, INT(10), FK to USER} */
     protected Integer _userId;
 
-    /** PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} */
-    protected Integer _productId;
+    /** ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} */
+    protected Integer _albumId;
 
     /** CONTENT: {NotNull, TEXT(65535)} */
     protected String _content;
@@ -109,11 +109,11 @@ public abstract class BsComment extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** ALBUM by my PRODUCT_ID, named 'album'. */
+    /** ALBUM by my ALBUM_ID, named 'album'. */
     protected OptionalEntity<Album> _album;
 
     /**
-     * [get] ALBUM by my PRODUCT_ID, named 'album'. <br>
+     * [get] ALBUM by my ALBUM_ID, named 'album'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'album'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -123,7 +123,7 @@ public abstract class BsComment extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] ALBUM by my PRODUCT_ID, named 'album'.
+     * [set] ALBUM by my ALBUM_ID, named 'album'.
      * @param album The entity of foreign property 'album'. (NullAllowed)
      */
     public void setAlbum(OptionalEntity<Album> album) {
@@ -198,7 +198,7 @@ public abstract class BsComment extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_id));
         sb.append(dm).append(xfND(_userId));
-        sb.append(dm).append(xfND(_productId));
+        sb.append(dm).append(xfND(_albumId));
         sb.append(dm).append(xfND(_content));
         sb.append(dm).append(xfND(_rate));
         if (sb.length() > dm.length()) {
@@ -270,23 +270,23 @@ public abstract class BsComment extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
-     * ??ID
-     * @return The value of the column 'PRODUCT_ID'. (basically NotNull if selected: for the constraint)
+     * [get] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * ????ID
+     * @return The value of the column 'ALBUM_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getProductId() {
-        checkSpecifiedProperty("productId");
-        return _productId;
+    public Integer getAlbumId() {
+        checkSpecifiedProperty("albumId");
+        return _albumId;
     }
 
     /**
-     * [set] PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
-     * ??ID
-     * @param productId The value of the column 'PRODUCT_ID'. (basically NotNull if update: for the constraint)
+     * [set] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * ????ID
+     * @param albumId The value of the column 'ALBUM_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setProductId(Integer productId) {
-        registerModifiedProperty("productId");
-        _productId = productId;
+    public void setAlbumId(Integer albumId) {
+        registerModifiedProperty("albumId");
+        _albumId = albumId;
     }
 
     /**

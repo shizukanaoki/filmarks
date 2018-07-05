@@ -65,7 +65,7 @@ public class LoaderOfAlbum {
 
     /**
      * Load referrer of commentList by the set-upper of referrer. <br>
-     * COMMENT by PRODUCT_ID, named 'commentList'.
+     * COMMENT by ALBUM_ID, named 'commentList'.
      * <pre>
      * <span style="color: #0000C0">albumBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">albumLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">albumLoader</span>.<span style="color: #CC4747">loadComment</span>(<span style="color: #553000">commentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -84,8 +84,8 @@ public class LoaderOfAlbum {
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
      * <pre>
-     * cb.query().setProductId_InScope(pkList);
-     * cb.query().addOrderBy_ProductId_Asc();
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
      * </pre>
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)

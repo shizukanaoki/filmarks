@@ -159,8 +159,8 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select PRODUCT_ID from COMMENT where ...)} <br>
-     * COMMENT by PRODUCT_ID, named 'commentAsOne'.
+     * {exists (select ALBUM_ID from COMMENT where ...)} <br>
+     * COMMENT by ALBUM_ID, named 'commentAsOne'.
      * <pre>
      * cb.query().<span style="color: #CC4747">existsComment</span>(commentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     commentCB.query().set...
@@ -172,7 +172,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
         lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_CommentList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "PRODUCT_ID", pp, "commentList");
+        registerExistsReferrer(cb.query(), "ID", "ALBUM_ID", pp, "commentList");
     }
     public abstract String keepId_ExistsReferrer_CommentList(CommentCQ sq);
 
@@ -197,8 +197,8 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select PRODUCT_ID from COMMENT where ...)} <br>
-     * COMMENT by PRODUCT_ID, named 'commentAsOne'.
+     * {not exists (select ALBUM_ID from COMMENT where ...)} <br>
+     * COMMENT by ALBUM_ID, named 'commentAsOne'.
      * <pre>
      * cb.query().<span style="color: #CC4747">notExistsComment</span>(commentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     commentCB.query().set...
@@ -210,7 +210,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
         lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_CommentList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "PRODUCT_ID", pp, "commentList");
+        registerNotExistsReferrer(cb.query(), "ID", "ALBUM_ID", pp, "commentList");
     }
     public abstract String keepId_NotExistsReferrer_CommentList(CommentCQ sq);
 
@@ -237,7 +237,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
         lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_CommentList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "PRODUCT_ID", pp, "commentList", al, op);
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "ALBUM_ID", pp, "commentList", al, op);
     }
     public abstract String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq);
 
@@ -252,7 +252,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
      * {FOO &lt;= (select max(BAR) from COMMENT where ...)} <br>
-     * COMMENT by PRODUCT_ID, named 'commentAsOne'.
+     * COMMENT by ALBUM_ID, named 'commentAsOne'.
      * <pre>
      * cb.query().<span style="color: #CC4747">derivedComment()</span>.<span style="color: #CC4747">max</span>(commentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     commentCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
@@ -271,7 +271,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
         lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_CommentList(cb.query()); String prpp = keepId_QueryDerivedReferrer_CommentListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "PRODUCT_ID", sqpp, "commentList", rd, vl, prpp, op);
+        registerQueryDerivedReferrer(fn, cb.query(), "ID", "ALBUM_ID", sqpp, "commentList", rd, vl, prpp, op);
     }
     public abstract String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq);
     public abstract String keepId_QueryDerivedReferrer_CommentListParameter(Object vl);

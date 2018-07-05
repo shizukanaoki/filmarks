@@ -1,4 +1,45 @@
 map:{
+    ; 2018/07/05 09:57:04 = map:{
+        ; diffDate = 2018/07/05 09:57:04
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_comment_function
+        ; tableDiff = map:{
+            ; COMMENT = map:{
+                ; tableName = COMMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ALBUM_ID = map:{
+                        ; columnName = ALBUM_ID
+                        ; diffType = ADD
+                    }
+                    ; PRODUCT_ID = map:{
+                        ; columnName = PRODUCT_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_COMMENT_PRODUCT = map:{
+                        ; constraintName = FK_COMMENT_PRODUCT
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ALBUM_ID
+                            ; previous = PRODUCT_ID
+                        }
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_COMMENT_PRODUCT = map:{
+                        ; constraintName = FK_COMMENT_PRODUCT
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ALBUM_ID
+                            ; previous = PRODUCT_ID
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/04 16:47:27 = map:{
         ; diffDate = 2018/07/04 16:47:27
         ; diffAuthor = naoki.shizuka

@@ -161,11 +161,11 @@ public class AlbumDbm extends AbstractDBMeta {
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * COMMENT by PRODUCT_ID, named 'commentList'.
+     * COMMENT by ALBUM_ID, named 'commentList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerCommentList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), CommentDbm.getInstance().columnProductId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), CommentDbm.getInstance().columnAlbumId());
         return cri("FK_COMMENT_PRODUCT", "commentList", this, CommentDbm.getInstance(), mp, false, "album");
     }
     /**
