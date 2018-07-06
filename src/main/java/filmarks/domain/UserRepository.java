@@ -20,8 +20,14 @@ public class UserRepository {
     }
 
     public User findOne(int id) throws EntityAlreadyDeletedException {
-        OptionalEntity<User> userOptionalEntity = userBhv.selectByPK(id);
-        return userOptionalEntity.get();
+        User user = userBhv.selectByPK(id).get();
+        userBhv.loadRelationshipByFollowingId(user, cb -> {
+           cb.setupSelect_UserByFollowerId();
+        });
+        userBhv.loadRelationshipByFollowerId(user, cb -> {
+            cb.setupSelect_UserByFollowingId();
+        });
+        return user;
     }
 
     public User save(User user) {

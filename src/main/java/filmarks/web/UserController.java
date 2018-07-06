@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class UserController {
 
@@ -21,7 +24,15 @@ public class UserController {
     public ModelAndView show (@PathVariable int id, ModelAndView mav) {
         try {
             User user = userService.findOne(id);
+            List<User> followings = user.getRelationshipByFollowingIdList().stream()
+                    .map(following -> following.getUserByFollowerId().get())
+                    .collect(Collectors.toList());
+            List<User> followers = user.getRelationshipByFollowerIdList().stream()
+                    .map(follower -> follower.getUserByFollowingId().get())
+                    .collect(Collectors.toList());
             mav.addObject("user", user);
+            mav.addObject("followings", followings);
+            mav.addObject("followers", followers);
             mav.setViewName("user/show");
             return mav;
         } catch (EntityAlreadyDeletedException e) {
