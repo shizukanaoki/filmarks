@@ -12,6 +12,9 @@
 <body>
 <div>
     <div th:text="${user.getUsername()}"></div>
+    <form name="form" method="post" th:action="@{'/relationships/' + ${user.getId()}}">
+        <a href="javascript:form.submit()">フォロー</a>
+    </form>
 </div>
 </body>
 </html>

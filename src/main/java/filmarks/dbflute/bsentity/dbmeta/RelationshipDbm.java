@@ -43,6 +43,7 @@ public class RelationshipDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
+        setupEpg(_epgMap, et -> ((Relationship)et).getId(), (et, vl) -> ((Relationship)et).setId(cti(vl)), "id");
         setupEpg(_epgMap, et -> ((Relationship)et).getFollowingId(), (et, vl) -> ((Relationship)et).setFollowingId(cti(vl)), "followingId");
         setupEpg(_epgMap, et -> ((Relationship)et).getFollowerId(), (et, vl) -> ((Relationship)et).setFollowerId(cti(vl)), "followerId");
     }
@@ -78,9 +79,15 @@ public class RelationshipDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
+    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnFollowingId = cci("FOLLOWING_ID", "FOLLOWING_ID", null, null, Integer.class, "followingId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowingId", null, null, false);
     protected final ColumnInfo _columnFollowerId = cci("FOLLOWER_ID", "FOLLOWER_ID", null, null, Integer.class, "followerId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowerId", null, null, false);
 
+    /**
+     * ID: {PK, ID, NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnId() { return _columnId; }
     /**
      * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
@@ -94,6 +101,7 @@ public class RelationshipDbm extends AbstractDBMeta {
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
+        ls.add(columnId());
         ls.add(columnFollowingId());
         ls.add(columnFollowerId());
         return ls;
@@ -107,10 +115,8 @@ public class RelationshipDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() {
-        throw new UnsupportedOperationException("The table does not have primary key: " + getTableDbName());
-    }
-    public boolean hasPrimaryKey() { return false; }
+    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
     // ===================================================================================
@@ -145,6 +151,7 @@ public class RelationshipDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
+    public boolean hasIdentity() { return true; }
 
     // ===================================================================================
     //                                                                           Type Name
