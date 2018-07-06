@@ -24,7 +24,7 @@ public class AlbumController {
 
     @RequestMapping(value = {"/", "/albums"})
     @ResponseBody
-    public ModelAndView index(@ModelAttribute("commentForm") CommentForm commentForm, ModelAndView mav) {
+    public ModelAndView index(ModelAndView mav) {
         ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_Id_Asc());
         albumBhv.loadComment(albums, cb -> {});
         mav.addObject("albums", albums);
@@ -34,9 +34,12 @@ public class AlbumController {
 
     @RequestMapping("/albums/{id}")
     @ResponseBody
-    public ModelAndView index(@PathVariable int id, ModelAndView mav) {
-        OptionalEntity<Album> albumOptionalEntity = albumBhv.selectByPK(id);
+    public ModelAndView show(@ModelAttribute("commentForm") CommentForm commentForm, @PathVariable int id, ModelAndView mav) {
+        OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> {
+            cb.query().setId_Equal(id);
+        });
         albumOptionalEntity.ifPresent(album -> {
+            albumBhv.loadComment(album, cb -> {});
             mav.addObject("album", album);
             mav.setViewName("album/show");
         }).orElse(() -> {

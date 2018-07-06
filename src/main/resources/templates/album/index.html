@@ -8,7 +8,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet", type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <div sec:authorize="isAuthenticated()">
@@ -21,32 +21,12 @@
             <div class="product" th:each="album:${albums}">
                 <div class="product-info">
                     <div class="product-info-left">
-                        <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="150" height="200"/>
+                        <a th:href="@{'/albums/' + ${album.getId()}}">
+                            <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="150" height="200"/>
+                        </a>
                     </div>
                     <div class="product-info-right">
                         <div class="product-info-title" th:text="|タイトル: ${album.getTitle()}|"></div>
-                        <div class="comment" th:each="comment:${album.getCommentList()}">
-                            <div th:text="${comment.getContent()}"></div>
-                            <div th:text="${comment.getRate()}"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <table>
-                            <form method="post" th:action="@{'/albums/' + ${album.getId()} + '/comments'}" th:object="${commentForm}">
-                                <tr>
-                                    <td width="150px"><label>内容</label></td>
-                                    <td><input th:field="*{content}"></td>
-                                </tr>
-                                <tr>
-                                    <td><label>評価</label></td>
-                                    <td><input type="number" th:field="*{rate}"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><input type="submit"></td>
-                                </tr>
-                            </form>
-                        </table>
                     </div>
                 </div>
                 <div class="product-review"></div>
