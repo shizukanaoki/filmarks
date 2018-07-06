@@ -41,7 +41,9 @@ public class CommentController {
             mav.setViewName("album/show");
             OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> cb.query().setId_Equal(albumId));
             albumOptionalEntity.ifPresent(album -> {
-                albumBhv.loadComment(album, cb -> {});
+                albumBhv.loadComment(album, commentCB-> {
+                    commentCB.setupSelect_User();
+                });
                 mav.addObject("album", album);
                 mav.setViewName("album/show");
             }).orElse(() -> {
