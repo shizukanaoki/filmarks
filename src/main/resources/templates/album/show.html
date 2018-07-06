@@ -14,6 +14,9 @@
             <div class="product-info-right">
                 <div class="product-info-title" th:text="|タイトル: ${album.getTitle()}|"></div>
                 <div class="comment" th:each="comment:${album.getCommentList()}">
+                    <a th:href="@{'/users/' + ${comment.getUserId()}}">
+                        <div th:text="${comment.getUser().get().getUsername()}"></div>
+                    </a>
                     <div th:text="${comment.getContent()}"></div>
                     <div th:text="${comment.getRate()}"></div>
                 </div>

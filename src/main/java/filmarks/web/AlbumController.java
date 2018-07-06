@@ -39,7 +39,9 @@ public class AlbumController {
             cb.query().setId_Equal(id);
         });
         albumOptionalEntity.ifPresent(album -> {
-            albumBhv.loadComment(album, cb -> {});
+            albumBhv.loadComment(album, commentCB -> {
+                commentCB.setupSelect_User();
+            });
             mav.addObject("album", album);
             mav.setViewName("album/show");
         }).orElse(() -> {
