@@ -73,6 +73,26 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
+    protected ConditionValue _id;
+    public ConditionValue xdfgetId()
+    { if (_id == null) { _id = nCV(); }
+      return _id; }
+    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsRelationshipCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsRelationshipCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+
     protected ConditionValue _followingId;
     public ConditionValue xdfgetFollowingId()
     { if (_followingId == null) { _followingId = nCV(); }
@@ -214,6 +234,30 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
     //                                                                     ===============
     public Map<String, RelationshipCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
     public String keepScalarCondition(RelationshipCQ sq) { return xkeepSQue("scalarCondition", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfDerived
+    //                                                                       =============
+    public Map<String, RelationshipCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
+    public String keepSpecifyMyselfDerived(RelationshipCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
+
+    public Map<String, RelationshipCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerived(RelationshipCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
+    public Map<String, Object> xdfgetQueryMyselfDerivedParameter() { return xgetSQuePmMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerivedParameter(Object pm) { return xkeepSQuePm("queryMyselfDerived", pm); }
+
+    // ===================================================================================
+    //                                                                        MyselfExists
+    //                                                                        ============
+    protected Map<String, RelationshipCQ> _myselfExistsMap;
+    public Map<String, RelationshipCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
+    public String keepMyselfExists(RelationshipCQ sq) { return xkeepSQue("myselfExists", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfInScope
+    //                                                                       =============
+    public Map<String, RelationshipCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
+    public String keepMyselfInScope(RelationshipCQ sq) { return xkeepSQue("myselfInScope", sq); }
 
     // ===================================================================================
     //                                                                       Very Internal

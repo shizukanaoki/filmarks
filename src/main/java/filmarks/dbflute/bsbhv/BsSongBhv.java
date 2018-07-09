@@ -25,10 +25,10 @@ import filmarks.dbflute.cbean.*;
  * The behavior of SONG as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     ALBUM_ID
  *
  * [column]
- *     ID, ARTIST_ID, NAME
+ *     ALBUM_ID, ARTIST_ID, NAME
  *
  * [sequence]
  *     
@@ -159,31 +159,31 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @param albumId : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Song> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<Song> selectByPK(Integer albumId) {
+        return facadeSelectByPK(albumId);
     }
 
-    protected OptionalEntity<Song> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<Song> facadeSelectByPK(Integer albumId) {
+        return doSelectOptionalByPK(albumId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Song> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends Song> ENTITY doSelectByPK(Integer albumId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(albumId), tp);
     }
 
-    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer albumId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(albumId, tp), albumId);
     }
 
-    protected SongCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected SongCB xprepareCBAsPK(Integer albumId) {
+        assertObjectNotNull("albumId", albumId);
+        return newConditionBean().acceptPK(albumId);
     }
 
     // ===================================================================================
@@ -384,12 +384,12 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
+     * Extract the value list of (single) primary key albumId.
      * @param songList The list of song. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<Song> songList)
-    { return helpExtractListInternally(songList, "id"); }
+    public List<Integer> extractAlbumIdList(List<Song> songList)
+    { return helpExtractListInternally(songList, "albumId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

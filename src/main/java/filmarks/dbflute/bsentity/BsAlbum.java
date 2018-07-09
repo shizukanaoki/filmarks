@@ -16,16 +16,16 @@ import filmarks.dbflute.exentity.*;
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     ID
+ *     ALBUM_ID
  *
  * [column]
- *     ID, TITLE, FILE_NAME, ARTIST_ID
+ *     ALBUM_ID, TITLE, FILE_NAME, ARTIST_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     ALBUM_ID
  *
  * [version-no]
  *     
@@ -34,21 +34,21 @@ import filmarks.dbflute.exentity.*;
  *     ARTIST, SONG(AsOne)
  *
  * [referrer table]
- *     COMMENT, PICK, SONG
+ *     COMMENT, FAVORITE, SONG
  *
  * [foreign property]
  *     artist, songAsOne
  *
  * [referrer property]
- *     commentList, pickList
+ *     commentList, favoriteList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer id = entity.getId();
+ * Integer albumId = entity.getAlbumId();
  * String title = entity.getTitle();
  * String fileName = entity.getFileName();
  * Integer artistId = entity.getArtistId();
- * entity.setId(id);
+ * entity.setAlbumId(albumId);
  * entity.setTitle(title);
  * entity.setFileName(fileName);
  * entity.setArtistId(artistId);
@@ -67,8 +67,8 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** ID: {PK, ID, NotNull, INT(10)} */
-    protected Integer _id;
+    /** ALBUM_ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _albumId;
 
     /** TITLE: {UQ, NotNull, VARCHAR(100)} */
     protected String _title;
@@ -97,7 +97,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (_albumId == null) { return false; }
         return true;
     }
 
@@ -136,11 +136,11 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
         _artist = artist;
     }
 
-    /** SONG by ID, named 'songAsOne'. */
+    /** SONG by ALBUM_ID, named 'songAsOne'. */
     protected OptionalEntity<Song> _songAsOne;
 
     /**
-     * [get] SONG by ID, named 'songAsOne'.
+     * [get] SONG by ALBUM_ID, named 'songAsOne'.
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return the entity of foreign property(referrer-as-one) 'songAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
      */
@@ -150,7 +150,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] SONG by ID, named 'songAsOne'.
+     * [set] SONG by ALBUM_ID, named 'songAsOne'.
      * @param songAsOne The entity of foreign property(referrer-as-one) 'songAsOne'. (NullAllowed)
      */
     public void setSongAsOne(OptionalEntity<Song> songAsOne) {
@@ -180,24 +180,24 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
         _commentList = commentList;
     }
 
-    /** PICK by PRODUCT_ID, named 'pickList'. */
-    protected List<Pick> _pickList;
+    /** FAVORITE by ALBUM_ID, named 'favoriteList'. */
+    protected List<Favorite> _favoriteList;
 
     /**
-     * [get] PICK by PRODUCT_ID, named 'pickList'.
-     * @return The entity list of referrer property 'pickList'. (NotNull: even if no loading, returns empty list)
+     * [get] FAVORITE by ALBUM_ID, named 'favoriteList'.
+     * @return The entity list of referrer property 'favoriteList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<Pick> getPickList() {
-        if (_pickList == null) { _pickList = newReferrerList(); }
-        return _pickList;
+    public List<Favorite> getFavoriteList() {
+        if (_favoriteList == null) { _favoriteList = newReferrerList(); }
+        return _favoriteList;
     }
 
     /**
-     * [set] PICK by PRODUCT_ID, named 'pickList'.
-     * @param pickList The entity list of referrer property 'pickList'. (NullAllowed)
+     * [set] FAVORITE by ALBUM_ID, named 'favoriteList'.
+     * @param favoriteList The entity list of referrer property 'favoriteList'. (NullAllowed)
      */
-    public void setPickList(List<Pick> pickList) {
-        _pickList = pickList;
+    public void setFavoriteList(List<Favorite> favoriteList) {
+        _favoriteList = favoriteList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -211,7 +211,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsAlbum) {
             BsAlbum other = (BsAlbum)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(_albumId, other._albumId)) { return false; }
             return true;
         } else {
             return false;
@@ -222,7 +222,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, _albumId);
         return hs;
     }
 
@@ -235,8 +235,8 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
         { sb.append(li).append(xbRDS(_songAsOne, "songAsOne")); }
         if (_commentList != null) { for (Comment et : _commentList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "commentList")); } } }
-        if (_pickList != null) { for (Pick et : _pickList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "pickList")); } } }
+        if (_favoriteList != null) { for (Favorite et : _favoriteList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "favoriteList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -246,7 +246,7 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
+        sb.append(dm).append(xfND(_albumId));
         sb.append(dm).append(xfND(_title));
         sb.append(dm).append(xfND(_fileName));
         sb.append(dm).append(xfND(_artistId));
@@ -266,8 +266,8 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
         { sb.append(dm).append("songAsOne"); }
         if (_commentList != null && !_commentList.isEmpty())
         { sb.append(dm).append("commentList"); }
-        if (_pickList != null && !_pickList.isEmpty())
-        { sb.append(dm).append("pickList"); }
+        if (_favoriteList != null && !_favoriteList.isEmpty())
+        { sb.append(dm).append("favoriteList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -283,23 +283,23 @@ public abstract class BsAlbum extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [get] ALBUM_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'ALBUM_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getId() {
-        checkSpecifiedProperty("id");
-        return _id;
+    public Integer getAlbumId() {
+        checkSpecifiedProperty("albumId");
+        return _albumId;
     }
 
     /**
-     * [set] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [set] ALBUM_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
+     * @param albumId The value of the column 'ALBUM_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setId(Integer id) {
-        registerModifiedProperty("id");
-        _id = id;
+    public void setAlbumId(Integer albumId) {
+        registerModifiedProperty("albumId");
+        _albumId = albumId;
     }
 
     /**

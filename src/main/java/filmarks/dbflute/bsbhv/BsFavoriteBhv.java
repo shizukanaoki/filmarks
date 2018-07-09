@@ -22,38 +22,38 @@ import filmarks.dbflute.bsentity.dbmeta.*;
 import filmarks.dbflute.cbean.*;
 
 /**
- * The behavior of ALBUM as TABLE. <br>
+ * The behavior of FAVORITE as TABLE. <br>
  * <pre>
  * [primary key]
- *     ALBUM_ID
+ *     FAVORITE_ID
  *
  * [column]
- *     ALBUM_ID, TITLE, FILE_NAME, ARTIST_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ALBUM_ID
+ *     FAVORITE_ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     ARTIST, SONG(AsOne)
+ *     ALBUM, USER
  *
  * [referrer table]
- *     COMMENT, FAVORITE, SONG
+ *     
  *
  * [foreign property]
- *     artist, songAsOne
+ *     album, user
  *
  * [referrer property]
- *     commentList, favoriteList
+ *     
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB> {
+public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, FavoriteCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -65,15 +65,15 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     //                                                                             DB Meta
     //                                                                             =======
     /** {@inheritDoc} */
-    public AlbumDbm asDBMeta() { return AlbumDbm.getInstance(); }
+    public FavoriteDbm asDBMeta() { return FavoriteDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "ALBUM"; }
+    public String asTableDbName() { return "FAVORITE"; }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public AlbumCB newConditionBean() { return new AlbumCB(); }
+    public FavoriteCB newConditionBean() { return new FavoriteCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -82,14 +82,14 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br>
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(CBCall<AlbumCB> cbLambda) {
+    public int selectCount(CBCall<FavoriteCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
@@ -103,38 +103,38 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * <span style="color: #AD4747; font-size: 120%">If it might be no data, isPresent() and orElse(), ...</span>
      * <pre>
      * <span style="color: #3F7E5E">// if the data always exists as your business rule</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">album</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
-     *     ... = <span style="color: #553000">album</span>.get...
+     *     ... = <span style="color: #553000">favorite</span>.get...
      * });
      *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">album</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present</span>
-     *     ... = <span style="color: #553000">album</span>.get...
+     *     ... = <span style="color: #553000">favorite</span>.get...
      * }).<span style="color: #994747">orElse</span>(() <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if not present</span>
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Album> selectEntity(CBCall<AlbumCB> cbLambda) {
+    public OptionalEntity<Favorite> selectEntity(CBCall<FavoriteCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<Album> facadeSelectEntity(AlbumCB cb) {
+    protected OptionalEntity<Favorite> facadeSelectEntity(FavoriteCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Album> OptionalEntity<ENTITY> doSelectOptionalEntity(AlbumCB cb, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectOptionalEntity(FavoriteCB cb, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -144,71 +144,46 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Select the entity by the condition-bean with deleted check. <br>
      * <span style="color: #AD4747; font-size: 120%">If the data is always present as your business rule, this method is good.</span>
      * <pre>
-     * Album <span style="color: #553000">album</span> = <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
-     * ... = <span style="color: #553000">album</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * Favorite <span style="color: #553000">favorite</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
+     * ... = <span style="color: #553000">favorite</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Album selectEntityWithDeletedCheck(CBCall<AlbumCB> cbLambda) {
+    public Favorite selectEntityWithDeletedCheck(CBCall<FavoriteCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
     /**
      * Select the entity by the primary-key value.
-     * @param albumId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param favoriteId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Album> selectByPK(Integer albumId) {
-        return facadeSelectByPK(albumId);
+    public OptionalEntity<Favorite> selectByPK(Integer favoriteId) {
+        return facadeSelectByPK(favoriteId);
     }
 
-    protected OptionalEntity<Album> facadeSelectByPK(Integer albumId) {
-        return doSelectOptionalByPK(albumId, typeOfSelectedEntity());
+    protected OptionalEntity<Favorite> facadeSelectByPK(Integer favoriteId) {
+        return doSelectOptionalByPK(favoriteId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Album> ENTITY doSelectByPK(Integer albumId, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(albumId), tp);
+    protected <ENTITY extends Favorite> ENTITY doSelectByPK(Integer favoriteId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(favoriteId), tp);
     }
 
-    protected <ENTITY extends Album> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer albumId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(albumId, tp), albumId);
+    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer favoriteId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(favoriteId, tp), favoriteId);
     }
 
-    protected AlbumCB xprepareCBAsPK(Integer albumId) {
-        assertObjectNotNull("albumId", albumId);
-        return newConditionBean().acceptPK(albumId);
-    }
-
-    /**
-     * Select the entity by the unique-key value.
-     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
-     */
-    public OptionalEntity<Album> selectByUniqueOf(String title) {
-        return facadeSelectByUniqueOf(title);
-    }
-
-    protected OptionalEntity<Album> facadeSelectByUniqueOf(String title) {
-        return doSelectByUniqueOf(title, typeOfSelectedEntity());
-    }
-
-    protected <ENTITY extends Album> OptionalEntity<ENTITY> doSelectByUniqueOf(String title, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(title), tp), title);
-    }
-
-    protected AlbumCB xprepareCBAsUniqueOf(String title) {
-        assertObjectNotNull("title", title);
-        return newConditionBean().acceptUniqueOf(title);
+    protected FavoriteCB xprepareCBAsPK(Integer favoriteId) {
+        assertObjectNotNull("favoriteId", favoriteId);
+        return newConditionBean().acceptPK(favoriteId);
     }
 
     // ===================================================================================
@@ -217,19 +192,19 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     /**
      * Select the list as result bean.
      * <pre>
-     * ListResultBean&lt;Album&gt; <span style="color: #553000">albumList</span> = <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * ListResultBean&lt;Favorite&gt; <span style="color: #553000">favoriteList</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...;
      *     <span style="color: #553000">cb</span>.query().addOrderBy...;
      * });
-     * <span style="color: #70226C">for</span> (Album <span style="color: #553000">album</span> : <span style="color: #553000">albumList</span>) {
-     *     ... = <span style="color: #553000">album</span>.get...;
+     * <span style="color: #70226C">for</span> (Favorite <span style="color: #553000">favorite</span> : <span style="color: #553000">favoriteList</span>) {
+     *     ... = <span style="color: #553000">favorite</span>.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<Album> selectList(CBCall<AlbumCB> cbLambda) {
+    public ListResultBean<Favorite> selectList(CBCall<FavoriteCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
@@ -243,7 +218,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Select the page as result bean. <br>
      * (both count-select and paging-select are executed)
      * <pre>
-     * PagingResultBean&lt;Album&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * PagingResultBean&lt;Favorite&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      *     <span style="color: #553000">cb</span>.query().addOrderBy...
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
@@ -253,15 +228,15 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * <span style="color: #70226C">boolean</span> isExistPrePage = <span style="color: #553000">page</span>.isExistPrePage();
      * <span style="color: #70226C">boolean</span> isExistNextPage = <span style="color: #553000">page</span>.isExistNextPage();
      * ...
-     * <span style="color: #70226C">for</span> (Album album : <span style="color: #553000">page</span>) {
-     *     ... = album.get...;
+     * <span style="color: #70226C">for</span> (Favorite favorite : <span style="color: #553000">page</span>) {
+     *     ... = favorite.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<Album> selectPage(CBCall<AlbumCB> cbLambda) {
+    public PagingResultBean<Favorite> selectPage(CBCall<FavoriteCB> cbLambda) {
         return facadeSelectPage(createCB(cbLambda));
     }
 
@@ -271,16 +246,16 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * }, <span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     ... = <span style="color: #553000">member</span>.getMemberName();
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
-     * @param entityLambda The handler of entity row of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param entityLambda The handler of entity row of Favorite. (NotNull)
      */
-    public void selectCursor(CBCall<AlbumCB> cbLambda, EntityRowHandler<Album> entityLambda) {
+    public void selectCursor(CBCall<FavoriteCB> cbLambda, EntityRowHandler<Favorite> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
@@ -291,7 +266,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Select the scalar value derived by a function from uniquely-selected records. <br>
      * You should call a function method after this method called like as follows:
      * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">column...</span>; <span style="color: #3F7E5E">// required for the function</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * });
@@ -300,7 +275,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<AlbumCB, RESULT> selectScalar(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<FavoriteCB, RESULT> selectScalar(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
@@ -345,12 +320,12 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param albumList The entity list of album. (NotNull)
+     * @param favoriteList The entity list of favorite. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<Album> albumList, ReferrerLoaderHandler<LoaderOfAlbum> loaderLambda) {
-        xassLRArg(albumList, loaderLambda);
-        loaderLambda.handle(new LoaderOfAlbum().ready(albumList, _behaviorSelector));
+    public void load(List<Favorite> favoriteList, ReferrerLoaderHandler<LoaderOfFavorite> loaderLambda) {
+        xassLRArg(favoriteList, loaderLambda);
+        loaderLambda.handle(new LoaderOfFavorite().ready(favoriteList, _behaviorSelector));
     }
 
     /**
@@ -378,179 +353,43 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param album The entity of album. (NotNull)
+     * @param favorite The entity of favorite. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(Album album, ReferrerLoaderHandler<LoaderOfAlbum> loaderLambda) {
-        xassLRArg(album, loaderLambda);
-        loaderLambda.handle(new LoaderOfAlbum().ready(xnewLRAryLs(album), _behaviorSelector));
-    }
-
-    /**
-     * Load referrer of commentList by the set-upper of referrer. <br>
-     * COMMENT by ALBUM_ID, named 'commentList'.
-     * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadComment</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">commentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">commentCB</span>.setupSelect...
-     *     <span style="color: #553000">commentCB</span>.query().set...
-     *     <span style="color: #553000">commentCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Album album : <span style="color: #553000">albumList</span>) {
-     *     ... = album.<span style="color: #CC4747">getCommentList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setAlbumId_InScope(pkList);
-     * cb.query().addOrderBy_AlbumId_Asc();
-     * </pre>
-     * @param albumList The entity list of album. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Comment> loadComment(List<Album> albumList, ReferrerConditionSetupper<CommentCB> refCBLambda) {
-        xassLRArg(albumList, refCBLambda);
-        return doLoadComment(albumList, new LoadReferrerOption<CommentCB, Comment>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of commentList by the set-upper of referrer. <br>
-     * COMMENT by ALBUM_ID, named 'commentList'.
-     * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadComment</span>(<span style="color: #553000">album</span>, <span style="color: #553000">commentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">commentCB</span>.setupSelect...
-     *     <span style="color: #553000">commentCB</span>.query().set...
-     *     <span style="color: #553000">commentCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">album</span>.<span style="color: #CC4747">getCommentList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setAlbumId_InScope(pkList);
-     * cb.query().addOrderBy_AlbumId_Asc();
-     * </pre>
-     * @param album The entity of album. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Comment> loadComment(Album album, ReferrerConditionSetupper<CommentCB> refCBLambda) {
-        xassLRArg(album, refCBLambda);
-        return doLoadComment(xnewLRLs(album), new LoadReferrerOption<CommentCB, Comment>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<Comment> doLoadComment(List<Album> albumList, LoadReferrerOption<CommentCB, Comment> option) {
-        return helpLoadReferrerInternally(albumList, option, "commentList");
-    }
-
-    /**
-     * Load referrer of favoriteList by the set-upper of referrer. <br>
-     * FAVORITE by ALBUM_ID, named 'favoriteList'.
-     * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadFavorite</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">favoriteCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">favoriteCB</span>.setupSelect...
-     *     <span style="color: #553000">favoriteCB</span>.query().set...
-     *     <span style="color: #553000">favoriteCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Album album : <span style="color: #553000">albumList</span>) {
-     *     ... = album.<span style="color: #CC4747">getFavoriteList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setAlbumId_InScope(pkList);
-     * cb.query().addOrderBy_AlbumId_Asc();
-     * </pre>
-     * @param albumList The entity list of album. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Favorite> loadFavorite(List<Album> albumList, ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
-        xassLRArg(albumList, refCBLambda);
-        return doLoadFavorite(albumList, new LoadReferrerOption<FavoriteCB, Favorite>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of favoriteList by the set-upper of referrer. <br>
-     * FAVORITE by ALBUM_ID, named 'favoriteList'.
-     * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadFavorite</span>(<span style="color: #553000">album</span>, <span style="color: #553000">favoriteCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">favoriteCB</span>.setupSelect...
-     *     <span style="color: #553000">favoriteCB</span>.query().set...
-     *     <span style="color: #553000">favoriteCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">album</span>.<span style="color: #CC4747">getFavoriteList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setAlbumId_InScope(pkList);
-     * cb.query().addOrderBy_AlbumId_Asc();
-     * </pre>
-     * @param album The entity of album. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Favorite> loadFavorite(Album album, ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
-        xassLRArg(album, refCBLambda);
-        return doLoadFavorite(xnewLRLs(album), new LoadReferrerOption<FavoriteCB, Favorite>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<Favorite> doLoadFavorite(List<Album> albumList, LoadReferrerOption<FavoriteCB, Favorite> option) {
-        return helpLoadReferrerInternally(albumList, option, "favoriteList");
+    public void load(Favorite favorite, ReferrerLoaderHandler<LoaderOfFavorite> loaderLambda) {
+        xassLRArg(favorite, loaderLambda);
+        loaderLambda.handle(new LoaderOfFavorite().ready(xnewLRAryLs(favorite), _behaviorSelector));
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
     /**
-     * Pull out the list of foreign table 'Artist'.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
+     * Pull out the list of foreign table 'Album'.
+     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Artist> pulloutArtist(List<Album> albumList)
-    { return helpPulloutInternally(albumList, "artist"); }
+    public List<Album> pulloutAlbum(List<Favorite> favoriteList)
+    { return helpPulloutInternally(favoriteList, "album"); }
 
     /**
-     * Pull out the list of referrer-as-one table 'Song'.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
-     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
+     * Pull out the list of foreign table 'User'.
+     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Song> pulloutSongAsOne(List<Album> albumList)
-    { return helpPulloutInternally(albumList, "songAsOne"); }
+    public List<User> pulloutUser(List<Favorite> favoriteList)
+    { return helpPulloutInternally(favoriteList, "user"); }
 
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key albumId.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
+     * Extract the value list of (single) primary key favoriteId.
+     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractAlbumIdList(List<Album> albumList)
-    { return helpExtractListInternally(albumList, "albumId"); }
-
-    /**
-     * Extract the value list of (single) unique key title.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
-     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<String> extractTitleList(List<Album> albumList)
-    { return helpExtractListInternally(albumList, "title"); }
+    public List<Integer> extractFavoriteIdList(List<Favorite> favoriteList)
+    { return helpExtractListInternally(favoriteList, "favoriteId"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -558,80 +397,80 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * album.setFoo...(value);
-     * album.setBar...(value);
+     * favorite.setFoo...(value);
+     * favorite.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//album.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//album.set...;</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">insert</span>(album);
-     * ... = album.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//favorite.set...;</span>
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">insert</span>(favorite);
+     * ... = favorite.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param album The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param favorite The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(Album album) {
-        doInsert(album, null);
+    public void insert(Favorite favorite) {
+        doInsert(favorite, null);
     }
 
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
-     * album.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * album.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * favorite.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//album.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//album.set...;</span>
+     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//favorite.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * album.<span style="color: #CC4747">setVersionNo</span>(value);
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">update</span>(album);
+     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">update</span>(favorite);
      * </pre>
-     * @param album The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param favorite The entity of update. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(Album album) {
-        doUpdate(album, null);
+    public void update(Favorite favorite) {
+        doUpdate(favorite, null);
     }
 
     /**
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param album The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param favorite The entity of insert or update. (NotNull, ...depends on insert or update)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(Album album) {
-        doInsertOrUpdate(album, null, null);
+    public void insertOrUpdate(Favorite favorite) {
+        doInsertOrUpdate(favorite, null, null);
     }
 
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
-     * album.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * album.<span style="color: #CC4747">setVersionNo</span>(value);
+     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #70226C">try</span> {
-     *     <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">delete</span>(album);
+     *     <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">delete</span>(favorite);
      * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param album The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param favorite The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(Album album) {
-        doDelete(album, null);
+    public void delete(Favorite favorite) {
+        doDelete(favorite, null);
     }
 
     // ===================================================================================
@@ -643,26 +482,26 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * <span style="color: #70226C">for</span> (... : ...) {
-     *     Album album = <span style="color: #70226C">new</span> Album();
-     *     album.setFooName("foo");
+     *     Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     *     favorite.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         album.setFooPrice(123);
+     *         favorite.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     albumList.add(album);
+     *     favoriteList.add(favorite);
      * }
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">batchInsert</span>(albumList);
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">batchInsert</span>(favoriteList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<Album> albumList) {
-        return doBatchInsert(albumList, null);
+    public int[] batchInsert(List<Favorite> favoriteList) {
+        return doBatchInsert(favoriteList, null);
     }
 
     /**
@@ -671,37 +510,37 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     Album album = <span style="color: #70226C">new</span> Album();
-     *     album.setFooName("foo");
+     *     Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     *     favorite.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         album.setFooPrice(123);
+     *         favorite.setFooPrice(123);
      *     } <span style="color: #70226C">else</span> {
-     *         album.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//album.setFooDate(...); // *not allowed, fragmented</span>
+     *         favorite.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//favorite.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     albumList.add(album);
+     *     favoriteList.add(favorite);
      * }
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">batchUpdate</span>(albumList);
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">batchUpdate</span>(favoriteList);
      * </pre>
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<Album> albumList) {
-        return doBatchUpdate(albumList, null);
+    public int[] batchUpdate(List<Favorite> favoriteList) {
+        return doBatchUpdate(favoriteList, null);
     }
 
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<Album> albumList) {
-        return doBatchDelete(albumList, null);
+    public int[] batchDelete(List<Favorite> favoriteList) {
+        return doBatchDelete(favoriteList, null);
     }
 
     // ===================================================================================
@@ -710,8 +549,8 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Album, AlbumCB&gt;() {
-     *     public ConditionBean setup(Album entity, AlbumCB intoCB) {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Favorite, FavoriteCB&gt;() {
+     *     public ConditionBean setup(Favorite entity, FavoriteCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -733,48 +572,48 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * @param manyArgLambda The callback to set up query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<Album, AlbumCB> manyArgLambda) {
+    public int queryInsert(QueryInsertSetupper<Favorite, FavoriteCB> manyArgLambda) {
         return doQueryInsert(manyArgLambda, null);
     }
 
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//album.setPK...(value);</span>
-     * album.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//favorite.setPK...(value);</span>
+     * favorite.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//album.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//album.set...;</span>
+     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//favorite.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//album.setVersionNo(value);</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">queryUpdate</span>(album, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//favorite.setVersionNo(value);</span>
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryUpdate</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param album The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param favorite The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(Album album, CBCall<AlbumCB> cbLambda) {
-        return doQueryUpdate(album, createCB(cbLambda), null);
+    public int queryUpdate(Favorite favorite, CBCall<FavoriteCB> cbLambda) {
+        return doQueryUpdate(favorite, createCB(cbLambda), null);
     }
 
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">queryDelete</span>(album, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryDelete</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(CBCall<AlbumCB> cbLambda) {
+    public int queryDelete(CBCall<FavoriteCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
@@ -789,22 +628,22 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
      * Other specifications are same as insert(entity).
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * album.setFoo...(value);
-     * album.setBar...(value);
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">varyingInsert</span>(album, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * favorite.setFoo...(value);
+     * favorite.setBar...(value);
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingInsert</span>(favorite, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
      * });
-     * ... = album.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * ... = favorite.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param album The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param favorite The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(Album album, WritableOptionCall<AlbumCB, InsertOption<AlbumCB>> opLambda) {
-        doInsert(album, createInsertOption(opLambda));
+    public void varyingInsert(Favorite favorite, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
+        doInsert(favorite, createInsertOption(opLambda));
     }
 
     /**
@@ -812,53 +651,53 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
-     * Album album = <span style="color: #70226C">new</span> Album();
-     * album.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * album.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * favorite.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * album.<span style="color: #CC4747">setVersionNo</span>(value);
+     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(album, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(favorite, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param album The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param favorite The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(Album album, WritableOptionCall<AlbumCB, UpdateOption<AlbumCB>> opLambda) {
-        doUpdate(album, createUpdateOption(opLambda));
+    public void varyingUpdate(Favorite favorite, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
+        doUpdate(favorite, createUpdateOption(opLambda));
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
-     * @param album The entity of insert or update. (NotNull)
+     * @param favorite The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(Album album, WritableOptionCall<AlbumCB, InsertOption<AlbumCB>> insertOpLambda, WritableOptionCall<AlbumCB, UpdateOption<AlbumCB>> updateOpLambda) {
-        doInsertOrUpdate(album, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    public void varyingInsertOrUpdate(Favorite favorite, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> insertOpLambda, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> updateOpLambda) {
+        doInsertOrUpdate(favorite, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
-     * @param album The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param favorite The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(Album album, WritableOptionCall<AlbumCB, DeleteOption<AlbumCB>> opLambda) {
-        doDelete(album, createDeleteOption(opLambda));
+    public void varyingDelete(Favorite favorite, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
+        doDelete(favorite, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -869,12 +708,12 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
      * Other specifications are same as batchInsert(entityList).
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<Album> albumList, WritableOptionCall<AlbumCB, InsertOption<AlbumCB>> opLambda) {
-        return doBatchInsert(albumList, createInsertOption(opLambda));
+    public int[] varyingBatchInsert(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
+        return doBatchInsert(favoriteList, createInsertOption(opLambda));
     }
 
     /**
@@ -882,24 +721,24 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
      * Other specifications are same as batchUpdate(entityList).
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<Album> albumList, WritableOptionCall<AlbumCB, UpdateOption<AlbumCB>> opLambda) {
-        return doBatchUpdate(albumList, createUpdateOption(opLambda));
+    public int[] varyingBatchUpdate(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
+        return doBatchUpdate(favoriteList, createUpdateOption(opLambda));
     }
 
     /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
-     * @param albumList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<Album> albumList, WritableOptionCall<AlbumCB, DeleteOption<AlbumCB>> opLambda) {
-        return doBatchDelete(albumList, createDeleteOption(opLambda));
+    public int[] varyingBatchDelete(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
+        return doBatchDelete(favoriteList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -913,7 +752,7 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<Album, AlbumCB> manyArgLambda, WritableOptionCall<AlbumCB, InsertOption<AlbumCB>> opLambda) {
+    public int varyingQueryInsert(QueryInsertSetupper<Favorite, FavoriteCB> manyArgLambda, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
         return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
     }
 
@@ -924,14 +763,14 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * Album album = <span style="color: #70226C">new</span> Album();
+     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//album.setPK...(value);</span>
-     * album.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//favorite.setPK...(value);</span>
+     * favorite.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//album.setVersionNo(value);</span>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(album, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//favorite.setVersionNo(value);</span>
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -939,14 +778,14 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
      * });
      * </pre>
-     * @param album The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param favorite The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(Album album, CBCall<AlbumCB> cbLambda, WritableOptionCall<AlbumCB, UpdateOption<AlbumCB>> opLambda) {
-        return doQueryUpdate(album, createCB(cbLambda), createUpdateOption(opLambda));
+    public int varyingQueryUpdate(Favorite favorite, CBCall<FavoriteCB> cbLambda, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
+        return doQueryUpdate(favorite, createCB(cbLambda), createUpdateOption(opLambda));
     }
 
     /**
@@ -954,18 +793,18 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * For example, allowNonQueryDelete(). <br>
      * Other specifications are same as queryDelete(cb).
      * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">queryDelete</span>(album, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryDelete</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Album. (NotNull)
+     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(CBCall<AlbumCB> cbLambda, WritableOptionCall<AlbumCB, DeleteOption<AlbumCB>> opLambda) {
+    public int varyingQueryDelete(CBCall<FavoriteCB> cbLambda, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
         return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
     }
 
@@ -976,40 +815,40 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
      * <span style="color: #3F7E5E">// main style</span>
-     * albumBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
-     * albumBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * albumBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
-     * albumBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * albumBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
-     * albumBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
-     * albumBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
+     * favoriteBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
+     * favoriteBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * favoriteBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
+     * favoriteBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * favoriteBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
+     * favoriteBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
+     * favoriteBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
      * <span style="color: #3F7E5E">// traditional style</span>
-     * albumBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
-     * albumBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
-     * albumBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
-     * albumBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
-     * albumBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
-     * albumBhv.outideSql().traditionalStyle().execute(path, pmb);
+     * favoriteBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
+     * favoriteBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
+     * favoriteBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
+     * favoriteBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
+     * favoriteBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
+     * favoriteBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
      * <span style="color: #3F7E5E">// options</span>
-     * albumBhv.outideSql().removeBlockComment().selectList()
-     * albumBhv.outideSql().removeLineComment().selectList()
-     * albumBhv.outideSql().formatSql().selectList()
+     * favoriteBhv.outideSql().removeBlockComment().selectList()
+     * favoriteBhv.outideSql().removeLineComment().selectList()
+     * favoriteBhv.outideSql().formatSql().selectList()
      * </pre>
      * <p>The invoker of behavior command should be not null when you call this method.</p>
      * @return The new-created all facade executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlAllFacadeExecutor<AlbumBhv> outsideSql() {
+    public OutsideSqlAllFacadeExecutor<FavoriteBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
-    protected Class<? extends Album> typeOfSelectedEntity() { return Album.class; }
-    protected Class<Album> typeOfHandlingEntity() { return Album.class; }
-    protected Class<AlbumCB> typeOfHandlingConditionBean() { return AlbumCB.class; }
+    protected Class<? extends Favorite> typeOfSelectedEntity() { return Favorite.class; }
+    protected Class<Favorite> typeOfHandlingEntity() { return Favorite.class; }
+    protected Class<FavoriteCB> typeOfHandlingConditionBean() { return FavoriteCB.class; }
 
     // ===================================================================================
     //                                                                            Accessor

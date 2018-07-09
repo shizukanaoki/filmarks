@@ -81,23 +81,35 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param userId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public UserCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
+    public UserCB acceptPK(Integer userId) {
+        assertObjectNotNull("userId", userId);
         BsUserCB cb = this;
-        cb.query().setId_Equal(id);
+        cb.query().setUserId_Equal(userId);
+        return (UserCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param username : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return this. (NotNull)
+     */
+    public UserCB acceptUniqueOf(String username) {
+        assertObjectNotNull("username", username);
+        BsUserCB cb = this;
+        cb.query().setUsername_Equal(username);
         return (UserCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_UserId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_UserId_Desc();
         return this;
     }
 
@@ -284,12 +296,12 @@ public class BsUserCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, ID, NotNull, INT(10)}
+         * USER_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * USERNAME: {NotNull, VARCHAR(100)}
+         * USERNAME: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUsername() { return doColumn("USERNAME"); }
@@ -302,7 +314,7 @@ public class BsUserCB extends AbstractConditionBean {
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
+            columnUserId(); // PK
         }
         @Override
         protected String getTableDbName() { return "USER"; }
@@ -325,20 +337,20 @@ public class BsUserCB extends AbstractConditionBean {
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from PICK where ...) as FOO_MAX} <br>
-         * PICK by USER_ID, named 'pickList'.
+         * {select max(FOO) from FAVORITE where ...) as FOO_MAX} <br>
+         * FAVORITE by USER_ID, named 'favoriteList'.
          * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     pickCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     pickCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Pick.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     favoriteCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     favoriteCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Favorite.<span style="color: #CC4747">ALIAS_foo...</span>);
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<PickCB, UserCQ> derivedPick() {
-            assertDerived("pickList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<PickCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderivePickList(fn, sq, al, op), _dbmetaProvider);
+        public HpSDRFunction<FavoriteCB, UserCQ> derivedFavorite() {
+            assertDerived("favoriteList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<FavoriteCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveFavoriteList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>

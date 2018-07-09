@@ -12,20 +12,20 @@ import filmarks.dbflute.allcommon.DBMetaInstanceHandler;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The entity of PICK as TABLE. <br>
+ * The entity of FAVORITE as TABLE. <br>
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     
+ *     FAVORITE_ID
  *
  * [column]
- *     USER_ID, PRODUCT_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     FAVORITE_ID
  *
  * [version-no]
  *     
@@ -44,15 +44,17 @@ import filmarks.dbflute.exentity.*;
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+ * Integer favoriteId = entity.getFavoriteId();
  * Integer userId = entity.getUserId();
- * Integer productId = entity.getProductId();
+ * Integer albumId = entity.getAlbumId();
+ * entity.setFavoriteId(favoriteId);
  * entity.setUserId(userId);
- * entity.setProductId(productId);
+ * entity.setAlbumId(albumId);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsPick extends AbstractEntity implements DomainEntity {
+public abstract class BsFavorite extends AbstractEntity implements DomainEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -63,11 +65,14 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
+    /** FAVORITE_ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _favoriteId;
+
     /** USER_ID: {IX, NotNull, INT(10), FK to USER} */
     protected Integer _userId;
 
-    /** PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} */
-    protected Integer _productId;
+    /** ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} */
+    protected Integer _albumId;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -79,7 +84,7 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "PICK";
+        return "FAVORITE";
     }
 
     // ===================================================================================
@@ -87,17 +92,18 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        return false;
+        if (_favoriteId == null) { return false; }
+        return true;
     }
 
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** ALBUM by my PRODUCT_ID, named 'album'. */
+    /** ALBUM by my ALBUM_ID, named 'album'. */
     protected OptionalEntity<Album> _album;
 
     /**
-     * [get] ALBUM by my PRODUCT_ID, named 'album'. <br>
+     * [get] ALBUM by my ALBUM_ID, named 'album'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'album'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -107,7 +113,7 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] ALBUM by my PRODUCT_ID, named 'album'.
+     * [set] ALBUM by my ALBUM_ID, named 'album'.
      * @param album The entity of foreign property 'album'. (NullAllowed)
      */
     public void setAlbum(OptionalEntity<Album> album) {
@@ -147,10 +153,9 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     //                                                                      ==============
     @Override
     protected boolean doEquals(Object obj) {
-        if (obj instanceof BsPick) {
-            BsPick other = (BsPick)obj;
-            if (!xSV(_userId, other._userId)) { return false; }
-            if (!xSV(_productId, other._productId)) { return false; }
+        if (obj instanceof BsFavorite) {
+            BsFavorite other = (BsFavorite)obj;
+            if (!xSV(_favoriteId, other._favoriteId)) { return false; }
             return true;
         } else {
             return false;
@@ -161,8 +166,7 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _userId);
-        hs = xCH(hs, _productId);
+        hs = xCH(hs, _favoriteId);
         return hs;
     }
 
@@ -182,8 +186,9 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
+        sb.append(dm).append(xfND(_favoriteId));
         sb.append(dm).append(xfND(_userId));
-        sb.append(dm).append(xfND(_productId));
+        sb.append(dm).append(xfND(_albumId));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -205,13 +210,33 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     }
 
     @Override
-    public Pick clone() {
-        return (Pick)super.clone();
+    public Favorite clone() {
+        return (Favorite)super.clone();
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
+    /**
+     * [get] FAVORITE_ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @return The value of the column 'FAVORITE_ID'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getFavoriteId() {
+        checkSpecifiedProperty("favoriteId");
+        return _favoriteId;
+    }
+
+    /**
+     * [set] FAVORITE_ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @param favoriteId The value of the column 'FAVORITE_ID'. (basically NotNull if update: for the constraint)
+     */
+    public void setFavoriteId(Integer favoriteId) {
+        registerModifiedProperty("favoriteId");
+        _favoriteId = favoriteId;
+    }
+
     /**
      * [get] USER_ID: {IX, NotNull, INT(10), FK to USER} <br>
      * ????ID
@@ -233,22 +258,22 @@ public abstract class BsPick extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
-     * ??ID
-     * @return The value of the column 'PRODUCT_ID'. (basically NotNull if selected: for the constraint)
+     * [get] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * ????ID
+     * @return The value of the column 'ALBUM_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getProductId() {
-        checkSpecifiedProperty("productId");
-        return _productId;
+    public Integer getAlbumId() {
+        checkSpecifiedProperty("albumId");
+        return _albumId;
     }
 
     /**
-     * [set] PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
-     * ??ID
-     * @param productId The value of the column 'PRODUCT_ID'. (basically NotNull if update: for the constraint)
+     * [set] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * ????ID
+     * @param albumId The value of the column 'ALBUM_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setProductId(Integer productId) {
-        registerModifiedProperty("productId");
-        _productId = productId;
+    public void setAlbumId(Integer albumId) {
+        registerModifiedProperty("albumId");
+        _albumId = albumId;
     }
 }

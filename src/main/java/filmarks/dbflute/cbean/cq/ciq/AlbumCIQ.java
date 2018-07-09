@@ -61,26 +61,26 @@ public class AlbumCIQ extends AbstractBsAlbumCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
-    public String keepId_ExistsReferrer_CommentList(CommentCQ sq)
+    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
+    public String keepAlbumId_ExistsReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_ExistsReferrer_PickList(PickCQ sq)
+    public String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_CommentList(CommentCQ sq)
+    public String keepAlbumId_NotExistsReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_PickList(PickCQ sq)
+    public String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
+    public String keepAlbumId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_PickList(PickCQ sq)
+    public String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq)
+    public String keepAlbumId_QueryDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_CommentListParameter(Object vl)
+    public String keepAlbumId_QueryDerivedReferrer_CommentListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_PickList(PickCQ sq)
+    public String keepAlbumId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_PickListParameter(Object vl)
+    public String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueTitle() { return _myCQ.xdfgetTitle(); }
     protected ConditionValue xgetCValueFileName() { return _myCQ.xdfgetFileName(); }

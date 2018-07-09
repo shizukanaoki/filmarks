@@ -16,10 +16,10 @@ import filmarks.dbflute.exentity.*;
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     ID
+ *     ALBUM_ID
  *
  * [column]
- *     ID, ARTIST_ID, NAME
+ *     ALBUM_ID, ARTIST_ID, NAME
  *
  * [sequence]
  *     
@@ -44,10 +44,10 @@ import filmarks.dbflute.exentity.*;
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer id = entity.getId();
+ * Integer albumId = entity.getAlbumId();
  * Integer artistId = entity.getArtistId();
  * String name = entity.getName();
- * entity.setId(id);
+ * entity.setAlbumId(albumId);
  * entity.setArtistId(artistId);
  * entity.setName(name);
  * = = = = = = = = = =/
@@ -65,8 +65,8 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** ID: {PK, NotNull, INT(10), FK to ALBUM} */
-    protected Integer _id;
+    /** ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM} */
+    protected Integer _albumId;
 
     /** ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST} */
     protected Integer _artistId;
@@ -92,7 +92,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (_albumId == null) { return false; }
         return true;
     }
 
@@ -120,11 +120,11 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
         _artist = artist;
     }
 
-    /** ALBUM by my ID, named 'album'. */
+    /** ALBUM by my ALBUM_ID, named 'album'. */
     protected OptionalEntity<Album> _album;
 
     /**
-     * [get] ALBUM by my ID, named 'album'. <br>
+     * [get] ALBUM by my ALBUM_ID, named 'album'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
      * @return The entity of foreign property 'album'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -134,7 +134,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] ALBUM by my ID, named 'album'.
+     * [set] ALBUM by my ALBUM_ID, named 'album'.
      * @param album The entity of foreign property 'album'. (NullAllowed)
      */
     public void setAlbum(OptionalEntity<Album> album) {
@@ -155,7 +155,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsSong) {
             BsSong other = (BsSong)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(_albumId, other._albumId)) { return false; }
             return true;
         } else {
             return false;
@@ -166,7 +166,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, _albumId);
         return hs;
     }
 
@@ -186,7 +186,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
+        sb.append(dm).append(xfND(_albumId));
         sb.append(dm).append(xfND(_artistId));
         sb.append(dm).append(xfND(_name));
         if (sb.length() > dm.length()) {
@@ -218,23 +218,23 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] ID: {PK, NotNull, INT(10), FK to ALBUM} <br>
+     * [get] ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM} <br>
      * ID
-     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'ALBUM_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getId() {
-        checkSpecifiedProperty("id");
-        return _id;
+    public Integer getAlbumId() {
+        checkSpecifiedProperty("albumId");
+        return _albumId;
     }
 
     /**
-     * [set] ID: {PK, NotNull, INT(10), FK to ALBUM} <br>
+     * [set] ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM} <br>
      * ID
-     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
+     * @param albumId The value of the column 'ALBUM_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setId(Integer id) {
-        registerModifiedProperty("id");
-        _id = id;
+    public void setAlbumId(Integer albumId) {
+        registerModifiedProperty("albumId");
+        _albumId = albumId;
     }
 
     /**

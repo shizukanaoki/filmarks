@@ -45,116 +45,116 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Integer id) {
-        doSetId_Equal(id);
+    public void setAlbumId_Equal(Integer albumId) {
+        doSetAlbumId_Equal(albumId);
     }
 
-    protected void doSetId_Equal(Integer id) {
-        regId(CK_EQ, id);
+    protected void doSetAlbumId_Equal(Integer albumId) {
+        regAlbumId(CK_EQ, albumId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Integer id) {
-        doSetId_NotEqual(id);
+    public void setAlbumId_NotEqual(Integer albumId) {
+        doSetAlbumId_NotEqual(albumId);
     }
 
-    protected void doSetId_NotEqual(Integer id) {
-        regId(CK_NES, id);
+    protected void doSetAlbumId_NotEqual(Integer albumId) {
+        regAlbumId(CK_NES, albumId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Integer id) {
-        regId(CK_GT, id);
+    public void setAlbumId_GreaterThan(Integer albumId) {
+        regAlbumId(CK_GT, albumId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Integer id) {
-        regId(CK_LT, id);
+    public void setAlbumId_LessThan(Integer albumId) {
+        regAlbumId(CK_LT, albumId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Integer id) {
-        regId(CK_GE, id);
+    public void setAlbumId_GreaterEqual(Integer albumId) {
+        regAlbumId(CK_GE, albumId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumId The value of albumId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Integer id) {
-        regId(CK_LE, id);
+    public void setAlbumId_LessEqual(Integer albumId) {
+        regAlbumId(CK_LE, albumId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setAlbumId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueId(), "ID", rangeOfOption);
+    protected void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueAlbumId(), "ALBUM_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumIdList The collection of albumId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Integer> idList) {
-        doSetId_InScope(idList);
+    public void setAlbumId_InScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_InScope(albumIdList);
     }
 
-    protected void doSetId_InScope(Collection<Integer> idList) {
-        regINS(CK_INS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetAlbumId_InScope(Collection<Integer> albumIdList) {
+        regINS(CK_INS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
+     * @param albumIdList The collection of albumId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Integer> idList) {
-        doSetId_NotInScope(idList);
+    public void setAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_NotInScope(albumIdList);
     }
 
-    protected void doSetId_NotInScope(Collection<Integer> idList) {
-        regINS(CK_NINS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        regINS(CK_NINS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
@@ -171,29 +171,29 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     public void existsComment(SubQuery<CommentCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_CommentList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "ALBUM_ID", pp, "commentList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_ExistsReferrer_CommentList(cb.query());
+        registerExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "commentList");
     }
-    public abstract String keepId_ExistsReferrer_CommentList(CommentCQ sq);
+    public abstract String keepAlbumId_ExistsReferrer_CommentList(CommentCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select PRODUCT_ID from PICK where ...)} <br>
-     * PICK by PRODUCT_ID, named 'pickAsOne'.
+     * {exists (select ALBUM_ID from FAVORITE where ...)} <br>
+     * FAVORITE by ALBUM_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">existsPick</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.query().set...
+     * cb.query().<span style="color: #CC4747">existsFavorite</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of PickList for 'exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of FavoriteList for 'exists'. (NotNull)
      */
-    public void existsPick(SubQuery<PickCB> subCBLambda) {
+    public void existsFavorite(SubQuery<FavoriteCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        PickCB cb = new PickCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_PickList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "PRODUCT_ID", pp, "pickList");
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_ExistsReferrer_FavoriteList(cb.query());
+        registerExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "favoriteList");
     }
-    public abstract String keepId_ExistsReferrer_PickList(PickCQ sq);
+    public abstract String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -204,50 +204,50 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
      *     commentCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_CommentList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of AlbumId_NotExistsReferrer_CommentList for 'not exists'. (NotNull)
      */
     public void notExistsComment(SubQuery<CommentCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_CommentList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "ALBUM_ID", pp, "commentList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_NotExistsReferrer_CommentList(cb.query());
+        registerNotExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "commentList");
     }
-    public abstract String keepId_NotExistsReferrer_CommentList(CommentCQ sq);
+    public abstract String keepAlbumId_NotExistsReferrer_CommentList(CommentCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select PRODUCT_ID from PICK where ...)} <br>
-     * PICK by PRODUCT_ID, named 'pickAsOne'.
+     * {not exists (select ALBUM_ID from FAVORITE where ...)} <br>
+     * FAVORITE by ALBUM_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsPick</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.query().set...
+     * cb.query().<span style="color: #CC4747">notExistsFavorite</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_PickList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of AlbumId_NotExistsReferrer_FavoriteList for 'not exists'. (NotNull)
      */
-    public void notExistsPick(SubQuery<PickCB> subCBLambda) {
+    public void notExistsFavorite(SubQuery<FavoriteCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        PickCB cb = new PickCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_PickList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "PRODUCT_ID", pp, "pickList");
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_NotExistsReferrer_FavoriteList(cb.query());
+        registerNotExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "favoriteList");
     }
-    public abstract String keepId_NotExistsReferrer_PickList(PickCQ sq);
+    public abstract String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq);
 
     public void xsderiveCommentList(String fn, SubQuery<CommentCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_CommentList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "ALBUM_ID", pp, "commentList", al, op);
+        lockCall(() -> sq.query(cb)); String pp = keepAlbumId_SpecifyDerivedReferrer_CommentList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "commentList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq);
+    public abstract String keepAlbumId_SpecifyDerivedReferrer_CommentList(CommentCQ sq);
 
-    public void xsderivePickList(String fn, SubQuery<PickCB> sq, String al, DerivedReferrerOption op) {
+    public void xsderiveFavoriteList(String fn, SubQuery<FavoriteCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        PickCB cb = new PickCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_PickList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "PRODUCT_ID", pp, "pickList", al, op);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepAlbumId_SpecifyDerivedReferrer_FavoriteList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "favoriteList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_PickList(PickCQ sq);
+    public abstract String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -270,53 +270,53 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     public void xqderiveCommentList(String fn, SubQuery<CommentCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_CommentList(cb.query()); String prpp = keepId_QueryDerivedReferrer_CommentListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "ALBUM_ID", sqpp, "commentList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String sqpp = keepAlbumId_QueryDerivedReferrer_CommentList(cb.query()); String prpp = keepAlbumId_QueryDerivedReferrer_CommentListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", sqpp, "commentList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_CommentListParameter(Object vl);
+    public abstract String keepAlbumId_QueryDerivedReferrer_CommentList(CommentCQ sq);
+    public abstract String keepAlbumId_QueryDerivedReferrer_CommentListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from PICK where ...)} <br>
-     * PICK by PRODUCT_ID, named 'pickAsOne'.
+     * {FOO &lt;= (select max(BAR) from FAVORITE where ...)} <br>
+     * FAVORITE by ALBUM_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">derivedPick()</span>.<span style="color: #CC4747">max</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     pickCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * cb.query().<span style="color: #CC4747">derivedFavorite()</span>.<span style="color: #CC4747">max</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     favoriteCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
      * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
      * </pre>
      * @return The object to set up a function for referrer table. (NotNull)
      */
-    public HpQDRFunction<PickCB> derivedPick() {
-        return xcreateQDRFunctionPickList();
+    public HpQDRFunction<FavoriteCB> derivedFavorite() {
+        return xcreateQDRFunctionFavoriteList();
     }
-    protected HpQDRFunction<PickCB> xcreateQDRFunctionPickList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderivePickList(fn, sq, rd, vl, op));
+    protected HpQDRFunction<FavoriteCB> xcreateQDRFunctionFavoriteList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveFavoriteList(fn, sq, rd, vl, op));
     }
-    public void xqderivePickList(String fn, SubQuery<PickCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xqderiveFavoriteList(String fn, SubQuery<FavoriteCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        PickCB cb = new PickCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_PickList(cb.query()); String prpp = keepId_QueryDerivedReferrer_PickListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "PRODUCT_ID", sqpp, "pickList", rd, vl, prpp, op);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepAlbumId_QueryDerivedReferrer_FavoriteList(cb.query()); String prpp = keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", sqpp, "favoriteList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_PickList(PickCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_PickListParameter(Object vl);
+    public abstract String keepAlbumId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq);
+    public abstract String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNull() { regId(CK_ISN, DOBJ); }
+    public void setAlbumId_IsNull() { regAlbumId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
+    public void setAlbumId_IsNotNull() { regAlbumId(CK_ISNN, DOBJ); }
 
-    protected void regId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueId(), "ID"); }
-    protected abstract ConditionValue xgetCValueId();
+    protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
+    protected abstract ConditionValue xgetCValueAlbumId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
@@ -836,7 +836,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     public void xsmyselfDerive(String fn, SubQuery<AlbumCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         AlbumCB cb = new AlbumCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ALBUM_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(AlbumCQ sq);
@@ -852,7 +852,7 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         AlbumCB cb = new AlbumCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "ID";
+        String pk = "ALBUM_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

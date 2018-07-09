@@ -61,7 +61,7 @@ public class SongCIQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
+    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
     protected ConditionValue xgetCValueArtistId() { return _myCQ.xdfgetArtistId(); }
     protected ConditionValue xgetCValueName() { return _myCQ.xdfgetName(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }

@@ -82,13 +82,13 @@ public class BsAlbumCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param albumId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public AlbumCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
+    public AlbumCB acceptPK(Integer albumId) {
+        assertObjectNotNull("albumId", albumId);
         BsAlbumCB cb = this;
-        cb.query().setId_Equal(id);
+        cb.query().setAlbumId_Equal(albumId);
         return (AlbumCB)this;
     }
 
@@ -105,12 +105,12 @@ public class BsAlbumCB extends AbstractConditionBean {
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_AlbumId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_AlbumId_Desc();
         return this;
     }
 
@@ -278,7 +278,7 @@ public class BsAlbumCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * SONG by ID, named 'songAsOne'.
+     * SONG by ALBUM_ID, named 'songAsOne'.
      * <pre>
      * <span style="color: #0000C0">albumBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_SongAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -345,10 +345,10 @@ public class BsAlbumCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, ID, NotNull, INT(10)}
+         * ALBUM_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         /**
          * TITLE: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
@@ -368,7 +368,7 @@ public class BsAlbumCB extends AbstractConditionBean {
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
+            columnAlbumId(); // PK
             if (qyCall().qy().hasConditionQueryArtist()
                     || qyCall().qy().xgetReferrerQuery() instanceof ArtistCQ) {
                 columnArtistId(); // FK or one-to-one referrer
@@ -398,7 +398,7 @@ public class BsAlbumCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * SONG by ID, named 'songAsOne'.
+         * SONG by ALBUM_ID, named 'songAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public SongCB.HpSpecification specifySongAsOne() {
@@ -435,20 +435,20 @@ public class BsAlbumCB extends AbstractConditionBean {
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from PICK where ...) as FOO_MAX} <br>
-         * PICK by PRODUCT_ID, named 'pickList'.
+         * {select max(FOO) from FAVORITE where ...) as FOO_MAX} <br>
+         * FAVORITE by ALBUM_ID, named 'favoriteList'.
          * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     pickCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     pickCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Pick.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     favoriteCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     favoriteCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Favorite.<span style="color: #CC4747">ALIAS_foo...</span>);
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<PickCB, AlbumCQ> derivedPick() {
-            assertDerived("pickList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<PickCB> sq, AlbumCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderivePickList(fn, sq, al, op), _dbmetaProvider);
+        public HpSDRFunction<FavoriteCB, AlbumCQ> derivedFavorite() {
+            assertDerived("favoriteList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<FavoriteCB> sq, AlbumCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveFavoriteList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

@@ -14,16 +14,16 @@ import filmarks.dbflute.exentity.*;
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     ID
+ *     USER_ID
  *
  * [column]
- *     ID, USERNAME, PASSWORD
+ *     USER_ID, USERNAME, PASSWORD
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     USER_ID
  *
  * [version-no]
  *     
@@ -32,20 +32,20 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     COMMENT, PICK, RELATIONSHIP
+ *     COMMENT, FAVORITE, RELATIONSHIP
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, pickList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer id = entity.getId();
+ * Integer userId = entity.getUserId();
  * String username = entity.getUsername();
  * String password = entity.getPassword();
- * entity.setId(id);
+ * entity.setUserId(userId);
  * entity.setUsername(username);
  * entity.setPassword(password);
  * = = = = = = = = = =/
@@ -63,10 +63,10 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** ID: {PK, ID, NotNull, INT(10)} */
-    protected Integer _id;
+    /** USER_ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _userId;
 
-    /** USERNAME: {NotNull, VARCHAR(100)} */
+    /** USERNAME: {UQ, NotNull, VARCHAR(100)} */
     protected String _username;
 
     /** PASSWORD: {NotNull, VARCHAR(100)} */
@@ -90,8 +90,19 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (_userId == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param username : UQ, NotNull, VARCHAR(100). (NotNull)
+     */
+    public void uniqueBy(String username) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("username");
+        setUsername(username);
     }
 
     // ===================================================================================
@@ -120,24 +131,24 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         _commentList = commentList;
     }
 
-    /** PICK by USER_ID, named 'pickList'. */
-    protected List<Pick> _pickList;
+    /** FAVORITE by USER_ID, named 'favoriteList'. */
+    protected List<Favorite> _favoriteList;
 
     /**
-     * [get] PICK by USER_ID, named 'pickList'.
-     * @return The entity list of referrer property 'pickList'. (NotNull: even if no loading, returns empty list)
+     * [get] FAVORITE by USER_ID, named 'favoriteList'.
+     * @return The entity list of referrer property 'favoriteList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<Pick> getPickList() {
-        if (_pickList == null) { _pickList = newReferrerList(); }
-        return _pickList;
+    public List<Favorite> getFavoriteList() {
+        if (_favoriteList == null) { _favoriteList = newReferrerList(); }
+        return _favoriteList;
     }
 
     /**
-     * [set] PICK by USER_ID, named 'pickList'.
-     * @param pickList The entity list of referrer property 'pickList'. (NullAllowed)
+     * [set] FAVORITE by USER_ID, named 'favoriteList'.
+     * @param favoriteList The entity list of referrer property 'favoriteList'. (NullAllowed)
      */
-    public void setPickList(List<Pick> pickList) {
-        _pickList = pickList;
+    public void setFavoriteList(List<Favorite> favoriteList) {
+        _favoriteList = favoriteList;
     }
 
     /** RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'. */
@@ -191,7 +202,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsUser) {
             BsUser other = (BsUser)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(_userId, other._userId)) { return false; }
             return true;
         } else {
             return false;
@@ -202,7 +213,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, _userId);
         return hs;
     }
 
@@ -211,8 +222,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_commentList != null) { for (Comment et : _commentList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "commentList")); } } }
-        if (_pickList != null) { for (Pick et : _pickList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "pickList")); } } }
+        if (_favoriteList != null) { for (Favorite et : _favoriteList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "favoriteList")); } } }
         if (_relationshipByFollowerIdList != null) { for (Relationship et : _relationshipByFollowerIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "relationshipByFollowerIdList")); } } }
         if (_relationshipByFollowingIdList != null) { for (Relationship et : _relationshipByFollowingIdList)
@@ -223,7 +234,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
+        sb.append(dm).append(xfND(_userId));
         sb.append(dm).append(xfND(_username));
         sb.append(dm).append(xfND(_password));
         if (sb.length() > dm.length()) {
@@ -238,8 +249,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_commentList != null && !_commentList.isEmpty())
         { sb.append(dm).append("commentList"); }
-        if (_pickList != null && !_pickList.isEmpty())
-        { sb.append(dm).append("pickList"); }
+        if (_favoriteList != null && !_favoriteList.isEmpty())
+        { sb.append(dm).append("favoriteList"); }
         if (_relationshipByFollowerIdList != null && !_relationshipByFollowerIdList.isEmpty())
         { sb.append(dm).append("relationshipByFollowerIdList"); }
         if (_relationshipByFollowingIdList != null && !_relationshipByFollowingIdList.isEmpty())
@@ -259,27 +270,27 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [get] USER_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'USER_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getId() {
-        checkSpecifiedProperty("id");
-        return _id;
+    public Integer getUserId() {
+        checkSpecifiedProperty("userId");
+        return _userId;
     }
 
     /**
-     * [set] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [set] USER_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
+     * @param userId The value of the column 'USER_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setId(Integer id) {
-        registerModifiedProperty("id");
-        _id = id;
+    public void setUserId(Integer userId) {
+        registerModifiedProperty("userId");
+        _userId = userId;
     }
 
     /**
-     * [get] USERNAME: {NotNull, VARCHAR(100)} <br>
+     * [get] USERNAME: {UQ, NotNull, VARCHAR(100)} <br>
      * ??
      * @return The value of the column 'USERNAME'. (basically NotNull if selected: for the constraint)
      */
@@ -289,7 +300,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] USERNAME: {NotNull, VARCHAR(100)} <br>
+     * [set] USERNAME: {UQ, NotNull, VARCHAR(100)} <br>
      * ??
      * @param username The value of the column 'USERNAME'. (basically NotNull if update: for the constraint)
      */

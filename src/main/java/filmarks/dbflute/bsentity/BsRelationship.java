@@ -16,16 +16,16 @@ import filmarks.dbflute.exentity.*;
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     
+ *     ID
  *
  * [column]
- *     FOLLOWING_ID, FOLLOWER_ID
+ *     ID, FOLLOWING_ID, FOLLOWER_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     
@@ -44,8 +44,10 @@ import filmarks.dbflute.exentity.*;
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+ * Integer id = entity.getId();
  * Integer followingId = entity.getFollowingId();
  * Integer followerId = entity.getFollowerId();
+ * entity.setId(id);
  * entity.setFollowingId(followingId);
  * entity.setFollowerId(followerId);
  * = = = = = = = = = =/
@@ -63,6 +65,9 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
+    /** ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _id;
+
     /** FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER} */
     protected Integer _followingId;
 
@@ -87,7 +92,8 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        return false;
+        if (_id == null) { return false; }
+        return true;
     }
 
     // ===================================================================================
@@ -149,8 +155,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsRelationship) {
             BsRelationship other = (BsRelationship)obj;
-            if (!xSV(_followingId, other._followingId)) { return false; }
-            if (!xSV(_followerId, other._followerId)) { return false; }
+            if (!xSV(_id, other._id)) { return false; }
             return true;
         } else {
             return false;
@@ -161,8 +166,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _followingId);
-        hs = xCH(hs, _followerId);
+        hs = xCH(hs, _id);
         return hs;
     }
 
@@ -182,6 +186,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
+        sb.append(dm).append(xfND(_id));
         sb.append(dm).append(xfND(_followingId));
         sb.append(dm).append(xfND(_followerId));
         if (sb.length() > dm.length()) {
@@ -212,6 +217,26 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
+    /**
+     * [get] ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getId() {
+        checkSpecifiedProperty("id");
+        return _id;
+    }
+
+    /**
+     * [set] ID: {PK, ID, NotNull, INT(10)} <br>
+     * ID
+     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
+     */
+    public void setId(Integer id) {
+        registerModifiedProperty("id");
+        _id = id;
+    }
+
     /**
      * [get] FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER} <br>
      * ????ID

@@ -12,16 +12,16 @@ import filmarks.dbflute.cbean.*;
  * The referrer loader of USER as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     USER_ID
  *
  * [column]
- *     ID, USERNAME, PASSWORD
+ *     USER_ID, USERNAME, PASSWORD
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     USER_ID
  *
  * [version-no]
  *     
@@ -30,13 +30,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, PICK, RELATIONSHIP
+ *     COMMENT, FAVORITE, RELATIONSHIP
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, pickList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -95,24 +95,24 @@ public class LoaderOfUser {
         return hd -> hd.handle(new LoaderOfComment().ready(_referrerComment, _selector));
     }
 
-    protected List<Pick> _referrerPick;
+    protected List<Favorite> _referrerFavorite;
 
     /**
-     * Load referrer of pickList by the set-upper of referrer. <br>
-     * PICK by USER_ID, named 'pickList'.
+     * Load referrer of favoriteList by the set-upper of referrer. <br>
+     * FAVORITE by USER_ID, named 'favoriteList'.
      * <pre>
      * <span style="color: #0000C0">userBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">userLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadPick</span>(<span style="color: #553000">pickCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">pickCB</span>.setupSelect...
-     *         <span style="color: #553000">pickCB</span>.query().set...
-     *         <span style="color: #553000">pickCB</span>.query().addOrderBy...
+     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadFavorite</span>(<span style="color: #553000">favoriteCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">favoriteCB</span>.setupSelect...
+     *         <span style="color: #553000">favoriteCB</span>.query().set...
+     *         <span style="color: #553000">favoriteCB</span>.query().addOrderBy...
      *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">pickLoader</span> -&gt; {</span>
-     *     <span style="color: #3F7E5E">//    pickLoader.load...</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">favoriteLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    favoriteLoader.load...</span>
      *     <span style="color: #3F7E5E">//});</span>
      * });
      * for (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getPickList()</span>;
+     *     ... = user.<span style="color: #CC4747">getFavoriteList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -124,9 +124,9 @@ public class LoaderOfUser {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerLoaderGateway<LoaderOfPick> loadPick(ReferrerConditionSetupper<PickCB> refCBLambda) {
-        myBhv().loadPick(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerPick = refLs);
-        return hd -> hd.handle(new LoaderOfPick().ready(_referrerPick, _selector));
+    public NestedReferrerLoaderGateway<LoaderOfFavorite> loadFavorite(ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
+        myBhv().loadFavorite(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerFavorite = refLs);
+        return hd -> hd.handle(new LoaderOfFavorite().ready(_referrerFavorite, _selector));
     }
 
     protected List<Relationship> _referrerRelationshipByFollowerId;

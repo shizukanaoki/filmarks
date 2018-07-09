@@ -42,7 +42,7 @@ public class UserDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((User)et).getId(), (et, vl) -> ((User)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((User)et).getUserId(), (et, vl) -> ((User)et).setUserId(cti(vl)), "userId");
         setupEpg(_epgMap, et -> ((User)et).getUsername(), (et, vl) -> ((User)et).setUsername((String)vl), "username");
         setupEpg(_epgMap, et -> ((User)et).getPassword(), (et, vl) -> ((User)et).setPassword((String)vl), "password");
     }
@@ -65,17 +65,17 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,pickList,relationshipByFollowerIdList,relationshipByFollowingIdList", null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,relationshipByFollowerIdList,relationshipByFollowingIdList", null, false);
     protected final ColumnInfo _columnUsername = cci("USERNAME", "USERNAME", null, null, String.class, "username", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, null, String.class, "password", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * ID: {PK, ID, NotNull, INT(10)}
+     * USER_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnId() { return _columnId; }
+    public ColumnInfo columnUserId() { return _columnUserId; }
     /**
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUsername() { return _columnUsername; }
@@ -87,7 +87,7 @@ public class UserDbm extends AbstractDBMeta {
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnId());
+        ls.add(columnUserId());
         ls.add(columnUsername());
         ls.add(columnPassword());
         return ls;
@@ -101,9 +101,14 @@ public class UserDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnUserId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnUsername()); }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -122,23 +127,23 @@ public class UserDbm extends AbstractDBMeta {
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerCommentList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), CommentDbm.getInstance().columnUserId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), CommentDbm.getInstance().columnUserId());
         return cri("FK_COMMENT_USER", "commentList", this, CommentDbm.getInstance(), mp, false, "user");
     }
     /**
-     * PICK by USER_ID, named 'pickList'.
+     * FAVORITE by USER_ID, named 'favoriteList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerPickList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), PickDbm.getInstance().columnUserId());
-        return cri("FK_PICK_USER", "pickList", this, PickDbm.getInstance(), mp, false, "user");
+    public ReferrerInfo referrerFavoriteList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), FavoriteDbm.getInstance().columnUserId());
+        return cri("FK_PICK_USER", "favoriteList", this, FavoriteDbm.getInstance(), mp, false, "user");
     }
     /**
      * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerRelationshipByFollowerIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), RelationshipDbm.getInstance().columnFollowerId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), RelationshipDbm.getInstance().columnFollowerId());
         return cri("FK_RELATIONSHIP_FOLLOWER", "relationshipByFollowerIdList", this, RelationshipDbm.getInstance(), mp, false, "userByFollowerId");
     }
     /**
@@ -146,7 +151,7 @@ public class UserDbm extends AbstractDBMeta {
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerRelationshipByFollowingIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), RelationshipDbm.getInstance().columnFollowingId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), RelationshipDbm.getInstance().columnFollowingId());
         return cri("FK_RELATIONSHIP_FOLLOWING", "relationshipByFollowingIdList", this, RelationshipDbm.getInstance(), mp, false, "userByFollowingId");
     }
 

@@ -61,46 +61,46 @@ public class UserCIQ extends AbstractBsUserCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
-    public String keepId_ExistsReferrer_CommentList(CommentCQ sq)
+    protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
+    public String keepUserId_ExistsReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_ExistsReferrer_PickList(PickCQ sq)
+    public String keepUserId_ExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_ExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
+    public String keepUserId_ExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_ExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
+    public String keepUserId_ExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_CommentList(CommentCQ sq)
+    public String keepUserId_NotExistsReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_PickList(PickCQ sq)
+    public String keepUserId_NotExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
+    public String keepUserId_NotExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
+    public String keepUserId_NotExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
+    public String keepUserId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_PickList(PickCQ sq)
+    public String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
+    public String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
+    public String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq)
+    public String keepUserId_QueryDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_CommentListParameter(Object vl)
+    public String keepUserId_QueryDerivedReferrer_CommentListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_PickList(PickCQ sq)
+    public String keepUserId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_PickListParameter(Object vl)
+    public String keepUserId_QueryDerivedReferrer_FavoriteListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
+    public String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(Object vl)
+    public String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
+    public String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(Object vl)
+    public String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueUsername() { return _myCQ.xdfgetUsername(); }
     protected ConditionValue xgetCValuePassword() { return _myCQ.xdfgetPassword(); }

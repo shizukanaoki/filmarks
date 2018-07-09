@@ -79,14 +79,26 @@ public class BsRelationshipCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public RelationshipCB acceptPK(Integer id) {
+        assertObjectNotNull("id", id);
+        BsRelationshipCB cb = this;
+        cb.query().setId_Equal(id);
+        return (RelationshipCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_Id_Asc();
+        return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_Id_Desc();
+        return this;
     }
 
     // ===================================================================================
@@ -314,6 +326,11 @@ public class BsRelationshipCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
+         * ID: {PK, ID, NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        /**
          * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
          */
@@ -327,6 +344,7 @@ public class BsRelationshipCB extends AbstractConditionBean {
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
+            columnId(); // PK
             if (qyCall().qy().hasConditionQueryUserByFollowerId()
                     || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
                 columnFollowerId(); // FK or one-to-one referrer
@@ -377,6 +395,15 @@ public class BsRelationshipCB extends AbstractConditionBean {
                 }
             }
             return _userByFollowingId;
+        }
+        /**
+         * Prepare for (Specify)MyselfDerived (SubQuery).
+         * @return The object to set up a function for myself table. (NotNull)
+         */
+        public HpSDRFunction<RelationshipCB, RelationshipCQ> myselfDerived() {
+            assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RelationshipCB> sq, RelationshipCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
         }
     }
 

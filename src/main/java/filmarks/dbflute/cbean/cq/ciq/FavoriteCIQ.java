@@ -12,21 +12,21 @@ import filmarks.dbflute.cbean.cq.bs.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of PICK.
+ * The condition-query for in-line of FAVORITE.
  * @author DBFlute(AutoGenerator)
  */
-public class PickCIQ extends AbstractBsPickCQ {
+public class FavoriteCIQ extends AbstractBsFavoriteCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsPickCQ _myCQ;
+    protected BsFavoriteCQ _myCQ;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public PickCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
-                        , String aliasName, int nestLevel, BsPickCQ myCQ) {
+    public FavoriteCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
+                        , String aliasName, int nestLevel, BsFavoriteCQ myCQ) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
         _myCQ = myCQ;
         _foreignPropertyName = _myCQ.xgetForeignPropertyName(); // accept foreign property name
@@ -61,11 +61,20 @@ public class PickCIQ extends AbstractBsPickCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
+    protected ConditionValue xgetCValueFavoriteId() { return _myCQ.xdfgetFavoriteId(); }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
-    protected ConditionValue xgetCValueProductId() { return _myCQ.xdfgetProductId(); }
+    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
-    public String keepScalarCondition(PickCQ sq)
+    public String keepScalarCondition(FavoriteCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
+    public String keepSpecifyMyselfDerived(FavoriteCQ sq)
+    { throwIICBOE("(Specify)MyselfDerived"); return null;}
+    public String keepQueryMyselfDerived(FavoriteCQ sq)
+    { throwIICBOE("(Query)MyselfDerived"); return null;}
+    public String keepQueryMyselfDerivedParameter(Object vl)
+    { throwIICBOE("(Query)MyselfDerived"); return null;}
+    public String keepMyselfExists(FavoriteCQ sq)
+    { throwIICBOE("MyselfExists"); return null;}
 
     protected void throwIICBOE(String name)
     { throw new IllegalConditionBeanOperationException(name + " at InlineView is unsupported."); }
@@ -74,6 +83,6 @@ public class PickCIQ extends AbstractBsPickCQ {
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xinCB() { return PickCB.class.getName(); }
-    protected String xinCQ() { return PickCQ.class.getName(); }
+    protected String xinCB() { return FavoriteCB.class.getName(); }
+    protected String xinCQ() { return FavoriteCQ.class.getName(); }
 }

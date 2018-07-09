@@ -10,10 +10,10 @@ import filmarks.dbflute.exentity.*;
  * The referrer loader of SONG as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     ALBUM_ID
  *
  * [column]
- *     ID, ARTIST_ID, NAME
+ *     ALBUM_ID, ARTIST_ID, NAME
  *
  * [sequence]
  *     
