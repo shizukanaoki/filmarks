@@ -1,4 +1,27 @@
 map:{
+    ; 2018/07/09 17:20:24 = map:{
+        ; diffDate = 2018/07/09 17:20:24
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_favorite_function
+        ; tableDiff = map:{
+            ; FAVORITE = map:{
+                ; tableName = FAVORITE
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE = map:{
+                        ; constraintName = UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_PICK_USER = map:{
+                        ; constraintName = FK_PICK_USER
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/09 16:13:32 = map:{
         ; diffDate = 2018/07/09 16:13:32
         ; diffAuthor = naoki.shizuka

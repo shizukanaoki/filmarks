@@ -78,11 +78,12 @@
             foreignTable="USER" name="FK_PICK_USER">
             <reference foreign="USER_ID" local="USER_ID"/>
         </foreign-key>
+        <unique name="UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE">
+            <unique-column name="USER_ID" position="1"/>
+            <unique-column name="ALBUM_ID" position="2"/>
+        </unique>
         <index name="FK_PICK_PRODUCT">
             <index-column name="ALBUM_ID" position="1"/>
-        </index>
-        <index name="FK_PICK_USER">
-            <index-column name="USER_ID" position="1"/>
         </index>
     </table>
     <table comment="NEW_TABLE" name="RELATIONSHIP"

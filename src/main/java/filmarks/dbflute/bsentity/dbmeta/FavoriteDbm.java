@@ -89,12 +89,12 @@ public class FavoriteDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnFavoriteId() { return _columnFavoriteId; }
     /**
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserId() { return _columnUserId; }
     /**
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnAlbumId() { return _columnAlbumId; }
@@ -118,6 +118,16 @@ public class FavoriteDbm extends AbstractDBMeta {
     protected UniqueInfo cpui() { return hpcpui(columnFavoriteId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnUserId());
+        ls.add(columnAlbumId());
+        return hpcui(ls);
+    }
 
     // ===================================================================================
     //                                                                       Relation Info

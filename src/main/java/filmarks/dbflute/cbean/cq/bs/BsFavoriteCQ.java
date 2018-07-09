@@ -101,14 +101,14 @@ public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
     public BsFavoriteCQ addOrderBy_UserId_Asc() { regOBA("USER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
     public BsFavoriteCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
@@ -121,14 +121,14 @@ public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
     public BsFavoriteCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
     public BsFavoriteCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }

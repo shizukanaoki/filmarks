@@ -68,10 +68,10 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     /** FAVORITE_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _favoriteId;
 
-    /** USER_ID: {IX, NotNull, INT(10), FK to USER} */
+    /** USER_ID: {UQ+, NotNull, INT(10), FK to USER} */
     protected Integer _userId;
 
-    /** ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} */
+    /** ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM} */
     protected Integer _albumId;
 
     // ===================================================================================
@@ -94,6 +94,19 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     public boolean hasPrimaryKeyValue() {
         if (_favoriteId == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param userId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param albumId : +UQ, IX, NotNull, INT(10), FK to ALBUM. (NotNull)
+     */
+    public void uniqueBy(Integer userId, Integer albumId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("userId");
+        __uniqueDrivenProperties.addPropertyName("albumId");
+        setUserId(userId);setAlbumId(albumId);
     }
 
     // ===================================================================================
@@ -238,7 +251,7 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] USER_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [get] USER_ID: {UQ+, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @return The value of the column 'USER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -248,7 +261,7 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] USER_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [set] USER_ID: {UQ+, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @param userId The value of the column 'USER_ID'. (basically NotNull if update: for the constraint)
      */
@@ -258,7 +271,7 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [get] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * [get] ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM} <br>
      * ????ID
      * @return The value of the column 'ALBUM_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -268,7 +281,7 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     }
 
     /**
-     * [set] ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM} <br>
+     * [set] ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM} <br>
      * ????ID
      * @param albumId The value of the column 'ALBUM_ID'. (basically NotNull if update: for the constraint)
      */

@@ -186,6 +186,32 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
         return newConditionBean().acceptPK(favoriteId);
     }
 
+    /**
+     * Select the entity by the unique-key value.
+     * @param userId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param albumId : +UQ, IX, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Favorite> selectByUniqueOf(Integer userId, Integer albumId) {
+        return facadeSelectByUniqueOf(userId, albumId);
+    }
+
+    protected OptionalEntity<Favorite> facadeSelectByUniqueOf(Integer userId, Integer albumId) {
+        return doSelectByUniqueOf(userId, albumId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer userId, Integer albumId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(userId, albumId), tp), userId, albumId);
+    }
+
+    protected FavoriteCB xprepareCBAsUniqueOf(Integer userId, Integer albumId) {
+        assertObjectNotNull("userId", userId);assertObjectNotNull("albumId", albumId);
+        return newConditionBean().acceptUniqueOf(userId, albumId);
+    }
+
     // ===================================================================================
     //                                                                         List Select
     //                                                                         ===========

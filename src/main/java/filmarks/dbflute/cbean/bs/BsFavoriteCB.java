@@ -92,6 +92,19 @@ public class BsFavoriteCB extends AbstractConditionBean {
         return (FavoriteCB)this;
     }
 
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param userId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param albumId : +UQ, IX, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @return this. (NotNull)
+     */
+    public FavoriteCB acceptUniqueOf(Integer userId, Integer albumId) {
+        assertObjectNotNull("userId", userId);assertObjectNotNull("albumId", albumId);
+        BsFavoriteCB cb = this;
+        cb.query().setUserId_Equal(userId);cb.query().setAlbumId_Equal(albumId);
+        return (FavoriteCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_FavoriteId_Asc();
         return this;
@@ -341,12 +354,12 @@ public class BsFavoriteCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnFavoriteId() { return doColumn("FAVORITE_ID"); }
         /**
-         * USER_ID: {IX, NotNull, INT(10), FK to USER}
+         * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+         * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }

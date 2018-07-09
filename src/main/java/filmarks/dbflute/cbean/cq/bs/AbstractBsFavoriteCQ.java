@@ -174,7 +174,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_Equal(Integer userId) {
@@ -187,7 +187,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_NotEqual(Integer userId) {
@@ -200,7 +200,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterThan(Integer userId) {
@@ -209,7 +209,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessThan(Integer userId) {
@@ -218,7 +218,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterEqual(Integer userId) {
@@ -227,7 +227,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessEqual(Integer userId) {
@@ -238,7 +238,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -251,7 +251,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -262,7 +262,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_InScope(Collection<Integer> userIdList) {
@@ -275,7 +275,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_NotInScope(Collection<Integer> userIdList) {
@@ -291,7 +291,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_Equal(Integer albumId) {
@@ -304,7 +304,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_NotEqual(Integer albumId) {
@@ -317,7 +317,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_GreaterThan(Integer albumId) {
@@ -326,7 +326,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_LessThan(Integer albumId) {
@@ -335,7 +335,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_GreaterEqual(Integer albumId) {
@@ -344,7 +344,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumId The value of albumId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setAlbumId_LessEqual(Integer albumId) {
@@ -355,7 +355,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -368,7 +368,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -379,7 +379,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumIdList The collection of albumId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setAlbumId_InScope(Collection<Integer> albumIdList) {
@@ -392,7 +392,7 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @param albumIdList The collection of albumId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setAlbumId_NotInScope(Collection<Integer> albumIdList) {
