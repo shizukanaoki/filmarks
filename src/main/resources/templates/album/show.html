@@ -6,8 +6,10 @@
 </head>
 <body>
     <div th:text="${album.getTitle()}"></div>
-    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
-        <input type="submit" th:value="お気に入りに追加">
-    </form>
+    <div th:unless="${favoriteOptionalEntity.orElse(false)}">
+        <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
+            <input type="submit" th:value="お気に入りに追加">
+        </form>
+    </div>
 </body>
 </html>

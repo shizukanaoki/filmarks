@@ -46,7 +46,6 @@ public class FavoriteController {
         User user = (User)auth.getPrincipal();
         userBhv.loadFavorite(user, FavoriteCB::setupSelect_Album);
         List<Album> albums = user.getFavoriteList().stream().map(favorite -> favorite.getAlbum().get()).collect(Collectors.toList());
-        albums.get(0).getTitle();
         mav.addObject("albums", albums);
         mav.setViewName("favorite/index");
         return mav;
