@@ -6,5 +6,8 @@
 </head>
 <body>
     <div th:text="${album.getTitle()}"></div>
+    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
+        <input type="submit" th:value="お気に入りに追加">
+    </form>
 </body>
 </html>

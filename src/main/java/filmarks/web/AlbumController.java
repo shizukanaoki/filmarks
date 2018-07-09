@@ -23,7 +23,7 @@ public class AlbumController {
     @RequestMapping(value = {"/", "/albums"})
     @ResponseBody
     public ModelAndView index(ModelAndView mav) {
-        ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_Id_Asc());
+        ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_AlbumId_Asc());
         mav.addObject("albums", albums);
         mav.setViewName("album/index");
         return mav;
