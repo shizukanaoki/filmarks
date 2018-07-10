@@ -18,10 +18,26 @@
                 <!--<input type="submit" value="Sign Out"/>-->
             <!--</form>-->
         <!--</div>-->
-        <div class="main">
-            <div class="products">
-                <div class="product" th:each="album:${albums}">
-                    <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
+        <div class="wrapper">
+            <ul class="sidebar">
+                <li class="sidebar_brand">
+                    <a href="">BLAND</a>
+                </li>
+                <li>
+                    <a href="">timeline</a>
+                </li>
+                <li>
+                    <a href="">favorites</a>
+                </li>
+            </ul>
+            <div class="sidebar_width">
+
+            </div>
+            <div class="main">
+                <div class="products">
+                    <div class="product" th:each="album:${albums}">
+                        <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
+                    </div>
                 </div>
             </div>
         </div>
