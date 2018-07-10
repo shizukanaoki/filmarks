@@ -8,29 +8,23 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet", type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="/javascript/top_page.js"></script>
 </head>
 <body>
-    <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
-    <div class="main">
-        <div class="products">
-            <div class="product" th:each="album:${albums}">
-                <div class="product-info">
-                    <div class="product-info-left">
-                        <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="150" height="200"/>
-                    </div>
-                    <div class="product-info-right">
-                        <div class="product-info-title" th:text="|タイトル: ${album.getTitle()}|"></div>
-                    </div>
+        <!--<div sec:authorize="isAuthenticated()">-->
+            <!--<form th:action="@{/logout}" method="post">-->
+                <!--<input type="submit" value="Sign Out"/>-->
+            <!--</form>-->
+        <!--</div>-->
+        <div class="main">
+            <div class="products">
+                <div class="product" th:each="album:${albums}">
+                    <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
                 </div>
-                <div class="product-review"></div>
             </div>
         </div>
-    </div>
 </body>
 </html>
 

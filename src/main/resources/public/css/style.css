@@ -1,17 +1,13 @@
-.product {
-    width: 660px;
-    margin-left: 20px;
-}
-
-.product-info {
+.products {
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.product-info-left {
-    width: 150px;
-}
-
-.product-info-right {
-    width: 430px;
-    margin-left: 20px;
+.product {
+    margin: 20px 0 20px 20px;
+    min-width: 0;
 }
