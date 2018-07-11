@@ -8,32 +8,39 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="/javascript/top_page.js"></script>
 </head>
 <body>
-    <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
-    <div class="main">
-        <div class="products">
-            <div class="product" th:each="album:${albums}">
-                <div class="product-info">
-                    <div class="product-info-left">
-                        <a th:href="@{'/albums/' + ${album.getId()}}">
-                            <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="150" height="200"/>
-                        </a>
-                    </div>
-                    <div class="product-info-right">
-                        <div class="product-info-title" th:text="|タイトル: ${album.getTitle()}|"></div>
-                        <div class="product-info-title" th:text="|平均: ${album.getAvgRate()}|"></div>
+        <!--<div sec:authorize="isAuthenticated()">-->
+            <!--<form th:action="@{/logout}" method="post">-->
+                <!--<input type="submit" value="Sign Out"/>-->
+            <!--</form>-->
+        <!--</div>-->
+        <div class="wrapper">
+            <ul class="sidebar">
+                <li class="sidebar_brand">
+                    <a href="">BLAND</a>
+                </li>
+                <li>
+                    <a href="">timeline</a>
+                </li>
+                <li>
+                    <a href="">favorites</a>
+                </li>
+            </ul>
+            <div class="sidebar_width">
+
+            </div>
+            <div class="main">
+                <div class="products">
+                    <div class="product" th:each="album:${albums}">
+                        <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
                     </div>
                 </div>
-                <div class="product-review"></div>
             </div>
         </div>
-    </div>
 </body>
 </html>
 
