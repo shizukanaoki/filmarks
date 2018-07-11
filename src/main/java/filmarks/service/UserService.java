@@ -28,8 +28,8 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findOne(int id) throws EntityAlreadyDeletedException {
-        return userRepository.findOne(id);
+    public User findOne(int userId) throws EntityAlreadyDeletedException {
+        return userRepository.findOne(userId);
     }
 
     public User create(User user) {

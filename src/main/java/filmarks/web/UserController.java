@@ -20,10 +20,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/users/{id}")
-    public ModelAndView show (@PathVariable int id, ModelAndView mav) {
+    @RequestMapping("/users/{userId}")
+    public ModelAndView show (@PathVariable int userId, ModelAndView mav) {
         try {
-            User user = userService.findOne(id);
+            User user = userService.findOne(userId);
             List<User> followings = user.getRelationshipByFollowingIdList().stream()
                     .map(following -> following.getUserByFollowerId().get())
                     .collect(Collectors.toList());

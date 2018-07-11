@@ -24,10 +24,10 @@ public class RelationshipController {
     @Autowired
     RelationShipService relationShipService;
 
-    @RequestMapping(value = "/relationships/{id}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int id, Principal principal, ModelAndView mav) {
+    @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
+    public ModelAndView create(@PathVariable int followerId, Principal principal, ModelAndView mav) {
         try {
-            User follower = userService.findOne(id);
+            User follower = userService.findOne(followerId);
             Authentication auth = (Authentication) principal;
             User following = (User) auth.getPrincipal();
             relationShipService.create(new Relationship(following.getId(), follower.getId()));

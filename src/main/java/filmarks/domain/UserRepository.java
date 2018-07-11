@@ -21,8 +21,8 @@ public class UserRepository {
         return userOptionalEntity.orElse(null);
     }
 
-    public User findOne(int id) throws EntityAlreadyDeletedException {
-        User user = userBhv.selectByPK(id).get();
+    public User findOne(int userId) throws EntityAlreadyDeletedException {
+        User user = userBhv.selectByPK(userId).get();
         userBhv.loadRelationshipByFollowingId(user, cb -> {
            cb.setupSelect_UserByFollowerId();
         });
