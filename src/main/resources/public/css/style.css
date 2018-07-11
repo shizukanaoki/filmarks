@@ -15,7 +15,7 @@ ul.sidebar {
 }
 
 .sidebar_width {
-    width: 200px;
+    min-width: 200px;
 }
 
 .sidebar>li {
@@ -42,19 +42,3 @@ ul.sidebar {
 .sidebar>.sidebar_brand>a {
     color: orange;
 }
-
-
-.products {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.product {
-    margin: 20px 0 20px 20px;
-    min-width: 0;
-}
-

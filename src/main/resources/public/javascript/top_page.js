@@ -1,6 +1,6 @@
 window.onload = function() {
-    var min = 200 ;
-    var max = 400 ;
+    var min = 100 ;
+    var max = 200 ;
     var elements = document.getElementsByClassName("product");
     for(var i = 0; i < elements.length; i++) {
         var size = Math.floor( Math.random() * (max + 1 - min) ) + min ;
