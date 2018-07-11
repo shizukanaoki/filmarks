@@ -84,6 +84,9 @@
     </table>
     <table comment="NEW_TABLE" name="RELATIONSHIP"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="ID" dbType="INT"
+            javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="FOLLOWING_ID" required="true" size="10" type="INTEGER"/>
         <column comment="?????ID" dbType="INT" javaType="Integer"

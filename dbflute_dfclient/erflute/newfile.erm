@@ -167,7 +167,6 @@
 					<logical_name>アーティストID</logical_name>
 					<referred_column>table.ARTIST.ID</referred_column>
 					<relationship>FK_PRODUCT_ARTIST</relationship>
-					<not_null>true</not_null>
 				</normal_column>
 			</columns>
 			<indexes>
@@ -255,7 +254,7 @@
 					<target>table.COMMENT</target>
 					<fk_columns>
 						<fk_column>
-							<fk_column_name>PRODUCT_ID</fk_column_name>
+							<fk_column_name>ALBUM_ID</fk_column_name>
 						</fk_column>
 					</fk_columns>
 					<parent_cardinality>1</parent_cardinality>
@@ -282,8 +281,8 @@
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
-					<physical_name>PRODUCT_ID</physical_name>
-					<logical_name>製品ID</logical_name>
+					<physical_name>ALBUM_ID</physical_name>
+					<logical_name>アルバムID</logical_name>
 					<referred_column>table.ALBUM.ID</referred_column>
 					<relationship>FK_COMMENT_PRODUCT</relationship>
 					<not_null>true</not_null>
@@ -427,6 +426,14 @@
 			</connections>
 			<columns>
 				<normal_column>
+					<physical_name>ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
 					<physical_name>FOLLOWING_ID</physical_name>
 					<logical_name>フォローID</logical_name>
 					<referred_column>table.USER.ID</referred_column>
@@ -552,7 +559,7 @@
 					<auto_increment>true</auto_increment>
 				</normal_column>
 				<normal_column>
-					<physical_name>NAME</physical_name>
+					<physical_name>USERNAME</physical_name>
 					<logical_name>名前</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>

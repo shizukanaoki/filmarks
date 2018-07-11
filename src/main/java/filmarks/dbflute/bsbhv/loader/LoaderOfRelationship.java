@@ -10,16 +10,16 @@ import filmarks.dbflute.exentity.*;
  * The referrer loader of RELATIONSHIP as TABLE. <br>
  * <pre>
  * [primary key]
- *     
+ *     ID
  *
  * [column]
- *     FOLLOWING_ID, FOLLOWER_ID
+ *     ID, FOLLOWING_ID, FOLLOWER_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     

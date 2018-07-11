@@ -6,11 +6,13 @@ import org.dbflute.*;
 import org.dbflute.bhv.*;
 import org.dbflute.bhv.core.BehaviorCommandInvoker;
 import org.dbflute.bhv.readable.*;
+import org.dbflute.bhv.writable.*;
 import org.dbflute.bhv.referrer.*;
 import org.dbflute.cbean.*;
 import org.dbflute.cbean.chelper.HpSLSFunction;
 import org.dbflute.cbean.result.*;
 import org.dbflute.exception.*;
+import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
 import org.dbflute.outsidesql.executor.*;
 import filmarks.dbflute.exbhv.*;
@@ -23,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of RELATIONSHIP as TABLE. <br>
  * <pre>
  * [primary key]
- *     
+ *     ID
  *
  * [column]
- *     FOLLOWING_ID, FOLLOWER_ID
+ *     ID, FOLLOWING_ID, FOLLOWER_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     ID
  *
  * [version-no]
  *     
@@ -51,7 +53,7 @@ import filmarks.dbflute.cbean.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsRelationshipBhv extends AbstractBehaviorReadable<Relationship, RelationshipCB> {
+public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relationship, RelationshipCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -153,6 +155,35 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorReadable<Relatio
      */
     public Relationship selectEntityWithDeletedCheck(CBCall<RelationshipCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
+    }
+
+    /**
+     * Select the entity by the primary-key value.
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Relationship> selectByPK(Integer id) {
+        return facadeSelectByPK(id);
+    }
+
+    protected OptionalEntity<Relationship> facadeSelectByPK(Integer id) {
+        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Relationship> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(id), tp);
+    }
+
+    protected <ENTITY extends Relationship> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(id, tp), id);
+    }
+
+    protected RelationshipCB xprepareCBAsPK(Integer id) {
+        assertObjectNotNull("id", id);
+        return newConditionBean().acceptPK(id);
     }
 
     // ===================================================================================
@@ -352,6 +383,430 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorReadable<Relatio
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
+    /**
+     * Extract the value list of (single) primary key id.
+     * @param relationshipList The list of relationship. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractIdList(List<Relationship> relationshipList)
+    { return helpExtractListInternally(relationshipList, "id"); }
+
+    // ===================================================================================
+    //                                                                       Entity Update
+    //                                                                       =============
+    /**
+     * Insert the entity modified-only. (DefaultConstraintsEnabled)
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
+     * relationship.setFoo...(value);
+     * relationship.setBar...(value);
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//relationship.set...;</span>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">insert</span>(relationship);
+     * ... = relationship.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * </pre>
+     * <p>While, when the entity is created by select, all columns are registered.</p>
+     * @param relationship The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insert(Relationship relationship) {
+        doInsert(relationship, null);
+    }
+
+    /**
+     * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can update by unique keys using entity's uniqueOf().
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * relationship.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//relationship.set...;</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">update</span>(relationship);
+     * </pre>
+     * @param relationship The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void update(Relationship relationship) {
+        doUpdate(relationship, null);
+    }
+
+    /**
+     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
+     * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
+     * @param relationship The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insertOrUpdate(Relationship relationship) {
+        doInsertOrUpdate(relationship, null, null);
+    }
+
+    /**
+     * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #70226C">try</span> {
+     *     <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">delete</span>(relationship);
+     * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
+     *     ...
+     * }
+     * </pre>
+     * @param relationship The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void delete(Relationship relationship) {
+        doDelete(relationship, null);
+    }
+
+    // ===================================================================================
+    //                                                                        Batch Update
+    //                                                                        ============
+    /**
+     * Batch-insert the entity list modified-only of same-set columns. (DefaultConstraintsEnabled) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
+     * <pre>
+     * <span style="color: #70226C">for</span> (... : ...) {
+     *     Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     *     relationship.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         relationship.setFooPrice(123);
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
+     *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
+     *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
+     *     relationshipList.add(relationship);
+     * }
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">batchInsert</span>(relationshipList);
+     * </pre>
+     * <p>While, when the entities are created by select, all columns are registered.</p>
+     * <p>And if the table has an identity, entities after the process don't have incremented values.
+     * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @return The array of inserted count. (NotNull, EmptyAllowed)
+     */
+    public int[] batchInsert(List<Relationship> relationshipList) {
+        return doBatchInsert(relationshipList, null);
+    }
+
+    /**
+     * Batch-update the entity list modified-only of same-set columns. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
+     * <pre>
+     * for (... : ...) {
+     *     Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     *     relationship.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         relationship.setFooPrice(123);
+     *     } <span style="color: #70226C">else</span> {
+     *         relationship.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//relationship.setFooDate(...); // *not allowed, fragmented</span>
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
+     *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
+     *     relationshipList.add(relationship);
+     * }
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">batchUpdate</span>(relationshipList);
+     * </pre>
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchUpdate(List<Relationship> relationshipList) {
+        return doBatchUpdate(relationshipList, null);
+    }
+
+    /**
+     * Batch-delete the entity list. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement.
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchDelete(List<Relationship> relationshipList) {
+        return doBatchDelete(relationshipList, null);
+    }
+
+    // ===================================================================================
+    //                                                                        Query Update
+    //                                                                        ============
+    /**
+     * Insert the several entities by query (modified-only for fixed value).
+     * <pre>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Relationship, RelationshipCB&gt;() {
+     *     public ConditionBean setup(Relationship entity, RelationshipCB intoCB) {
+     *         FooCB cb = FooCB();
+     *         cb.setupSelect_Bar();
+     *
+     *         <span style="color: #3F7E5E">// mapping</span>
+     *         intoCB.specify().columnMyName().mappedFrom(cb.specify().columnFooName());
+     *         intoCB.specify().columnMyCount().mappedFrom(cb.specify().columnFooCount());
+     *         intoCB.specify().columnMyDate().mappedFrom(cb.specify().specifyBar().columnBarDate());
+     *         entity.setMyFixedValue("foo"); <span style="color: #3F7E5E">// fixed value</span>
+     *         <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     *         <span style="color: #3F7E5E">//entity.setRegisterUser(value);</span>
+     *         <span style="color: #3F7E5E">//entity.set...;</span>
+     *         <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     *         <span style="color: #3F7E5E">//entity.setVersionNo(value);</span>
+     *
+     *         return cb;
+     *     }
+     * });
+     * </pre>
+     * @param manyArgLambda The callback to set up query-insert. (NotNull)
+     * @return The inserted count.
+     */
+    public int queryInsert(QueryInsertSetupper<Relationship, RelationshipCB> manyArgLambda) {
+        return doQueryInsert(manyArgLambda, null);
+    }
+
+    /**
+     * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * <span style="color: #3F7E5E">// you don't need to set PK value</span>
+     * <span style="color: #3F7E5E">//relationship.setPK...(value);</span>
+     * relationship.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//relationship.set...;</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//relationship.setVersionNo(value);</span>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryUpdate</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * });
+     * </pre>
+     * @param relationship The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @return The updated count.
+     * @throws NonQueryUpdateNotAllowedException When the query has no condition.
+     */
+    public int queryUpdate(Relationship relationship, CBCall<RelationshipCB> cbLambda) {
+        return doQueryUpdate(relationship, createCB(cbLambda), null);
+    }
+
+    /**
+     * Delete the several entities by query. (NonExclusiveControl)
+     * <pre>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryDelete</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * });
+     * </pre>
+     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @return The deleted count.
+     * @throws NonQueryDeleteNotAllowedException When the query has no condition.
+     */
+    public int queryDelete(CBCall<RelationshipCB> cbLambda) {
+        return doQueryDelete(createCB(cbLambda), null);
+    }
+
+    // ===================================================================================
+    //                                                                      Varying Update
+    //                                                                      ==============
+    // -----------------------------------------------------
+    //                                         Entity Update
+    //                                         -------------
+    /**
+     * Insert the entity with varying requests. <br>
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
+     * Other specifications are same as insert(entity).
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
+     * relationship.setFoo...(value);
+     * relationship.setBar...(value);
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingInsert</span>(relationship, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
+     *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
+     * });
+     * ... = relationship.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * </pre>
+     * @param relationship The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsert(Relationship relationship, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
+        doInsert(relationship, createInsertOption(opLambda));
+    }
+
+    /**
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
+     * Other specifications are same as update(entity).
+     * <pre>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * relationship.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #3F7E5E">// you can update by self calculation values</span>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(relationship, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param relationship The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingUpdate(Relationship relationship, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
+        doUpdate(relationship, createUpdateOption(opLambda));
+    }
+
+    /**
+     * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
+     * Other specifications are same as insertOrUpdate(entity).
+     * @param relationship The entity of insert or update. (NotNull)
+     * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
+     * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsertOrUpdate(Relationship relationship, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> insertOpLambda, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> updateOpLambda) {
+        doInsertOrUpdate(relationship, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Now a valid option does not exist. <br>
+     * Other specifications are same as delete(entity).
+     * @param relationship The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void varyingDelete(Relationship relationship, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
+        doDelete(relationship, createDeleteOption(opLambda));
+    }
+
+    // -----------------------------------------------------
+    //                                          Batch Update
+    //                                          ------------
+    /**
+     * Batch-insert the list with varying requests. <br>
+     * For example, disableCommonColumnAutoSetup()
+     * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
+     * Other specifications are same as batchInsert(entityList).
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchInsert(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
+        return doBatchInsert(relationshipList, createInsertOption(opLambda));
+    }
+
+    /**
+     * Batch-update the list with varying requests. <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
+     * Other specifications are same as batchUpdate(entityList).
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchUpdate(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
+        return doBatchUpdate(relationshipList, createUpdateOption(opLambda));
+    }
+
+    /**
+     * Batch-delete the list with varying requests. <br>
+     * For example, limitBatchDeleteLogging(). <br>
+     * Other specifications are same as batchDelete(entityList).
+     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchDelete(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
+        return doBatchDelete(relationshipList, createDeleteOption(opLambda));
+    }
+
+    // -----------------------------------------------------
+    //                                          Query Update
+    //                                          ------------
+    /**
+     * Insert the several entities by query with varying requests (modified-only for fixed value). <br>
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
+     * Other specifications are same as queryInsert(entity, setupper).
+     * @param manyArgLambda The set-upper of query-insert. (NotNull)
+     * @param opLambda The callback for option of insert for varying requests. (NotNull)
+     * @return The inserted count.
+     */
+    public int varyingQueryInsert(QueryInsertSetupper<Relationship, RelationshipCB> manyArgLambda, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
+        return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
+    }
+
+    /**
+     * Update the several entities by query with varying requests non-strictly modified-only. {NonExclusiveControl} <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), allowNonQueryUpdate(). <br>
+     * Other specifications are same as queryUpdate(entity, cb).
+     * <pre>
+     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
+     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * <span style="color: #3F7E5E">// you don't need to set PK value</span>
+     * <span style="color: #3F7E5E">//relationship.setPK...(value);</span>
+     * relationship.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//relationship.setVersionNo(value);</span>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">colCB</span>.specify().<span style="color: #CC4747">columnFooCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param relationship The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The updated count.
+     * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryUpdate(Relationship relationship, CBCall<RelationshipCB> cbLambda, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
+        return doQueryUpdate(relationship, createCB(cbLambda), createUpdateOption(opLambda));
+    }
+
+    /**
+     * Delete the several entities by query with varying requests non-strictly. <br>
+     * For example, allowNonQueryDelete(). <br>
+     * Other specifications are same as queryDelete(cb).
+     * <pre>
+     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryDelete</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.query().setFoo...
+     * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>...
+     * });
+     * </pre>
+     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The deleted count.
+     * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryDelete(CBCall<RelationshipCB> cbLambda, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
+        return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
+    }
 
     // ===================================================================================
     //                                                                          OutsideSql
@@ -408,5 +863,11 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorReadable<Relatio
     @javax.annotation.Resource(name="behaviorSelector")
     public void setBehaviorSelector(BehaviorSelector behaviorSelector) {
         super.setBehaviorSelector(behaviorSelector);
+    }
+
+    @Override
+    @javax.annotation.Resource(name="commonColumnAutoSetupper")
+    public void setCommonColumnAutoSetupper(CommonColumnAutoSetupper commonColumnAutoSetupper) {
+        super.setCommonColumnAutoSetupper(commonColumnAutoSetupper);
     }
 }
