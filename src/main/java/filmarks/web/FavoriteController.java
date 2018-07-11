@@ -1,12 +1,12 @@
 package filmarks.web;
 
 import filmarks.dbflute.cbean.FavoriteCB;
-import filmarks.dbflute.exbhv.FavoriteBhv;
 import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.Album;
 import filmarks.dbflute.exentity.Favorite;
 import filmarks.dbflute.exentity.User;
-
+import filmarks.service.FavoriteService;
+import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class FavoriteController {
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    FavoriteService favoriteService;
 
     @Autowired
     UserBhv userBhv;
@@ -36,7 +36,16 @@ public class FavoriteController {
     public ModelAndView create(@PathVariable int albumID, Principal principal) {
         Authentication auth = (Authentication)principal;
         User user = (User)auth.getPrincipal();
-        favoriteBhv.insert(new Favorite(user.getUserId(), albumID));
+        favoriteService.create(new Favorite(user.getUserId(), albumID));
+        return new ModelAndView("redirect:/albums/" + String.valueOf(albumID));
+    }
+
+    @RequestMapping(value = "albums/{albumID}/favorites", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable int albumID, Principal principal) {
+        Authentication auth = (Authentication)principal;
+        User user = (User)auth.getPrincipal();
+        OptionalEntity<Favorite> favoriteOptionalEntity = favoriteService.loadFavoriteByUserIdAndAlbumId(user.getUserId(), albumID);
+        favoriteOptionalEntity.ifPresent(favorite -> favoriteService.delete(favorite));
         return new ModelAndView("redirect:/albums/" + String.valueOf(albumID));
     }
 
