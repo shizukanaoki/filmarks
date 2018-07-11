@@ -35,9 +35,7 @@ public class AlbumController {
     @RequestMapping("/albums/{id}")
     @ResponseBody
     public ModelAndView show(@ModelAttribute("commentForm") CommentForm commentForm, @PathVariable int id, ModelAndView mav) {
-        OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> {
-            cb.query().setId_Equal(id);
-        });
+        OptionalEntity<Album> albumOptionalEntity = albumBhv.selectByPK(id);
         albumOptionalEntity.ifPresent(album -> {
             albumBhv.loadComment(album, commentCB -> {
                 commentCB.setupSelect_User();
