@@ -177,10 +177,10 @@
 <body>
 
 <div class="login">
-    <header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
-    <form class="login-form" th:method="post" th:action="@{/login}">
-        <input class="login-input" type="text" placeholder="Username" th:name="username"/>
-        <input class="login-input" type="password" placeholder="Password" th:name="password"/>
+    <header class="login-header"><span class="text">SIGNUP</span><span class="loader"></span></header>
+    <form class="login-form" th:method="post" action="/signup" th:object="${formmodel}">
+        <input class="login-input" type="text" placeholder="Username" th:value="*{username}" th:name="username"/>
+        <input class="login-input" type="password" placeholder="Password" th:value="*{password}" th:name="password"/>
         <button class="login-btn" type="submit">login</button>
     </form>
 </div>

@@ -3,18 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/album.css">
+    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" />
 </head>
 <body>
-    <div th:text="${album.getTitle()}"></div>
-    <div th:if="${favoriteOptionalEntity.orElse(false)}">
-        <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="delete">
-            <input type="submit" th:value="お気に入りから削除">
-        </form>
+<div class="wrapper">
+    <ul class="sidebar">
+        <li class="sidebar_brand">
+            <a href="">BLAND</a>
+        </li>
+        <li>
+            <a href="">timeline</a>
+        </li>
+        <li>
+            <a href="">favorites</a>
+        </li>
+    </ul>
+    <div class="sidebar_width">
+
     </div>
-    <div th:unless="${favoriteOptionalEntity.orElse(false)}">
-        <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
-            <input type="submit" th:value="お気に入りに追加">
-        </form>
+    <div class="main">
+        <div class="album_info">
+            <div class="album_info_left">
+                <div class="album_info_img">
+                    <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="300" height="300"/>
+                </div>
+                <div class="album_action_button">
+                    <button type="button" data-toggle="modal" data-target="#comment_form">
+                        コメントを投稿
+                    </button>
+                </div>
+                <div class="album_action_button" th:if="${favoriteOptionalEntity.orElse(false)}">
+                    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="delete">
+                        <button type="submit">
+                            お気に入りから削除
+                        </button>
+                    </form>
+                </div>
+                <div class="album_action_button" th:unless="${favoriteOptionalEntity.orElse(false)}">
+                    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
+                        <button type="submit">
+                            お気に入りに追加
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="album_info_right">
+                <div class="album_info_header">
+                    <h2 class="album_info_title">with the beatles</h2>
+                    <p class="album_info_artist">beatles</p>
+                </div>
+                <p class="album_info_rate">RATE: 5.4</p>
+                <table class="album_info_songs">
+                    <tr>
+                        <td>1.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="comment_list">
+            <h2 class="comment_list_title">Comments</h2>
+            <ul class="comments">
+                <li class="comment" th:each="comment:${album.getCommentList()}">
+                    <div class="comment_header">
+                        <a class="comment_username" th:href="@{'/users/' + ${comment.getUserId()}}" th:text="${comment.getUser().get().getUsername()}">
+                        </a>
+                        <span class="comment_rate" th:text="${comment.getRate()}"></span>
+                    </div>
+                    <div class="comment_datetime">2018/07/09 02:24</div>
+                    <div class="comment_content" th:text="${comment.getContent()}"></div>
+                </li>
+            </ul>
+        </div>
     </div>
+    <div class="modal fade" id="comment_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLongTitle">コメントを投稿</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="comment_form">
+                        <form class="form-horizontal" method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea th:field="*{content}" rows="8" class="form-control" id="InputTextarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input th:field="*{rate}" type="number" class="form-control" id="InputNumber">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit">投稿</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 </body>
 </html>

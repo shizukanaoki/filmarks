@@ -2,6 +2,7 @@ package filmarks.service;
 
 import filmarks.dbflute.exentity.User;
 import filmarks.domain.UserRepository;
+import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,8 +28,11 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    public User findOne(int userId) throws EntityAlreadyDeletedException {
+        return userRepository.findOne(userId);
+    }
+
     public User create(User user) {
-        userRepository.save(user);
-        return user;
+        return userRepository.save(user);
     }
 }

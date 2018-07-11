@@ -6684,3 +6684,340 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = $$AutoDetect$$
 _/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2018-07-11 16:59:22,575 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-07-11 16:59:22,578 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-07-11 16:59:22,578 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-07-11 16:59:22,583 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-07-11 16:59:22,583 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-07-11 16:59:22,584 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-07-11 16:59:24,260 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-11 16:59:24,261 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-11 16:59:24,261 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-11 16:59:24,261 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-11 16:59:24,269 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-07-11 16:59:24,760 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.22
+2018-07-11 16:59:24,760 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-07-11 16:59:24,774 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():229) - 
+2018-07-11 16:59:24,774 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():230) - * * * * * * * * * * *
+2018-07-11 16:59:24,774 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():231) - *                   *
+2018-07-11 16:59:24,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():232) - * Initialize Schema *
+2018-07-11 16:59:24,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():233) - *                   *
+2018-07-11 16:59:24,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():234) - * * * * * * * * * * *
+2018-07-11 16:59:24,785 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-11 16:59:24,786 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-11 16:59:24,786 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-11 16:59:24,823 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table COMMENT
+2018-07-11 16:59:24,828 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table PICK
+2018-07-11 16:59:24,834 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table RELATIONSHIP
+2018-07-11 16:59:24,840 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table SONG
+2018-07-11 16:59:24,849 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table ALBUM drop foreign key FK_PRODUCT_ARTIST
+2018-07-11 16:59:24,857 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table COMMENT drop foreign key FK_COMMENT_PRODUCT
+2018-07-11 16:59:24,862 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table COMMENT drop foreign key FK_COMMENT_USER
+2018-07-11 16:59:24,867 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table PICK drop foreign key FK_PICK_PRODUCT
+2018-07-11 16:59:24,872 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table PICK drop foreign key FK_PICK_USER
+2018-07-11 16:59:24,877 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table RELATIONSHIP drop foreign key FK_RELATIONSHIP_FOLLOWER
+2018-07-11 16:59:24,882 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table RELATIONSHIP drop foreign key FK_RELATIONSHIP_FOLLOWING
+2018-07-11 16:59:24,887 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table SONG drop foreign key FK_SONG_ARTIST
+2018-07-11 16:59:24,892 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table SONG drop foreign key FK_SONG_PRODUCT
+2018-07-11 16:59:24,897 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table ALBUM
+2018-07-11 16:59:24,902 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table ARTIST
+2018-07-11 16:59:24,907 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table COMMENT
+2018-07-11 16:59:24,912 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table PICK
+2018-07-11 16:59:24,917 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table RELATIONSHIP
+2018-07-11 16:59:24,922 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table SONG
+2018-07-11 16:59:24,926 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table USER
+2018-07-11 16:59:24,948 [main] INFO  (DfCreateSchemaProcess#createSchema():266) - 
+2018-07-11 16:59:24,948 [main] INFO  (DfCreateSchemaProcess#createSchema():267) - * * * * * * * * *
+2018-07-11 16:59:24,948 [main] INFO  (DfCreateSchemaProcess#createSchema():268) - *               *
+2018-07-11 16:59:24,948 [main] INFO  (DfCreateSchemaProcess#createSchema():269) - * Create Schema *
+2018-07-11 16:59:24,948 [main] INFO  (DfCreateSchemaProcess#createSchema():270) - *               *
+2018-07-11 16:59:24,949 [main] INFO  (DfCreateSchemaProcess#createSchema():271) - * * * * * * * * *
+2018-07-11 16:59:24,952 [main] INFO  (DfSqlFileFireMan#fire():68) - ...Firing: replace-schema.sql
+2018-07-11 16:59:24,955 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE ALBUM
+(
+	ALBUM_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	TITLE VARCHAR(100) NOT NULL UNIQUE COMMENT 'タイトル',
+	FILE_NAME VARCHAR(200) NOT NULL COMMENT 'ファイル名',
+	ARTIST_ID INT COMMENT 'アーティストID',
+	PRIMARY KEY (ALBUM_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:24,966 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE ARTIST
+(
+	ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	NAME VARCHAR(100) NOT NULL COMMENT '名前',
+	PRIMARY KEY (ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:24,975 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE COMMENT
+(
+	ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	ALBUM_ID INT NOT NULL COMMENT 'アルバムID',
+	CONTENT TEXT NOT NULL COMMENT '内容',
+	RATE FLOAT NOT NULL COMMENT 'レート',
+	PRIMARY KEY (ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:24,984 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE FAVORITE
+(
+	FAVORITE_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	ALBUM_ID INT NOT NULL COMMENT 'アルバムID',
+	PRIMARY KEY (FAVORITE_ID),
+	CONSTRAINT UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE UNIQUE (USER_ID, ALBUM_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:24,994 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE RELATIONSHIP
+(
+	ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	FOLLOWING_ID INT NOT NULL COMMENT 'フォローID',
+	FOLLOWER_ID INT NOT NULL COMMENT 'フォロワーID',
+	PRIMARY KEY (ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:25,004 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE SONG
+(
+	ALBUM_ID INT NOT NULL COMMENT 'ID',
+	ARTIST_ID INT NOT NULL COMMENT 'アーティストID',
+	NAME VARCHAR(100) NOT NULL COMMENT '名前',
+	PRIMARY KEY (ALBUM_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:25,012 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE USER
+(
+	USER_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	USERNAME VARCHAR(100) NOT NULL UNIQUE COMMENT '名前',
+	PASSWORD VARCHAR(100) NOT NULL COMMENT 'パスワード',
+	PRIMARY KEY (USER_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-11 16:59:25,023 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE COMMENT
+	ADD CONSTRAINT FK_COMMENT_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,038 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FAVORITE
+	ADD CONSTRAINT FK_PICK_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,056 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE SONG
+	ADD CONSTRAINT FK_SONG_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,072 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE ALBUM
+	ADD CONSTRAINT FK_PRODUCT_ARTIST FOREIGN KEY (ARTIST_ID)
+	REFERENCES ARTIST (ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,089 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE SONG
+	ADD CONSTRAINT FK_SONG_ARTIST FOREIGN KEY (ARTIST_ID)
+	REFERENCES ARTIST (ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,104 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE COMMENT
+	ADD CONSTRAINT FK_COMMENT_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,121 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FAVORITE
+	ADD CONSTRAINT FK_PICK_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,139 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE RELATIONSHIP
+	ADD CONSTRAINT FK_RELATIONSHIP_FOLLOWING FOREIGN KEY (FOLLOWING_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,154 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE RELATIONSHIP
+	ADD CONSTRAINT FK_RELATIONSHIP_FOLLOWER FOREIGN KEY (FOLLOWER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-11 16:59:25,171 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=16 failure=0
+2018-07-11 16:59:25,172 [main] INFO  (DfSqlFileFireMan#fire():93) - {Create Schema}: success=16 failure=0 (in 1 files)
+2018-07-11 16:59:25,229 [main] INFO  (DfLoadDataProcess#execute():130) - 
+2018-07-11 16:59:25,229 [main] INFO  (DfLoadDataProcess#execute():131) - * * * * * * * * * * *
+2018-07-11 16:59:25,229 [main] INFO  (DfLoadDataProcess#execute():132) - *                   *
+2018-07-11 16:59:25,230 [main] INFO  (DfLoadDataProcess#execute():133) - * Load Data         *
+2018-07-11 16:59:25,230 [main] INFO  (DfLoadDataProcess#execute():134) - *                   *
+2018-07-11 16:59:25,230 [main] INFO  (DfLoadDataProcess#execute():135) - * * * * * * * * * * *
+2018-07-11 16:59:25,251 [main] INFO  (DfDelimiterDataWriterImpl#writeData():87) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2018-07-11 16:59:25,251 [main] INFO  (DfDelimiterDataWriterImpl#writeData():88) - writeData(playsql/data/common/csv/UTF-8/10-ALBUM.csv)
+2018-07-11 16:59:25,251 [main] INFO  (DfDelimiterDataWriterImpl#writeData():89) - = = = = = = =/
+2018-07-11 16:59:25,252 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-11 16:59:25,252 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-11 16:59:25,252 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-11 16:59:25,267 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{please please me, 1.jpg}
+2018-07-11 16:59:25,279 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{stereo, 2.jpg}
+2018-07-11 16:59:25,279 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{hard day's night, 3.jpg}
+2018-07-11 16:59:25,279 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Sgt Pepper's Lonely Hearts Club Band, 4.jpg}
+2018-07-11 16:59:25,279 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Abbey Road, 5.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 6.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{I Want To Hold Your Hand, 7.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1962-1966, 8.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1967-1970, 9.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 10.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles (White Album), 11.jpg}
+2018-07-11 16:59:25,280 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Let it be, 12.jpg}
+2018-07-11 16:59:25,281 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{REVOLVER, 13.jpg}
+2018-07-11 16:59:25,281 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Live At The Hollywood Bowl, 14.jpg}
+2018-07-11 16:59:25,281 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Rubber Soul, 15.jpg}
+2018-07-11 16:59:25,281 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{On Air -Live At The BBC Vol.2, 16.jpg}
+2018-07-11 16:59:25,298 [main] ERROR (DfDBFluteTaskUtil#logException():150) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.7.22
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+* * * * * * * * * */
+org.dbflute.exception.DfDelimiterDataRegistrationFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to register the table data.
+
+[Advice]
+If you don't know the cause, suppress batch update and retry it.
+Change the property isSuppressBatchUpdate
+of loadingControlMap.dataprop to false temporarily,
+and loading process is executed per one record,
+and you can find a record that causes the exception with logs.
+
+[Delimiter File]
+playsql/data/common/csv/UTF-8/10-ALBUM.csv
+
+[Table]
+ALBUM
+
+[SQLException]
+org.dbflute.exception.DfJDBCException
+JDBC said...
+/- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[SQLException]
+java.sql.BatchUpdateException
+Duplicate entry 'HELP!' for key 'TITLE'
+- - - - - - - - - -/
+
+[Executed SQL]
+insert into ALBUM (TITLE, FILE_NAME) values(?, ?)
+
+[Bind Type]
+TITLE = class java.lang.String
+FILE_NAME = class java.lang.String
+
+[String Processor]
+TITLE = RealStringProcessor
+FILE_NAME = RealStringProcessor
+* * * * * * * * * */
+	at org.dbflute.logic.replaceschema.loaddata.impl.DfDelimiterDataWriterImpl.writeData(DfDelimiterDataWriterImpl.java:267)
+	at org.dbflute.logic.replaceschema.loaddata.impl.DfDelimiterDataHandlerImpl.writeSeveralData(DfDelimiterDataHandlerImpl.java:132)
+	at org.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromDelimiterFile(DfLoadDataProcess.java:194)
+	at org.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromDelimiterFileAsCommonData(DfLoadDataProcess.java:177)
+	at org.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:148)
+	at org.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:339)
+	at org.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:251)
+	at org.dbflute.task.DfReplaceSchemaTask.processReplaceSchema(DfReplaceSchemaTask.java:232)
+	at org.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:158)
+	at org.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:129)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:192)
+	at org.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:78)
+	at org.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:151)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: java.sql.BatchUpdateException: Duplicate entry 'HELP!' for key 'TITLE'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createBatchUpdateException(SQLError.java:1163)
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1778)
+	at com.mysql.jdbc.PreparedStatement.executeBatchInternal(PreparedStatement.java:1262)
+	at com.mysql.jdbc.StatementImpl.executeBatch(StatementImpl.java:970)
+	at org.dbflute.logic.replaceschema.loaddata.impl.DfDelimiterDataWriterImpl.writeData(DfDelimiterDataWriterImpl.java:253)
+	... 28 more
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'HELP!' for key 'TITLE'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.Util.getInstance(Util.java:408)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2486)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1756)
+	... 31 more
+2018-07-11 16:59:25,303 [main] INFO  (DfDataSourceHandler#commit():94) - ...commit()
+2018-07-11 16:59:25,304 [main] INFO  (DfDataSourceHandler#destroy():116) - ...rollback()
+2018-07-11 16:59:25,305 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-07-11 16:59:25,312 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s751ms *Abort
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.22)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=16 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}

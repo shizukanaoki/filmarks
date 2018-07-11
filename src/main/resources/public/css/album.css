@@ -1,0 +1,82 @@
+.main {
+    margin: 40px;
+}
+
+.album_info_left img {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.album_action_button {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.album_info_right {
+    margin-left: 40px;
+}
+
+.album_info {
+    display: flex;
+}
+
+.album_info_header {
+    padding-left: 5px;
+    border-left:  3px solid orange;
+}
+
+.album_info_title {
+    font-size: 40px;
+}
+
+.album_info_songs {
+    margin-top: 40px;
+}
+
+.album_info_rate {
+    margin-top: 40px;
+
+}
+
+.comment_list {
+    margin-top: 40px;
+}
+
+.comment {
+    margin-top: 20px;
+}
+
+.comment_username {
+    font-size: 20px;
+    color: #333333;
+}
+
+.comment_username:hover {
+    color: orange;
+    text-decoration: none;
+}
+
+.comment_datetime {
+    margin-top: 5px;
+}
+
+.comment_content {
+    margin-top: 5px;
+}
+
+
+table.album_info_songs{
+    min-width: 400px;
+    border-collapse:collapse;
+    margin:40px auto 0;
+}
+
+.album_info_songs td,th{
+    border-top:1px solid #ddd;
+    padding:15px;
+}
+
+.album_info_songs tr:last-child td,
+.album_info_songs tr:last-child th{
+    border-bottom:1px solid #ddd;
+}
