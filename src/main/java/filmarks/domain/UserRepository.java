@@ -15,7 +15,9 @@ public class UserRepository {
     private UserBhv userBhv;
 
     public User findByUsername(String username) {
-        OptionalEntity<User> userOptionalEntity = userBhv.selectEntity(cb -> cb.query().setUsername_Equal(username));
+        OptionalEntity<User> userOptionalEntity = userBhv.selectEntity(cb -> {
+            cb.query().setUsername_Equal(username);
+        });
         return userOptionalEntity.orElse(null);
     }
 
