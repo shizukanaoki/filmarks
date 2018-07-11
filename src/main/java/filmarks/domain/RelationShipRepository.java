@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class RelationShipRepository {
 
     @Autowired
-    RelationshipBhv relationshipBhv;
+    private RelationshipBhv relationshipBhv;
 
     public Relationship save(Relationship relationship) {
         relationshipBhv.insert(relationship);

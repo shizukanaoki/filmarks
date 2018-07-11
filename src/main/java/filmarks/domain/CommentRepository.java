@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class CommentRepository {
 
     @Autowired
-    CommentBhv commentBhv;
+    private CommentBhv commentBhv;
 
     public Comment save(Comment comment) {
         commentBhv.insert(comment);
