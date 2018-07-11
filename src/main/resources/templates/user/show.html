@@ -7,23 +7,40 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet", type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/top.css">
+    <script type="text/javascript" src="/javascript/top_page.js"></script>
 </head>
 <body>
 <div>
-    <div th:text="${user.getUsername()}"></div>
-    <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
-        <a href="javascript:form.submit()">フォロー</a>
-    </form>
-    <h2>フォロー一覧</h2>
-    <ul>
-        <li th:each="following : ${followings}" th:text="${following.getUsername()}"></li>
-    </ul>
-    <h2>フォロワー一覧</h2>
-    <ul>
-        <li th:each="follower : ${followers}" th:text="${follower.getUsername()}"></li>
-    </ul>
-
+    <div class="wrapper">
+        <ul class="sidebar">
+            <li class="sidebar_brand">
+                <a href="/" th:text="BLAND"></a>
+            </li>
+            <li>
+                <a href="">favorites</a>
+            </li>
+            <li>
+                <a href="">following</a>
+            </li>
+            <li>
+                <a href="">follower</a>
+            </li>
+        </ul>
+        <div class="sidebar_width">
+        </div>
+        <div class="main">
+            <div class="products">
+                <div class="product" th:each="album:${albums}">
+                    <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
+                        <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
