@@ -6,14 +6,12 @@ import filmarks.service.RelationShipService;
 import filmarks.service.UserService;
 import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.security.Principal;
 
 @Controller
 public class RelationshipController {
@@ -25,11 +23,9 @@ public class RelationshipController {
     RelationShipService relationShipService;
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int followerId, Principal principal, ModelAndView mav) {
+    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, ModelAndView mav) {
         try {
             User follower = userService.findOne(followerId);
-            Authentication auth = (Authentication) principal;
-            User following = (User) auth.getPrincipal();
             relationShipService.create(new Relationship(following.getId(), follower.getId()));
             mav.setViewName("user/show");
             mav.addObject("user", follower);
