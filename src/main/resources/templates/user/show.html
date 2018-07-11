@@ -12,7 +12,7 @@
 <body>
 <div>
     <div th:text="${user.getUsername()}"></div>
-    <form name="form" method="post" th:action="@{'/relationships/' + ${user.getId()}}">
+    <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
         <a href="javascript:form.submit()">フォロー</a>
     </form>
     <h2>フォロー一覧</h2>
