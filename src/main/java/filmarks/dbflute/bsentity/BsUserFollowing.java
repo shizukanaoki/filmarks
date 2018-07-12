@@ -12,7 +12,7 @@ import filmarks.dbflute.allcommon.DBMetaInstanceHandler;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The entity of RELATIONSHIP as TABLE. <br>
+ * The entity of USER_FOLLOWING as TABLE. <br>
  * NEW_TABLE
  * <pre>
  * [primary-key]
@@ -54,7 +54,7 @@ import filmarks.dbflute.exentity.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsRelationship extends AbstractEntity implements DomainEntity {
+public abstract class BsUserFollowing extends AbstractEntity implements DomainEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -68,10 +68,10 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     /** ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _id;
 
-    /** FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER} */
+    /** FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER} */
     protected Integer _followingId;
 
-    /** FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER} */
+    /** FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER} */
     protected Integer _followerId;
 
     // ===================================================================================
@@ -84,7 +84,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
 
     /** {@inheritDoc} */
     public String asTableDbName() {
-        return "RELATIONSHIP";
+        return "USER_FOLLOWING";
     }
 
     // ===================================================================================
@@ -94,6 +94,19 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     public boolean hasPrimaryKeyValue() {
         if (_id == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param followingId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param followerId : +UQ, IX, NotNull, INT(10), FK to USER. (NotNull)
+     */
+    public void uniqueBy(Integer followingId, Integer followerId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("followingId");
+        __uniqueDrivenProperties.addPropertyName("followerId");
+        setFollowingId(followingId);setFollowerId(followerId);
     }
 
     // ===================================================================================
@@ -153,8 +166,8 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     //                                                                      ==============
     @Override
     protected boolean doEquals(Object obj) {
-        if (obj instanceof BsRelationship) {
-            BsRelationship other = (BsRelationship)obj;
+        if (obj instanceof BsUserFollowing) {
+            BsUserFollowing other = (BsUserFollowing)obj;
             if (!xSV(_id, other._id)) { return false; }
             return true;
         } else {
@@ -210,8 +223,8 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     }
 
     @Override
-    public Relationship clone() {
-        return (Relationship)super.clone();
+    public UserFollowing clone() {
+        return (UserFollowing)super.clone();
     }
 
     // ===================================================================================
@@ -238,7 +251,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [get] FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [get] FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @return The value of the column 'FOLLOWING_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -248,7 +261,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [set] FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [set] FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @param followingId The value of the column 'FOLLOWING_ID'. (basically NotNull if update: for the constraint)
      */
@@ -258,7 +271,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [get] FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [get] FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER} <br>
      * ?????ID
      * @return The value of the column 'FOLLOWER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -268,7 +281,7 @@ public abstract class BsRelationship extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [set] FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER} <br>
+     * [set] FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER} <br>
      * ?????ID
      * @param followerId The value of the column 'FOLLOWER_ID'. (basically NotNull if update: for the constraint)
      */

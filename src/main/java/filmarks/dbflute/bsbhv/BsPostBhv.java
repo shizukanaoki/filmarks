@@ -22,38 +22,38 @@ import filmarks.dbflute.bsentity.dbmeta.*;
 import filmarks.dbflute.cbean.*;
 
 /**
- * The behavior of RELATIONSHIP as TABLE. <br>
+ * The behavior of POST as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     POST_ID
  *
  * [column]
- *     ID, FOLLOWING_ID, FOLLOWER_ID
+ *     POST_ID, TARGET_ID, TARGET_TYPE, USER_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     POST_ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     USER
+ *     
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     userByFollowerId, userByFollowingId
+ *     
  *
  * [referrer property]
  *     
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relationship, RelationshipCB> {
+public abstract class BsPostBhv extends AbstractBehaviorWritable<Post, PostCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -65,15 +65,15 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
     //                                                                             DB Meta
     //                                                                             =======
     /** {@inheritDoc} */
-    public RelationshipDbm asDBMeta() { return RelationshipDbm.getInstance(); }
+    public PostDbm asDBMeta() { return PostDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "RELATIONSHIP"; }
+    public String asTableDbName() { return "POST"; }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public RelationshipCB newConditionBean() { return new RelationshipCB(); }
+    public PostCB newConditionBean() { return new PostCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -82,14 +82,14 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br>
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(CBCall<RelationshipCB> cbLambda) {
+    public int selectCount(CBCall<PostCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
@@ -103,38 +103,38 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * <span style="color: #AD4747; font-size: 120%">If it might be no data, isPresent() and orElse(), ...</span>
      * <pre>
      * <span style="color: #3F7E5E">// if the data always exists as your business rule</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">relationship</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
-     *     ... = <span style="color: #553000">relationship</span>.get...
+     *     ... = <span style="color: #553000">post</span>.get...
      * });
      *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">relationship</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present</span>
-     *     ... = <span style="color: #553000">relationship</span>.get...
+     *     ... = <span style="color: #553000">post</span>.get...
      * }).<span style="color: #994747">orElse</span>(() <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if not present</span>
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Relationship> selectEntity(CBCall<RelationshipCB> cbLambda) {
+    public OptionalEntity<Post> selectEntity(CBCall<PostCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<Relationship> facadeSelectEntity(RelationshipCB cb) {
+    protected OptionalEntity<Post> facadeSelectEntity(PostCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Relationship> OptionalEntity<ENTITY> doSelectOptionalEntity(RelationshipCB cb, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Post> OptionalEntity<ENTITY> doSelectOptionalEntity(PostCB cb, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -144,46 +144,46 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Select the entity by the condition-bean with deleted check. <br>
      * <span style="color: #AD4747; font-size: 120%">If the data is always present as your business rule, this method is good.</span>
      * <pre>
-     * Relationship <span style="color: #553000">relationship</span> = <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
-     * ... = <span style="color: #553000">relationship</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * Post <span style="color: #553000">post</span> = <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
+     * ... = <span style="color: #553000">post</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Relationship selectEntityWithDeletedCheck(CBCall<RelationshipCB> cbLambda) {
+    public Post selectEntityWithDeletedCheck(CBCall<PostCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param postId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Relationship> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<Post> selectByPK(Integer postId) {
+        return facadeSelectByPK(postId);
     }
 
-    protected OptionalEntity<Relationship> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<Post> facadeSelectByPK(Integer postId) {
+        return doSelectOptionalByPK(postId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Relationship> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends Post> ENTITY doSelectByPK(Integer postId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(postId), tp);
     }
 
-    protected <ENTITY extends Relationship> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends Post> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer postId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(postId, tp), postId);
     }
 
-    protected RelationshipCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected PostCB xprepareCBAsPK(Integer postId) {
+        assertObjectNotNull("postId", postId);
+        return newConditionBean().acceptPK(postId);
     }
 
     // ===================================================================================
@@ -192,19 +192,19 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
     /**
      * Select the list as result bean.
      * <pre>
-     * ListResultBean&lt;Relationship&gt; <span style="color: #553000">relationshipList</span> = <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * ListResultBean&lt;Post&gt; <span style="color: #553000">postList</span> = <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...;
      *     <span style="color: #553000">cb</span>.query().addOrderBy...;
      * });
-     * <span style="color: #70226C">for</span> (Relationship <span style="color: #553000">relationship</span> : <span style="color: #553000">relationshipList</span>) {
-     *     ... = <span style="color: #553000">relationship</span>.get...;
+     * <span style="color: #70226C">for</span> (Post <span style="color: #553000">post</span> : <span style="color: #553000">postList</span>) {
+     *     ... = <span style="color: #553000">post</span>.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<Relationship> selectList(CBCall<RelationshipCB> cbLambda) {
+    public ListResultBean<Post> selectList(CBCall<PostCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
@@ -218,7 +218,7 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Select the page as result bean. <br>
      * (both count-select and paging-select are executed)
      * <pre>
-     * PagingResultBean&lt;Relationship&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * PagingResultBean&lt;Post&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      *     <span style="color: #553000">cb</span>.query().addOrderBy...
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
@@ -228,15 +228,15 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * <span style="color: #70226C">boolean</span> isExistPrePage = <span style="color: #553000">page</span>.isExistPrePage();
      * <span style="color: #70226C">boolean</span> isExistNextPage = <span style="color: #553000">page</span>.isExistNextPage();
      * ...
-     * <span style="color: #70226C">for</span> (Relationship relationship : <span style="color: #553000">page</span>) {
-     *     ... = relationship.get...;
+     * <span style="color: #70226C">for</span> (Post post : <span style="color: #553000">page</span>) {
+     *     ... = post.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<Relationship> selectPage(CBCall<RelationshipCB> cbLambda) {
+    public PagingResultBean<Post> selectPage(CBCall<PostCB> cbLambda) {
         return facadeSelectPage(createCB(cbLambda));
     }
 
@@ -246,16 +246,16 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * }, <span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     ... = <span style="color: #553000">member</span>.getMemberName();
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
-     * @param entityLambda The handler of entity row of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
+     * @param entityLambda The handler of entity row of Post. (NotNull)
      */
-    public void selectCursor(CBCall<RelationshipCB> cbLambda, EntityRowHandler<Relationship> entityLambda) {
+    public void selectCursor(CBCall<PostCB> cbLambda, EntityRowHandler<Post> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
@@ -266,7 +266,7 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Select the scalar value derived by a function from uniquely-selected records. <br>
      * You should call a function method after this method called like as follows:
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">column...</span>; <span style="color: #3F7E5E">// required for the function</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * });
@@ -275,7 +275,7 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<RelationshipCB, RESULT> selectScalar(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<PostCB, RESULT> selectScalar(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
@@ -320,12 +320,12 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param relationshipList The entity list of relationship. (NotNull)
+     * @param postList The entity list of post. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<Relationship> relationshipList, ReferrerLoaderHandler<LoaderOfRelationship> loaderLambda) {
-        xassLRArg(relationshipList, loaderLambda);
-        loaderLambda.handle(new LoaderOfRelationship().ready(relationshipList, _behaviorSelector));
+    public void load(List<Post> postList, ReferrerLoaderHandler<LoaderOfPost> loaderLambda) {
+        xassLRArg(postList, loaderLambda);
+        loaderLambda.handle(new LoaderOfPost().ready(postList, _behaviorSelector));
     }
 
     /**
@@ -353,43 +353,27 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param relationship The entity of relationship. (NotNull)
+     * @param post The entity of post. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(Relationship relationship, ReferrerLoaderHandler<LoaderOfRelationship> loaderLambda) {
-        xassLRArg(relationship, loaderLambda);
-        loaderLambda.handle(new LoaderOfRelationship().ready(xnewLRAryLs(relationship), _behaviorSelector));
+    public void load(Post post, ReferrerLoaderHandler<LoaderOfPost> loaderLambda) {
+        xassLRArg(post, loaderLambda);
+        loaderLambda.handle(new LoaderOfPost().ready(xnewLRAryLs(post), _behaviorSelector));
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
-    /**
-     * Pull out the list of foreign table 'User'.
-     * @param relationshipList The list of relationship. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<User> pulloutUserByFollowerId(List<Relationship> relationshipList)
-    { return helpPulloutInternally(relationshipList, "userByFollowerId"); }
-
-    /**
-     * Pull out the list of foreign table 'User'.
-     * @param relationshipList The list of relationship. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<User> pulloutUserByFollowingId(List<Relationship> relationshipList)
-    { return helpPulloutInternally(relationshipList, "userByFollowingId"); }
-
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
-     * @param relationshipList The list of relationship. (NotNull, EmptyAllowed)
+     * Extract the value list of (single) primary key postId.
+     * @param postList The list of post. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<Relationship> relationshipList)
-    { return helpExtractListInternally(relationshipList, "id"); }
+    public List<Integer> extractPostIdList(List<Post> postList)
+    { return helpExtractListInternally(postList, "postId"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -397,80 +381,80 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * Post post = <span style="color: #70226C">new</span> Post();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * relationship.setFoo...(value);
-     * relationship.setBar...(value);
+     * post.setFoo...(value);
+     * post.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//relationship.set...;</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">insert</span>(relationship);
-     * ... = relationship.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//post.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//post.set...;</span>
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">insert</span>(post);
+     * ... = post.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param relationship The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param post The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(Relationship relationship) {
-        doInsert(relationship, null);
+    public void insert(Post post) {
+        doInsert(post, null);
     }
 
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
-     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * relationship.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Post post = <span style="color: #70226C">new</span> Post();
+     * post.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * post.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//relationship.set...;</span>
+     * <span style="color: #3F7E5E">//post.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//post.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">update</span>(relationship);
+     * post.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">update</span>(post);
      * </pre>
-     * @param relationship The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param post The entity of update. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(Relationship relationship) {
-        doUpdate(relationship, null);
+    public void update(Post post) {
+        doUpdate(post, null);
     }
 
     /**
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param relationship The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param post The entity of insert or update. (NotNull, ...depends on insert or update)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(Relationship relationship) {
-        doInsertOrUpdate(relationship, null, null);
+    public void insertOrUpdate(Post post) {
+        doInsertOrUpdate(post, null, null);
     }
 
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
-     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * Post post = <span style="color: #70226C">new</span> Post();
+     * post.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
+     * post.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #70226C">try</span> {
-     *     <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">delete</span>(relationship);
+     *     <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">delete</span>(post);
      * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param relationship The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param post The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(Relationship relationship) {
-        doDelete(relationship, null);
+    public void delete(Post post) {
+        doDelete(post, null);
     }
 
     // ===================================================================================
@@ -482,26 +466,26 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * <span style="color: #70226C">for</span> (... : ...) {
-     *     Relationship relationship = <span style="color: #70226C">new</span> Relationship();
-     *     relationship.setFooName("foo");
+     *     Post post = <span style="color: #70226C">new</span> Post();
+     *     post.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         relationship.setFooPrice(123);
+     *         post.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     relationshipList.add(relationship);
+     *     postList.add(post);
      * }
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">batchInsert</span>(relationshipList);
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">batchInsert</span>(postList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<Relationship> relationshipList) {
-        return doBatchInsert(relationshipList, null);
+    public int[] batchInsert(List<Post> postList) {
+        return doBatchInsert(postList, null);
     }
 
     /**
@@ -510,37 +494,37 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     Relationship relationship = <span style="color: #70226C">new</span> Relationship();
-     *     relationship.setFooName("foo");
+     *     Post post = <span style="color: #70226C">new</span> Post();
+     *     post.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         relationship.setFooPrice(123);
+     *         post.setFooPrice(123);
      *     } <span style="color: #70226C">else</span> {
-     *         relationship.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//relationship.setFooDate(...); // *not allowed, fragmented</span>
+     *         post.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//post.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     relationshipList.add(relationship);
+     *     postList.add(post);
      * }
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">batchUpdate</span>(relationshipList);
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">batchUpdate</span>(postList);
      * </pre>
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<Relationship> relationshipList) {
-        return doBatchUpdate(relationshipList, null);
+    public int[] batchUpdate(List<Post> postList) {
+        return doBatchUpdate(postList, null);
     }
 
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<Relationship> relationshipList) {
-        return doBatchDelete(relationshipList, null);
+    public int[] batchDelete(List<Post> postList) {
+        return doBatchDelete(postList, null);
     }
 
     // ===================================================================================
@@ -549,8 +533,8 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Relationship, RelationshipCB&gt;() {
-     *     public ConditionBean setup(Relationship entity, RelationshipCB intoCB) {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Post, PostCB&gt;() {
+     *     public ConditionBean setup(Post entity, PostCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -572,48 +556,48 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * @param manyArgLambda The callback to set up query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<Relationship, RelationshipCB> manyArgLambda) {
+    public int queryInsert(QueryInsertSetupper<Post, PostCB> manyArgLambda) {
         return doQueryInsert(manyArgLambda, null);
     }
 
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * Post post = <span style="color: #70226C">new</span> Post();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//relationship.setPK...(value);</span>
-     * relationship.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//post.setPK...(value);</span>
+     * post.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//relationship.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//relationship.set...;</span>
+     * <span style="color: #3F7E5E">//post.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//post.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//relationship.setVersionNo(value);</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryUpdate</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//post.setVersionNo(value);</span>
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">queryUpdate</span>(post, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param relationship The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param post The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(Relationship relationship, CBCall<RelationshipCB> cbLambda) {
-        return doQueryUpdate(relationship, createCB(cbLambda), null);
+    public int queryUpdate(Post post, CBCall<PostCB> cbLambda) {
+        return doQueryUpdate(post, createCB(cbLambda), null);
     }
 
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryDelete</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">queryDelete</span>(post, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(CBCall<RelationshipCB> cbLambda) {
+    public int queryDelete(CBCall<PostCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
@@ -628,22 +612,22 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
      * Other specifications are same as insert(entity).
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * Post post = <span style="color: #70226C">new</span> Post();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * relationship.setFoo...(value);
-     * relationship.setBar...(value);
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingInsert</span>(relationship, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * post.setFoo...(value);
+     * post.setBar...(value);
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">varyingInsert</span>(post, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
      * });
-     * ... = relationship.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * ... = post.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param relationship The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param post The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(Relationship relationship, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
-        doInsert(relationship, createInsertOption(opLambda));
+    public void varyingInsert(Post post, WritableOptionCall<PostCB, InsertOption<PostCB>> opLambda) {
+        doInsert(post, createInsertOption(opLambda));
     }
 
     /**
@@ -651,53 +635,53 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
-     * relationship.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * relationship.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Post post = <span style="color: #70226C">new</span> Post();
+     * post.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * post.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * relationship.<span style="color: #CC4747">setVersionNo</span>(value);
+     * post.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(relationship, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(post, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param relationship The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param post The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(Relationship relationship, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
-        doUpdate(relationship, createUpdateOption(opLambda));
+    public void varyingUpdate(Post post, WritableOptionCall<PostCB, UpdateOption<PostCB>> opLambda) {
+        doUpdate(post, createUpdateOption(opLambda));
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
-     * @param relationship The entity of insert or update. (NotNull)
+     * @param post The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(Relationship relationship, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> insertOpLambda, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> updateOpLambda) {
-        doInsertOrUpdate(relationship, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    public void varyingInsertOrUpdate(Post post, WritableOptionCall<PostCB, InsertOption<PostCB>> insertOpLambda, WritableOptionCall<PostCB, UpdateOption<PostCB>> updateOpLambda) {
+        doInsertOrUpdate(post, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
-     * @param relationship The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param post The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(Relationship relationship, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
-        doDelete(relationship, createDeleteOption(opLambda));
+    public void varyingDelete(Post post, WritableOptionCall<PostCB, DeleteOption<PostCB>> opLambda) {
+        doDelete(post, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -708,12 +692,12 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
      * Other specifications are same as batchInsert(entityList).
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
-        return doBatchInsert(relationshipList, createInsertOption(opLambda));
+    public int[] varyingBatchInsert(List<Post> postList, WritableOptionCall<PostCB, InsertOption<PostCB>> opLambda) {
+        return doBatchInsert(postList, createInsertOption(opLambda));
     }
 
     /**
@@ -721,24 +705,24 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
      * Other specifications are same as batchUpdate(entityList).
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
-        return doBatchUpdate(relationshipList, createUpdateOption(opLambda));
+    public int[] varyingBatchUpdate(List<Post> postList, WritableOptionCall<PostCB, UpdateOption<PostCB>> opLambda) {
+        return doBatchUpdate(postList, createUpdateOption(opLambda));
     }
 
     /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
-     * @param relationshipList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param postList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<Relationship> relationshipList, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
-        return doBatchDelete(relationshipList, createDeleteOption(opLambda));
+    public int[] varyingBatchDelete(List<Post> postList, WritableOptionCall<PostCB, DeleteOption<PostCB>> opLambda) {
+        return doBatchDelete(postList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -752,7 +736,7 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<Relationship, RelationshipCB> manyArgLambda, WritableOptionCall<RelationshipCB, InsertOption<RelationshipCB>> opLambda) {
+    public int varyingQueryInsert(QueryInsertSetupper<Post, PostCB> manyArgLambda, WritableOptionCall<PostCB, InsertOption<PostCB>> opLambda) {
         return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
     }
 
@@ -763,14 +747,14 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * Relationship relationship = <span style="color: #70226C">new</span> Relationship();
+     * Post post = <span style="color: #70226C">new</span> Post();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//relationship.setPK...(value);</span>
-     * relationship.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//post.setPK...(value);</span>
+     * post.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//relationship.setVersionNo(value);</span>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//post.setVersionNo(value);</span>
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(post, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -778,14 +762,14 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
      * });
      * </pre>
-     * @param relationship The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param post The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(Relationship relationship, CBCall<RelationshipCB> cbLambda, WritableOptionCall<RelationshipCB, UpdateOption<RelationshipCB>> opLambda) {
-        return doQueryUpdate(relationship, createCB(cbLambda), createUpdateOption(opLambda));
+    public int varyingQueryUpdate(Post post, CBCall<PostCB> cbLambda, WritableOptionCall<PostCB, UpdateOption<PostCB>> opLambda) {
+        return doQueryUpdate(post, createCB(cbLambda), createUpdateOption(opLambda));
     }
 
     /**
@@ -793,18 +777,18 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * For example, allowNonQueryDelete(). <br>
      * Other specifications are same as queryDelete(cb).
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.<span style="color: #CC4747">queryDelete</span>(relationship, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">postBhv</span>.<span style="color: #CC4747">queryDelete</span>(post, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Relationship. (NotNull)
+     * @param cbLambda The callback for condition-bean of Post. (NotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(CBCall<RelationshipCB> cbLambda, WritableOptionCall<RelationshipCB, DeleteOption<RelationshipCB>> opLambda) {
+    public int varyingQueryDelete(CBCall<PostCB> cbLambda, WritableOptionCall<PostCB, DeleteOption<PostCB>> opLambda) {
         return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
     }
 
@@ -815,40 +799,40 @@ public abstract class BsRelationshipBhv extends AbstractBehaviorWritable<Relatio
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
      * <span style="color: #3F7E5E">// main style</span>
-     * relationshipBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
-     * relationshipBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * relationshipBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
-     * relationshipBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * relationshipBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
-     * relationshipBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
-     * relationshipBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
+     * postBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
+     * postBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * postBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
+     * postBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * postBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
+     * postBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
+     * postBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
      * <span style="color: #3F7E5E">// traditional style</span>
-     * relationshipBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
-     * relationshipBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
-     * relationshipBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
-     * relationshipBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
-     * relationshipBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
-     * relationshipBhv.outideSql().traditionalStyle().execute(path, pmb);
+     * postBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
+     * postBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
+     * postBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
+     * postBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
+     * postBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
+     * postBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
      * <span style="color: #3F7E5E">// options</span>
-     * relationshipBhv.outideSql().removeBlockComment().selectList()
-     * relationshipBhv.outideSql().removeLineComment().selectList()
-     * relationshipBhv.outideSql().formatSql().selectList()
+     * postBhv.outideSql().removeBlockComment().selectList()
+     * postBhv.outideSql().removeLineComment().selectList()
+     * postBhv.outideSql().formatSql().selectList()
      * </pre>
      * <p>The invoker of behavior command should be not null when you call this method.</p>
      * @return The new-created all facade executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlAllFacadeExecutor<RelationshipBhv> outsideSql() {
+    public OutsideSqlAllFacadeExecutor<PostBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
-    protected Class<? extends Relationship> typeOfSelectedEntity() { return Relationship.class; }
-    protected Class<Relationship> typeOfHandlingEntity() { return Relationship.class; }
-    protected Class<RelationshipCB> typeOfHandlingConditionBean() { return RelationshipCB.class; }
+    protected Class<? extends Post> typeOfSelectedEntity() { return Post.class; }
+    protected Class<Post> typeOfHandlingEntity() { return Post.class; }
+    protected Class<PostCB> typeOfHandlingConditionBean() { return PostCB.class; }
 
     // ===================================================================================
     //                                                                            Accessor

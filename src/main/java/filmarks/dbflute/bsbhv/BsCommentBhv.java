@@ -25,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of COMMENT as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     COMMENT_ID
  *
  * [column]
- *     ID, USER_ID, ALBUM_ID, CONTENT, RATE
+ *     COMMENT_ID, USER_ID, ALBUM_ID, CONTENT, RATE, COMMENT_CREATED_AT
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     COMMENT_ID
  *
  * [version-no]
  *     
@@ -159,31 +159,31 @@ public abstract class BsCommentBhv extends AbstractBehaviorWritable<Comment, Com
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param commentId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Comment> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<Comment> selectByPK(Integer commentId) {
+        return facadeSelectByPK(commentId);
     }
 
-    protected OptionalEntity<Comment> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<Comment> facadeSelectByPK(Integer commentId) {
+        return doSelectOptionalByPK(commentId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Comment> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends Comment> ENTITY doSelectByPK(Integer commentId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(commentId), tp);
     }
 
-    protected <ENTITY extends Comment> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends Comment> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer commentId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(commentId, tp), commentId);
     }
 
-    protected CommentCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected CommentCB xprepareCBAsPK(Integer commentId) {
+        assertObjectNotNull("commentId", commentId);
+        return newConditionBean().acceptPK(commentId);
     }
 
     // ===================================================================================
@@ -384,12 +384,12 @@ public abstract class BsCommentBhv extends AbstractBehaviorWritable<Comment, Com
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
+     * Extract the value list of (single) primary key commentId.
      * @param commentList The list of comment. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<Comment> commentList)
-    { return helpExtractListInternally(commentList, "id"); }
+    public List<Integer> extractCommentIdList(List<Comment> commentList)
+    { return helpExtractListInternally(commentList, "commentId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

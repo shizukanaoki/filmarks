@@ -44,8 +44,8 @@ public class AlbumDbm extends AbstractDBMeta {
     { xsetupEpg(); }
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((Album)et).getAlbumId(), (et, vl) -> ((Album)et).setAlbumId(cti(vl)), "albumId");
-        setupEpg(_epgMap, et -> ((Album)et).getTitle(), (et, vl) -> ((Album)et).setTitle((String)vl), "title");
-        setupEpg(_epgMap, et -> ((Album)et).getFileName(), (et, vl) -> ((Album)et).setFileName((String)vl), "fileName");
+        setupEpg(_epgMap, et -> ((Album)et).getAlbumTitle(), (et, vl) -> ((Album)et).setAlbumTitle((String)vl), "albumTitle");
+        setupEpg(_epgMap, et -> ((Album)et).getImageFileName(), (et, vl) -> ((Album)et).setImageFileName((String)vl), "imageFileName");
         setupEpg(_epgMap, et -> ((Album)et).getArtistId(), (et, vl) -> ((Album)et).setArtistId(cti(vl)), "artistId");
     }
     public PropertyGateway findPropertyGateway(String prop)
@@ -59,7 +59,6 @@ public class AlbumDbm extends AbstractDBMeta {
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((Album)et).getArtist(), (et, vl) -> ((Album)et).setArtist((OptionalEntity<Artist>)vl), "artist");
-        setupEfpg(_efpgMap, et -> ((Album)et).getSongAsOne(), (et, vl) -> ((Album)et).setSongAsOne((OptionalEntity<Song>)vl), "songAsOne");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -80,9 +79,9 @@ public class AlbumDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList", null, false);
-    protected final ColumnInfo _columnTitle = cci("TITLE", "TITLE", null, null, String.class, "title", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFileName = cci("FILE_NAME", "FILE_NAME", null, null, String.class, "fileName", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,songList", null, false);
+    protected final ColumnInfo _columnAlbumTitle = cci("ALBUM_TITLE", "ALBUM_TITLE", null, null, String.class, "albumTitle", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnImageFileName = cci("IMAGE_FILE_NAME", "IMAGE_FILE_NAME", null, null, String.class, "imageFileName", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnArtistId = cci("ARTIST_ID", "ARTIST_ID", null, null, Integer.class, "artistId", null, false, false, false, "INT", 10, 0, null, null, false, null, null, "artist", null, null, false);
 
     /**
@@ -91,15 +90,15 @@ public class AlbumDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnAlbumId() { return _columnAlbumId; }
     /**
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnTitle() { return _columnTitle; }
+    public ColumnInfo columnAlbumTitle() { return _columnAlbumTitle; }
     /**
-     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnFileName() { return _columnFileName; }
+    public ColumnInfo columnImageFileName() { return _columnImageFileName; }
     /**
      * ARTIST_ID: {IX, INT(10), FK to ARTIST}
      * @return The information object of specified column. (NotNull)
@@ -109,8 +108,8 @@ public class AlbumDbm extends AbstractDBMeta {
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnAlbumId());
-        ls.add(columnTitle());
-        ls.add(columnFileName());
+        ls.add(columnAlbumTitle());
+        ls.add(columnImageFileName());
         ls.add(columnArtistId());
         return ls;
     }
@@ -127,11 +126,6 @@ public class AlbumDbm extends AbstractDBMeta {
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
-    // -----------------------------------------------------
-    //                                        Unique Element
-    //                                        --------------
-    public UniqueInfo uniqueOf() { return hpcui(columnTitle()); }
-
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
@@ -145,16 +139,8 @@ public class AlbumDbm extends AbstractDBMeta {
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignArtist() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnArtistId(), ArtistDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnArtistId(), ArtistDbm.getInstance().columnArtistId());
         return cfi("FK_PRODUCT_ARTIST", "artist", this, ArtistDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "albumList", false);
-    }
-    /**
-     * SONG by ALBUM_ID, named 'songAsOne'.
-     * @return The information object of foreign property(referrer-as-one). (NotNull)
-     */
-    public ForeignInfo foreignSongAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), SongDbm.getInstance().columnAlbumId());
-        return cfi("FK_SONG_PRODUCT", "songAsOne", this, SongDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "album", false);
     }
 
     // -----------------------------------------------------
@@ -175,6 +161,14 @@ public class AlbumDbm extends AbstractDBMeta {
     public ReferrerInfo referrerFavoriteList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), FavoriteDbm.getInstance().columnAlbumId());
         return cri("FK_PICK_PRODUCT", "favoriteList", this, FavoriteDbm.getInstance(), mp, false, "album");
+    }
+    /**
+     * SONG by ALBUM_ID, named 'songList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerSongList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), SongDbm.getInstance().columnAlbumId());
+        return cri("FK_SONG_PRODUCT", "songList", this, SongDbm.getInstance(), mp, false, "album");
     }
 
     // ===================================================================================

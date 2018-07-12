@@ -10,28 +10,28 @@ import filmarks.dbflute.exentity.*;
  * The referrer loader of SONG as TABLE. <br>
  * <pre>
  * [primary key]
- *     ALBUM_ID
+ *     SONG_ID
  *
  * [column]
- *     ALBUM_ID, ARTIST_ID, NAME
+ *     SONG_ID, ALBUM_ID, SONG_TITLE
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     SONG_ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     ARTIST, ALBUM
+ *     ALBUM
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     artist, album
+ *     album
  *
  * [referrer property]
  *     
@@ -59,13 +59,6 @@ public class LoaderOfSong {
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
-    protected LoaderOfArtist _foreignArtistLoader;
-    public LoaderOfArtist pulloutArtist() {
-        if (_foreignArtistLoader == null)
-        { _foreignArtistLoader = new LoaderOfArtist().ready(myBhv().pulloutArtist(_selectedList), _selector); }
-        return _foreignArtistLoader;
-    }
-
     protected LoaderOfAlbum _foreignAlbumLoader;
     public LoaderOfAlbum pulloutAlbum() {
         if (_foreignAlbumLoader == null)

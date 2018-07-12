@@ -133,6 +133,26 @@ public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
      */
     public BsFavoriteCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
+    protected ConditionValue _favoriteCreatedAt;
+    public ConditionValue xdfgetFavoriteCreatedAt()
+    { if (_favoriteCreatedAt == null) { _favoriteCreatedAt = nCV(); }
+      return _favoriteCreatedAt; }
+    protected ConditionValue xgetCValueFavoriteCreatedAt() { return xdfgetFavoriteCreatedAt(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteCreatedAt_Asc() { regOBA("FAVORITE_CREATED_AT"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteCreatedAt_Desc() { regOBD("FAVORITE_CREATED_AT"); return this; }
+
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

@@ -46,6 +46,7 @@ public class FavoriteDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Favorite)et).getFavoriteId(), (et, vl) -> ((Favorite)et).setFavoriteId(cti(vl)), "favoriteId");
         setupEpg(_epgMap, et -> ((Favorite)et).getUserId(), (et, vl) -> ((Favorite)et).setUserId(cti(vl)), "userId");
         setupEpg(_epgMap, et -> ((Favorite)et).getAlbumId(), (et, vl) -> ((Favorite)et).setAlbumId(cti(vl)), "albumId");
+        setupEpg(_epgMap, et -> ((Favorite)et).getFavoriteCreatedAt(), (et, vl) -> ((Favorite)et).setFavoriteCreatedAt(ctldt(vl)), "favoriteCreatedAt");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -82,6 +83,7 @@ public class FavoriteDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnFavoriteId = cci("FAVORITE_ID", "FAVORITE_ID", null, null, Integer.class, "favoriteId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
+    protected final ColumnInfo _columnFavoriteCreatedAt = cci("FAVORITE_CREATED_AT", "FAVORITE_CREATED_AT", null, null, java.time.LocalDateTime.class, "favoriteCreatedAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
@@ -98,12 +100,18 @@ public class FavoriteDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnAlbumId() { return _columnAlbumId; }
+    /**
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnFavoriteCreatedAt() { return _columnFavoriteCreatedAt; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnFavoriteId());
         ls.add(columnUserId());
         ls.add(columnAlbumId());
+        ls.add(columnFavoriteCreatedAt());
         return ls;
     }
 

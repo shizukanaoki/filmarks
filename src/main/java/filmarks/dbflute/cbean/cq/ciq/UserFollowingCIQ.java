@@ -12,21 +12,21 @@ import filmarks.dbflute.cbean.cq.bs.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of RELATIONSHIP.
+ * The condition-query for in-line of USER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
-public class RelationshipCIQ extends AbstractBsRelationshipCQ {
+public class UserFollowingCIQ extends AbstractBsUserFollowingCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsRelationshipCQ _myCQ;
+    protected BsUserFollowingCQ _myCQ;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public RelationshipCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
-                        , String aliasName, int nestLevel, BsRelationshipCQ myCQ) {
+    public UserFollowingCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
+                        , String aliasName, int nestLevel, BsUserFollowingCQ myCQ) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
         _myCQ = myCQ;
         _foreignPropertyName = _myCQ.xgetForeignPropertyName(); // accept foreign property name
@@ -65,15 +65,15 @@ public class RelationshipCIQ extends AbstractBsRelationshipCQ {
     protected ConditionValue xgetCValueFollowingId() { return _myCQ.xdfgetFollowingId(); }
     protected ConditionValue xgetCValueFollowerId() { return _myCQ.xdfgetFollowerId(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
-    public String keepScalarCondition(RelationshipCQ sq)
+    public String keepScalarCondition(UserFollowingCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
-    public String keepSpecifyMyselfDerived(RelationshipCQ sq)
+    public String keepSpecifyMyselfDerived(UserFollowingCQ sq)
     { throwIICBOE("(Specify)MyselfDerived"); return null;}
-    public String keepQueryMyselfDerived(RelationshipCQ sq)
+    public String keepQueryMyselfDerived(UserFollowingCQ sq)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
     public String keepQueryMyselfDerivedParameter(Object vl)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
-    public String keepMyselfExists(RelationshipCQ sq)
+    public String keepMyselfExists(UserFollowingCQ sq)
     { throwIICBOE("MyselfExists"); return null;}
 
     protected void throwIICBOE(String name)
@@ -83,6 +83,6 @@ public class RelationshipCIQ extends AbstractBsRelationshipCQ {
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xinCB() { return RelationshipCB.class.getName(); }
-    protected String xinCQ() { return RelationshipCQ.class.getName(); }
+    protected String xinCB() { return UserFollowingCB.class.getName(); }
+    protected String xinCQ() { return UserFollowingCQ.class.getName(); }
 }

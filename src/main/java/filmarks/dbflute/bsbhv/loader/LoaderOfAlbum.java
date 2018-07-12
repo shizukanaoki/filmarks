@@ -15,7 +15,7 @@ import filmarks.dbflute.cbean.*;
  *     ALBUM_ID
  *
  * [column]
- *     ALBUM_ID, TITLE, FILE_NAME, ARTIST_ID
+ *     ALBUM_ID, ALBUM_TITLE, IMAGE_FILE_NAME, ARTIST_ID
  *
  * [sequence]
  *     
@@ -27,16 +27,16 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     ARTIST, SONG(AsOne)
+ *     ARTIST
  *
  * [referrer table]
  *     COMMENT, FAVORITE, SONG
  *
  * [foreign property]
- *     artist, songAsOne
+ *     artist
  *
  * [referrer property]
- *     commentList, favoriteList
+ *     commentList, favoriteList, songList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -129,6 +129,40 @@ public class LoaderOfAlbum {
         return hd -> hd.handle(new LoaderOfFavorite().ready(_referrerFavorite, _selector));
     }
 
+    protected List<Song> _referrerSong;
+
+    /**
+     * Load referrer of songList by the set-upper of referrer. <br>
+     * SONG by ALBUM_ID, named 'songList'.
+     * <pre>
+     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">albumLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">albumLoader</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">songCB</span>.setupSelect...
+     *         <span style="color: #553000">songCB</span>.query().set...
+     *         <span style="color: #553000">songCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">songLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    songLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (Album album : <span style="color: #553000">albumList</span>) {
+     *     ... = album.<span style="color: #CC4747">getSongList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfSong> loadSong(ReferrerConditionSetupper<SongCB> refCBLambda) {
+        myBhv().loadSong(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerSong = refLs);
+        return hd -> hd.handle(new LoaderOfSong().ready(_referrerSong, _selector));
+    }
+
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
@@ -137,13 +171,6 @@ public class LoaderOfAlbum {
         if (_foreignArtistLoader == null)
         { _foreignArtistLoader = new LoaderOfArtist().ready(myBhv().pulloutArtist(_selectedList), _selector); }
         return _foreignArtistLoader;
-    }
-
-    protected LoaderOfSong _foreignSongAsOneLoader;
-    public LoaderOfSong pulloutSongAsOne() {
-        if (_foreignSongAsOneLoader == null)
-        { _foreignSongAsOneLoader = new LoaderOfSong().ready(myBhv().pulloutSongAsOne(_selectedList), _selector); }
-        return _foreignSongAsOneLoader;
     }
 
     // ===================================================================================

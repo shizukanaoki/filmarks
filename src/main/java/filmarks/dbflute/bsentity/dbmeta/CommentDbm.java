@@ -43,11 +43,12 @@ public class CommentDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Comment)et).getId(), (et, vl) -> ((Comment)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((Comment)et).getCommentId(), (et, vl) -> ((Comment)et).setCommentId(cti(vl)), "commentId");
         setupEpg(_epgMap, et -> ((Comment)et).getUserId(), (et, vl) -> ((Comment)et).setUserId(cti(vl)), "userId");
         setupEpg(_epgMap, et -> ((Comment)et).getAlbumId(), (et, vl) -> ((Comment)et).setAlbumId(cti(vl)), "albumId");
         setupEpg(_epgMap, et -> ((Comment)et).getContent(), (et, vl) -> ((Comment)et).setContent((String)vl), "content");
         setupEpg(_epgMap, et -> ((Comment)et).getRate(), (et, vl) -> ((Comment)et).setRate(ctb(vl)), "rate");
+        setupEpg(_epgMap, et -> ((Comment)et).getCommentCreatedAt(), (et, vl) -> ((Comment)et).setCommentCreatedAt(ctldt(vl)), "commentCreatedAt");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -81,17 +82,18 @@ public class CommentDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCommentId = cci("COMMENT_ID", "COMMENT_ID", null, null, Integer.class, "commentId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnContent = cci("CONTENT", "CONTENT", null, null, String.class, "content", null, false, false, true, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRate = cci("RATE", "RATE", null, null, java.math.BigDecimal.class, "rate", null, false, false, true, "FLOAT", 12, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCommentCreatedAt = cci("COMMENT_CREATED_AT", "COMMENT_CREATED_AT", null, null, java.time.LocalDateTime.class, "commentCreatedAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnId() { return _columnId; }
+    public ColumnInfo columnCommentId() { return _columnCommentId; }
     /**
      * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
@@ -112,14 +114,20 @@ public class CommentDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRate() { return _columnRate; }
+    /**
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnCommentCreatedAt() { return _columnCommentCreatedAt; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnId());
+        ls.add(columnCommentId());
         ls.add(columnUserId());
         ls.add(columnAlbumId());
         ls.add(columnContent());
         ls.add(columnRate());
+        ls.add(columnCommentCreatedAt());
         return ls;
     }
 
@@ -131,7 +139,7 @@ public class CommentDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnCommentId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 

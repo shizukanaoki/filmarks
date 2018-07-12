@@ -61,28 +61,18 @@ public class ArtistCIQ extends AbstractBsArtistCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
-    public String keepId_ExistsReferrer_AlbumList(AlbumCQ sq)
+    protected ConditionValue xgetCValueArtistId() { return _myCQ.xdfgetArtistId(); }
+    public String keepArtistId_ExistsReferrer_AlbumList(AlbumCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_ExistsReferrer_SongList(SongCQ sq)
-    { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_AlbumList(AlbumCQ sq)
+    public String keepArtistId_NotExistsReferrer_AlbumList(AlbumCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_NotExistsReferrer_SongList(SongCQ sq)
-    { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq)
+    public String keepArtistId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_SpecifyDerivedReferrer_SongList(SongCQ sq)
-    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_AlbumList(AlbumCQ sq)
+    public String keepArtistId_QueryDerivedReferrer_AlbumList(AlbumCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_AlbumListParameter(Object vl)
+    public String keepArtistId_QueryDerivedReferrer_AlbumListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_SongList(SongCQ sq)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepId_QueryDerivedReferrer_SongListParameter(Object vl)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    protected ConditionValue xgetCValueName() { return _myCQ.xdfgetName(); }
+    protected ConditionValue xgetCValueArtistName() { return _myCQ.xdfgetArtistName(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(ArtistCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

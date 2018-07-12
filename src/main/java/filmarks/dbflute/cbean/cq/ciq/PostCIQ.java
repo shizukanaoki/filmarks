@@ -12,21 +12,21 @@ import filmarks.dbflute.cbean.cq.bs.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of FAVORITE.
+ * The condition-query for in-line of POST.
  * @author DBFlute(AutoGenerator)
  */
-public class FavoriteCIQ extends AbstractBsFavoriteCQ {
+public class PostCIQ extends AbstractBsPostCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsFavoriteCQ _myCQ;
+    protected BsPostCQ _myCQ;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public FavoriteCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
-                        , String aliasName, int nestLevel, BsFavoriteCQ myCQ) {
+    public PostCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
+                        , String aliasName, int nestLevel, BsPostCQ myCQ) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
         _myCQ = myCQ;
         _foreignPropertyName = _myCQ.xgetForeignPropertyName(); // accept foreign property name
@@ -61,20 +61,20 @@ public class FavoriteCIQ extends AbstractBsFavoriteCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueFavoriteId() { return _myCQ.xdfgetFavoriteId(); }
+    protected ConditionValue xgetCValuePostId() { return _myCQ.xdfgetPostId(); }
+    protected ConditionValue xgetCValueTargetId() { return _myCQ.xdfgetTargetId(); }
+    protected ConditionValue xgetCValueTargetType() { return _myCQ.xdfgetTargetType(); }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
-    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
-    protected ConditionValue xgetCValueFavoriteCreatedAt() { return _myCQ.xdfgetFavoriteCreatedAt(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
-    public String keepScalarCondition(FavoriteCQ sq)
+    public String keepScalarCondition(PostCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
-    public String keepSpecifyMyselfDerived(FavoriteCQ sq)
+    public String keepSpecifyMyselfDerived(PostCQ sq)
     { throwIICBOE("(Specify)MyselfDerived"); return null;}
-    public String keepQueryMyselfDerived(FavoriteCQ sq)
+    public String keepQueryMyselfDerived(PostCQ sq)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
     public String keepQueryMyselfDerivedParameter(Object vl)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
-    public String keepMyselfExists(FavoriteCQ sq)
+    public String keepMyselfExists(PostCQ sq)
     { throwIICBOE("MyselfExists"); return null;}
 
     protected void throwIICBOE(String name)
@@ -84,6 +84,6 @@ public class FavoriteCIQ extends AbstractBsFavoriteCQ {
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xinCB() { return FavoriteCB.class.getName(); }
-    protected String xinCQ() { return FavoriteCQ.class.getName(); }
+    protected String xinCB() { return PostCB.class.getName(); }
+    protected String xinCQ() { return PostCQ.class.getName(); }
 }

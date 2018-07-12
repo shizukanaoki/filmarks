@@ -73,25 +73,25 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _id;
-    public ConditionValue xdfgetId()
-    { if (_id == null) { _id = nCV(); }
-      return _id; }
-    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+    protected ConditionValue _commentId;
+    public ConditionValue xdfgetCommentId()
+    { if (_commentId == null) { _commentId = nCV(); }
+      return _commentId; }
+    protected ConditionValue xgetCValueCommentId() { return xdfgetCommentId(); }
 
     /**
      * Add order-by as ascend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsCommentCQ addOrderBy_CommentId_Asc() { regOBA("COMMENT_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsCommentCQ addOrderBy_CommentId_Desc() { regOBD("COMMENT_ID"); return this; }
 
     protected ConditionValue _userId;
     public ConditionValue xdfgetUserId()
@@ -172,6 +172,26 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
      * @return this. (NotNull)
      */
     public BsCommentCQ addOrderBy_Rate_Desc() { regOBD("RATE"); return this; }
+
+    protected ConditionValue _commentCreatedAt;
+    public ConditionValue xdfgetCommentCreatedAt()
+    { if (_commentCreatedAt == null) { _commentCreatedAt = nCV(); }
+      return _commentCreatedAt; }
+    protected ConditionValue xgetCValueCommentCreatedAt() { return xdfgetCommentCreatedAt(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsCommentCQ addOrderBy_CommentCreatedAt_Asc() { regOBA("COMMENT_CREATED_AT"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsCommentCQ addOrderBy_CommentCreatedAt_Desc() { regOBD("COMMENT_CREATED_AT"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

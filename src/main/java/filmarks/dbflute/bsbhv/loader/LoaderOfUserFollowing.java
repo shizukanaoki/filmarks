@@ -7,7 +7,7 @@ import filmarks.dbflute.exbhv.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The referrer loader of RELATIONSHIP as TABLE. <br>
+ * The referrer loader of USER_FOLLOWING as TABLE. <br>
  * <pre>
  * [primary key]
  *     ID
@@ -38,23 +38,23 @@ import filmarks.dbflute.exentity.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public class LoaderOfRelationship {
+public class LoaderOfUserFollowing {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected List<Relationship> _selectedList;
+    protected List<UserFollowing> _selectedList;
     protected BehaviorSelector _selector;
-    protected RelationshipBhv _myBhv; // lazy-loaded
+    protected UserFollowingBhv _myBhv; // lazy-loaded
 
     // ===================================================================================
     //                                                                   Ready for Loading
     //                                                                   =================
-    public LoaderOfRelationship ready(List<Relationship> selectedList, BehaviorSelector selector)
+    public LoaderOfUserFollowing ready(List<UserFollowing> selectedList, BehaviorSelector selector)
     { _selectedList = selectedList; _selector = selector; return this; }
 
-    protected RelationshipBhv myBhv()
-    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(RelationshipBhv.class); return _myBhv; } }
+    protected UserFollowingBhv myBhv()
+    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(UserFollowingBhv.class); return _myBhv; } }
 
     // ===================================================================================
     //                                                                    Pull out Foreign
@@ -76,6 +76,6 @@ public class LoaderOfRelationship {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public List<Relationship> getSelectedList() { return _selectedList; }
+    public List<UserFollowing> getSelectedList() { return _selectedList; }
     public BehaviorSelector getSelector() { return _selector; }
 }

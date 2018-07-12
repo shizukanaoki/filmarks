@@ -82,23 +82,23 @@ public class BsCommentCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param commentId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public CommentCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
+    public CommentCB acceptPK(Integer commentId) {
+        assertObjectNotNull("commentId", commentId);
         BsCommentCB cb = this;
-        cb.query().setId_Equal(id);
+        cb.query().setCommentId_Equal(commentId);
         return (CommentCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_CommentId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_CommentId_Desc();
         return this;
     }
 
@@ -336,10 +336,10 @@ public class BsCommentCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, ID, NotNull, INT(10)}
+         * COMMENT_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnCommentId() { return doColumn("COMMENT_ID"); }
         /**
          * USER_ID: {IX, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
@@ -360,11 +360,16 @@ public class BsCommentCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnRate() { return doColumn("RATE"); }
+        /**
+         * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnCommentCreatedAt() { return doColumn("COMMENT_CREATED_AT"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
+            columnCommentId(); // PK
             if (qyCall().qy().hasConditionQueryAlbum()
                     || qyCall().qy().xgetReferrerQuery() instanceof AlbumCQ) {
                 columnAlbumId(); // FK or one-to-one referrer

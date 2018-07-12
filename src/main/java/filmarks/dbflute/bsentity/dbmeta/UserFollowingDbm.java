@@ -14,17 +14,17 @@ import filmarks.dbflute.allcommon.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The DB meta of SONG. (Singleton)
+ * The DB meta of USER_FOLLOWING. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class SongDbm extends AbstractDBMeta {
+public class UserFollowingDbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final SongDbm _instance = new SongDbm();
-    private SongDbm() {}
-    public static SongDbm getInstance() { return _instance; }
+    private static final UserFollowingDbm _instance = new UserFollowingDbm();
+    private UserFollowingDbm() {}
+    public static UserFollowingDbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -43,9 +43,9 @@ public class SongDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Song)et).getSongId(), (et, vl) -> ((Song)et).setSongId(cti(vl)), "songId");
-        setupEpg(_epgMap, et -> ((Song)et).getAlbumId(), (et, vl) -> ((Song)et).setAlbumId(cti(vl)), "albumId");
-        setupEpg(_epgMap, et -> ((Song)et).getSongTitle(), (et, vl) -> ((Song)et).setSongTitle((String)vl), "songTitle");
+        setupEpg(_epgMap, et -> ((UserFollowing)et).getId(), (et, vl) -> ((UserFollowing)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((UserFollowing)et).getFollowingId(), (et, vl) -> ((UserFollowing)et).setFollowingId(cti(vl)), "followingId");
+        setupEpg(_epgMap, et -> ((UserFollowing)et).getFollowerId(), (et, vl) -> ((UserFollowing)et).setFollowerId(cti(vl)), "followerId");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -57,7 +57,8 @@ public class SongDbm extends AbstractDBMeta {
     { xsetupEfpg(); }
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
-        setupEfpg(_efpgMap, et -> ((Song)et).getAlbum(), (et, vl) -> ((Song)et).setAlbum((OptionalEntity<Album>)vl), "album");
+        setupEfpg(_efpgMap, et -> ((UserFollowing)et).getUserByFollowerId(), (et, vl) -> ((UserFollowing)et).setUserByFollowerId((OptionalEntity<User>)vl), "userByFollowerId");
+        setupEfpg(_efpgMap, et -> ((UserFollowing)et).getUserByFollowingId(), (et, vl) -> ((UserFollowing)et).setUserByFollowingId((OptionalEntity<User>)vl), "userByFollowingId");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -65,10 +66,10 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "SONG";
-    protected final String _tableDispName = "SONG";
-    protected final String _tablePropertyName = "song";
-    protected final TableSqlName _tableSqlName = new TableSqlName("SONG", _tableDbName);
+    protected final String _tableDbName = "USER_FOLLOWING";
+    protected final String _tableDispName = "USER_FOLLOWING";
+    protected final String _tablePropertyName = "userFollowing";
+    protected final TableSqlName _tableSqlName = new TableSqlName("USER_FOLLOWING", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
@@ -78,31 +79,31 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnSongId = cci("SONG_ID", "SONG_ID", null, null, Integer.class, "songId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
-    protected final ColumnInfo _columnSongTitle = cci("SONG_TITLE", "SONG_TITLE", null, null, String.class, "songTitle", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnFollowingId = cci("FOLLOWING_ID", "FOLLOWING_ID", null, null, Integer.class, "followingId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowingId", null, null, false);
+    protected final ColumnInfo _columnFollowerId = cci("FOLLOWER_ID", "FOLLOWER_ID", null, null, Integer.class, "followerId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowerId", null, null, false);
 
     /**
-     * SONG_ID: {PK, ID, NotNull, INT(10)}
+     * ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnSongId() { return _columnSongId; }
+    public ColumnInfo columnId() { return _columnId; }
     /**
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnAlbumId() { return _columnAlbumId; }
+    public ColumnInfo columnFollowingId() { return _columnFollowingId; }
     /**
-     * SONG_TITLE: {NotNull, VARCHAR(200)}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnSongTitle() { return _columnSongTitle; }
+    public ColumnInfo columnFollowerId() { return _columnFollowerId; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnSongId());
-        ls.add(columnAlbumId());
-        ls.add(columnSongTitle());
+        ls.add(columnId());
+        ls.add(columnFollowingId());
+        ls.add(columnFollowerId());
         return ls;
     }
 
@@ -114,9 +115,19 @@ public class SongDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnSongId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnFollowingId());
+        ls.add(columnFollowerId());
+        return hpcui(ls);
+    }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -127,12 +138,20 @@ public class SongDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * ALBUM by my ALBUM_ID, named 'album'.
+     * USER by my FOLLOWER_ID, named 'userByFollowerId'.
      * @return The information object of foreign property. (NotNull)
      */
-    public ForeignInfo foreignAlbum() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnAlbumId());
-        return cfi("FK_SONG_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "songList", false);
+    public ForeignInfo foreignUserByFollowerId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowerId(), UserDbm.getInstance().columnUserId());
+        return cfi("FK_RELATIONSHIP_FOLLOWER", "userByFollowerId", this, UserDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "userFollowingByFollowerIdList", false);
+    }
+    /**
+     * USER by my FOLLOWING_ID, named 'userByFollowingId'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignUserByFollowingId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowingId(), UserDbm.getInstance().columnUserId());
+        return cfi("FK_RELATIONSHIP_FOLLOWING", "userByFollowingId", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "userFollowingByFollowingIdList", false);
     }
 
     // -----------------------------------------------------
@@ -147,27 +166,27 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "filmarks.dbflute.exentity.Song"; }
-    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.SongCB"; }
-    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.SongBhv"; }
+    public String getEntityTypeName() { return "filmarks.dbflute.exentity.UserFollowing"; }
+    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.UserFollowingCB"; }
+    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.UserFollowingBhv"; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<Song> getEntityType() { return Song.class; }
+    public Class<UserFollowing> getEntityType() { return UserFollowing.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Song newEntity() { return new Song(); }
+    public UserFollowing newEntity() { return new UserFollowing(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((Song)et, mp); }
+    { doAcceptPrimaryKeyMap((UserFollowing)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((Song)et, mp); }
+    { doAcceptAllColumnMap((UserFollowing)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

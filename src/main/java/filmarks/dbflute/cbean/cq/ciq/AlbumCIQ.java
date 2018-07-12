@@ -66,13 +66,19 @@ public class AlbumCIQ extends AbstractBsAlbumCQ {
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepAlbumId_ExistsReferrer_SongList(SongCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepAlbumId_NotExistsReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepAlbumId_NotExistsReferrer_SongList(SongCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepAlbumId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepAlbumId_SpecifyDerivedReferrer_SongList(SongCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepAlbumId_QueryDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
@@ -82,8 +88,12 @@ public class AlbumCIQ extends AbstractBsAlbumCQ {
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    protected ConditionValue xgetCValueTitle() { return _myCQ.xdfgetTitle(); }
-    protected ConditionValue xgetCValueFileName() { return _myCQ.xdfgetFileName(); }
+    public String keepAlbumId_QueryDerivedReferrer_SongList(SongCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepAlbumId_QueryDerivedReferrer_SongListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    protected ConditionValue xgetCValueAlbumTitle() { return _myCQ.xdfgetAlbumTitle(); }
+    protected ConditionValue xgetCValueImageFileName() { return _myCQ.xdfgetImageFileName(); }
     protected ConditionValue xgetCValueArtistId() { return _myCQ.xdfgetArtistId(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(AlbumCQ sq)

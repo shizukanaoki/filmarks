@@ -22,38 +22,38 @@ import filmarks.dbflute.bsentity.dbmeta.*;
 import filmarks.dbflute.cbean.*;
 
 /**
- * The behavior of FAVORITE as TABLE. <br>
+ * The behavior of USER_FOLLOWING as TABLE. <br>
  * <pre>
  * [primary key]
- *     FAVORITE_ID
+ *     ID
  *
  * [column]
- *     FAVORITE_ID, USER_ID, ALBUM_ID, FAVORITE_CREATED_AT
+ *     ID, FOLLOWING_ID, FOLLOWER_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     FAVORITE_ID
+ *     ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     ALBUM, USER
+ *     USER
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     album, user
+ *     userByFollowerId, userByFollowingId
  *
  * [referrer property]
  *     
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, FavoriteCB> {
+public abstract class BsUserFollowingBhv extends AbstractBehaviorWritable<UserFollowing, UserFollowingCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -65,15 +65,15 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     //                                                                             DB Meta
     //                                                                             =======
     /** {@inheritDoc} */
-    public FavoriteDbm asDBMeta() { return FavoriteDbm.getInstance(); }
+    public UserFollowingDbm asDBMeta() { return UserFollowingDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "FAVORITE"; }
+    public String asTableDbName() { return "USER_FOLLOWING"; }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public FavoriteCB newConditionBean() { return new FavoriteCB(); }
+    public UserFollowingCB newConditionBean() { return new UserFollowingCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -82,14 +82,14 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br>
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(CBCall<FavoriteCB> cbLambda) {
+    public int selectCount(CBCall<UserFollowingCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
@@ -103,38 +103,38 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * <span style="color: #AD4747; font-size: 120%">If it might be no data, isPresent() and orElse(), ...</span>
      * <pre>
      * <span style="color: #3F7E5E">// if the data always exists as your business rule</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">userFollowing</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
-     *     ... = <span style="color: #553000">favorite</span>.get...
+     *     ... = <span style="color: #553000">userFollowing</span>.get...
      * });
      *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">userFollowing</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present</span>
-     *     ... = <span style="color: #553000">favorite</span>.get...
+     *     ... = <span style="color: #553000">userFollowing</span>.get...
      * }).<span style="color: #994747">orElse</span>(() <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if not present</span>
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Favorite> selectEntity(CBCall<FavoriteCB> cbLambda) {
+    public OptionalEntity<UserFollowing> selectEntity(CBCall<UserFollowingCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<Favorite> facadeSelectEntity(FavoriteCB cb) {
+    protected OptionalEntity<UserFollowing> facadeSelectEntity(UserFollowingCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectOptionalEntity(FavoriteCB cb, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends UserFollowing> OptionalEntity<ENTITY> doSelectOptionalEntity(UserFollowingCB cb, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -144,72 +144,72 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Select the entity by the condition-bean with deleted check. <br>
      * <span style="color: #AD4747; font-size: 120%">If the data is always present as your business rule, this method is good.</span>
      * <pre>
-     * Favorite <span style="color: #553000">favorite</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
-     * ... = <span style="color: #553000">favorite</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * UserFollowing <span style="color: #553000">userFollowing</span> = <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
+     * ... = <span style="color: #553000">userFollowing</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Favorite selectEntityWithDeletedCheck(CBCall<FavoriteCB> cbLambda) {
+    public UserFollowing selectEntityWithDeletedCheck(CBCall<UserFollowingCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
     /**
      * Select the entity by the primary-key value.
-     * @param favoriteId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Favorite> selectByPK(Integer favoriteId) {
-        return facadeSelectByPK(favoriteId);
+    public OptionalEntity<UserFollowing> selectByPK(Integer id) {
+        return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<Favorite> facadeSelectByPK(Integer favoriteId) {
-        return doSelectOptionalByPK(favoriteId, typeOfSelectedEntity());
+    protected OptionalEntity<UserFollowing> facadeSelectByPK(Integer id) {
+        return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Favorite> ENTITY doSelectByPK(Integer favoriteId, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(favoriteId), tp);
+    protected <ENTITY extends UserFollowing> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer favoriteId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(favoriteId, tp), favoriteId);
+    protected <ENTITY extends UserFollowing> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
-    protected FavoriteCB xprepareCBAsPK(Integer favoriteId) {
-        assertObjectNotNull("favoriteId", favoriteId);
-        return newConditionBean().acceptPK(favoriteId);
+    protected UserFollowingCB xprepareCBAsPK(Integer id) {
+        assertObjectNotNull("id", id);
+        return newConditionBean().acceptPK(id);
     }
 
     /**
      * Select the entity by the unique-key value.
-     * @param userId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
-     * @param albumId : +UQ, IX, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @param followingId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param followerId : +UQ, IX, NotNull, INT(10), FK to USER. (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Favorite> selectByUniqueOf(Integer userId, Integer albumId) {
-        return facadeSelectByUniqueOf(userId, albumId);
+    public OptionalEntity<UserFollowing> selectByUniqueOf(Integer followingId, Integer followerId) {
+        return facadeSelectByUniqueOf(followingId, followerId);
     }
 
-    protected OptionalEntity<Favorite> facadeSelectByUniqueOf(Integer userId, Integer albumId) {
-        return doSelectByUniqueOf(userId, albumId, typeOfSelectedEntity());
+    protected OptionalEntity<UserFollowing> facadeSelectByUniqueOf(Integer followingId, Integer followerId) {
+        return doSelectByUniqueOf(followingId, followerId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Favorite> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer userId, Integer albumId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(userId, albumId), tp), userId, albumId);
+    protected <ENTITY extends UserFollowing> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer followingId, Integer followerId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(followingId, followerId), tp), followingId, followerId);
     }
 
-    protected FavoriteCB xprepareCBAsUniqueOf(Integer userId, Integer albumId) {
-        assertObjectNotNull("userId", userId);assertObjectNotNull("albumId", albumId);
-        return newConditionBean().acceptUniqueOf(userId, albumId);
+    protected UserFollowingCB xprepareCBAsUniqueOf(Integer followingId, Integer followerId) {
+        assertObjectNotNull("followingId", followingId);assertObjectNotNull("followerId", followerId);
+        return newConditionBean().acceptUniqueOf(followingId, followerId);
     }
 
     // ===================================================================================
@@ -218,19 +218,19 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     /**
      * Select the list as result bean.
      * <pre>
-     * ListResultBean&lt;Favorite&gt; <span style="color: #553000">favoriteList</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * ListResultBean&lt;UserFollowing&gt; <span style="color: #553000">userFollowingList</span> = <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...;
      *     <span style="color: #553000">cb</span>.query().addOrderBy...;
      * });
-     * <span style="color: #70226C">for</span> (Favorite <span style="color: #553000">favorite</span> : <span style="color: #553000">favoriteList</span>) {
-     *     ... = <span style="color: #553000">favorite</span>.get...;
+     * <span style="color: #70226C">for</span> (UserFollowing <span style="color: #553000">userFollowing</span> : <span style="color: #553000">userFollowingList</span>) {
+     *     ... = <span style="color: #553000">userFollowing</span>.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<Favorite> selectList(CBCall<FavoriteCB> cbLambda) {
+    public ListResultBean<UserFollowing> selectList(CBCall<UserFollowingCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
@@ -244,7 +244,7 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Select the page as result bean. <br>
      * (both count-select and paging-select are executed)
      * <pre>
-     * PagingResultBean&lt;Favorite&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * PagingResultBean&lt;UserFollowing&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      *     <span style="color: #553000">cb</span>.query().addOrderBy...
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
@@ -254,15 +254,15 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * <span style="color: #70226C">boolean</span> isExistPrePage = <span style="color: #553000">page</span>.isExistPrePage();
      * <span style="color: #70226C">boolean</span> isExistNextPage = <span style="color: #553000">page</span>.isExistNextPage();
      * ...
-     * <span style="color: #70226C">for</span> (Favorite favorite : <span style="color: #553000">page</span>) {
-     *     ... = favorite.get...;
+     * <span style="color: #70226C">for</span> (UserFollowing userFollowing : <span style="color: #553000">page</span>) {
+     *     ... = userFollowing.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<Favorite> selectPage(CBCall<FavoriteCB> cbLambda) {
+    public PagingResultBean<UserFollowing> selectPage(CBCall<UserFollowingCB> cbLambda) {
         return facadeSelectPage(createCB(cbLambda));
     }
 
@@ -272,16 +272,16 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * }, <span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     ... = <span style="color: #553000">member</span>.getMemberName();
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
-     * @param entityLambda The handler of entity row of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
+     * @param entityLambda The handler of entity row of UserFollowing. (NotNull)
      */
-    public void selectCursor(CBCall<FavoriteCB> cbLambda, EntityRowHandler<Favorite> entityLambda) {
+    public void selectCursor(CBCall<UserFollowingCB> cbLambda, EntityRowHandler<UserFollowing> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
@@ -292,7 +292,7 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Select the scalar value derived by a function from uniquely-selected records. <br>
      * You should call a function method after this method called like as follows:
      * <pre>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">column...</span>; <span style="color: #3F7E5E">// required for the function</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * });
@@ -301,7 +301,7 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<FavoriteCB, RESULT> selectScalar(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<UserFollowingCB, RESULT> selectScalar(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
@@ -346,12 +346,12 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param favoriteList The entity list of favorite. (NotNull)
+     * @param userFollowingList The entity list of userFollowing. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<Favorite> favoriteList, ReferrerLoaderHandler<LoaderOfFavorite> loaderLambda) {
-        xassLRArg(favoriteList, loaderLambda);
-        loaderLambda.handle(new LoaderOfFavorite().ready(favoriteList, _behaviorSelector));
+    public void load(List<UserFollowing> userFollowingList, ReferrerLoaderHandler<LoaderOfUserFollowing> loaderLambda) {
+        xassLRArg(userFollowingList, loaderLambda);
+        loaderLambda.handle(new LoaderOfUserFollowing().ready(userFollowingList, _behaviorSelector));
     }
 
     /**
@@ -379,43 +379,43 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param favorite The entity of favorite. (NotNull)
+     * @param userFollowing The entity of userFollowing. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(Favorite favorite, ReferrerLoaderHandler<LoaderOfFavorite> loaderLambda) {
-        xassLRArg(favorite, loaderLambda);
-        loaderLambda.handle(new LoaderOfFavorite().ready(xnewLRAryLs(favorite), _behaviorSelector));
+    public void load(UserFollowing userFollowing, ReferrerLoaderHandler<LoaderOfUserFollowing> loaderLambda) {
+        xassLRArg(userFollowing, loaderLambda);
+        loaderLambda.handle(new LoaderOfUserFollowing().ready(xnewLRAryLs(userFollowing), _behaviorSelector));
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
     /**
-     * Pull out the list of foreign table 'Album'.
-     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
+     * Pull out the list of foreign table 'User'.
+     * @param userFollowingList The list of userFollowing. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Album> pulloutAlbum(List<Favorite> favoriteList)
-    { return helpPulloutInternally(favoriteList, "album"); }
+    public List<User> pulloutUserByFollowerId(List<UserFollowing> userFollowingList)
+    { return helpPulloutInternally(userFollowingList, "userByFollowerId"); }
 
     /**
      * Pull out the list of foreign table 'User'.
-     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
+     * @param userFollowingList The list of userFollowing. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<User> pulloutUser(List<Favorite> favoriteList)
-    { return helpPulloutInternally(favoriteList, "user"); }
+    public List<User> pulloutUserByFollowingId(List<UserFollowing> userFollowingList)
+    { return helpPulloutInternally(userFollowingList, "userByFollowingId"); }
 
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key favoriteId.
-     * @param favoriteList The list of favorite. (NotNull, EmptyAllowed)
+     * Extract the value list of (single) primary key id.
+     * @param userFollowingList The list of userFollowing. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractFavoriteIdList(List<Favorite> favoriteList)
-    { return helpExtractListInternally(favoriteList, "favoriteId"); }
+    public List<Integer> extractIdList(List<UserFollowing> userFollowingList)
+    { return helpExtractListInternally(userFollowingList, "id"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -423,80 +423,80 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * favorite.setFoo...(value);
-     * favorite.setBar...(value);
+     * userFollowing.setFoo...(value);
+     * userFollowing.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//favorite.set...;</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">insert</span>(favorite);
-     * ... = favorite.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//userFollowing.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//userFollowing.set...;</span>
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">insert</span>(userFollowing);
+     * ... = userFollowing.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param favorite The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param userFollowing The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(Favorite favorite) {
-        doInsert(favorite, null);
+    public void insert(UserFollowing userFollowing) {
+        doInsert(userFollowing, null);
     }
 
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
-     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * favorite.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
+     * userFollowing.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * userFollowing.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//favorite.set...;</span>
+     * <span style="color: #3F7E5E">//userFollowing.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//userFollowing.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">update</span>(favorite);
+     * userFollowing.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">update</span>(userFollowing);
      * </pre>
-     * @param favorite The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param userFollowing The entity of update. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(Favorite favorite) {
-        doUpdate(favorite, null);
+    public void update(UserFollowing userFollowing) {
+        doUpdate(userFollowing, null);
     }
 
     /**
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param favorite The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param userFollowing The entity of insert or update. (NotNull, ...depends on insert or update)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(Favorite favorite) {
-        doInsertOrUpdate(favorite, null, null);
+    public void insertOrUpdate(UserFollowing userFollowing) {
+        doInsertOrUpdate(userFollowing, null, null);
     }
 
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
-     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
+     * userFollowing.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
+     * userFollowing.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #70226C">try</span> {
-     *     <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">delete</span>(favorite);
+     *     <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">delete</span>(userFollowing);
      * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param favorite The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param userFollowing The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(Favorite favorite) {
-        doDelete(favorite, null);
+    public void delete(UserFollowing userFollowing) {
+        doDelete(userFollowing, null);
     }
 
     // ===================================================================================
@@ -508,26 +508,26 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * <span style="color: #70226C">for</span> (... : ...) {
-     *     Favorite favorite = <span style="color: #70226C">new</span> Favorite();
-     *     favorite.setFooName("foo");
+     *     UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
+     *     userFollowing.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         favorite.setFooPrice(123);
+     *         userFollowing.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     favoriteList.add(favorite);
+     *     userFollowingList.add(userFollowing);
      * }
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">batchInsert</span>(favoriteList);
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">batchInsert</span>(userFollowingList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<Favorite> favoriteList) {
-        return doBatchInsert(favoriteList, null);
+    public int[] batchInsert(List<UserFollowing> userFollowingList) {
+        return doBatchInsert(userFollowingList, null);
     }
 
     /**
@@ -536,37 +536,37 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     Favorite favorite = <span style="color: #70226C">new</span> Favorite();
-     *     favorite.setFooName("foo");
+     *     UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
+     *     userFollowing.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         favorite.setFooPrice(123);
+     *         userFollowing.setFooPrice(123);
      *     } <span style="color: #70226C">else</span> {
-     *         favorite.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//favorite.setFooDate(...); // *not allowed, fragmented</span>
+     *         userFollowing.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//userFollowing.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     favoriteList.add(favorite);
+     *     userFollowingList.add(userFollowing);
      * }
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">batchUpdate</span>(favoriteList);
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">batchUpdate</span>(userFollowingList);
      * </pre>
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<Favorite> favoriteList) {
-        return doBatchUpdate(favoriteList, null);
+    public int[] batchUpdate(List<UserFollowing> userFollowingList) {
+        return doBatchUpdate(userFollowingList, null);
     }
 
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<Favorite> favoriteList) {
-        return doBatchDelete(favoriteList, null);
+    public int[] batchDelete(List<UserFollowing> userFollowingList) {
+        return doBatchDelete(userFollowingList, null);
     }
 
     // ===================================================================================
@@ -575,8 +575,8 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Favorite, FavoriteCB&gt;() {
-     *     public ConditionBean setup(Favorite entity, FavoriteCB intoCB) {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;UserFollowing, UserFollowingCB&gt;() {
+     *     public ConditionBean setup(UserFollowing entity, UserFollowingCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -598,48 +598,48 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * @param manyArgLambda The callback to set up query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<Favorite, FavoriteCB> manyArgLambda) {
+    public int queryInsert(QueryInsertSetupper<UserFollowing, UserFollowingCB> manyArgLambda) {
         return doQueryInsert(manyArgLambda, null);
     }
 
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//favorite.setPK...(value);</span>
-     * favorite.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//userFollowing.setPK...(value);</span>
+     * userFollowing.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//favorite.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//favorite.set...;</span>
+     * <span style="color: #3F7E5E">//userFollowing.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//userFollowing.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//favorite.setVersionNo(value);</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryUpdate</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//userFollowing.setVersionNo(value);</span>
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">queryUpdate</span>(userFollowing, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param favorite The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param userFollowing The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(Favorite favorite, CBCall<FavoriteCB> cbLambda) {
-        return doQueryUpdate(favorite, createCB(cbLambda), null);
+    public int queryUpdate(UserFollowing userFollowing, CBCall<UserFollowingCB> cbLambda) {
+        return doQueryUpdate(userFollowing, createCB(cbLambda), null);
     }
 
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryDelete</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">queryDelete</span>(userFollowing, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(CBCall<FavoriteCB> cbLambda) {
+    public int queryDelete(CBCall<UserFollowingCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
@@ -654,22 +654,22 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
      * Other specifications are same as insert(entity).
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * favorite.setFoo...(value);
-     * favorite.setBar...(value);
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingInsert</span>(favorite, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * userFollowing.setFoo...(value);
+     * userFollowing.setBar...(value);
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">varyingInsert</span>(userFollowing, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
      * });
-     * ... = favorite.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * ... = userFollowing.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param favorite The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param userFollowing The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(Favorite favorite, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
-        doInsert(favorite, createInsertOption(opLambda));
+    public void varyingInsert(UserFollowing userFollowing, WritableOptionCall<UserFollowingCB, InsertOption<UserFollowingCB>> opLambda) {
+        doInsert(userFollowing, createInsertOption(opLambda));
     }
 
     /**
@@ -677,53 +677,53 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
-     * favorite.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * favorite.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
+     * userFollowing.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * userFollowing.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * favorite.<span style="color: #CC4747">setVersionNo</span>(value);
+     * userFollowing.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(favorite, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(userFollowing, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param favorite The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param userFollowing The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(Favorite favorite, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
-        doUpdate(favorite, createUpdateOption(opLambda));
+    public void varyingUpdate(UserFollowing userFollowing, WritableOptionCall<UserFollowingCB, UpdateOption<UserFollowingCB>> opLambda) {
+        doUpdate(userFollowing, createUpdateOption(opLambda));
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
-     * @param favorite The entity of insert or update. (NotNull)
+     * @param userFollowing The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(Favorite favorite, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> insertOpLambda, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> updateOpLambda) {
-        doInsertOrUpdate(favorite, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    public void varyingInsertOrUpdate(UserFollowing userFollowing, WritableOptionCall<UserFollowingCB, InsertOption<UserFollowingCB>> insertOpLambda, WritableOptionCall<UserFollowingCB, UpdateOption<UserFollowingCB>> updateOpLambda) {
+        doInsertOrUpdate(userFollowing, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
-     * @param favorite The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param userFollowing The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(Favorite favorite, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
-        doDelete(favorite, createDeleteOption(opLambda));
+    public void varyingDelete(UserFollowing userFollowing, WritableOptionCall<UserFollowingCB, DeleteOption<UserFollowingCB>> opLambda) {
+        doDelete(userFollowing, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -734,12 +734,12 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
      * Other specifications are same as batchInsert(entityList).
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
-        return doBatchInsert(favoriteList, createInsertOption(opLambda));
+    public int[] varyingBatchInsert(List<UserFollowing> userFollowingList, WritableOptionCall<UserFollowingCB, InsertOption<UserFollowingCB>> opLambda) {
+        return doBatchInsert(userFollowingList, createInsertOption(opLambda));
     }
 
     /**
@@ -747,24 +747,24 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
      * Other specifications are same as batchUpdate(entityList).
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
-        return doBatchUpdate(favoriteList, createUpdateOption(opLambda));
+    public int[] varyingBatchUpdate(List<UserFollowing> userFollowingList, WritableOptionCall<UserFollowingCB, UpdateOption<UserFollowingCB>> opLambda) {
+        return doBatchUpdate(userFollowingList, createUpdateOption(opLambda));
     }
 
     /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
-     * @param favoriteList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param userFollowingList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<Favorite> favoriteList, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
-        return doBatchDelete(favoriteList, createDeleteOption(opLambda));
+    public int[] varyingBatchDelete(List<UserFollowing> userFollowingList, WritableOptionCall<UserFollowingCB, DeleteOption<UserFollowingCB>> opLambda) {
+        return doBatchDelete(userFollowingList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -778,7 +778,7 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<Favorite, FavoriteCB> manyArgLambda, WritableOptionCall<FavoriteCB, InsertOption<FavoriteCB>> opLambda) {
+    public int varyingQueryInsert(QueryInsertSetupper<UserFollowing, UserFollowingCB> manyArgLambda, WritableOptionCall<UserFollowingCB, InsertOption<UserFollowingCB>> opLambda) {
         return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
     }
 
@@ -789,14 +789,14 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * Favorite favorite = <span style="color: #70226C">new</span> Favorite();
+     * UserFollowing userFollowing = <span style="color: #70226C">new</span> UserFollowing();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//favorite.setPK...(value);</span>
-     * favorite.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//userFollowing.setPK...(value);</span>
+     * userFollowing.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//favorite.setVersionNo(value);</span>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//userFollowing.setVersionNo(value);</span>
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(userFollowing, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -804,14 +804,14 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
      * });
      * </pre>
-     * @param favorite The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param userFollowing The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(Favorite favorite, CBCall<FavoriteCB> cbLambda, WritableOptionCall<FavoriteCB, UpdateOption<FavoriteCB>> opLambda) {
-        return doQueryUpdate(favorite, createCB(cbLambda), createUpdateOption(opLambda));
+    public int varyingQueryUpdate(UserFollowing userFollowing, CBCall<UserFollowingCB> cbLambda, WritableOptionCall<UserFollowingCB, UpdateOption<UserFollowingCB>> opLambda) {
+        return doQueryUpdate(userFollowing, createCB(cbLambda), createUpdateOption(opLambda));
     }
 
     /**
@@ -819,18 +819,18 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * For example, allowNonQueryDelete(). <br>
      * Other specifications are same as queryDelete(cb).
      * <pre>
-     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">queryDelete</span>(favorite, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">userFollowingBhv</span>.<span style="color: #CC4747">queryDelete</span>(userFollowing, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Favorite. (NotNull)
+     * @param cbLambda The callback for condition-bean of UserFollowing. (NotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(CBCall<FavoriteCB> cbLambda, WritableOptionCall<FavoriteCB, DeleteOption<FavoriteCB>> opLambda) {
+    public int varyingQueryDelete(CBCall<UserFollowingCB> cbLambda, WritableOptionCall<UserFollowingCB, DeleteOption<UserFollowingCB>> opLambda) {
         return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
     }
 
@@ -841,40 +841,40 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
      * <span style="color: #3F7E5E">// main style</span>
-     * favoriteBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
-     * favoriteBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * favoriteBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
-     * favoriteBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * favoriteBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
-     * favoriteBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
-     * favoriteBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
+     * userFollowingBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
+     * userFollowingBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * userFollowingBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
+     * userFollowingBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * userFollowingBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
+     * userFollowingBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
+     * userFollowingBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
      * <span style="color: #3F7E5E">// traditional style</span>
-     * favoriteBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
-     * favoriteBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
-     * favoriteBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
-     * favoriteBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
-     * favoriteBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
-     * favoriteBhv.outideSql().traditionalStyle().execute(path, pmb);
+     * userFollowingBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
+     * userFollowingBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
+     * userFollowingBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
+     * userFollowingBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
+     * userFollowingBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
+     * userFollowingBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
      * <span style="color: #3F7E5E">// options</span>
-     * favoriteBhv.outideSql().removeBlockComment().selectList()
-     * favoriteBhv.outideSql().removeLineComment().selectList()
-     * favoriteBhv.outideSql().formatSql().selectList()
+     * userFollowingBhv.outideSql().removeBlockComment().selectList()
+     * userFollowingBhv.outideSql().removeLineComment().selectList()
+     * userFollowingBhv.outideSql().formatSql().selectList()
      * </pre>
      * <p>The invoker of behavior command should be not null when you call this method.</p>
      * @return The new-created all facade executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlAllFacadeExecutor<FavoriteBhv> outsideSql() {
+    public OutsideSqlAllFacadeExecutor<UserFollowingBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
-    protected Class<? extends Favorite> typeOfSelectedEntity() { return Favorite.class; }
-    protected Class<Favorite> typeOfHandlingEntity() { return Favorite.class; }
-    protected Class<FavoriteCB> typeOfHandlingConditionBean() { return FavoriteCB.class; }
+    protected Class<? extends UserFollowing> typeOfSelectedEntity() { return UserFollowing.class; }
+    protected Class<UserFollowing> typeOfHandlingEntity() { return UserFollowing.class; }
+    protected Class<UserFollowingCB> typeOfHandlingConditionBean() { return UserFollowingCB.class; }
 
     // ===================================================================================
     //                                                                            Accessor

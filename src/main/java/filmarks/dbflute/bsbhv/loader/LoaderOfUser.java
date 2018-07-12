@@ -30,13 +30,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, RELATIONSHIP
+ *     COMMENT, FAVORITE, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -129,24 +129,24 @@ public class LoaderOfUser {
         return hd -> hd.handle(new LoaderOfFavorite().ready(_referrerFavorite, _selector));
     }
 
-    protected List<Relationship> _referrerRelationshipByFollowerId;
+    protected List<UserFollowing> _referrerUserFollowingByFollowerId;
 
     /**
-     * Load referrer of relationshipByFollowerIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
+     * Load referrer of userFollowingByFollowerIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
      * <pre>
      * <span style="color: #0000C0">userBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">userLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadRelationshipByFollowerId</span>(<span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *         <span style="color: #553000">relationshipCB</span>.query().set...
-     *         <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadUserFollowingByFollowerId</span>(<span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">followingCB</span>.setupSelect...
+     *         <span style="color: #553000">followingCB</span>.query().set...
+     *         <span style="color: #553000">followingCB</span>.query().addOrderBy...
      *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">relationshipLoader</span> -&gt; {</span>
-     *     <span style="color: #3F7E5E">//    relationshipLoader.load...</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">followingLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    followingLoader.load...</span>
      *     <span style="color: #3F7E5E">//});</span>
      * });
      * for (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getRelationshipByFollowerIdList()</span>;
+     *     ... = user.<span style="color: #CC4747">getUserFollowingByFollowerIdList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -158,29 +158,29 @@ public class LoaderOfUser {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerLoaderGateway<LoaderOfRelationship> loadRelationshipByFollowerId(ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
-        myBhv().loadRelationshipByFollowerId(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerRelationshipByFollowerId = refLs);
-        return hd -> hd.handle(new LoaderOfRelationship().ready(_referrerRelationshipByFollowerId, _selector));
+    public NestedReferrerLoaderGateway<LoaderOfUserFollowing> loadUserFollowingByFollowerId(ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
+        myBhv().loadUserFollowingByFollowerId(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerUserFollowingByFollowerId = refLs);
+        return hd -> hd.handle(new LoaderOfUserFollowing().ready(_referrerUserFollowingByFollowerId, _selector));
     }
 
-    protected List<Relationship> _referrerRelationshipByFollowingId;
+    protected List<UserFollowing> _referrerUserFollowingByFollowingId;
 
     /**
-     * Load referrer of relationshipByFollowingIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
+     * Load referrer of userFollowingByFollowingIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
      * <pre>
      * <span style="color: #0000C0">userBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">userLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadRelationshipByFollowingId</span>(<span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *         <span style="color: #553000">relationshipCB</span>.query().set...
-     *         <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadUserFollowingByFollowingId</span>(<span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">followingCB</span>.setupSelect...
+     *         <span style="color: #553000">followingCB</span>.query().set...
+     *         <span style="color: #553000">followingCB</span>.query().addOrderBy...
      *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">relationshipLoader</span> -&gt; {</span>
-     *     <span style="color: #3F7E5E">//    relationshipLoader.load...</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">followingLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    followingLoader.load...</span>
      *     <span style="color: #3F7E5E">//});</span>
      * });
      * for (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getRelationshipByFollowingIdList()</span>;
+     *     ... = user.<span style="color: #CC4747">getUserFollowingByFollowingIdList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -192,9 +192,9 @@ public class LoaderOfUser {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerLoaderGateway<LoaderOfRelationship> loadRelationshipByFollowingId(ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
-        myBhv().loadRelationshipByFollowingId(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerRelationshipByFollowingId = refLs);
-        return hd -> hd.handle(new LoaderOfRelationship().ready(_referrerRelationshipByFollowingId, _selector));
+    public NestedReferrerLoaderGateway<LoaderOfUserFollowing> loadUserFollowingByFollowingId(ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
+        myBhv().loadUserFollowingByFollowingId(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerUserFollowingByFollowingId = refLs);
+        return hd -> hd.handle(new LoaderOfUserFollowing().ready(_referrerUserFollowingByFollowingId, _selector));
     }
 
     // ===================================================================================

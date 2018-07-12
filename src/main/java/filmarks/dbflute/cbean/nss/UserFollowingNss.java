@@ -1,18 +1,18 @@
 package filmarks.dbflute.cbean.nss;
 
-import filmarks.dbflute.cbean.cq.RelationshipCQ;
+import filmarks.dbflute.cbean.cq.UserFollowingCQ;
 
 /**
- * The nest select set-upper of RELATIONSHIP.
+ * The nest select set-upper of USER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
-public class RelationshipNss {
+public class UserFollowingNss {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final RelationshipCQ _query;
-    public RelationshipNss(RelationshipCQ query) { _query = query; }
+    protected final UserFollowingCQ _query;
+    public UserFollowingNss(UserFollowingCQ query) { _query = query; }
     public boolean hasConditionQuery() { return _query != null; }
 
     // ===================================================================================

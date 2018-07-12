@@ -19,7 +19,7 @@ import filmarks.dbflute.exentity.*;
  *     FAVORITE_ID
  *
  * [column]
- *     FAVORITE_ID, USER_ID, ALBUM_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID, FAVORITE_CREATED_AT
  *
  * [sequence]
  *     
@@ -47,9 +47,11 @@ import filmarks.dbflute.exentity.*;
  * Integer favoriteId = entity.getFavoriteId();
  * Integer userId = entity.getUserId();
  * Integer albumId = entity.getAlbumId();
+ * java.time.LocalDateTime favoriteCreatedAt = entity.getFavoriteCreatedAt();
  * entity.setFavoriteId(favoriteId);
  * entity.setUserId(userId);
  * entity.setAlbumId(albumId);
+ * entity.setFavoriteCreatedAt(favoriteCreatedAt);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -73,6 +75,9 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
 
     /** ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM} */
     protected Integer _albumId;
+
+    /** FAVORITE_CREATED_AT: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _favoriteCreatedAt;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -202,6 +207,7 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
         sb.append(dm).append(xfND(_favoriteId));
         sb.append(dm).append(xfND(_userId));
         sb.append(dm).append(xfND(_albumId));
+        sb.append(dm).append(xfND(_favoriteCreatedAt));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -288,5 +294,25 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     public void setAlbumId(Integer albumId) {
         registerModifiedProperty("albumId");
         _albumId = albumId;
+    }
+
+    /**
+     * [get] FAVORITE_CREATED_AT: {NotNull, DATETIME(19)} <br>
+     * ??
+     * @return The value of the column 'FAVORITE_CREATED_AT'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getFavoriteCreatedAt() {
+        checkSpecifiedProperty("favoriteCreatedAt");
+        return _favoriteCreatedAt;
+    }
+
+    /**
+     * [set] FAVORITE_CREATED_AT: {NotNull, DATETIME(19)} <br>
+     * ??
+     * @param favoriteCreatedAt The value of the column 'FAVORITE_CREATED_AT'. (basically NotNull if update: for the constraint)
+     */
+    public void setFavoriteCreatedAt(java.time.LocalDateTime favoriteCreatedAt) {
+        registerModifiedProperty("favoriteCreatedAt");
+        _favoriteCreatedAt = favoriteCreatedAt;
     }
 }

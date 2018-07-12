@@ -25,28 +25,28 @@ import filmarks.dbflute.cbean.*;
  * The behavior of SONG as TABLE. <br>
  * <pre>
  * [primary key]
- *     ALBUM_ID
+ *     SONG_ID
  *
  * [column]
- *     ALBUM_ID, ARTIST_ID, NAME
+ *     SONG_ID, ALBUM_ID, SONG_TITLE
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     SONG_ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     ARTIST, ALBUM
+ *     ALBUM
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     artist, album
+ *     album
  *
  * [referrer property]
  *     
@@ -159,31 +159,31 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
 
     /**
      * Select the entity by the primary-key value.
-     * @param albumId : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @param songId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Song> selectByPK(Integer albumId) {
-        return facadeSelectByPK(albumId);
+    public OptionalEntity<Song> selectByPK(Integer songId) {
+        return facadeSelectByPK(songId);
     }
 
-    protected OptionalEntity<Song> facadeSelectByPK(Integer albumId) {
-        return doSelectOptionalByPK(albumId, typeOfSelectedEntity());
+    protected OptionalEntity<Song> facadeSelectByPK(Integer songId) {
+        return doSelectOptionalByPK(songId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Song> ENTITY doSelectByPK(Integer albumId, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(albumId), tp);
+    protected <ENTITY extends Song> ENTITY doSelectByPK(Integer songId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(songId), tp);
     }
 
-    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer albumId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(albumId, tp), albumId);
+    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer songId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(songId, tp), songId);
     }
 
-    protected SongCB xprepareCBAsPK(Integer albumId) {
-        assertObjectNotNull("albumId", albumId);
-        return newConditionBean().acceptPK(albumId);
+    protected SongCB xprepareCBAsPK(Integer songId) {
+        assertObjectNotNull("songId", songId);
+        return newConditionBean().acceptPK(songId);
     }
 
     // ===================================================================================
@@ -365,14 +365,6 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     //                                                                   Pull out Relation
     //                                                                   =================
     /**
-     * Pull out the list of foreign table 'Artist'.
-     * @param songList The list of song. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<Artist> pulloutArtist(List<Song> songList)
-    { return helpPulloutInternally(songList, "artist"); }
-
-    /**
      * Pull out the list of foreign table 'Album'.
      * @param songList The list of song. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
@@ -384,12 +376,12 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key albumId.
+     * Extract the value list of (single) primary key songId.
      * @param songList The list of song. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractAlbumIdList(List<Song> songList)
-    { return helpExtractListInternally(songList, "albumId"); }
+    public List<Integer> extractSongIdList(List<Song> songList)
+    { return helpExtractListInternally(songList, "songId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

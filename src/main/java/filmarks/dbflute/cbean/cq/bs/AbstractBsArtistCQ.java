@@ -45,116 +45,116 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Integer id) {
-        doSetId_Equal(id);
+    public void setArtistId_Equal(Integer artistId) {
+        doSetArtistId_Equal(artistId);
     }
 
-    protected void doSetId_Equal(Integer id) {
-        regId(CK_EQ, id);
+    protected void doSetArtistId_Equal(Integer artistId) {
+        regArtistId(CK_EQ, artistId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Integer id) {
-        doSetId_NotEqual(id);
+    public void setArtistId_NotEqual(Integer artistId) {
+        doSetArtistId_NotEqual(artistId);
     }
 
-    protected void doSetId_NotEqual(Integer id) {
-        regId(CK_NES, id);
+    protected void doSetArtistId_NotEqual(Integer artistId) {
+        regArtistId(CK_NES, artistId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Integer id) {
-        regId(CK_GT, id);
+    public void setArtistId_GreaterThan(Integer artistId) {
+        regArtistId(CK_GT, artistId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Integer id) {
-        regId(CK_LT, id);
+    public void setArtistId_LessThan(Integer artistId) {
+        regArtistId(CK_LT, artistId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Integer id) {
-        regId(CK_GE, id);
+    public void setArtistId_GreaterEqual(Integer artistId) {
+        regArtistId(CK_GE, artistId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistId The value of artistId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Integer id) {
-        regId(CK_LE, id);
+    public void setArtistId_LessEqual(Integer artistId) {
+        regArtistId(CK_LE, artistId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of artistId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of artistId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setArtistId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setArtistId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of artistId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of artistId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueId(), "ID", rangeOfOption);
+    protected void setArtistId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueArtistId(), "ARTIST_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistIdList The collection of artistId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Integer> idList) {
-        doSetId_InScope(idList);
+    public void setArtistId_InScope(Collection<Integer> artistIdList) {
+        doSetArtistId_InScope(artistIdList);
     }
 
-    protected void doSetId_InScope(Collection<Integer> idList) {
-        regINS(CK_INS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetArtistId_InScope(Collection<Integer> artistIdList) {
+        regINS(CK_INS, cTL(artistIdList), xgetCValueArtistId(), "ARTIST_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
+     * @param artistIdList The collection of artistId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Integer> idList) {
-        doSetId_NotInScope(idList);
+    public void setArtistId_NotInScope(Collection<Integer> artistIdList) {
+        doSetArtistId_NotInScope(artistIdList);
     }
 
-    protected void doSetId_NotInScope(Collection<Integer> idList) {
-        regINS(CK_NINS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetArtistId_NotInScope(Collection<Integer> artistIdList) {
+        regINS(CK_NINS, cTL(artistIdList), xgetCValueArtistId(), "ARTIST_ID");
     }
 
     /**
@@ -171,29 +171,10 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
     public void existsAlbum(SubQuery<AlbumCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         AlbumCB cb = new AlbumCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_AlbumList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "ARTIST_ID", pp, "albumList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepArtistId_ExistsReferrer_AlbumList(cb.query());
+        registerExistsReferrer(cb.query(), "ARTIST_ID", "ARTIST_ID", pp, "albumList");
     }
-    public abstract String keepId_ExistsReferrer_AlbumList(AlbumCQ sq);
-
-    /**
-     * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select ARTIST_ID from SONG where ...)} <br>
-     * SONG by ARTIST_ID, named 'songAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">existsSong</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     songCB.query().set...
-     * });
-     * </pre>
-     * @param subCBLambda The callback for sub-query of SongList for 'exists'. (NotNull)
-     */
-    public void existsSong(SubQuery<SongCB> subCBLambda) {
-        assertObjectNotNull("subCBLambda", subCBLambda);
-        SongCB cb = new SongCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_SongList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "ARTIST_ID", pp, "songList");
-    }
-    public abstract String keepId_ExistsReferrer_SongList(SongCQ sq);
+    public abstract String keepArtistId_ExistsReferrer_AlbumList(AlbumCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -204,50 +185,23 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
      *     albumCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_AlbumList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of ArtistId_NotExistsReferrer_AlbumList for 'not exists'. (NotNull)
      */
     public void notExistsAlbum(SubQuery<AlbumCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         AlbumCB cb = new AlbumCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_AlbumList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "ARTIST_ID", pp, "albumList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepArtistId_NotExistsReferrer_AlbumList(cb.query());
+        registerNotExistsReferrer(cb.query(), "ARTIST_ID", "ARTIST_ID", pp, "albumList");
     }
-    public abstract String keepId_NotExistsReferrer_AlbumList(AlbumCQ sq);
-
-    /**
-     * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select ARTIST_ID from SONG where ...)} <br>
-     * SONG by ARTIST_ID, named 'songAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsSong</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     songCB.query().set...
-     * });
-     * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_SongList for 'not exists'. (NotNull)
-     */
-    public void notExistsSong(SubQuery<SongCB> subCBLambda) {
-        assertObjectNotNull("subCBLambda", subCBLambda);
-        SongCB cb = new SongCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_SongList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "ARTIST_ID", pp, "songList");
-    }
-    public abstract String keepId_NotExistsReferrer_SongList(SongCQ sq);
+    public abstract String keepArtistId_NotExistsReferrer_AlbumList(AlbumCQ sq);
 
     public void xsderiveAlbumList(String fn, SubQuery<AlbumCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         AlbumCB cb = new AlbumCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_AlbumList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "ARTIST_ID", pp, "albumList", al, op);
+        lockCall(() -> sq.query(cb)); String pp = keepArtistId_SpecifyDerivedReferrer_AlbumList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ARTIST_ID", "ARTIST_ID", pp, "albumList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq);
-
-    public void xsderiveSongList(String fn, SubQuery<SongCB> sq, String al, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_SongList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "ARTIST_ID", pp, "songList", al, op);
-    }
-    public abstract String keepId_SpecifyDerivedReferrer_SongList(SongCQ sq);
+    public abstract String keepArtistId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -270,188 +224,161 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
     public void xqderiveAlbumList(String fn, SubQuery<AlbumCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         AlbumCB cb = new AlbumCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_AlbumList(cb.query()); String prpp = keepId_QueryDerivedReferrer_AlbumListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "ARTIST_ID", sqpp, "albumList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String sqpp = keepArtistId_QueryDerivedReferrer_AlbumList(cb.query()); String prpp = keepArtistId_QueryDerivedReferrer_AlbumListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "ARTIST_ID", "ARTIST_ID", sqpp, "albumList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_AlbumList(AlbumCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_AlbumListParameter(Object vl);
-
-    /**
-     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from SONG where ...)} <br>
-     * SONG by ARTIST_ID, named 'songAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">derivedSong()</span>.<span style="color: #CC4747">max</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     songCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     songCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
-     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
-     * </pre>
-     * @return The object to set up a function for referrer table. (NotNull)
-     */
-    public HpQDRFunction<SongCB> derivedSong() {
-        return xcreateQDRFunctionSongList();
-    }
-    protected HpQDRFunction<SongCB> xcreateQDRFunctionSongList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveSongList(fn, sq, rd, vl, op));
-    }
-    public void xqderiveSongList(String fn, SubQuery<SongCB> sq, String rd, Object vl, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_SongList(cb.query()); String prpp = keepId_QueryDerivedReferrer_SongListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "ARTIST_ID", sqpp, "songList", rd, vl, prpp, op);
-    }
-    public abstract String keepId_QueryDerivedReferrer_SongList(SongCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_SongListParameter(Object vl);
+    public abstract String keepArtistId_QueryDerivedReferrer_AlbumList(AlbumCQ sq);
+    public abstract String keepArtistId_QueryDerivedReferrer_AlbumListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNull() { regId(CK_ISN, DOBJ); }
+    public void setArtistId_IsNull() { regArtistId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
+    public void setArtistId_IsNotNull() { regArtistId(CK_ISNN, DOBJ); }
 
-    protected void regId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueId(), "ID"); }
-    protected abstract ConditionValue xgetCValueId();
+    protected void regArtistId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueArtistId(), "ARTIST_ID"); }
+    protected abstract ConditionValue xgetCValueArtistId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_Equal(String name) {
-        doSetName_Equal(fRES(name));
+    public void setArtistName_Equal(String artistName) {
+        doSetArtistName_Equal(fRES(artistName));
     }
 
-    protected void doSetName_Equal(String name) {
-        regName(CK_EQ, name);
+    protected void doSetArtistName_Equal(String artistName) {
+        regArtistName(CK_EQ, artistName);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_NotEqual(String name) {
-        doSetName_NotEqual(fRES(name));
+    public void setArtistName_NotEqual(String artistName) {
+        doSetArtistName_NotEqual(fRES(artistName));
     }
 
-    protected void doSetName_NotEqual(String name) {
-        regName(CK_NES, name);
+    protected void doSetArtistName_NotEqual(String artistName) {
+        regArtistName(CK_NES, artistName);
     }
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_GreaterThan(String name) {
-        regName(CK_GT, fRES(name));
+    public void setArtistName_GreaterThan(String artistName) {
+        regArtistName(CK_GT, fRES(artistName));
     }
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_LessThan(String name) {
-        regName(CK_LT, fRES(name));
+    public void setArtistName_LessThan(String artistName) {
+        regArtistName(CK_LT, fRES(artistName));
     }
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_GreaterEqual(String name) {
-        regName(CK_GE, fRES(name));
+    public void setArtistName_GreaterEqual(String artistName) {
+        regArtistName(CK_GE, fRES(artistName));
     }
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_LessEqual(String name) {
-        regName(CK_LE, fRES(name));
+    public void setArtistName_LessEqual(String artistName) {
+        regArtistName(CK_LE, fRES(artistName));
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param nameList The collection of name as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistNameList The collection of artistName as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_InScope(Collection<String> nameList) {
-        doSetName_InScope(nameList);
+    public void setArtistName_InScope(Collection<String> artistNameList) {
+        doSetArtistName_InScope(artistNameList);
     }
 
-    protected void doSetName_InScope(Collection<String> nameList) {
-        regINS(CK_INS, cTL(nameList), xgetCValueName(), "NAME");
+    protected void doSetArtistName_InScope(Collection<String> artistNameList) {
+        regINS(CK_INS, cTL(artistNameList), xgetCValueArtistName(), "ARTIST_NAME");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param nameList The collection of name as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistNameList The collection of artistName as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setName_NotInScope(Collection<String> nameList) {
-        doSetName_NotInScope(nameList);
+    public void setArtistName_NotInScope(Collection<String> artistNameList) {
+        doSetArtistName_NotInScope(artistNameList);
     }
 
-    protected void doSetName_NotInScope(Collection<String> nameList) {
-        regINS(CK_NINS, cTL(nameList), xgetCValueName(), "NAME");
+    protected void doSetArtistName_NotInScope(Collection<String> artistNameList) {
+        regINS(CK_NINS, cTL(artistNameList), xgetCValueArtistName(), "ARTIST_NAME");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setArtistName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param artistName The value of artistName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setName_LikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setName_LikeSearch(name, xcLSOP(opLambda));
+    public void setArtistName_LikeSearch(String artistName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setArtistName_LikeSearch(artistName, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setArtistName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param artistName The value of artistName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setName_LikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
+    protected void setArtistName_LikeSearch(String artistName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(artistName), xgetCValueArtistName(), "ARTIST_NAME", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setName_NotLikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setName_NotLikeSearch(name, xcLSOP(opLambda));
+    public void setArtistName_NotLikeSearch(String artistName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setArtistName_NotLikeSearch(artistName, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
+     * @param artistName The value of artistName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setName_NotLikeSearch(String name, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(name), xgetCValueName(), "NAME", likeSearchOption);
+    protected void setArtistName_NotLikeSearch(String artistName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(artistName), xgetCValueArtistName(), "ARTIST_NAME", likeSearchOption);
     }
 
-    protected void regName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueName(), "NAME"); }
-    protected abstract ConditionValue xgetCValueName();
+    protected void regArtistName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueArtistName(), "ARTIST_NAME"); }
+    protected abstract ConditionValue xgetCValueArtistName();
 
     // ===================================================================================
     //                                                                     ScalarCondition
@@ -572,7 +499,7 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
     public void xsmyselfDerive(String fn, SubQuery<ArtistCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         ArtistCB cb = new ArtistCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ARTIST_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(ArtistCQ sq);
@@ -588,7 +515,7 @@ public abstract class AbstractBsArtistCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         ArtistCB cb = new ArtistCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "ID";
+        String pk = "ARTIST_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

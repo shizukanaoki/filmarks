@@ -13,7 +13,7 @@ import filmarks.dbflute.exentity.*;
  *     FAVORITE_ID
  *
  * [column]
- *     FAVORITE_ID, USER_ID, ALBUM_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID, FAVORITE_CREATED_AT
  *
  * [sequence]
  *     

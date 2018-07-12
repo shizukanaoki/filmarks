@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.dbflute.Entity;
-import org.dbflute.optional.OptionalEntity;
 import org.dbflute.dbmeta.AbstractDBMeta;
 import org.dbflute.dbmeta.info.*;
 import org.dbflute.dbmeta.name.*;
@@ -14,17 +13,17 @@ import filmarks.dbflute.allcommon.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The DB meta of RELATIONSHIP. (Singleton)
+ * The DB meta of POST. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class RelationshipDbm extends AbstractDBMeta {
+public class PostDbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final RelationshipDbm _instance = new RelationshipDbm();
-    private RelationshipDbm() {}
-    public static RelationshipDbm getInstance() { return _instance; }
+    private static final PostDbm _instance = new PostDbm();
+    private PostDbm() {}
+    public static PostDbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -43,33 +42,21 @@ public class RelationshipDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Relationship)et).getId(), (et, vl) -> ((Relationship)et).setId(cti(vl)), "id");
-        setupEpg(_epgMap, et -> ((Relationship)et).getFollowingId(), (et, vl) -> ((Relationship)et).setFollowingId(cti(vl)), "followingId");
-        setupEpg(_epgMap, et -> ((Relationship)et).getFollowerId(), (et, vl) -> ((Relationship)et).setFollowerId(cti(vl)), "followerId");
+        setupEpg(_epgMap, et -> ((Post)et).getPostId(), (et, vl) -> ((Post)et).setPostId(cti(vl)), "postId");
+        setupEpg(_epgMap, et -> ((Post)et).getTargetId(), (et, vl) -> ((Post)et).setTargetId(cti(vl)), "targetId");
+        setupEpg(_epgMap, et -> ((Post)et).getTargetType(), (et, vl) -> ((Post)et).setTargetType(cti(vl)), "targetType");
+        setupEpg(_epgMap, et -> ((Post)et).getUserId(), (et, vl) -> ((Post)et).setUserId(cti(vl)), "userId");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
 
-    // -----------------------------------------------------
-    //                                      Foreign Property
-    //                                      ----------------
-    protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
-    { xsetupEfpg(); }
-    @SuppressWarnings("unchecked")
-    protected void xsetupEfpg() {
-        setupEfpg(_efpgMap, et -> ((Relationship)et).getUserByFollowerId(), (et, vl) -> ((Relationship)et).setUserByFollowerId((OptionalEntity<User>)vl), "userByFollowerId");
-        setupEfpg(_efpgMap, et -> ((Relationship)et).getUserByFollowingId(), (et, vl) -> ((Relationship)et).setUserByFollowingId((OptionalEntity<User>)vl), "userByFollowingId");
-    }
-    public PropertyGateway findForeignPropertyGateway(String prop)
-    { return doFindEfpg(_efpgMap, prop); }
-
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "RELATIONSHIP";
-    protected final String _tableDispName = "RELATIONSHIP";
-    protected final String _tablePropertyName = "relationship";
-    protected final TableSqlName _tableSqlName = new TableSqlName("RELATIONSHIP", _tableDbName);
+    protected final String _tableDbName = "POST";
+    protected final String _tableDispName = "POST";
+    protected final String _tablePropertyName = "post";
+    protected final TableSqlName _tableSqlName = new TableSqlName("POST", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
@@ -79,31 +66,38 @@ public class RelationshipDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnFollowingId = cci("FOLLOWING_ID", "FOLLOWING_ID", null, null, Integer.class, "followingId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowingId", null, null, false);
-    protected final ColumnInfo _columnFollowerId = cci("FOLLOWER_ID", "FOLLOWER_ID", null, null, Integer.class, "followerId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "userByFollowerId", null, null, false);
+    protected final ColumnInfo _columnPostId = cci("POST_ID", "POST_ID", null, null, Integer.class, "postId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnTargetId = cci("TARGET_ID", "TARGET_ID", null, null, Integer.class, "targetId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnTargetType = cci("TARGET_TYPE", "TARGET_TYPE", null, null, Integer.class, "targetType", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * ID: {PK, ID, NotNull, INT(10)}
+     * POST_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnId() { return _columnId; }
+    public ColumnInfo columnPostId() { return _columnPostId; }
     /**
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * TARGET_ID: {NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnFollowingId() { return _columnFollowingId; }
+    public ColumnInfo columnTargetId() { return _columnTargetId; }
     /**
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * TARGET_TYPE: {NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnFollowerId() { return _columnFollowerId; }
+    public ColumnInfo columnTargetType() { return _columnTargetType; }
+    /**
+     * USER_ID: {NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUserId() { return _columnUserId; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnId());
-        ls.add(columnFollowingId());
-        ls.add(columnFollowerId());
+        ls.add(columnPostId());
+        ls.add(columnTargetId());
+        ls.add(columnTargetType());
+        ls.add(columnUserId());
         return ls;
     }
 
@@ -115,7 +109,7 @@ public class RelationshipDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnPostId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
@@ -127,22 +121,6 @@ public class RelationshipDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------
-    /**
-     * USER by my FOLLOWER_ID, named 'userByFollowerId'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignUserByFollowerId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowerId(), UserDbm.getInstance().columnUserId());
-        return cfi("FK_RELATIONSHIP_FOLLOWER", "userByFollowerId", this, UserDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "relationshipByFollowerIdList", false);
-    }
-    /**
-     * USER by my FOLLOWING_ID, named 'userByFollowingId'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignUserByFollowingId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowingId(), UserDbm.getInstance().columnUserId());
-        return cfi("FK_RELATIONSHIP_FOLLOWING", "userByFollowingId", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "relationshipByFollowingIdList", false);
-    }
 
     // -----------------------------------------------------
     //                                     Referrer Property
@@ -156,27 +134,27 @@ public class RelationshipDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "filmarks.dbflute.exentity.Relationship"; }
-    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.RelationshipCB"; }
-    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.RelationshipBhv"; }
+    public String getEntityTypeName() { return "filmarks.dbflute.exentity.Post"; }
+    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.PostCB"; }
+    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.PostBhv"; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<Relationship> getEntityType() { return Relationship.class; }
+    public Class<Post> getEntityType() { return Post.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Relationship newEntity() { return new Relationship(); }
+    public Post newEntity() { return new Post(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((Relationship)et, mp); }
+    { doAcceptPrimaryKeyMap((Post)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((Relationship)et, mp); }
+    { doAcceptAllColumnMap((Post)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

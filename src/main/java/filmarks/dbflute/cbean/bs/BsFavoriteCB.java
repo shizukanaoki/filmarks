@@ -363,6 +363,11 @@ public class BsFavoriteCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
+        /**
+         * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFavoriteCreatedAt() { return doColumn("FAVORITE_CREATED_AT"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

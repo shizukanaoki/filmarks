@@ -406,6 +406,81 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
     protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
     protected abstract ConditionValue xgetCValueAlbumId();
 
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_Equal(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_EQ,  favoriteCreatedAt);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_GreaterThan(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_GT,  favoriteCreatedAt);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_LessThan(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_LT,  favoriteCreatedAt);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_GreaterEqual(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_GE,  favoriteCreatedAt);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_LessEqual(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_LE, favoriteCreatedAt);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setFavoriteCreatedAt_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setFavoriteCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setFavoriteCreatedAt_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setFavoriteCreatedAt_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setFavoriteCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "FAVORITE_CREATED_AT"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueFavoriteCreatedAt(), nm, op);
+    }
+
+    protected void regFavoriteCreatedAt(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFavoriteCreatedAt(), "FAVORITE_CREATED_AT"); }
+    protected abstract ConditionValue xgetCValueFavoriteCreatedAt();
+
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============
