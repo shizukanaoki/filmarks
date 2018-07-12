@@ -36,7 +36,10 @@ public class FavoriteController {
     public ModelAndView create(@PathVariable int albumID, Principal principal) {
         Authentication auth = (Authentication)principal;
         User user = (User)auth.getPrincipal();
-        favoriteService.create(new Favorite(user.getUserId(), albumID));
+        Favorite favorite = new Favorite();
+        favorite.setUserId(user.getUserId());
+        favorite.setAlbumId(albumID);
+        favoriteService.create(favorite);
         return new ModelAndView("redirect:/albums/" + String.valueOf(albumID));
     }
 
