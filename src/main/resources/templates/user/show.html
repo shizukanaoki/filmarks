@@ -20,7 +20,10 @@
                 <a href="/" th:text="BLAND"></a>
             </li>
             <li>
-                <a href="">favorites</a>
+                <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+            </li>
+            <li>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
             </li>
             <li>
                 <a href="">following</a>

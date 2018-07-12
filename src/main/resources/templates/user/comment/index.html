@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/comment.css">
+</head>
+<body>
+<div>
+    <div class="wrapper">
+        <ul class="sidebar">
+            <li class="sidebar_brand">
+                <a href="/" th:text="BLAND"></a>
+            </li>
+            <li>
+                <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+            </li>
+            <li>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
+            </li>
+            <li>
+                <a href="">following</a>
+            </li>
+            <li>
+                <a href="">follower</a>
+            </li>
+        </ul>
+        <div class="sidebar_width">
+        </div>
+        <div class="main">
+            <div class="comments">
+                <div class="comment">
+                    <img src="/image/album/1.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/2.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/3.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/4.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/5.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/6.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <img src="/image/album/7.jpg" alt="">
+                    <div class="comment_info">
+                        <div class="comment_datetime">2018/07/12 00:56</div>
+                        <div class="comment_rate">RATE: 5</div>
+                        <div class="comment_content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
