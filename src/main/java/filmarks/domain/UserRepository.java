@@ -26,10 +26,10 @@ public class UserRepository {
         userBhv.loadFavorite(user, cb -> {
             cb.setupSelect_Album();
         });
-        userBhv.loadRelationshipByFollowingId(user, cb -> {
-           cb.setupSelect_UserByFollowerId();
+        userBhv.loadUserFollowingByFollowingId(user, cb -> {
+            cb.setupSelect_UserByFollowerId();
         });
-        userBhv.loadRelationshipByFollowerId(user, cb -> {
+        userBhv.loadUserFollowingByFollowerId(user, cb -> {
             cb.setupSelect_UserByFollowingId();
         });
         return user;

@@ -1,8 +1,8 @@
 package filmarks.web;
 
-import filmarks.dbflute.exentity.Relationship;
 import filmarks.dbflute.exentity.User;
-import filmarks.service.RelationShipService;
+import filmarks.dbflute.exentity.UserFollowing;
+import filmarks.service.UserFollowingService;
 import filmarks.service.UserService;
 import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,16 @@ public class RelationshipController {
     UserService userService;
 
     @Autowired
-    RelationShipService relationShipService;
+    UserFollowingService userFollowingService;
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
     public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, ModelAndView mav) {
         try {
             User follower = userService.findOne(followerId);
-            relationShipService.create(new Relationship(following.getUserId(), follower.getUserId()));
+            UserFollowing userFollowing = new UserFollowing();
+            userFollowing.setFollowerId(follower.getUserId());
+            userFollowing.setFollowingId(following.getUserId());
+            userFollowingService.create(userFollowing);
             mav.setViewName("user/show");
             mav.addObject("user", follower);
             return mav;

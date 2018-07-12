@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,7 @@ public class FavoriteController {
         Favorite favorite = new Favorite();
         favorite.setUserId(user.getUserId());
         favorite.setAlbumId(albumID);
+        favorite.setFavoriteCreatedAt(LocalDateTime.now());
         favoriteService.create(favorite);
         return new ModelAndView("redirect:/albums/" + String.valueOf(albumID));
     }
