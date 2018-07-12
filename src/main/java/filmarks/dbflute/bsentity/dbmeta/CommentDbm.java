@@ -148,7 +148,7 @@ public class CommentDbm extends AbstractDBMeta {
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignAlbum() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnAlbumId());
         return cfi("FK_COMMENT_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "commentList", false);
     }
     /**
@@ -156,7 +156,7 @@ public class CommentDbm extends AbstractDBMeta {
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignUser() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnUserId());
         return cfi("FK_COMMENT_USER", "user", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "commentList", false);
     }
 

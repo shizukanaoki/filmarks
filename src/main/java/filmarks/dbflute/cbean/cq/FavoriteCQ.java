@@ -2,17 +2,17 @@ package filmarks.dbflute.cbean.cq;
 
 import org.dbflute.cbean.ConditionQuery;
 import org.dbflute.cbean.sqlclause.SqlClause;
-import filmarks.dbflute.cbean.cq.bs.BsPickCQ;
+import filmarks.dbflute.cbean.cq.bs.BsFavoriteCQ;
 
 /**
- * The condition-query of PICK.
+ * The condition-query of FAVORITE.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
  */
-public class PickCQ extends BsPickCQ {
+public class FavoriteCQ extends BsFavoriteCQ {
 
     // ===================================================================================
     //                                                                         Constructor
@@ -25,7 +25,7 @@ public class PickCQ extends BsPickCQ {
      * @param aliasName The alias name for this query. (NotNull)
      * @param nestLevel The nest level of this query. (if zero, this is base query)
      */
-    public PickCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public FavoriteCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 

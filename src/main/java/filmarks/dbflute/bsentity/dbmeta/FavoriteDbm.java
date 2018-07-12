@@ -14,17 +14,17 @@ import filmarks.dbflute.allcommon.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The DB meta of PICK. (Singleton)
+ * The DB meta of FAVORITE. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class PickDbm extends AbstractDBMeta {
+public class FavoriteDbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final PickDbm _instance = new PickDbm();
-    private PickDbm() {}
-    public static PickDbm getInstance() { return _instance; }
+    private static final FavoriteDbm _instance = new FavoriteDbm();
+    private FavoriteDbm() {}
+    public static FavoriteDbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -43,8 +43,9 @@ public class PickDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Pick)et).getUserId(), (et, vl) -> ((Pick)et).setUserId(cti(vl)), "userId");
-        setupEpg(_epgMap, et -> ((Pick)et).getProductId(), (et, vl) -> ((Pick)et).setProductId(cti(vl)), "productId");
+        setupEpg(_epgMap, et -> ((Favorite)et).getFavoriteId(), (et, vl) -> ((Favorite)et).setFavoriteId(cti(vl)), "favoriteId");
+        setupEpg(_epgMap, et -> ((Favorite)et).getUserId(), (et, vl) -> ((Favorite)et).setUserId(cti(vl)), "userId");
+        setupEpg(_epgMap, et -> ((Favorite)et).getAlbumId(), (et, vl) -> ((Favorite)et).setAlbumId(cti(vl)), "albumId");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -56,8 +57,8 @@ public class PickDbm extends AbstractDBMeta {
     { xsetupEfpg(); }
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
-        setupEfpg(_efpgMap, et -> ((Pick)et).getAlbum(), (et, vl) -> ((Pick)et).setAlbum((OptionalEntity<Album>)vl), "album");
-        setupEfpg(_efpgMap, et -> ((Pick)et).getUser(), (et, vl) -> ((Pick)et).setUser((OptionalEntity<User>)vl), "user");
+        setupEfpg(_efpgMap, et -> ((Favorite)et).getAlbum(), (et, vl) -> ((Favorite)et).setAlbum((OptionalEntity<Album>)vl), "album");
+        setupEfpg(_efpgMap, et -> ((Favorite)et).getUser(), (et, vl) -> ((Favorite)et).setUser((OptionalEntity<User>)vl), "user");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -65,10 +66,10 @@ public class PickDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "PICK";
-    protected final String _tableDispName = "PICK";
-    protected final String _tablePropertyName = "pick";
-    protected final TableSqlName _tableSqlName = new TableSqlName("PICK", _tableDbName);
+    protected final String _tableDbName = "FAVORITE";
+    protected final String _tableDispName = "FAVORITE";
+    protected final String _tablePropertyName = "favorite";
+    protected final TableSqlName _tableSqlName = new TableSqlName("FAVORITE", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
@@ -78,24 +79,31 @@ public class PickDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
+    protected final ColumnInfo _columnFavoriteId = cci("FAVORITE_ID", "FAVORITE_ID", null, null, Integer.class, "favoriteId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
-    protected final ColumnInfo _columnProductId = cci("PRODUCT_ID", "PRODUCT_ID", null, null, Integer.class, "productId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
+    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
 
     /**
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnFavoriteId() { return _columnFavoriteId; }
+    /**
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserId() { return _columnUserId; }
     /**
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnProductId() { return _columnProductId; }
+    public ColumnInfo columnAlbumId() { return _columnAlbumId; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
+        ls.add(columnFavoriteId());
         ls.add(columnUserId());
-        ls.add(columnProductId());
+        ls.add(columnAlbumId());
         return ls;
     }
 
@@ -107,11 +115,19 @@ public class PickDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() {
-        throw new UnsupportedOperationException("The table does not have primary key: " + getTableDbName());
-    }
-    public boolean hasPrimaryKey() { return false; }
+    protected UniqueInfo cpui() { return hpcpui(columnFavoriteId()); }
+    public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnUserId());
+        ls.add(columnAlbumId());
+        return hpcui(ls);
+    }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -122,20 +138,20 @@ public class PickDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignAlbum() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnProductId(), AlbumDbm.getInstance().columnId());
-        return cfi("FK_PICK_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "pickList", false);
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnAlbumId());
+        return cfi("FK_PICK_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "favoriteList", false);
     }
     /**
      * USER by my USER_ID, named 'user'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignUser() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnId());
-        return cfi("FK_PICK_USER", "user", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "pickList", false);
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnUserId());
+        return cfi("FK_PICK_USER", "user", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "favoriteList", false);
     }
 
     // -----------------------------------------------------
@@ -145,31 +161,32 @@ public class PickDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
+    public boolean hasIdentity() { return true; }
 
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "filmarks.dbflute.exentity.Pick"; }
-    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.PickCB"; }
-    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.PickBhv"; }
+    public String getEntityTypeName() { return "filmarks.dbflute.exentity.Favorite"; }
+    public String getConditionBeanTypeName() { return "filmarks.dbflute.cbean.FavoriteCB"; }
+    public String getBehaviorTypeName() { return "filmarks.dbflute.exbhv.FavoriteBhv"; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<Pick> getEntityType() { return Pick.class; }
+    public Class<Favorite> getEntityType() { return Favorite.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Pick newEntity() { return new Pick(); }
+    public Favorite newEntity() { return new Favorite(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((Pick)et, mp); }
+    { doAcceptPrimaryKeyMap((Favorite)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((Pick)et, mp); }
+    { doAcceptAllColumnMap((Favorite)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

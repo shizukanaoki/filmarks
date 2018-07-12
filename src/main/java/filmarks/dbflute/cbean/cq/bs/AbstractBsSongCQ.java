@@ -45,132 +45,132 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Integer id) {
-        doSetId_Equal(id);
+    public void setAlbumId_Equal(Integer albumId) {
+        doSetAlbumId_Equal(albumId);
     }
 
-    protected void doSetId_Equal(Integer id) {
-        regId(CK_EQ, id);
+    protected void doSetAlbumId_Equal(Integer albumId) {
+        regAlbumId(CK_EQ, albumId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Integer id) {
-        doSetId_NotEqual(id);
+    public void setAlbumId_NotEqual(Integer albumId) {
+        doSetAlbumId_NotEqual(albumId);
     }
 
-    protected void doSetId_NotEqual(Integer id) {
-        regId(CK_NES, id);
+    protected void doSetAlbumId_NotEqual(Integer albumId) {
+        regAlbumId(CK_NES, albumId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Integer id) {
-        regId(CK_GT, id);
+    public void setAlbumId_GreaterThan(Integer albumId) {
+        regAlbumId(CK_GT, albumId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Integer id) {
-        regId(CK_LT, id);
+    public void setAlbumId_LessThan(Integer albumId) {
+        regAlbumId(CK_LT, albumId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Integer id) {
-        regId(CK_GE, id);
+    public void setAlbumId_GreaterEqual(Integer albumId) {
+        regAlbumId(CK_GE, albumId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Integer id) {
-        regId(CK_LE, id);
+    public void setAlbumId_LessEqual(Integer albumId) {
+        regAlbumId(CK_LE, albumId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setAlbumId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueId(), "ID", rangeOfOption);
+    protected void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueAlbumId(), "ALBUM_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Integer> idList) {
-        doSetId_InScope(idList);
+    public void setAlbumId_InScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_InScope(albumIdList);
     }
 
-    protected void doSetId_InScope(Collection<Integer> idList) {
-        regINS(CK_INS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetAlbumId_InScope(Collection<Integer> albumIdList) {
+        regINS(CK_INS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
-     * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Integer> idList) {
-        doSetId_NotInScope(idList);
+    public void setAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_NotInScope(albumIdList);
     }
 
-    protected void doSetId_NotInScope(Collection<Integer> idList) {
-        regINS(CK_NINS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        regINS(CK_NINS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
      */
-    public void setId_IsNull() { regId(CK_ISN, DOBJ); }
+    public void setAlbumId_IsNull() { regAlbumId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
      */
-    public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
+    public void setAlbumId_IsNotNull() { regAlbumId(CK_ISNN, DOBJ); }
 
-    protected void regId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueId(), "ID"); }
-    protected abstract ConditionValue xgetCValueId();
+    protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
+    protected abstract ConditionValue xgetCValueAlbumId();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
@@ -543,7 +543,7 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
     public void xsmyselfDerive(String fn, SubQuery<SongCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ALBUM_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(SongCQ sq);
@@ -559,7 +559,7 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "ID";
+        String pk = "ALBUM_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

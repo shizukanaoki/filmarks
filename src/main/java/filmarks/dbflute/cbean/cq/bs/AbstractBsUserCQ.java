@@ -45,116 +45,116 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Integer id) {
-        doSetId_Equal(id);
+    public void setUserId_Equal(Integer userId) {
+        doSetUserId_Equal(userId);
     }
 
-    protected void doSetId_Equal(Integer id) {
-        regId(CK_EQ, id);
+    protected void doSetUserId_Equal(Integer userId) {
+        regUserId(CK_EQ, userId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Integer id) {
-        doSetId_NotEqual(id);
+    public void setUserId_NotEqual(Integer userId) {
+        doSetUserId_NotEqual(userId);
     }
 
-    protected void doSetId_NotEqual(Integer id) {
-        regId(CK_NES, id);
+    protected void doSetUserId_NotEqual(Integer userId) {
+        regUserId(CK_NES, userId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Integer id) {
-        regId(CK_GT, id);
+    public void setUserId_GreaterThan(Integer userId) {
+        regUserId(CK_GT, userId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Integer id) {
-        regId(CK_LT, id);
+    public void setUserId_LessThan(Integer userId) {
+        regUserId(CK_LT, userId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Integer id) {
-        regId(CK_GE, id);
+    public void setUserId_GreaterEqual(Integer userId) {
+        regUserId(CK_GE, userId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userId The value of userId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Integer id) {
-        regId(CK_LE, id);
+    public void setUserId_LessEqual(Integer userId) {
+        regUserId(CK_LE, userId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setUserId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setUserId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueId(), "ID", rangeOfOption);
+    protected void setUserId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueUserId(), "USER_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userIdList The collection of userId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Integer> idList) {
-        doSetId_InScope(idList);
+    public void setUserId_InScope(Collection<Integer> userIdList) {
+        doSetUserId_InScope(userIdList);
     }
 
-    protected void doSetId_InScope(Collection<Integer> idList) {
-        regINS(CK_INS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetUserId_InScope(Collection<Integer> userIdList) {
+        regINS(CK_INS, cTL(userIdList), xgetCValueUserId(), "USER_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * USER_ID: {PK, ID, NotNull, INT(10)}
+     * @param userIdList The collection of userId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Integer> idList) {
-        doSetId_NotInScope(idList);
+    public void setUserId_NotInScope(Collection<Integer> userIdList) {
+        doSetUserId_NotInScope(userIdList);
     }
 
-    protected void doSetId_NotInScope(Collection<Integer> idList) {
-        regINS(CK_NINS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetUserId_NotInScope(Collection<Integer> userIdList) {
+        regINS(CK_NINS, cTL(userIdList), xgetCValueUserId(), "USER_ID");
     }
 
     /**
@@ -171,29 +171,29 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void existsComment(SubQuery<CommentCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_CommentList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "USER_ID", pp, "commentList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_CommentList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "commentList");
     }
-    public abstract String keepId_ExistsReferrer_CommentList(CommentCQ sq);
+    public abstract String keepUserId_ExistsReferrer_CommentList(CommentCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select USER_ID from PICK where ...)} <br>
-     * PICK by USER_ID, named 'pickAsOne'.
+     * {exists (select USER_ID from FAVORITE where ...)} <br>
+     * FAVORITE by USER_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">existsPick</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.query().set...
+     * cb.query().<span style="color: #CC4747">existsFavorite</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of PickList for 'exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of FavoriteList for 'exists'. (NotNull)
      */
-    public void existsPick(SubQuery<PickCB> subCBLambda) {
+    public void existsFavorite(SubQuery<FavoriteCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        PickCB cb = new PickCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_PickList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "USER_ID", pp, "pickList");
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_FavoriteList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "favoriteList");
     }
-    public abstract String keepId_ExistsReferrer_PickList(PickCQ sq);
+    public abstract String keepUserId_ExistsReferrer_FavoriteList(FavoriteCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
@@ -209,10 +209,10 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void existsRelationshipByFollowerId(SubQuery<RelationshipCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_RelationshipByFollowerIdList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_RelationshipByFollowerIdList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
     }
-    public abstract String keepId_ExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_ExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
@@ -228,10 +228,10 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void existsRelationshipByFollowingId(SubQuery<RelationshipCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_RelationshipByFollowingIdList(cb.query());
-        registerExistsReferrer(cb.query(), "ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_RelationshipByFollowingIdList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
     }
-    public abstract String keepId_ExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_ExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -242,34 +242,34 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      *     commentCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_CommentList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_CommentList for 'not exists'. (NotNull)
      */
     public void notExistsComment(SubQuery<CommentCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         CommentCB cb = new CommentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_CommentList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "USER_ID", pp, "commentList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_CommentList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "commentList");
     }
-    public abstract String keepId_NotExistsReferrer_CommentList(CommentCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_CommentList(CommentCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select USER_ID from PICK where ...)} <br>
-     * PICK by USER_ID, named 'pickAsOne'.
+     * {not exists (select USER_ID from FAVORITE where ...)} <br>
+     * FAVORITE by USER_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsPick</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.query().set...
+     * cb.query().<span style="color: #CC4747">notExistsFavorite</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_PickList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_FavoriteList for 'not exists'. (NotNull)
      */
-    public void notExistsPick(SubQuery<PickCB> subCBLambda) {
+    public void notExistsFavorite(SubQuery<FavoriteCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        PickCB cb = new PickCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_PickList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "USER_ID", pp, "pickList");
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_FavoriteList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "favoriteList");
     }
-    public abstract String keepId_NotExistsReferrer_PickList(PickCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_FavoriteList(FavoriteCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -280,15 +280,15 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      *     relationshipCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_RelationshipByFollowerIdList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_RelationshipByFollowerIdList for 'not exists'. (NotNull)
      */
     public void notExistsRelationshipByFollowerId(SubQuery<RelationshipCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_RelationshipByFollowerIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_RelationshipByFollowerIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
     }
-    public abstract String keepId_NotExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -299,47 +299,47 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      *     relationshipCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_RelationshipByFollowingIdList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_RelationshipByFollowingIdList for 'not exists'. (NotNull)
      */
     public void notExistsRelationshipByFollowingId(SubQuery<RelationshipCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_RelationshipByFollowingIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_RelationshipByFollowingIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
     }
-    public abstract String keepId_NotExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
 
     public void xsderiveCommentList(String fn, SubQuery<CommentCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_CommentList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "USER_ID", pp, "commentList", al, op);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_CommentList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "commentList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_CommentList(CommentCQ sq);
 
-    public void xsderivePickList(String fn, SubQuery<PickCB> sq, String al, DerivedReferrerOption op) {
+    public void xsderiveFavoriteList(String fn, SubQuery<FavoriteCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        PickCB cb = new PickCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_PickList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "USER_ID", pp, "pickList", al, op);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_FavoriteList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "favoriteList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_PickList(PickCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq);
 
     public void xsderiveRelationshipByFollowerIdList(String fn, SubQuery<RelationshipCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList", al, op);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
 
     public void xsderiveRelationshipByFollowingIdList(String fn, SubQuery<RelationshipCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList", al, op);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList", al, op);
     }
-    public abstract String keepId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -362,38 +362,38 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void xqderiveCommentList(String fn, SubQuery<CommentCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_CommentList(cb.query()); String prpp = keepId_QueryDerivedReferrer_CommentListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "USER_ID", sqpp, "commentList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_CommentList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_CommentListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "commentList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_CommentListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_CommentList(CommentCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_CommentListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from PICK where ...)} <br>
-     * PICK by USER_ID, named 'pickAsOne'.
+     * {FOO &lt;= (select max(BAR) from FAVORITE where ...)} <br>
+     * FAVORITE by USER_ID, named 'favoriteAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">derivedPick()</span>.<span style="color: #CC4747">max</span>(pickCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     pickCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     pickCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * cb.query().<span style="color: #CC4747">derivedFavorite()</span>.<span style="color: #CC4747">max</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     favoriteCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     favoriteCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
      * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
      * </pre>
      * @return The object to set up a function for referrer table. (NotNull)
      */
-    public HpQDRFunction<PickCB> derivedPick() {
-        return xcreateQDRFunctionPickList();
+    public HpQDRFunction<FavoriteCB> derivedFavorite() {
+        return xcreateQDRFunctionFavoriteList();
     }
-    protected HpQDRFunction<PickCB> xcreateQDRFunctionPickList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderivePickList(fn, sq, rd, vl, op));
+    protected HpQDRFunction<FavoriteCB> xcreateQDRFunctionFavoriteList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveFavoriteList(fn, sq, rd, vl, op));
     }
-    public void xqderivePickList(String fn, SubQuery<PickCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xqderiveFavoriteList(String fn, SubQuery<FavoriteCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        PickCB cb = new PickCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_PickList(cb.query()); String prpp = keepId_QueryDerivedReferrer_PickListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "USER_ID", sqpp, "pickList", rd, vl, prpp, op);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_FavoriteList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_FavoriteListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "favoriteList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_PickList(PickCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_PickListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_FavoriteListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -416,11 +416,11 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void xqderiveRelationshipByFollowerIdList(String fn, SubQuery<RelationshipCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_RelationshipByFollowerIdList(cb.query()); String prpp = keepId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "FOLLOWER_ID", sqpp, "relationshipByFollowerIdList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", sqpp, "relationshipByFollowerIdList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -443,30 +443,30 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void xqderiveRelationshipByFollowingIdList(String fn, SubQuery<RelationshipCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_RelationshipByFollowingIdList(cb.query()); String prpp = keepId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "ID", "FOLLOWING_ID", sqpp, "relationshipByFollowingIdList", rd, vl, prpp, op);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", sqpp, "relationshipByFollowingIdList", rd, vl, prpp, op);
     }
-    public abstract String keepId_QueryDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
-    public abstract String keepId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * USER_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNull() { regId(CK_ISN, DOBJ); }
+    public void setUserId_IsNull() { regUserId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * USER_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
+    public void setUserId_IsNotNull() { regUserId(CK_ISNN, DOBJ); }
 
-    protected void regId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueId(), "ID"); }
-    protected abstract ConditionValue xgetCValueId();
+    protected void regUserId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUserId(), "USER_ID"); }
+    protected abstract ConditionValue xgetCValueUserId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_Equal(String username) {
@@ -479,7 +479,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_NotEqual(String username) {
@@ -492,7 +492,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_GreaterThan(String username) {
@@ -501,7 +501,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_LessThan(String username) {
@@ -510,7 +510,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_GreaterEqual(String username) {
@@ -519,7 +519,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_LessEqual(String username) {
@@ -528,7 +528,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param usernameList The collection of username as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_InScope(Collection<String> usernameList) {
@@ -541,7 +541,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param usernameList The collection of username as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUsername_NotInScope(Collection<String> usernameList) {
@@ -554,7 +554,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)} <br>
+     * USERNAME: {UQ, NotNull, VARCHAR(100)} <br>
      * <pre>e.g. setUsername_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param username The value of username as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -565,7 +565,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)} <br>
+     * USERNAME: {UQ, NotNull, VARCHAR(100)} <br>
      * <pre>e.g. setUsername_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param username The value of username as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -577,7 +577,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -588,7 +588,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * USERNAME: {NotNull, VARCHAR(100)}
+     * USERNAME: {UQ, NotNull, VARCHAR(100)}
      * @param username The value of username as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -853,7 +853,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     public void xsmyselfDerive(String fn, SubQuery<UserCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         UserCB cb = new UserCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "USER_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(UserCQ sq);
@@ -869,7 +869,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         UserCB cb = new UserCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "ID";
+        String pk = "USER_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

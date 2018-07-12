@@ -25,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of USER as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     USER_ID
  *
  * [column]
- *     ID, USERNAME, PASSWORD
+ *     USER_ID, USERNAME, PASSWORD
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     USER_ID
  *
  * [version-no]
  *     
@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, PICK, RELATIONSHIP
+ *     COMMENT, FAVORITE, RELATIONSHIP
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, pickList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -159,31 +159,56 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param userId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<User> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<User> selectByPK(Integer userId) {
+        return facadeSelectByPK(userId);
     }
 
-    protected OptionalEntity<User> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<User> facadeSelectByPK(Integer userId) {
+        return doSelectOptionalByPK(userId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends User> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends User> ENTITY doSelectByPK(Integer userId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(userId), tp);
     }
 
-    protected <ENTITY extends User> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends User> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer userId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(userId, tp), userId);
     }
 
-    protected UserCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected UserCB xprepareCBAsPK(Integer userId) {
+        assertObjectNotNull("userId", userId);
+        return newConditionBean().acceptPK(userId);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param username : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<User> selectByUniqueOf(String username) {
+        return facadeSelectByUniqueOf(username);
+    }
+
+    protected OptionalEntity<User> facadeSelectByUniqueOf(String username) {
+        return doSelectByUniqueOf(username, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends User> OptionalEntity<ENTITY> doSelectByUniqueOf(String username, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(username), tp), username);
+    }
+
+    protected UserCB xprepareCBAsUniqueOf(String username) {
+        assertObjectNotNull("username", username);
+        return newConditionBean().acceptUniqueOf(username);
     }
 
     // ===================================================================================
@@ -426,19 +451,19 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     }
 
     /**
-     * Load referrer of pickList by the set-upper of referrer. <br>
-     * PICK by USER_ID, named 'pickList'.
+     * Load referrer of favoriteList by the set-upper of referrer. <br>
+     * FAVORITE by USER_ID, named 'favoriteList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadPick</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">pickCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">pickCB</span>.setupSelect...
-     *     <span style="color: #553000">pickCB</span>.query().set...
-     *     <span style="color: #553000">pickCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadFavorite</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">favoriteCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">favoriteCB</span>.setupSelect...
+     *     <span style="color: #553000">favoriteCB</span>.query().set...
+     *     <span style="color: #553000">favoriteCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
      * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getPickList()</span>;
+     *     ... = user.<span style="color: #CC4747">getFavoriteList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -451,24 +476,24 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Pick> loadPick(List<User> userList, ReferrerConditionSetupper<PickCB> refCBLambda) {
+    public NestedReferrerListGateway<Favorite> loadFavorite(List<User> userList, ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
         xassLRArg(userList, refCBLambda);
-        return doLoadPick(userList, new LoadReferrerOption<PickCB, Pick>().xinit(refCBLambda));
+        return doLoadFavorite(userList, new LoadReferrerOption<FavoriteCB, Favorite>().xinit(refCBLambda));
     }
 
     /**
-     * Load referrer of pickList by the set-upper of referrer. <br>
-     * PICK by USER_ID, named 'pickList'.
+     * Load referrer of favoriteList by the set-upper of referrer. <br>
+     * FAVORITE by USER_ID, named 'favoriteList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadPick</span>(<span style="color: #553000">user</span>, <span style="color: #553000">pickCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">pickCB</span>.setupSelect...
-     *     <span style="color: #553000">pickCB</span>.query().set...
-     *     <span style="color: #553000">pickCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadFavorite</span>(<span style="color: #553000">user</span>, <span style="color: #553000">favoriteCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">favoriteCB</span>.setupSelect...
+     *     <span style="color: #553000">favoriteCB</span>.query().set...
+     *     <span style="color: #553000">favoriteCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getPickList()</span>;
+     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getFavoriteList()</span>;
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
@@ -480,13 +505,13 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Pick> loadPick(User user, ReferrerConditionSetupper<PickCB> refCBLambda) {
+    public NestedReferrerListGateway<Favorite> loadFavorite(User user, ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
         xassLRArg(user, refCBLambda);
-        return doLoadPick(xnewLRLs(user), new LoadReferrerOption<PickCB, Pick>().xinit(refCBLambda));
+        return doLoadFavorite(xnewLRLs(user), new LoadReferrerOption<FavoriteCB, Favorite>().xinit(refCBLambda));
     }
 
-    protected NestedReferrerListGateway<Pick> doLoadPick(List<User> userList, LoadReferrerOption<PickCB, Pick> option) {
-        return helpLoadReferrerInternally(userList, option, "pickList");
+    protected NestedReferrerListGateway<Favorite> doLoadFavorite(List<User> userList, LoadReferrerOption<FavoriteCB, Favorite> option) {
+        return helpLoadReferrerInternally(userList, option, "favoriteList");
     }
 
     /**
@@ -624,12 +649,20 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
+     * Extract the value list of (single) primary key userId.
      * @param userList The list of user. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<User> userList)
-    { return helpExtractListInternally(userList, "id"); }
+    public List<Integer> extractUserIdList(List<User> userList)
+    { return helpExtractListInternally(userList, "userId"); }
+
+    /**
+     * Extract the value list of (single) unique key username.
+     * @param userList The list of user. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<String> extractUsernameList(List<User> userList)
+    { return helpExtractListInternally(userList, "username"); }
 
     // ===================================================================================
     //                                                                       Entity Update

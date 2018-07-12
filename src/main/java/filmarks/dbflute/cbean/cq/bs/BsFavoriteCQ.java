@@ -13,20 +13,20 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of PICK.
+ * The base condition-query of FAVORITE.
  * @author DBFlute(AutoGenerator)
  */
-public class BsPickCQ extends AbstractBsPickCQ {
+public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected PickCIQ _inlineQuery;
+    protected FavoriteCIQ _inlineQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsPickCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public BsFavoriteCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -35,44 +35,64 @@ public class BsPickCQ extends AbstractBsPickCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from PICK) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from FAVORITE) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
      * @return The condition-query for InlineView query. (NotNull)
      */
-    public PickCIQ inline() {
+    public FavoriteCIQ inline() {
         if (_inlineQuery == null) { _inlineQuery = xcreateCIQ(); }
         _inlineQuery.xsetOnClause(false); return _inlineQuery;
     }
 
-    protected PickCIQ xcreateCIQ() {
-        PickCIQ ciq = xnewCIQ();
+    protected FavoriteCIQ xcreateCIQ() {
+        FavoriteCIQ ciq = xnewCIQ();
         ciq.xsetBaseCB(_baseCB);
         return ciq;
     }
 
-    protected PickCIQ xnewCIQ() {
-        return new PickCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
+    protected FavoriteCIQ xnewCIQ() {
+        return new FavoriteCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
     }
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join PICK on ... and FOO = [value] ...}
+     * {select ... from ... left outer join FAVORITE on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
      * @return The condition-query for OnClause query. (NotNull)
      * @throws IllegalConditionBeanOperationException When this condition-query is base query.
      */
-    public PickCIQ on() {
+    public FavoriteCIQ on() {
         if (isBaseQuery()) { throw new IllegalConditionBeanOperationException("OnClause for local table is unavailable!"); }
-        PickCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
+        FavoriteCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
     }
 
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
+    protected ConditionValue _favoriteId;
+    public ConditionValue xdfgetFavoriteId()
+    { if (_favoriteId == null) { _favoriteId = nCV(); }
+      return _favoriteId; }
+    protected ConditionValue xgetCValueFavoriteId() { return xdfgetFavoriteId(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteId_Asc() { regOBA("FAVORITE_ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteId_Desc() { regOBD("FAVORITE_ID"); return this; }
+
     protected ConditionValue _userId;
     public ConditionValue xdfgetUserId()
     { if (_userId == null) { _userId = nCV(); }
@@ -81,37 +101,37 @@ public class BsPickCQ extends AbstractBsPickCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsPickCQ addOrderBy_UserId_Asc() { regOBA("USER_ID"); return this; }
+    public BsFavoriteCQ addOrderBy_UserId_Asc() { regOBA("USER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsPickCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
+    public BsFavoriteCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
 
-    protected ConditionValue _productId;
-    public ConditionValue xdfgetProductId()
-    { if (_productId == null) { _productId = nCV(); }
-      return _productId; }
-    protected ConditionValue xgetCValueProductId() { return xdfgetProductId(); }
+    protected ConditionValue _albumId;
+    public ConditionValue xdfgetAlbumId()
+    { if (_albumId == null) { _albumId = nCV(); }
+      return _albumId; }
+    protected ConditionValue xgetCValueAlbumId() { return xdfgetAlbumId(); }
 
     /**
      * Add order-by as ascend. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsPickCQ addOrderBy_ProductId_Asc() { regOBA("PRODUCT_ID"); return this; }
+    public BsFavoriteCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsPickCQ addOrderBy_ProductId_Desc() { regOBD("PRODUCT_ID"); return this; }
+    public BsFavoriteCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -130,7 +150,7 @@ public class BsPickCQ extends AbstractBsPickCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsPickCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
+    public BsFavoriteCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
 
     /**
      * Add order-by for specified derived column as descend.
@@ -146,14 +166,14 @@ public class BsPickCQ extends AbstractBsPickCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsPickCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
+    public BsFavoriteCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
 
     // ===================================================================================
     //                                                                         Union Query
     //                                                                         ===========
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
-        PickCQ bq = (PickCQ)bqs;
-        PickCQ uq = (PickCQ)uqs;
+        FavoriteCQ bq = (FavoriteCQ)bqs;
+        FavoriteCQ uq = (FavoriteCQ)uqs;
         if (bq.hasConditionQueryAlbum()) {
             uq.queryAlbum().reflectRelationOnUnionQuery(bq.queryAlbum(), uq.queryAlbum());
         }
@@ -167,7 +187,7 @@ public class BsPickCQ extends AbstractBsPickCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The instance of condition-query. (NotNull)
      */
     public AlbumCQ queryAlbum() {
@@ -179,7 +199,7 @@ public class BsPickCQ extends AbstractBsPickCQ {
         return xgetQueRlMap(prop);
     }
     protected AlbumCQ xcreateQueryAlbum() {
-        String nrp = xresolveNRP("PICK", "album"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("FAVORITE", "album"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new AlbumCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "album", nrp);
     }
     protected void xsetupOuterJoinAlbum() { xregOutJo("album"); }
@@ -199,7 +219,7 @@ public class BsPickCQ extends AbstractBsPickCQ {
         return xgetQueRlMap(prop);
     }
     protected UserCQ xcreateQueryUser() {
-        String nrp = xresolveNRP("PICK", "user"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("FAVORITE", "user"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new UserCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "user", nrp);
     }
     protected void xsetupOuterJoinUser() { xregOutJo("user"); }
@@ -212,15 +232,39 @@ public class BsPickCQ extends AbstractBsPickCQ {
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============
-    public Map<String, PickCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
-    public String keepScalarCondition(PickCQ sq) { return xkeepSQue("scalarCondition", sq); }
+    public Map<String, FavoriteCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
+    public String keepScalarCondition(FavoriteCQ sq) { return xkeepSQue("scalarCondition", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfDerived
+    //                                                                       =============
+    public Map<String, FavoriteCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
+    public String keepSpecifyMyselfDerived(FavoriteCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
+
+    public Map<String, FavoriteCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerived(FavoriteCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
+    public Map<String, Object> xdfgetQueryMyselfDerivedParameter() { return xgetSQuePmMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerivedParameter(Object pm) { return xkeepSQuePm("queryMyselfDerived", pm); }
+
+    // ===================================================================================
+    //                                                                        MyselfExists
+    //                                                                        ============
+    protected Map<String, FavoriteCQ> _myselfExistsMap;
+    public Map<String, FavoriteCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
+    public String keepMyselfExists(FavoriteCQ sq) { return xkeepSQue("myselfExists", sq); }
+
+    // ===================================================================================
+    //                                                                       MyselfInScope
+    //                                                                       =============
+    public Map<String, FavoriteCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
+    public String keepMyselfInScope(FavoriteCQ sq) { return xkeepSQue("myselfInScope", sq); }
 
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xCB() { return PickCB.class.getName(); }
-    protected String xCQ() { return PickCQ.class.getName(); }
+    protected String xCB() { return FavoriteCB.class.getName(); }
+    protected String xCQ() { return FavoriteCQ.class.getName(); }
     protected String xCHp() { return HpQDRFunction.class.getName(); }
     protected String xCOp() { return ConditionOption.class.getName(); }
     protected String xMap() { return Map.class.getName(); }

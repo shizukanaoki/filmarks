@@ -132,7 +132,7 @@ public class RelationshipDbm extends AbstractDBMeta {
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignUserByFollowerId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowerId(), UserDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowerId(), UserDbm.getInstance().columnUserId());
         return cfi("FK_RELATIONSHIP_FOLLOWER", "userByFollowerId", this, UserDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "relationshipByFollowerIdList", false);
     }
     /**
@@ -140,7 +140,7 @@ public class RelationshipDbm extends AbstractDBMeta {
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignUserByFollowingId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowingId(), UserDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFollowingId(), UserDbm.getInstance().columnUserId());
         return cfi("FK_RELATIONSHIP_FOLLOWING", "userByFollowingId", this, UserDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "relationshipByFollowingIdList", false);
     }
 

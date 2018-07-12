@@ -139,7 +139,7 @@
 			</connections>
 			<columns>
 				<normal_column>
-					<physical_name>ID</physical_name>
+					<physical_name>ALBUM_ID</physical_name>
 					<logical_name>ID</logical_name>
 					<type>integer</type>
 					<not_null>true</not_null>
@@ -276,14 +276,14 @@
 				<normal_column>
 					<physical_name>USER_ID</physical_name>
 					<logical_name>ユーザーID</logical_name>
-					<referred_column>table.USER.ID</referred_column>
+					<referred_column>table.USER.USER_ID</referred_column>
 					<relationship>FK_COMMENT_USER</relationship>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>ALBUM_ID</physical_name>
 					<logical_name>アルバムID</logical_name>
-					<referred_column>table.ALBUM.ID</referred_column>
+					<referred_column>table.ALBUM.ALBUM_ID</referred_column>
 					<relationship>FK_COMMENT_PRODUCT</relationship>
 					<not_null>true</not_null>
 				</normal_column>
@@ -308,7 +308,7 @@
 			</table_properties>
 		</table>
 		<table>
-			<physical_name>PICK</physical_name>
+			<physical_name>FAVORITE</physical_name>
 			<logical_name>NEW_TABLE</logical_name>
 			<description></description>
 			<height>78</height>
@@ -326,7 +326,7 @@
 				<relationship>
 					<name>FK_PICK_USER</name>
 					<source>table.USER</source>
-					<target>table.PICK</target>
+					<target>table.FAVORITE</target>
 					<fk_columns>
 						<fk_column>
 							<fk_column_name>USER_ID</fk_column_name>
@@ -341,10 +341,10 @@
 				<relationship>
 					<name>FK_PICK_PRODUCT</name>
 					<source>table.ALBUM</source>
-					<target>table.PICK</target>
+					<target>table.FAVORITE</target>
 					<fk_columns>
 						<fk_column>
-							<fk_column_name>PRODUCT_ID</fk_column_name>
+							<fk_column_name>ALBUM_ID</fk_column_name>
 						</fk_column>
 					</fk_columns>
 					<parent_cardinality>1</parent_cardinality>
@@ -356,16 +356,25 @@
 			</connections>
 			<columns>
 				<normal_column>
+					<physical_name>FAVORITE_ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>true</unique_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
 					<physical_name>USER_ID</physical_name>
 					<logical_name>ユーザーID</logical_name>
-					<referred_column>table.USER.ID</referred_column>
+					<referred_column>table.USER.USER_ID</referred_column>
 					<relationship>FK_PICK_USER</relationship>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
-					<physical_name>PRODUCT_ID</physical_name>
-					<logical_name>製品ID</logical_name>
-					<referred_column>table.ALBUM.ID</referred_column>
+					<physical_name>ALBUM_ID</physical_name>
+					<logical_name>アルバムID</logical_name>
+					<referred_column>table.ALBUM.ALBUM_ID</referred_column>
 					<relationship>FK_PICK_PRODUCT</relationship>
 					<not_null>true</not_null>
 				</normal_column>
@@ -436,14 +445,14 @@
 				<normal_column>
 					<physical_name>FOLLOWING_ID</physical_name>
 					<logical_name>フォローID</logical_name>
-					<referred_column>table.USER.ID</referred_column>
+					<referred_column>table.USER.USER_ID</referred_column>
 					<relationship>FK_RELATIONSHIP_FOLLOWING</relationship>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>FOLLOWER_ID</physical_name>
 					<logical_name>フォロワーID</logical_name>
-					<referred_column>table.USER.ID</referred_column>
+					<referred_column>table.USER.USER_ID</referred_column>
 					<relationship>FK_RELATIONSHIP_FOLLOWER</relationship>
 					<not_null>true</not_null>
 				</normal_column>
@@ -492,7 +501,7 @@
 					<target>table.SONG</target>
 					<fk_columns>
 						<fk_column>
-							<fk_column_name>ID</fk_column_name>
+							<fk_column_name>ALBUM_ID</fk_column_name>
 						</fk_column>
 					</fk_columns>
 					<parent_cardinality>1</parent_cardinality>
@@ -504,8 +513,8 @@
 			</connections>
 			<columns>
 				<normal_column>
-					<physical_name>ID</physical_name>
-					<referred_column>table.ALBUM.ID</referred_column>
+					<physical_name>ALBUM_ID</physical_name>
+					<referred_column>table.ALBUM.ALBUM_ID</referred_column>
 					<relationship>FK_SONG_PRODUCT</relationship>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
@@ -551,11 +560,12 @@
 			</connections>
 			<columns>
 				<normal_column>
-					<physical_name>ID</physical_name>
+					<physical_name>USER_ID</physical_name>
 					<logical_name>ID</logical_name>
 					<type>integer</type>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
+					<unique_key>true</unique_key>
 					<auto_increment>true</auto_increment>
 				</normal_column>
 				<normal_column>
@@ -564,6 +574,7 @@
 					<type>varchar(n)</type>
 					<length>100</length>
 					<not_null>true</not_null>
+					<unique_key>true</unique_key>
 				</normal_column>
 				<normal_column>
 					<physical_name>PASSWORD</physical_name>

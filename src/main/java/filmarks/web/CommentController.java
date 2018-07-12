@@ -30,12 +30,12 @@ public class CommentController {
     public ModelAndView create(@ModelAttribute("commentForm") @Validated CommentForm commentForm, BindingResult result, @PathVariable int albumId, @AuthenticationPrincipal User user, ModelAndView mav) {
         ModelAndView res;
         if (!result.hasErrors()) {
-            Comment comment = new Comment(user.getId(), albumId, commentForm.getContent(), commentForm.getRate());
+            Comment comment = new Comment(user.getUserId(), albumId, commentForm.getContent(), commentForm.getRate());
             commentService.create(comment);
             res = new ModelAndView("redirect:/");
         } else {
             mav.setViewName("album/show");
-            OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> cb.query().setId_Equal(albumId));
+            OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> cb.query().setAlbumId_Equal(albumId));
             albumOptionalEntity.ifPresent(album -> {
                 albumBhv.loadComment(album, commentCB-> {
                     commentCB.setupSelect_User();

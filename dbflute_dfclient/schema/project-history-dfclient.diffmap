@@ -1,9 +1,60 @@
 map:{
-    ; 2018/07/06 15:44:19 = map:{
-        ; diffDate = 2018/07/06 15:44:19
+    ; 2018/07/09 17:20:24 = map:{
+        ; diffDate = 2018/07/09 17:20:24
         ; diffAuthor = naoki.shizuka
-        ; diffGitBranch = add_comment_function
+        ; diffGitBranch = add_favorite_function
         ; tableDiff = map:{
+            ; FAVORITE = map:{
+                ; tableName = FAVORITE
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE = map:{
+                        ; constraintName = UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_PICK_USER = map:{
+                        ; constraintName = FK_PICK_USER
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/07/09 16:13:32 = map:{
+        ; diffDate = 2018/07/09 16:13:32
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; FAVORITE = map:{
+                ; tableName = FAVORITE
+                ; diffType = ADD
+            }
+            ; ALBUM = map:{
+                ; tableName = ALBUM
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ALBUM_ID = map:{
+                        ; columnName = ALBUM_ID
+                        ; diffType = ADD
+                    }
+                    ; ID = map:{
+                        ; columnName = ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ALBUM_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+            }
             ; RELATIONSHIP = map:{
                 ; tableName = RELATIONSHIP
                 ; diffType = CHANGE
@@ -19,6 +70,74 @@ map:{
                         ; diffType = ADD
                     }
                 }
+            }
+            ; SONG = map:{
+                ; tableName = SONG
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ALBUM_ID = map:{
+                        ; columnName = ALBUM_ID
+                        ; diffType = ADD
+                    }
+                    ; ID = map:{
+                        ; columnName = ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ALBUM_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_SONG_PRODUCT = map:{
+                        ; constraintName = FK_SONG_PRODUCT
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ALBUM_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_ID = map:{
+                        ; columnName = USER_ID
+                        ; diffType = ADD
+                    }
+                    ; ID = map:{
+                        ; columnName = ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = USER_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; USERNAME = map:{
+                        ; constraintName = USERNAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; PICK = map:{
+                ; tableName = PICK
+                ; diffType = DELETE
             }
         }
     }

@@ -23,6 +23,9 @@ public class UserRepository {
 
     public User findOne(int userId) throws EntityAlreadyDeletedException {
         User user = userBhv.selectByPK(userId).get();
+        userBhv.loadFavorite(user, cb -> {
+            cb.setupSelect_Album();
+        });
         userBhv.loadRelationshipByFollowingId(user, cb -> {
            cb.setupSelect_UserByFollowerId();
         });

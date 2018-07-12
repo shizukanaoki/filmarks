@@ -1,18 +1,18 @@
 package filmarks.dbflute.cbean.nss;
 
-import filmarks.dbflute.cbean.cq.PickCQ;
+import filmarks.dbflute.cbean.cq.FavoriteCQ;
 
 /**
- * The nest select set-upper of PICK.
+ * The nest select set-upper of FAVORITE.
  * @author DBFlute(AutoGenerator)
  */
-public class PickNss {
+public class FavoriteNss {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected final PickCQ _query;
-    public PickNss(PickCQ query) { _query = query; }
+    protected final FavoriteCQ _query;
+    public FavoriteNss(FavoriteCQ query) { _query = query; }
     public boolean hasConditionQuery() { return _query != null; }
 
     // ===================================================================================
@@ -20,7 +20,7 @@ public class PickNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public AlbumNss withAlbum() {

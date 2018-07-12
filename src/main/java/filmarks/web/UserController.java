@@ -1,5 +1,6 @@
 package filmarks.web;
 
+import filmarks.dbflute.exentity.Album;
 import filmarks.dbflute.exentity.User;
 import filmarks.service.UserService;
 import org.dbflute.exception.EntityAlreadyDeletedException;
@@ -24,15 +25,11 @@ public class UserController {
     public ModelAndView show (@PathVariable int userId, ModelAndView mav) {
         try {
             User user = userService.findOne(userId);
-            List<User> followings = user.getRelationshipByFollowingIdList().stream()
-                    .map(following -> following.getUserByFollowerId().get())
-                    .collect(Collectors.toList());
-            List<User> followers = user.getRelationshipByFollowerIdList().stream()
-                    .map(follower -> follower.getUserByFollowingId().get())
-                    .collect(Collectors.toList());
             mav.addObject("user", user);
-            mav.addObject("followings", followings);
-            mav.addObject("followers", followers);
+            List<Album> albums = user.getFavoriteList().stream()
+                    .map(favorite -> favorite.getAlbum().get())
+                    .collect(Collectors.toList());
+            mav.addObject("albums", albums);
             mav.setViewName("user/show");
             return mav;
         } catch (EntityAlreadyDeletedException e) {

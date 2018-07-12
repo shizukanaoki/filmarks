@@ -30,10 +30,24 @@
                 <div class="album_info_img">
                     <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="300" height="300"/>
                 </div>
-                <div class="album_comment_button">
+                <div class="album_action_button">
                     <button type="button" data-toggle="modal" data-target="#comment_form">
                         コメントを投稿
                     </button>
+                </div>
+                <div class="album_action_button" th:if="${favoriteOptionalEntity.orElse(false)}">
+                    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="delete">
+                        <button type="submit">
+                            お気に入りから削除
+                        </button>
+                    </form>
+                </div>
+                <div class="album_action_button" th:unless="${favoriteOptionalEntity.orElse(false)}">
+                    <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
+                        <button type="submit">
+                            お気に入りに追加
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="album_info_right">
@@ -99,7 +113,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="comment_form">
-                        <form class="form-horizontal" method="post" th:action="@{'/albums/' + ${album.getId()} + '/comments'}" th:object="${commentForm}">
+                        <form class="form-horizontal" method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}">
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <textarea th:field="*{content}" rows="8" class="form-control" id="InputTextarea"></textarea>

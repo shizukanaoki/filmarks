@@ -16,15 +16,15 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The abstract condition-query of PICK.
+ * The abstract condition-query of FAVORITE.
  * @author DBFlute(AutoGenerator)
  */
-public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
+public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public AbstractBsPickCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public AbstractBsFavoriteCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -37,7 +37,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
     }
 
     public String asTableDbName() {
-        return "PICK";
+        return "FAVORITE";
     }
 
     // ===================================================================================
@@ -45,7 +45,136 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_Equal(Integer favoriteId) {
+        doSetFavoriteId_Equal(favoriteId);
+    }
+
+    protected void doSetFavoriteId_Equal(Integer favoriteId) {
+        regFavoriteId(CK_EQ, favoriteId);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as notEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_NotEqual(Integer favoriteId) {
+        doSetFavoriteId_NotEqual(favoriteId);
+    }
+
+    protected void doSetFavoriteId_NotEqual(Integer favoriteId) {
+        regFavoriteId(CK_NES, favoriteId);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_GreaterThan(Integer favoriteId) {
+        regFavoriteId(CK_GT, favoriteId);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_LessThan(Integer favoriteId) {
+        regFavoriteId(CK_LT, favoriteId);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_GreaterEqual(Integer favoriteId) {
+        regFavoriteId(CK_GE, favoriteId);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteId The value of favoriteId as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteId_LessEqual(Integer favoriteId) {
+        regFavoriteId(CK_LE, favoriteId);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of favoriteId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of favoriteId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setFavoriteId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setFavoriteId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of favoriteId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of favoriteId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setFavoriteId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueFavoriteId(), "FAVORITE_ID", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteIdList The collection of favoriteId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFavoriteId_InScope(Collection<Integer> favoriteIdList) {
+        doSetFavoriteId_InScope(favoriteIdList);
+    }
+
+    protected void doSetFavoriteId_InScope(Collection<Integer> favoriteIdList) {
+        regINS(CK_INS, cTL(favoriteIdList), xgetCValueFavoriteId(), "FAVORITE_ID");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     * @param favoriteIdList The collection of favoriteId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setFavoriteId_NotInScope(Collection<Integer> favoriteIdList) {
+        doSetFavoriteId_NotInScope(favoriteIdList);
+    }
+
+    protected void doSetFavoriteId_NotInScope(Collection<Integer> favoriteIdList) {
+        regINS(CK_NINS, cTL(favoriteIdList), xgetCValueFavoriteId(), "FAVORITE_ID");
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     */
+    public void setFavoriteId_IsNull() { regFavoriteId(CK_ISN, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+     */
+    public void setFavoriteId_IsNotNull() { regFavoriteId(CK_ISNN, DOBJ); }
+
+    protected void regFavoriteId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFavoriteId(), "FAVORITE_ID"); }
+    protected abstract ConditionValue xgetCValueFavoriteId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_Equal(Integer userId) {
@@ -58,7 +187,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_NotEqual(Integer userId) {
@@ -71,7 +200,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterThan(Integer userId) {
@@ -80,7 +209,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessThan(Integer userId) {
@@ -89,7 +218,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterEqual(Integer userId) {
@@ -98,7 +227,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessEqual(Integer userId) {
@@ -109,7 +238,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -122,7 +251,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -133,7 +262,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_InScope(Collection<Integer> userIdList) {
@@ -146,7 +275,7 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_NotInScope(Collection<Integer> userIdList) {
@@ -162,120 +291,120 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as equal. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_Equal(Integer productId) {
-        doSetProductId_Equal(productId);
+    public void setAlbumId_Equal(Integer albumId) {
+        doSetAlbumId_Equal(albumId);
     }
 
-    protected void doSetProductId_Equal(Integer productId) {
-        regProductId(CK_EQ, productId);
+    protected void doSetAlbumId_Equal(Integer albumId) {
+        regAlbumId(CK_EQ, albumId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as notEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_NotEqual(Integer productId) {
-        doSetProductId_NotEqual(productId);
+    public void setAlbumId_NotEqual(Integer albumId) {
+        doSetAlbumId_NotEqual(albumId);
     }
 
-    protected void doSetProductId_NotEqual(Integer productId) {
-        regProductId(CK_NES, productId);
+    protected void doSetAlbumId_NotEqual(Integer albumId) {
+        regAlbumId(CK_NES, albumId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_GreaterThan(Integer productId) {
-        regProductId(CK_GT, productId);
+    public void setAlbumId_GreaterThan(Integer albumId) {
+        regAlbumId(CK_GT, albumId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as lessThan. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_LessThan(Integer productId) {
-        regProductId(CK_LT, productId);
+    public void setAlbumId_LessThan(Integer albumId) {
+        regAlbumId(CK_LT, albumId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_GreaterEqual(Integer productId) {
-        regProductId(CK_GE, productId);
+    public void setAlbumId_GreaterEqual(Integer albumId) {
+        regAlbumId(CK_GE, albumId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productId The value of productId as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumId The value of albumId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setProductId_LessEqual(Integer productId) {
-        regProductId(CK_LE, productId);
+    public void setAlbumId_LessEqual(Integer albumId) {
+        regAlbumId(CK_LE, albumId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setProductId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setProductId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setAlbumId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param minNumber The min number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of productId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param minNumber The min number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of albumId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setProductId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueProductId(), "PRODUCT_ID", rangeOfOption);
+    protected void setAlbumId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueAlbumId(), "ALBUM_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productIdList The collection of productId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setProductId_InScope(Collection<Integer> productIdList) {
-        doSetProductId_InScope(productIdList);
+    public void setAlbumId_InScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_InScope(albumIdList);
     }
 
-    protected void doSetProductId_InScope(Collection<Integer> productIdList) {
-        regINS(CK_INS, cTL(productIdList), xgetCValueProductId(), "PRODUCT_ID");
+    protected void doSetAlbumId_InScope(Collection<Integer> albumIdList) {
+        regINS(CK_INS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
-     * @param productIdList The collection of productId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
+     * @param albumIdList The collection of albumId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setProductId_NotInScope(Collection<Integer> productIdList) {
-        doSetProductId_NotInScope(productIdList);
+    public void setAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        doSetAlbumId_NotInScope(albumIdList);
     }
 
-    protected void doSetProductId_NotInScope(Collection<Integer> productIdList) {
-        regINS(CK_NINS, cTL(productIdList), xgetCValueProductId(), "PRODUCT_ID");
+    protected void doSetAlbumId_NotInScope(Collection<Integer> albumIdList) {
+        regINS(CK_NINS, cTL(albumIdList), xgetCValueAlbumId(), "ALBUM_ID");
     }
 
-    protected void regProductId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueProductId(), "PRODUCT_ID"); }
-    protected abstract ConditionValue xgetCValueProductId();
+    protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
+    protected abstract ConditionValue xgetCValueAlbumId();
 
     // ===================================================================================
     //                                                                     ScalarCondition
@@ -291,8 +420,8 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_Equal() {
-        return xcreateSLCFunction(CK_EQ, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_Equal() {
+        return xcreateSLCFunction(CK_EQ, FavoriteCB.class);
     }
 
     /**
@@ -306,8 +435,8 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_NotEqual() {
-        return xcreateSLCFunction(CK_NES, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_NotEqual() {
+        return xcreateSLCFunction(CK_NES, FavoriteCB.class);
     }
 
     /**
@@ -321,8 +450,8 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_GreaterThan() {
-        return xcreateSLCFunction(CK_GT, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_GreaterThan() {
+        return xcreateSLCFunction(CK_GT, FavoriteCB.class);
     }
 
     /**
@@ -336,8 +465,8 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_LessThan() {
-        return xcreateSLCFunction(CK_LT, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_LessThan() {
+        return xcreateSLCFunction(CK_LT, FavoriteCB.class);
     }
 
     /**
@@ -351,16 +480,16 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_GreaterEqual() {
-        return xcreateSLCFunction(CK_GE, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_GreaterEqual() {
+        return xcreateSLCFunction(CK_GE, FavoriteCB.class);
     }
 
     /**
      * Prepare ScalarCondition as lessEqual. <br>
      * {where FOO &lt;= (select max(BAR) from ...)}
      * <pre>
-     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;PickCB&gt;() {
-     *     public void query(PickCB subCB) {
+     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;FavoriteCB&gt;() {
+     *     public void query(FavoriteCB subCB) {
      *         subCB.specify().setFoo... <span style="color: #3F7E5E">// derived column for function</span>
      *         subCB.query().setBar...
      *     }
@@ -368,27 +497,72 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<PickCB> scalar_LessEqual() {
-        return xcreateSLCFunction(CK_LE, PickCB.class);
+    public HpSLCFunction<FavoriteCB> scalar_LessEqual() {
+        return xcreateSLCFunction(CK_LE, FavoriteCB.class);
     }
 
     @SuppressWarnings("unchecked")
     protected <CB extends ConditionBean> void xscalarCondition(String fn, SubQuery<CB> sq, String rd, HpSLCCustomized<CB> cs, ScalarConditionOption op) {
         assertObjectNotNull("subQuery", sq);
-        PickCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
+        FavoriteCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
         String pp = keepScalarCondition(cb.query()); // for saving query-value
         cs.setPartitionByCBean((CB)xcreateScalarConditionPartitionByCB()); // for using partition-by
         registerScalarCondition(fn, cb.query(), pp, rd, cs, op);
     }
-    public abstract String keepScalarCondition(PickCQ sq);
+    public abstract String keepScalarCondition(FavoriteCQ sq);
 
-    protected PickCB xcreateScalarConditionCB() {
-        PickCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
+    protected FavoriteCB xcreateScalarConditionCB() {
+        FavoriteCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
     }
 
-    protected PickCB xcreateScalarConditionPartitionByCB() {
-        PickCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
+    protected FavoriteCB xcreateScalarConditionPartitionByCB() {
+        FavoriteCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
     }
+
+    // ===================================================================================
+    //                                                                       MyselfDerived
+    //                                                                       =============
+    public void xsmyselfDerive(String fn, SubQuery<FavoriteCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "FAVORITE_ID";
+        registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
+    }
+    public abstract String keepSpecifyMyselfDerived(FavoriteCQ sq);
+
+    /**
+     * Prepare for (Query)MyselfDerived (correlated sub-query).
+     * @return The object to set up a function for myself table. (NotNull)
+     */
+    public HpQDRFunction<FavoriteCB> myselfDerived() {
+        return xcreateQDRFunctionMyselfDerived(FavoriteCB.class);
+    }
+    @SuppressWarnings("unchecked")
+    protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
+        String pk = "FAVORITE_ID";
+        String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
+        String prpp = keepQueryMyselfDerivedParameter(vl);
+        registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);
+    }
+    public abstract String keepQueryMyselfDerived(FavoriteCQ sq);
+    public abstract String keepQueryMyselfDerivedParameter(Object vl);
+
+    // ===================================================================================
+    //                                                                        MyselfExists
+    //                                                                        ============
+    /**
+     * Prepare for MyselfExists (correlated sub-query).
+     * @param subCBLambda The implementation of sub-query. (NotNull)
+     */
+    public void myselfExists(SubQuery<FavoriteCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        FavoriteCB cb = new FavoriteCB(); cb.xsetupForMyselfExists(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepMyselfExists(cb.query());
+        registerMyselfExists(cb.query(), pp);
+    }
+    public abstract String keepMyselfExists(FavoriteCQ sq);
 
     // ===================================================================================
     //                                                                        Manual Order
@@ -432,12 +606,12 @@ public abstract class AbstractBsPickCQ extends AbstractConditionQuery {
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
-    protected PickCB newMyCB() {
-        return new PickCB();
+    protected FavoriteCB newMyCB() {
+        return new FavoriteCB();
     }
     // very internal (for suppressing warn about 'Not Use Import')
     protected String xabUDT() { return Date.class.getName(); }
-    protected String xabCQ() { return PickCQ.class.getName(); }
+    protected String xabCQ() { return FavoriteCQ.class.getName(); }
     protected String xabLSO() { return LikeSearchOption.class.getName(); }
     protected String xabSLCS() { return HpSLCSetupper.class.getName(); }
     protected String xabSCP() { return SubQuery.class.getName(); }

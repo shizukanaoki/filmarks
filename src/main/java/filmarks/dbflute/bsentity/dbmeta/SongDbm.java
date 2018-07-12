@@ -43,7 +43,7 @@ public class SongDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Song)et).getId(), (et, vl) -> ((Song)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((Song)et).getAlbumId(), (et, vl) -> ((Song)et).setAlbumId(cti(vl)), "albumId");
         setupEpg(_epgMap, et -> ((Song)et).getArtistId(), (et, vl) -> ((Song)et).setArtistId(cti(vl)), "artistId");
         setupEpg(_epgMap, et -> ((Song)et).getName(), (et, vl) -> ((Song)et).setName((String)vl), "name");
     }
@@ -79,15 +79,15 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
+    protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, true, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnArtistId = cci("ARTIST_ID", "ARTIST_ID", null, null, Integer.class, "artistId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "artist", null, null, false);
     protected final ColumnInfo _columnName = cci("NAME", "NAME", null, null, String.class, "name", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnId() { return _columnId; }
+    public ColumnInfo columnAlbumId() { return _columnAlbumId; }
     /**
      * ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST}
      * @return The information object of specified column. (NotNull)
@@ -101,7 +101,7 @@ public class SongDbm extends AbstractDBMeta {
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnId());
+        ls.add(columnAlbumId());
         ls.add(columnArtistId());
         ls.add(columnName());
         return ls;
@@ -115,7 +115,7 @@ public class SongDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnAlbumId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
@@ -136,11 +136,11 @@ public class SongDbm extends AbstractDBMeta {
         return cfi("FK_SONG_ARTIST", "artist", this, ArtistDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "songList", false);
     }
     /**
-     * ALBUM by my ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignAlbum() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), AlbumDbm.getInstance().columnId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnAlbumId(), AlbumDbm.getInstance().columnAlbumId());
         return cfi("FK_SONG_PRODUCT", "album", this, AlbumDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, true, false, false, false, null, null, false, "songAsOne", false);
     }
 

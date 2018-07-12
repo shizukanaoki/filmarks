@@ -37,7 +37,7 @@
             <div class="main">
                 <div class="products">
                     <div class="product" th:each="album:${albums}">
-                        <a th:href="@{'/albums/' + ${album.getId()}}">
+                        <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
                             <img th:src="@{'/image/album/' + ${album.getFileName()}}"/>
                         </a>
                     </div>

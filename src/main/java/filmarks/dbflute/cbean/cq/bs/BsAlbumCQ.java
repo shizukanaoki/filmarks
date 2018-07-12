@@ -73,53 +73,53 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _id;
-    public ConditionValue xdfgetId()
-    { if (_id == null) { _id = nCV(); }
-      return _id; }
-    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+    protected ConditionValue _albumId;
+    public ConditionValue xdfgetAlbumId()
+    { if (_albumId == null) { _albumId = nCV(); }
+      return _albumId; }
+    protected ConditionValue xgetCValueAlbumId() { return xdfgetAlbumId(); }
 
-    public Map<String, CommentCQ> xdfgetId_ExistsReferrer_CommentList() { return xgetSQueMap("id_ExistsReferrer_CommentList"); }
-    public String keepId_ExistsReferrer_CommentList(CommentCQ sq) { return xkeepSQue("id_ExistsReferrer_CommentList", sq); }
+    public Map<String, CommentCQ> xdfgetAlbumId_ExistsReferrer_CommentList() { return xgetSQueMap("albumId_ExistsReferrer_CommentList"); }
+    public String keepAlbumId_ExistsReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_ExistsReferrer_CommentList", sq); }
 
-    public Map<String, PickCQ> xdfgetId_ExistsReferrer_PickList() { return xgetSQueMap("id_ExistsReferrer_PickList"); }
-    public String keepId_ExistsReferrer_PickList(PickCQ sq) { return xkeepSQue("id_ExistsReferrer_PickList", sq); }
+    public Map<String, FavoriteCQ> xdfgetAlbumId_ExistsReferrer_FavoriteList() { return xgetSQueMap("albumId_ExistsReferrer_FavoriteList"); }
+    public String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_ExistsReferrer_FavoriteList", sq); }
 
-    public Map<String, CommentCQ> xdfgetId_NotExistsReferrer_CommentList() { return xgetSQueMap("id_NotExistsReferrer_CommentList"); }
-    public String keepId_NotExistsReferrer_CommentList(CommentCQ sq) { return xkeepSQue("id_NotExistsReferrer_CommentList", sq); }
+    public Map<String, CommentCQ> xdfgetAlbumId_NotExistsReferrer_CommentList() { return xgetSQueMap("albumId_NotExistsReferrer_CommentList"); }
+    public String keepAlbumId_NotExistsReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_NotExistsReferrer_CommentList", sq); }
 
-    public Map<String, PickCQ> xdfgetId_NotExistsReferrer_PickList() { return xgetSQueMap("id_NotExistsReferrer_PickList"); }
-    public String keepId_NotExistsReferrer_PickList(PickCQ sq) { return xkeepSQue("id_NotExistsReferrer_PickList", sq); }
+    public Map<String, FavoriteCQ> xdfgetAlbumId_NotExistsReferrer_FavoriteList() { return xgetSQueMap("albumId_NotExistsReferrer_FavoriteList"); }
+    public String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_NotExistsReferrer_FavoriteList", sq); }
 
-    public Map<String, CommentCQ> xdfgetId_SpecifyDerivedReferrer_CommentList() { return xgetSQueMap("id_SpecifyDerivedReferrer_CommentList"); }
-    public String keepId_SpecifyDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("id_SpecifyDerivedReferrer_CommentList", sq); }
+    public Map<String, CommentCQ> xdfgetAlbumId_SpecifyDerivedReferrer_CommentList() { return xgetSQueMap("albumId_SpecifyDerivedReferrer_CommentList"); }
+    public String keepAlbumId_SpecifyDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_SpecifyDerivedReferrer_CommentList", sq); }
 
-    public Map<String, PickCQ> xdfgetId_SpecifyDerivedReferrer_PickList() { return xgetSQueMap("id_SpecifyDerivedReferrer_PickList"); }
-    public String keepId_SpecifyDerivedReferrer_PickList(PickCQ sq) { return xkeepSQue("id_SpecifyDerivedReferrer_PickList", sq); }
+    public Map<String, FavoriteCQ> xdfgetAlbumId_SpecifyDerivedReferrer_FavoriteList() { return xgetSQueMap("albumId_SpecifyDerivedReferrer_FavoriteList"); }
+    public String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_SpecifyDerivedReferrer_FavoriteList", sq); }
 
-    public Map<String, CommentCQ> xdfgetId_QueryDerivedReferrer_CommentList() { return xgetSQueMap("id_QueryDerivedReferrer_CommentList"); }
-    public String keepId_QueryDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("id_QueryDerivedReferrer_CommentList", sq); }
-    public Map<String, Object> xdfgetId_QueryDerivedReferrer_CommentListParameter() { return xgetSQuePmMap("id_QueryDerivedReferrer_CommentList"); }
-    public String keepId_QueryDerivedReferrer_CommentListParameter(Object pm) { return xkeepSQuePm("id_QueryDerivedReferrer_CommentList", pm); }
+    public Map<String, CommentCQ> xdfgetAlbumId_QueryDerivedReferrer_CommentList() { return xgetSQueMap("albumId_QueryDerivedReferrer_CommentList"); }
+    public String keepAlbumId_QueryDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_QueryDerivedReferrer_CommentList", sq); }
+    public Map<String, Object> xdfgetAlbumId_QueryDerivedReferrer_CommentListParameter() { return xgetSQuePmMap("albumId_QueryDerivedReferrer_CommentList"); }
+    public String keepAlbumId_QueryDerivedReferrer_CommentListParameter(Object pm) { return xkeepSQuePm("albumId_QueryDerivedReferrer_CommentList", pm); }
 
-    public Map<String, PickCQ> xdfgetId_QueryDerivedReferrer_PickList() { return xgetSQueMap("id_QueryDerivedReferrer_PickList"); }
-    public String keepId_QueryDerivedReferrer_PickList(PickCQ sq) { return xkeepSQue("id_QueryDerivedReferrer_PickList", sq); }
-    public Map<String, Object> xdfgetId_QueryDerivedReferrer_PickListParameter() { return xgetSQuePmMap("id_QueryDerivedReferrer_PickList"); }
-    public String keepId_QueryDerivedReferrer_PickListParameter(Object pm) { return xkeepSQuePm("id_QueryDerivedReferrer_PickList", pm); }
+    public Map<String, FavoriteCQ> xdfgetAlbumId_QueryDerivedReferrer_FavoriteList() { return xgetSQueMap("albumId_QueryDerivedReferrer_FavoriteList"); }
+    public String keepAlbumId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_QueryDerivedReferrer_FavoriteList", sq); }
+    public Map<String, Object> xdfgetAlbumId_QueryDerivedReferrer_FavoriteListParameter() { return xgetSQuePmMap("albumId_QueryDerivedReferrer_FavoriteList"); }
+    public String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object pm) { return xkeepSQuePm("albumId_QueryDerivedReferrer_FavoriteList", pm); }
 
     /**
      * Add order-by as ascend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsAlbumCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ALBUM_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsAlbumCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
     protected ConditionValue _title;
     public ConditionValue xdfgetTitle()
@@ -255,7 +255,7 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * SONG by ID, named 'songAsOne'.
+     * SONG by ALBUM_ID, named 'songAsOne'.
      * @return The instance of condition-query. (NotNull)
      */
     public SongCQ querySongAsOne() { return xdfgetConditionQuerySongAsOne(); }

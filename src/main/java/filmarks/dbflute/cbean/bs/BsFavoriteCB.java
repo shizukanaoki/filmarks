@@ -21,20 +21,20 @@ import filmarks.dbflute.cbean.cq.*;
 import filmarks.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of PICK.
+ * The base condition-bean of FAVORITE.
  * @author DBFlute(AutoGenerator)
  */
-public class BsPickCB extends AbstractConditionBean {
+public class BsFavoriteCB extends AbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected PickCQ _conditionQuery;
+    protected FavoriteCQ _conditionQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsPickCB() {
+    public BsFavoriteCB() {
         if (DBFluteConfig.getInstance().isPagingCountLater()) {
             enablePagingCountLater();
         }
@@ -74,20 +74,45 @@ public class BsPickCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "PICK";
+        return "FAVORITE";
     }
 
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param favoriteId : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public FavoriteCB acceptPK(Integer favoriteId) {
+        assertObjectNotNull("favoriteId", favoriteId);
+        BsFavoriteCB cb = this;
+        cb.query().setFavoriteId_Equal(favoriteId);
+        return (FavoriteCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param userId : UQ+, NotNull, INT(10), FK to USER. (NotNull)
+     * @param albumId : +UQ, IX, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @return this. (NotNull)
+     */
+    public FavoriteCB acceptUniqueOf(Integer userId, Integer albumId) {
+        assertObjectNotNull("userId", userId);assertObjectNotNull("albumId", albumId);
+        BsFavoriteCB cb = this;
+        cb.query().setUserId_Equal(userId);cb.query().setAlbumId_Equal(albumId);
+        return (FavoriteCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_FavoriteId_Asc();
+        return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        String msg = "The table has no primary-keys: " + asTableDbName();
-        throw new UnsupportedOperationException(msg);
+        query().addOrderBy_FavoriteId_Desc();
+        return this;
     }
 
     // ===================================================================================
@@ -150,34 +175,34 @@ public class BsPickCB extends AbstractConditionBean {
      * </pre>
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
-    public PickCQ query() {
+    public FavoriteCQ query() {
         assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
-    public PickCQ xdfgetConditionQuery() { // public for parameter comment and internal
+    public FavoriteCQ xdfgetConditionQuery() { // public for parameter comment and internal
         return doGetConditionQuery();
     }
 
-    protected PickCQ doGetConditionQuery() {
+    protected FavoriteCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected PickCQ createLocalCQ() {
+    protected FavoriteCQ createLocalCQ() {
         return xcreateCQ(null, getSqlClause(), getSqlClause().getBasePointAliasName(), 0);
     }
 
-    protected PickCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        PickCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected FavoriteCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        FavoriteCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
         cq.xsetBaseCB(this);
         return cq;
     }
 
-    protected PickCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        return new PickCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected FavoriteCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        return new FavoriteCQ(childQuery, sqlClause, aliasName, nestLevel);
     }
 
     /**
@@ -201,10 +226,10 @@ public class BsPickCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
-    public void union(UnionQuery<PickCB> unionCBLambda) {
-        final PickCB cb = new PickCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void union(UnionQuery<FavoriteCB> unionCBLambda) {
+        final FavoriteCB cb = new FavoriteCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final PickCQ cq = cb.query(); query().xsetUnionQuery(cq);
+        final FavoriteCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
 
     /**
@@ -218,10 +243,10 @@ public class BsPickCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union all'. (NotNull)
      */
-    public void unionAll(UnionQuery<PickCB> unionCBLambda) {
-        final PickCB cb = new PickCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void unionAll(UnionQuery<FavoriteCB> unionCBLambda) {
+        final FavoriteCB cb = new FavoriteCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final PickCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
+        final FavoriteCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
     }
 
     // ===================================================================================
@@ -234,13 +259,13 @@ public class BsPickCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * ALBUM by my PRODUCT_ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * <pre>
-     * <span style="color: #0000C0">pickBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Album()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">pick</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">pick</span>.<span style="color: #CC4747">getAlbum()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * }).alwaysPresent(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">favorite</span>.<span style="color: #CC4747">getAlbum()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
@@ -248,7 +273,7 @@ public class BsPickCB extends AbstractConditionBean {
     public AlbumNss setupSelect_Album() {
         assertSetupSelectPurpose("album");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnProductId();
+            specify().columnAlbumId();
         }
         doSetupSelect(() -> query().queryAlbum());
         if (_nssAlbum == null || !_nssAlbum.hasConditionQuery())
@@ -260,11 +285,11 @@ public class BsPickCB extends AbstractConditionBean {
      * Set up relation columns to select clause. <br>
      * USER by my USER_ID, named 'user'.
      * <pre>
-     * <span style="color: #0000C0">pickBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">favoriteBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_User()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">pick</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">pick</span>.<span style="color: #CC4747">getUser()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * }).alwaysPresent(<span style="color: #553000">favorite</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">favorite</span>.<span style="color: #CC4747">getUser()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      */
@@ -316,30 +341,36 @@ public class BsPickCB extends AbstractConditionBean {
         return _specification != null && _specification.hasSpecifiedColumn();
     }
 
-    public static class HpSpecification extends HpAbstractSpecification<PickCQ> {
+    public static class HpSpecification extends HpAbstractSpecification<FavoriteCQ> {
         protected AlbumCB.HpSpecification _album;
         protected UserCB.HpSpecification _user;
-        public HpSpecification(ConditionBean baseCB, HpSpQyCall<PickCQ> qyCall
+        public HpSpecification(ConditionBean baseCB, HpSpQyCall<FavoriteCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * USER_ID: {IX, NotNull, INT(10), FK to USER}
+         * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFavoriteId() { return doColumn("FAVORITE_ID"); }
+        /**
+         * USER_ID: {UQ+, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * PRODUCT_ID: {IX, NotNull, INT(10), FK to ALBUM}
+         * ALBUM_ID: {+UQ, IX, NotNull, INT(10), FK to ALBUM}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnProductId() { return doColumn("PRODUCT_ID"); }
+        public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
+            columnFavoriteId(); // PK
             if (qyCall().qy().hasConditionQueryAlbum()
                     || qyCall().qy().xgetReferrerQuery() instanceof AlbumCQ) {
-                columnProductId(); // FK or one-to-one referrer
+                columnAlbumId(); // FK or one-to-one referrer
             }
             if (qyCall().qy().hasConditionQueryUser()
                     || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
@@ -347,10 +378,10 @@ public class BsPickCB extends AbstractConditionBean {
             }
         }
         @Override
-        protected String getTableDbName() { return "PICK"; }
+        protected String getTableDbName() { return "FAVORITE"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * ALBUM by my PRODUCT_ID, named 'album'.
+         * ALBUM by my ALBUM_ID, named 'album'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public AlbumCB.HpSpecification specifyAlbum() {
@@ -388,6 +419,15 @@ public class BsPickCB extends AbstractConditionBean {
             }
             return _user;
         }
+        /**
+         * Prepare for (Specify)MyselfDerived (SubQuery).
+         * @return The object to set up a function for myself table. (NotNull)
+         */
+        public HpSDRFunction<FavoriteCB, FavoriteCQ> myselfDerived() {
+            assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<FavoriteCB> sq, FavoriteCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
+        }
     }
 
     // ===================================================================================
@@ -398,9 +438,9 @@ public class BsPickCB extends AbstractConditionBean {
      * This is very specialty so you can get the frontier spirit. Bon voyage!
      * @return The condition-bean for dream cruise, which is linked to main condition-bean.
      */
-    public PickCB dreamCruiseCB() {
-        PickCB cb = new PickCB();
-        cb.xsetupForDreamCruise((PickCB) this);
+    public FavoriteCB dreamCruiseCB() {
+        FavoriteCB cb = new FavoriteCB();
+        cb.xsetupForDreamCruise((FavoriteCB) this);
         return cb;
     }
 
@@ -425,15 +465,15 @@ public class BsPickCB extends AbstractConditionBean {
      * @param colCBLambda The callback for specify-query of left column. (NotNull)
      * @return The object for setting up operand and right column. (NotNull)
      */
-    public HpColQyOperand<PickCB> columnQuery(final SpecifyQuery<PickCB> colCBLambda) {
+    public HpColQyOperand<FavoriteCB> columnQuery(final SpecifyQuery<FavoriteCB> colCBLambda) {
         return xcreateColQyOperand((rightSp, operand) -> {
             return xcolqy(xcreateColumnQueryCB(), xcreateColumnQueryCB(), colCBLambda, rightSp, operand);
         });
     }
 
-    protected PickCB xcreateColumnQueryCB() {
-        PickCB cb = new PickCB();
-        cb.xsetupForColumnQuery((PickCB)this);
+    protected FavoriteCB xcreateColumnQueryCB() {
+        FavoriteCB cb = new FavoriteCB();
+        cb.xsetupForColumnQuery((FavoriteCB)this);
         return cb;
     }
 
@@ -453,8 +493,8 @@ public class BsPickCB extends AbstractConditionBean {
      * </pre>
      * @param orCBLambda The callback for query of or-condition. (NotNull)
      */
-    public void orScopeQuery(OrQuery<PickCB> orCBLambda) {
-        xorSQ((PickCB)this, orCBLambda);
+    public void orScopeQuery(OrQuery<FavoriteCB> orCBLambda) {
+        xorSQ((FavoriteCB)this, orCBLambda);
     }
 
     /**
@@ -472,8 +512,8 @@ public class BsPickCB extends AbstractConditionBean {
      * </pre>
      * @param andCBLambda The callback for query of and-condition. (NotNull)
      */
-    public void orScopeQueryAndPart(AndQuery<PickCB> andCBLambda) {
-        xorSQAP((PickCB)this, andCBLambda);
+    public void orScopeQueryAndPart(AndQuery<FavoriteCB> andCBLambda) {
+        xorSQAP((FavoriteCB)this, andCBLambda);
     }
 
     // ===================================================================================
@@ -503,11 +543,11 @@ public class BsPickCB extends AbstractConditionBean {
     //                                                                        ============
     @Override
     protected void xprepareSyncQyCall(ConditionBean mainCB) {
-        final PickCB cb;
+        final FavoriteCB cb;
         if (mainCB != null) {
-            cb = (PickCB)mainCB;
+            cb = (FavoriteCB)mainCB;
         } else {
-            cb = new PickCB();
+            cb = new FavoriteCB();
         }
         specify().xsetSyncQyCall(xcreateSpQyCall(() -> true, () -> cb.query()));
     }
@@ -516,8 +556,8 @@ public class BsPickCB extends AbstractConditionBean {
     //                                                                            Internal
     //                                                                            ========
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xgetConditionBeanClassNameInternally() { return PickCB.class.getName(); }
-    protected String xgetConditionQueryClassNameInternally() { return PickCQ.class.getName(); }
+    protected String xgetConditionBeanClassNameInternally() { return FavoriteCB.class.getName(); }
+    protected String xgetConditionQueryClassNameInternally() { return FavoriteCQ.class.getName(); }
     protected String xgetSubQueryClassNameInternally() { return SubQuery.class.getName(); }
     protected String xgetConditionOptionClassNameInternally() { return ConditionOption.class.getName(); }
 }

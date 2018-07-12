@@ -7,19 +7,19 @@ import filmarks.dbflute.exbhv.*;
 import filmarks.dbflute.exentity.*;
 
 /**
- * The referrer loader of PICK as TABLE. <br>
+ * The referrer loader of FAVORITE as TABLE. <br>
  * <pre>
  * [primary key]
- *     
+ *     FAVORITE_ID
  *
  * [column]
- *     USER_ID, PRODUCT_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     FAVORITE_ID
  *
  * [version-no]
  *     
@@ -38,23 +38,23 @@ import filmarks.dbflute.exentity.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public class LoaderOfPick {
+public class LoaderOfFavorite {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected List<Pick> _selectedList;
+    protected List<Favorite> _selectedList;
     protected BehaviorSelector _selector;
-    protected PickBhv _myBhv; // lazy-loaded
+    protected FavoriteBhv _myBhv; // lazy-loaded
 
     // ===================================================================================
     //                                                                   Ready for Loading
     //                                                                   =================
-    public LoaderOfPick ready(List<Pick> selectedList, BehaviorSelector selector)
+    public LoaderOfFavorite ready(List<Favorite> selectedList, BehaviorSelector selector)
     { _selectedList = selectedList; _selector = selector; return this; }
 
-    protected PickBhv myBhv()
-    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(PickBhv.class); return _myBhv; } }
+    protected FavoriteBhv myBhv()
+    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(FavoriteBhv.class); return _myBhv; } }
 
     // ===================================================================================
     //                                                                    Pull out Foreign
@@ -76,6 +76,6 @@ public class LoaderOfPick {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public List<Pick> getSelectedList() { return _selectedList; }
+    public List<Favorite> getSelectedList() { return _selectedList; }
     public BehaviorSelector getSelector() { return _selector; }
 }

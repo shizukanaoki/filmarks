@@ -82,23 +82,23 @@ public class BsSongCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @param albumId : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
      * @return this. (NotNull)
      */
-    public SongCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
+    public SongCB acceptPK(Integer albumId) {
+        assertObjectNotNull("albumId", albumId);
         BsSongCB cb = this;
-        cb.query().setId_Equal(id);
+        cb.query().setAlbumId_Equal(albumId);
         return (SongCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_AlbumId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_AlbumId_Desc();
         return this;
     }
 
@@ -266,7 +266,7 @@ public class BsSongCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br>
-     * ALBUM by my ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * <pre>
      * <span style="color: #0000C0">songBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Album()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -333,10 +333,10 @@ public class BsSongCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, NotNull, INT(10), FK to ALBUM}
+         * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         /**
          * ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST}
          * @return The information object of specified column. (NotNull)
@@ -351,7 +351,7 @@ public class BsSongCB extends AbstractConditionBean {
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
+            columnAlbumId(); // PK
             if (qyCall().qy().hasConditionQueryArtist()
                     || qyCall().qy().xgetReferrerQuery() instanceof ArtistCQ) {
                 columnArtistId(); // FK or one-to-one referrer
@@ -381,7 +381,7 @@ public class BsSongCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * ALBUM by my ID, named 'album'.
+         * ALBUM by my ALBUM_ID, named 'album'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public AlbumCB.HpSpecification specifyAlbum() {

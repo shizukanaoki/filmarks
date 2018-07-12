@@ -73,25 +73,25 @@ public class BsSongCQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _id;
-    public ConditionValue xdfgetId()
-    { if (_id == null) { _id = nCV(); }
-      return _id; }
-    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+    protected ConditionValue _albumId;
+    public ConditionValue xdfgetAlbumId()
+    { if (_albumId == null) { _albumId = nCV(); }
+      return _albumId; }
+    protected ConditionValue xgetCValueAlbumId() { return xdfgetAlbumId(); }
 
     /**
      * Add order-by as ascend. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsSongCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsSongCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
     protected ConditionValue _artistId;
     public ConditionValue xdfgetArtistId()
@@ -207,7 +207,7 @@ public class BsSongCQ extends AbstractBsSongCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * ALBUM by my ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The instance of condition-query. (NotNull)
      */
     public AlbumCQ queryAlbum() {

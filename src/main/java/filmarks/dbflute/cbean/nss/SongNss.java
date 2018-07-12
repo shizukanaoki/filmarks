@@ -27,7 +27,7 @@ public class SongNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * ALBUM by my ID, named 'album'.
+     * ALBUM by my ALBUM_ID, named 'album'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public AlbumNss withAlbum() {

@@ -26,7 +26,7 @@ public class RelationshipController {
     public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, ModelAndView mav) {
         try {
             User follower = userService.findOne(followerId);
-            relationShipService.create(new Relationship(following.getId(), follower.getId()));
+            relationShipService.create(new Relationship(following.getUserId(), follower.getUserId()));
             mav.setViewName("user/show");
             mav.addObject("user", follower);
             return mav;
