@@ -1,4 +1,39 @@
 map:{
+    ; 2018/07/13 10:17:14 = map:{
+        ; diffDate = 2018/07/13 10:17:14
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = change_database
+        ; tableDiff = map:{
+            ; POST = map:{
+                ; tableName = POST
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CREATED_AT = map:{
+                        ; columnName = CREATED_AT
+                        ; diffType = ADD
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_POST_USER = map:{
+                        ; constraintName = FK_POST_USER
+                        ; diffType = ADD
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; UQ_POST_TARGET_ID_AND_TARGET_TYPE = map:{
+                        ; constraintName = UQ_POST_TARGET_ID_AND_TARGET_TYPE
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_POST_USER = map:{
+                        ; constraintName = FK_POST_USER
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/12 18:18:35 = map:{
         ; diffDate = 2018/07/12 18:18:35
         ; tableCount = map:{

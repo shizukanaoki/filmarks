@@ -30,13 +30,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, USER_FOLLOWING
+ *     COMMENT, FAVORITE, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
+ *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -127,6 +127,40 @@ public class LoaderOfUser {
     public NestedReferrerLoaderGateway<LoaderOfFavorite> loadFavorite(ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
         myBhv().loadFavorite(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerFavorite = refLs);
         return hd -> hd.handle(new LoaderOfFavorite().ready(_referrerFavorite, _selector));
+    }
+
+    protected List<Post> _referrerPost;
+
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by USER_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">userLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">postCB</span>.setupSelect...
+     *         <span style="color: #553000">postCB</span>.query().set...
+     *         <span style="color: #553000">postCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">postLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    postLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (User user : <span style="color: #553000">userList</span>) {
+     *     ... = user.<span style="color: #CC4747">getPostList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfPost> loadPost(ReferrerConditionSetupper<PostCB> refCBLambda) {
+        myBhv().loadPost(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerPost = refLs);
+        return hd -> hd.handle(new LoaderOfPost().ready(_referrerPost, _selector));
     }
 
     protected List<UserFollowing> _referrerUserFollowingByFollowerId;

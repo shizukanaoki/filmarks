@@ -91,6 +91,19 @@ public class BsPostCB extends AbstractConditionBean {
         return (PostCB)this;
     }
 
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param targetId : UQ+, NotNull, INT(10). (NotNull)
+     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public PostCB acceptUniqueOf(Integer targetId, Integer targetType) {
+        assertObjectNotNull("targetId", targetId);assertObjectNotNull("targetType", targetType);
+        BsPostCB cb = this;
+        cb.query().setTargetId_Equal(targetId);cb.query().setTargetType_Equal(targetType);
+        return (PostCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_PostId_Asc();
         return this;
@@ -238,6 +251,26 @@ public class BsPostCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
+    /**
+     * Set up relation columns to select clause. <br>
+     * USER by my USER_ID, named 'user'.
+     * <pre>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_User()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getUser()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     */
+    public void setupSelect_User() {
+        assertSetupSelectPurpose("user");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnUserId();
+        }
+        doSetupSelect(() -> query().queryUser());
+    }
+
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -279,6 +312,7 @@ public class BsPostCB extends AbstractConditionBean {
     }
 
     public static class HpSpecification extends HpAbstractSpecification<PostCQ> {
+        protected UserCB.HpSpecification _user;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<PostCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -289,28 +323,57 @@ public class BsPostCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPostId() { return doColumn("POST_ID"); }
         /**
-         * TARGET_ID: {NotNull, INT(10)}
+         * TARGET_ID: {UQ+, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnTargetId() { return doColumn("TARGET_ID"); }
         /**
-         * TARGET_TYPE: {NotNull, INT(10)}
+         * TARGET_TYPE: {+UQ, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnTargetType() { return doColumn("TARGET_TYPE"); }
         /**
-         * USER_ID: {NotNull, INT(10)}
+         * USER_ID: {IX, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
+        /**
+         * CREATED_AT: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnCreatedAt() { return doColumn("CREATED_AT"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
             columnPostId(); // PK
+            if (qyCall().qy().hasConditionQueryUser()
+                    || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
+                columnUserId(); // FK or one-to-one referrer
+            }
         }
         @Override
         protected String getTableDbName() { return "POST"; }
+        /**
+         * Prepare to specify functions about relation table. <br>
+         * USER by my USER_ID, named 'user'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public UserCB.HpSpecification specifyUser() {
+            assertRelation("user");
+            if (_user == null) {
+                _user = new UserCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryUser()
+                                    , () -> _qyCall.qy().queryUser())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _user.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryUser()
+                      , () -> xsyncQyCall().qy().queryUser()));
+                }
+            }
+            return _user;
+        }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)

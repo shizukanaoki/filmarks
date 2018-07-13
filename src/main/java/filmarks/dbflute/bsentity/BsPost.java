@@ -3,9 +3,11 @@ package filmarks.dbflute.bsentity;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.dbflute.Entity;
 import org.dbflute.dbmeta.DBMeta;
 import org.dbflute.dbmeta.AbstractEntity;
 import org.dbflute.dbmeta.accessory.DomainEntity;
+import org.dbflute.optional.OptionalEntity;
 import filmarks.dbflute.allcommon.DBMetaInstanceHandler;
 import filmarks.dbflute.exentity.*;
 
@@ -17,7 +19,7 @@ import filmarks.dbflute.exentity.*;
  *     POST_ID
  *
  * [column]
- *     POST_ID, TARGET_ID, TARGET_TYPE, USER_ID
+ *     POST_ID, TARGET_ID, TARGET_TYPE, USER_ID, CREATED_AT
  *
  * [sequence]
  *     
@@ -29,13 +31,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     
+ *     USER
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     
+ *     user
  *
  * [referrer property]
  *     
@@ -46,10 +48,12 @@ import filmarks.dbflute.exentity.*;
  * Integer targetId = entity.getTargetId();
  * Integer targetType = entity.getTargetType();
  * Integer userId = entity.getUserId();
+ * java.time.LocalDateTime createdAt = entity.getCreatedAt();
  * entity.setPostId(postId);
  * entity.setTargetId(targetId);
  * entity.setTargetType(targetType);
  * entity.setUserId(userId);
+ * entity.setCreatedAt(createdAt);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -68,14 +72,17 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     /** POST_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _postId;
 
-    /** TARGET_ID: {NotNull, INT(10)} */
+    /** TARGET_ID: {UQ+, NotNull, INT(10)} */
     protected Integer _targetId;
 
-    /** TARGET_TYPE: {NotNull, INT(10)} */
+    /** TARGET_TYPE: {+UQ, NotNull, INT(10)} */
     protected Integer _targetType;
 
-    /** USER_ID: {NotNull, INT(10)} */
+    /** USER_ID: {IX, NotNull, INT(10), FK to USER} */
     protected Integer _userId;
+
+    /** CREATED_AT: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _createdAt;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -99,9 +106,43 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
         return true;
     }
 
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param targetId : UQ+, NotNull, INT(10). (NotNull)
+     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     */
+    public void uniqueBy(Integer targetId, Integer targetType) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("targetId");
+        __uniqueDrivenProperties.addPropertyName("targetType");
+        setTargetId(targetId);setTargetType(targetType);
+    }
+
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
+    /** USER by my USER_ID, named 'user'. */
+    protected OptionalEntity<User> _user;
+
+    /**
+     * [get] USER by my USER_ID, named 'user'. <br>
+     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
+     * @return The entity of foreign property 'user'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public OptionalEntity<User> getUser() {
+        if (_user == null) { _user = OptionalEntity.relationEmpty(this, "user"); }
+        return _user;
+    }
+
+    /**
+     * [set] USER by my USER_ID, named 'user'.
+     * @param user The entity of foreign property 'user'. (NullAllowed)
+     */
+    public void setUser(OptionalEntity<User> user) {
+        _user = user;
+    }
+
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
@@ -133,7 +174,13 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
 
     @Override
     protected String doBuildStringWithRelation(String li) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        if (_user != null && _user.isPresent())
+        { sb.append(li).append(xbRDS(_user, "user")); }
+        return sb.toString();
+    }
+    protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
+        return et.get().buildDisplayString(name, true, true);
     }
 
     @Override
@@ -143,6 +190,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_targetId));
         sb.append(dm).append(xfND(_targetType));
         sb.append(dm).append(xfND(_userId));
+        sb.append(dm).append(xfND(_createdAt));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -152,7 +200,13 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
 
     @Override
     protected String doBuildRelationString(String dm) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        if (_user != null && _user.isPresent())
+        { sb.append(dm).append("user"); }
+        if (sb.length() > dm.length()) {
+            sb.delete(0, dm.length()).insert(0, "(").append(")");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -184,7 +238,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] TARGET_ID: {NotNull, INT(10)} <br>
+     * [get] TARGET_ID: {UQ+, NotNull, INT(10)} <br>
      * @return The value of the column 'TARGET_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getTargetId() {
@@ -193,7 +247,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] TARGET_ID: {NotNull, INT(10)} <br>
+     * [set] TARGET_ID: {UQ+, NotNull, INT(10)} <br>
      * @param targetId The value of the column 'TARGET_ID'. (basically NotNull if update: for the constraint)
      */
     public void setTargetId(Integer targetId) {
@@ -202,7 +256,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] TARGET_TYPE: {NotNull, INT(10)} <br>
+     * [get] TARGET_TYPE: {+UQ, NotNull, INT(10)} <br>
      * @return The value of the column 'TARGET_TYPE'. (basically NotNull if selected: for the constraint)
      */
     public Integer getTargetType() {
@@ -211,7 +265,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] TARGET_TYPE: {NotNull, INT(10)} <br>
+     * [set] TARGET_TYPE: {+UQ, NotNull, INT(10)} <br>
      * @param targetType The value of the column 'TARGET_TYPE'. (basically NotNull if update: for the constraint)
      */
     public void setTargetType(Integer targetType) {
@@ -220,7 +274,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] USER_ID: {NotNull, INT(10)} <br>
+     * [get] USER_ID: {IX, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @return The value of the column 'USER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -230,12 +284,30 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] USER_ID: {NotNull, INT(10)} <br>
+     * [set] USER_ID: {IX, NotNull, INT(10), FK to USER} <br>
      * ????ID
      * @param userId The value of the column 'USER_ID'. (basically NotNull if update: for the constraint)
      */
     public void setUserId(Integer userId) {
         registerModifiedProperty("userId");
         _userId = userId;
+    }
+
+    /**
+     * [get] CREATED_AT: {NotNull, DATETIME(19)} <br>
+     * @return The value of the column 'CREATED_AT'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getCreatedAt() {
+        checkSpecifiedProperty("createdAt");
+        return _createdAt;
+    }
+
+    /**
+     * [set] CREATED_AT: {NotNull, DATETIME(19)} <br>
+     * @param createdAt The value of the column 'CREATED_AT'. (basically NotNull if update: for the constraint)
+     */
+    public void setCreatedAt(java.time.LocalDateTime createdAt) {
+        registerModifiedProperty("createdAt");
+        _createdAt = createdAt;
     }
 }

@@ -32,13 +32,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, USER_FOLLOWING
+ *     COMMENT, FAVORITE, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
+ *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -151,6 +151,26 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         _favoriteList = favoriteList;
     }
 
+    /** POST by USER_ID, named 'postList'. */
+    protected List<Post> _postList;
+
+    /**
+     * [get] POST by USER_ID, named 'postList'.
+     * @return The entity list of referrer property 'postList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Post> getPostList() {
+        if (_postList == null) { _postList = newReferrerList(); }
+        return _postList;
+    }
+
+    /**
+     * [set] POST by USER_ID, named 'postList'.
+     * @param postList The entity list of referrer property 'postList'. (NullAllowed)
+     */
+    public void setPostList(List<Post> postList) {
+        _postList = postList;
+    }
+
     /** USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'. */
     protected List<UserFollowing> _userFollowingByFollowerIdList;
 
@@ -224,6 +244,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { if (et != null) { sb.append(li).append(xbRDS(et, "commentList")); } } }
         if (_favoriteList != null) { for (Favorite et : _favoriteList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "favoriteList")); } } }
+        if (_postList != null) { for (Post et : _postList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "postList")); } } }
         if (_userFollowingByFollowerIdList != null) { for (UserFollowing et : _userFollowingByFollowerIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "userFollowingByFollowerIdList")); } } }
         if (_userFollowingByFollowingIdList != null) { for (UserFollowing et : _userFollowingByFollowingIdList)
@@ -251,6 +273,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { sb.append(dm).append("commentList"); }
         if (_favoriteList != null && !_favoriteList.isEmpty())
         { sb.append(dm).append("favoriteList"); }
+        if (_postList != null && !_postList.isEmpty())
+        { sb.append(dm).append("postList"); }
         if (_userFollowingByFollowerIdList != null && !_userFollowingByFollowerIdList.isEmpty())
         { sb.append(dm).append("userFollowingByFollowerIdList"); }
         if (_userFollowingByFollowingIdList != null && !_userFollowingByFollowingIdList.isEmpty())

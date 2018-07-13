@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.dbflute.Entity;
+import org.dbflute.optional.OptionalEntity;
 import org.dbflute.dbmeta.AbstractDBMeta;
 import org.dbflute.dbmeta.info.*;
 import org.dbflute.dbmeta.name.*;
@@ -46,9 +47,22 @@ public class PostDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Post)et).getTargetId(), (et, vl) -> ((Post)et).setTargetId(cti(vl)), "targetId");
         setupEpg(_epgMap, et -> ((Post)et).getTargetType(), (et, vl) -> ((Post)et).setTargetType(cti(vl)), "targetType");
         setupEpg(_epgMap, et -> ((Post)et).getUserId(), (et, vl) -> ((Post)et).setUserId(cti(vl)), "userId");
+        setupEpg(_epgMap, et -> ((Post)et).getCreatedAt(), (et, vl) -> ((Post)et).setCreatedAt(ctldt(vl)), "createdAt");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
+
+    // -----------------------------------------------------
+    //                                      Foreign Property
+    //                                      ----------------
+    protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
+    { xsetupEfpg(); }
+    @SuppressWarnings("unchecked")
+    protected void xsetupEfpg() {
+        setupEfpg(_efpgMap, et -> ((Post)et).getUser(), (et, vl) -> ((Post)et).setUser((OptionalEntity<User>)vl), "user");
+    }
+    public PropertyGateway findForeignPropertyGateway(String prop)
+    { return doFindEfpg(_efpgMap, prop); }
 
     // ===================================================================================
     //                                                                          Table Info
@@ -69,7 +83,8 @@ public class PostDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnPostId = cci("POST_ID", "POST_ID", null, null, Integer.class, "postId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnTargetId = cci("TARGET_ID", "TARGET_ID", null, null, Integer.class, "targetId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnTargetType = cci("TARGET_TYPE", "TARGET_TYPE", null, null, Integer.class, "targetType", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
+    protected final ColumnInfo _columnCreatedAt = cci("CREATED_AT", "CREATED_AT", null, null, java.time.LocalDateTime.class, "createdAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * POST_ID: {PK, ID, NotNull, INT(10)}
@@ -77,20 +92,25 @@ public class PostDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPostId() { return _columnPostId; }
     /**
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnTargetId() { return _columnTargetId; }
     /**
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnTargetType() { return _columnTargetType; }
     /**
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserId() { return _columnUserId; }
+    /**
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnCreatedAt() { return _columnCreatedAt; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -98,6 +118,7 @@ public class PostDbm extends AbstractDBMeta {
         ls.add(columnTargetId());
         ls.add(columnTargetType());
         ls.add(columnUserId());
+        ls.add(columnCreatedAt());
         return ls;
     }
 
@@ -113,6 +134,16 @@ public class PostDbm extends AbstractDBMeta {
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnTargetId());
+        ls.add(columnTargetType());
+        return hpcui(ls);
+    }
+
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
@@ -121,6 +152,14 @@ public class PostDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------
+    /**
+     * USER by my USER_ID, named 'user'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignUser() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnUserId());
+        return cfi("FK_POST_USER", "user", this, UserDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "postList", false);
+    }
 
     // -----------------------------------------------------
     //                                     Referrer Property

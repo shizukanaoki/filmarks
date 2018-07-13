@@ -13,7 +13,7 @@ import filmarks.dbflute.exentity.*;
  *     POST_ID
  *
  * [column]
- *     POST_ID, TARGET_ID, TARGET_TYPE, USER_ID
+ *     POST_ID, TARGET_ID, TARGET_TYPE, USER_ID, CREATED_AT
  *
  * [sequence]
  *     
@@ -25,13 +25,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     
+ *     USER
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     
+ *     user
  *
  * [referrer property]
  *     
@@ -59,6 +59,13 @@ public class LoaderOfPost {
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
+    protected LoaderOfUser _foreignUserLoader;
+    public LoaderOfUser pulloutUser() {
+        if (_foreignUserLoader == null)
+        { _foreignUserLoader = new LoaderOfUser().ready(myBhv().pulloutUser(_selectedList), _selector); }
+        return _foreignUserLoader;
+    }
+
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========

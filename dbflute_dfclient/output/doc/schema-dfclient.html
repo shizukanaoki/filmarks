@@ -473,9 +473,9 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">5</td>
-		<td class="namecell" data-name="POST"><a href="#post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=4">POST</a></td>
+		<td class="namecell" data-name="POST"><a href="#post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=5">POST</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell POST_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Post</td>
@@ -496,7 +496,7 @@ dl.procedurelist dd.column pre {
 		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=3">USER</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#favorite" title="FK_PICK_USER">FAVORITE</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a></td>
+		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#favorite" title="FK_PICK_USER">FAVORITE</a>, <a href="#post" title="FK_POST_USER">POST</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a></td>
 		<td class="commentcell USER_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">User</td>
 		<td class="subcell">2018/07/03</td>
@@ -926,7 +926,7 @@ FAVORITE
 	</tbody>
 </table>
 
-<h2 id="post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=4">
+<h2 id="post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=5">
 POST
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/12</span>
 </h2>
@@ -976,7 +976,7 @@ POST
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="UQ_POST_TARGET_ID_AND_TARGET_TYPE(TARGET_ID, TARGET_TYPE)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
 		<td class=" columnnamecell" id="post_target_id">TARGET_ID</td>
@@ -994,7 +994,7 @@ POST
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="UQ_POST_TARGET_ID_AND_TARGET_TYPE(TARGET_ID, TARGET_TYPE)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
 		<td class=" columnnamecell" id="post_target_type">TARGET_TYPE</td>
@@ -1013,18 +1013,36 @@ POST
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="FK_POST_USER(USER_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td class=" columnnamecell" id="post_user_id">USER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>????ID</pre></td>
 		<td class="subcell">userId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="post_created_at">CREATED_AT</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">createdAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">2018/07/13</td>
 	</tr>
 	</tbody>
 </table>
@@ -1153,7 +1171,7 @@ USER
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>,<br><a href="#favorite" title="FK_PICK_USER">FAVORITE</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a>&nbsp;</td>
+		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>,<br><a href="#favorite" title="FK_PICK_USER">FAVORITE</a>,<br><a href="#post" title="FK_POST_USER">POST</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
 		<td class="subcell">userId</td>
@@ -1890,6 +1908,9 @@ function StoreClient() {
 				}
 				, 'USER_ID': {
 					'databaseComment': '????ID'
+				}
+				, 'CREATED_AT': {
+					'databaseComment': ''
 				}
 			}
 		}

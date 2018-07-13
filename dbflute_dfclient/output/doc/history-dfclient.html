@@ -213,6 +213,37 @@ dl.column-content dd span {
 <p class="sisterlink"><a href="./schema-dfclient.html">to SchemaHTML</a></p>
 </div>
 
+<div class="section diffCode_20180713101714">
+	<h2>
+		<span class="titlediffno">diffNo. 13:</span> <span class="titlediffdatepart">2018/07/13</span> <span class="titledifftimepart">10:17:14</span>
+		<span class="titlediffauthor">by naoki.shizuka</span>
+		<span class="titlediffgitbranch">on change_database</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-dfclient.html#post">POST</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CREATED_AT</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_POST_USER</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>UQ_POST_TARGET_ID_AND_TARGET_TYPE</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_POST_USER</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div class="section diffCode_20180712181835">
 	<h2>
 		<span class="titlediffno">diffNo. 12:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">18:18:35</span>
@@ -224,12 +255,12 @@ dl.column-content dd span {
 
 	<h3>Add Table</h3>
 	<ul class="table-content">
-		<li><a href="./schema-dfclient.html#post">POST</a></li>
-		<li><a href="./schema-dfclient.html#user_following">USER_FOLLOWING</a></li>
+		<li>POST</li>
+		<li>USER_FOLLOWING</li>
 	</ul>
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-dfclient.html#album">ALBUM</a></h4>
+		<h4>ALBUM</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">
@@ -246,7 +277,7 @@ dl.column-content dd span {
 				<li>TITLE</li>
 			</ul>
 		</div>
-		<h4><a href="./schema-dfclient.html#artist">ARTIST</a></h4>
+		<h4>ARTIST</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">
@@ -268,7 +299,7 @@ dl.column-content dd span {
 				<li>ARTIST_NAME</li>
 			</ul>
 		</div>
-		<h4><a href="./schema-dfclient.html#comment">COMMENT</a></h4>
+		<h4>COMMENT</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">
@@ -285,14 +316,14 @@ dl.column-content dd span {
 				<dd><span>Column</span>ID&nbsp;-&gt;&nbsp;COMMENT_ID</dd>
 			</dl>
 		</div>
-		<h4><a href="./schema-dfclient.html#favorite">FAVORITE</a></h4>
+		<h4>FAVORITE</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">
 				<li>FAVORITE_CREATED_AT</li>
 			</ul>
 		</div>
-		<h4><a href="./schema-dfclient.html#song">SONG</a></h4>
+		<h4>SONG</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">
@@ -785,7 +816,11 @@ dl.column-content dd span {
             ]
         };
         this.pickupStore = {
-            '20180712181835' : {
+            '20180713101714' : {
+                'diffDate' : '2018/07/13 10:17:14',
+                'diffComment' : ''
+            }
+            , '20180712181835' : {
                 'diffDate' : '2018/07/12 18:18:35',
                 'diffComment' : ''
             }

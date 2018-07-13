@@ -103,6 +103,20 @@
             name="TARGET_TYPE" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="USER_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="CREATED_AT"
+            required="true" size="19" type="TIMESTAMP"/>
+        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
+            foreignTable="USER" name="FK_POST_USER">
+            <reference foreign="USER_ID" local="USER_ID"/>
+        </foreign-key>
+        <unique name="UQ_POST_TARGET_ID_AND_TARGET_TYPE">
+            <unique-column name="TARGET_ID" position="1"/>
+            <unique-column name="TARGET_TYPE" position="2"/>
+        </unique>
+        <index name="FK_POST_USER">
+            <index-column name="USER_ID" position="1"/>
+        </index>
     </table>
     <table comment="NEW_TABLE" name="SONG"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">

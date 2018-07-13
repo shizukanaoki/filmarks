@@ -174,7 +174,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_Equal(Integer targetId) {
@@ -187,7 +187,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_NotEqual(Integer targetId) {
@@ -200,7 +200,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_GreaterThan(Integer targetId) {
@@ -209,7 +209,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_LessThan(Integer targetId) {
@@ -218,7 +218,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_GreaterEqual(Integer targetId) {
@@ -227,7 +227,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetId The value of targetId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_LessEqual(Integer targetId) {
@@ -238,7 +238,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param minNumber The min number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -251,7 +251,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param minNumber The min number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -262,7 +262,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetIdList The collection of targetId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetId_InScope(Collection<Integer> targetIdList) {
@@ -275,7 +275,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @param targetIdList The collection of targetId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetId_NotInScope(Collection<Integer> targetIdList) {
@@ -291,7 +291,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_Equal(Integer targetType) {
@@ -304,7 +304,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_NotEqual(Integer targetType) {
@@ -317,7 +317,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_GreaterThan(Integer targetType) {
@@ -326,7 +326,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_LessThan(Integer targetType) {
@@ -335,7 +335,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_GreaterEqual(Integer targetType) {
@@ -344,7 +344,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetType The value of targetType as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetType_LessEqual(Integer targetType) {
@@ -355,7 +355,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param minNumber The min number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -368,7 +368,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param minNumber The min number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -379,7 +379,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetTypeList The collection of targetType as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetType_InScope(Collection<Integer> targetTypeList) {
@@ -392,7 +392,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @param targetTypeList The collection of targetType as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetType_NotInScope(Collection<Integer> targetTypeList) {
@@ -408,7 +408,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_Equal(Integer userId) {
@@ -421,7 +421,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_NotEqual(Integer userId) {
@@ -434,7 +434,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterThan(Integer userId) {
@@ -443,7 +443,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessThan(Integer userId) {
@@ -452,7 +452,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_GreaterEqual(Integer userId) {
@@ -461,7 +461,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userId The value of userId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserId_LessEqual(Integer userId) {
@@ -472,7 +472,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -485,7 +485,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of userId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -496,7 +496,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_InScope(Collection<Integer> userIdList) {
@@ -509,7 +509,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @param userIdList The collection of userId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setUserId_NotInScope(Collection<Integer> userIdList) {
@@ -522,6 +522,81 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     protected void regUserId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUserId(), "USER_ID"); }
     protected abstract ConditionValue xgetCValueUserId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @param createdAt The value of createdAt as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCreatedAt_Equal(java.time.LocalDateTime createdAt) {
+        regCreatedAt(CK_EQ,  createdAt);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @param createdAt The value of createdAt as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCreatedAt_GreaterThan(java.time.LocalDateTime createdAt) {
+        regCreatedAt(CK_GT,  createdAt);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @param createdAt The value of createdAt as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCreatedAt_LessThan(java.time.LocalDateTime createdAt) {
+        regCreatedAt(CK_LT,  createdAt);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @param createdAt The value of createdAt as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCreatedAt_GreaterEqual(java.time.LocalDateTime createdAt) {
+        regCreatedAt(CK_GE,  createdAt);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @param createdAt The value of createdAt as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCreatedAt_LessEqual(java.time.LocalDateTime createdAt) {
+        regCreatedAt(CK_LE, createdAt);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setCreatedAt_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of createdAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of createdAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setCreatedAt_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setCreatedAt_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of createdAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of createdAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "CREATED_AT"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueCreatedAt(), nm, op);
+    }
+
+    protected void regCreatedAt(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCreatedAt(), "CREATED_AT"); }
+    protected abstract ConditionValue xgetCValueCreatedAt();
 
     // ===================================================================================
     //                                                                     ScalarCondition

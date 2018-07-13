@@ -85,6 +85,9 @@ public class BsUserCQ extends AbstractBsUserCQ {
     public Map<String, FavoriteCQ> xdfgetUserId_ExistsReferrer_FavoriteList() { return xgetSQueMap("userId_ExistsReferrer_FavoriteList"); }
     public String keepUserId_ExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("userId_ExistsReferrer_FavoriteList", sq); }
 
+    public Map<String, PostCQ> xdfgetUserId_ExistsReferrer_PostList() { return xgetSQueMap("userId_ExistsReferrer_PostList"); }
+    public String keepUserId_ExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("userId_ExistsReferrer_PostList", sq); }
+
     public Map<String, UserFollowingCQ> xdfgetUserId_ExistsReferrer_UserFollowingByFollowerIdList() { return xgetSQueMap("userId_ExistsReferrer_UserFollowingByFollowerIdList"); }
     public String keepUserId_ExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq) { return xkeepSQue("userId_ExistsReferrer_UserFollowingByFollowerIdList", sq); }
 
@@ -97,6 +100,9 @@ public class BsUserCQ extends AbstractBsUserCQ {
     public Map<String, FavoriteCQ> xdfgetUserId_NotExistsReferrer_FavoriteList() { return xgetSQueMap("userId_NotExistsReferrer_FavoriteList"); }
     public String keepUserId_NotExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("userId_NotExistsReferrer_FavoriteList", sq); }
 
+    public Map<String, PostCQ> xdfgetUserId_NotExistsReferrer_PostList() { return xgetSQueMap("userId_NotExistsReferrer_PostList"); }
+    public String keepUserId_NotExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("userId_NotExistsReferrer_PostList", sq); }
+
     public Map<String, UserFollowingCQ> xdfgetUserId_NotExistsReferrer_UserFollowingByFollowerIdList() { return xgetSQueMap("userId_NotExistsReferrer_UserFollowingByFollowerIdList"); }
     public String keepUserId_NotExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq) { return xkeepSQue("userId_NotExistsReferrer_UserFollowingByFollowerIdList", sq); }
 
@@ -108,6 +114,9 @@ public class BsUserCQ extends AbstractBsUserCQ {
 
     public Map<String, FavoriteCQ> xdfgetUserId_SpecifyDerivedReferrer_FavoriteList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_FavoriteList"); }
     public String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_FavoriteList", sq); }
+
+    public Map<String, PostCQ> xdfgetUserId_SpecifyDerivedReferrer_PostList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_PostList"); }
+    public String keepUserId_SpecifyDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_PostList", sq); }
 
     public Map<String, UserFollowingCQ> xdfgetUserId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList"); }
     public String keepUserId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList", sq); }
@@ -124,6 +133,11 @@ public class BsUserCQ extends AbstractBsUserCQ {
     public String keepUserId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_FavoriteList", sq); }
     public Map<String, Object> xdfgetUserId_QueryDerivedReferrer_FavoriteListParameter() { return xgetSQuePmMap("userId_QueryDerivedReferrer_FavoriteList"); }
     public String keepUserId_QueryDerivedReferrer_FavoriteListParameter(Object pm) { return xkeepSQuePm("userId_QueryDerivedReferrer_FavoriteList", pm); }
+
+    public Map<String, PostCQ> xdfgetUserId_QueryDerivedReferrer_PostList() { return xgetSQueMap("userId_QueryDerivedReferrer_PostList"); }
+    public String keepUserId_QueryDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_PostList", sq); }
+    public Map<String, Object> xdfgetUserId_QueryDerivedReferrer_PostListParameter() { return xgetSQuePmMap("userId_QueryDerivedReferrer_PostList"); }
+    public String keepUserId_QueryDerivedReferrer_PostListParameter(Object pm) { return xkeepSQuePm("userId_QueryDerivedReferrer_PostList", pm); }
 
     public Map<String, UserFollowingCQ> xdfgetUserId_QueryDerivedReferrer_UserFollowingByFollowerIdList() { return xgetSQueMap("userId_QueryDerivedReferrer_UserFollowingByFollowerIdList"); }
     public String keepUserId_QueryDerivedReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_UserFollowingByFollowerIdList", sq); }

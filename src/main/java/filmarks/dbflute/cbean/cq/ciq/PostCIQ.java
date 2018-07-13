@@ -65,6 +65,7 @@ public class PostCIQ extends AbstractBsPostCQ {
     protected ConditionValue xgetCValueTargetId() { return _myCQ.xdfgetTargetId(); }
     protected ConditionValue xgetCValueTargetType() { return _myCQ.xdfgetTargetType(); }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
+    protected ConditionValue xgetCValueCreatedAt() { return _myCQ.xdfgetCreatedAt(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(PostCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

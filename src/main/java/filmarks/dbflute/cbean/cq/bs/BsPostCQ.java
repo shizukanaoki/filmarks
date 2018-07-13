@@ -101,14 +101,14 @@ public class BsPostCQ extends AbstractBsPostCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetId_Asc() { regOBA("TARGET_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * TARGET_ID: {NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetId_Desc() { regOBD("TARGET_ID"); return this; }
@@ -121,14 +121,14 @@ public class BsPostCQ extends AbstractBsPostCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetType_Asc() { regOBA("TARGET_TYPE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * TARGET_TYPE: {NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetType_Desc() { regOBD("TARGET_TYPE"); return this; }
@@ -141,17 +141,37 @@ public class BsPostCQ extends AbstractBsPostCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_UserId_Asc() { regOBA("USER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * USER_ID: {NotNull, INT(10)}
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
+
+    protected ConditionValue _createdAt;
+    public ConditionValue xdfgetCreatedAt()
+    { if (_createdAt == null) { _createdAt = nCV(); }
+      return _createdAt; }
+    protected ConditionValue xgetCValueCreatedAt() { return xdfgetCreatedAt(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsPostCQ addOrderBy_CreatedAt_Asc() { regOBA("CREATED_AT"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsPostCQ addOrderBy_CreatedAt_Desc() { regOBD("CREATED_AT"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -192,11 +212,36 @@ public class BsPostCQ extends AbstractBsPostCQ {
     //                                                                         Union Query
     //                                                                         ===========
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
+        PostCQ bq = (PostCQ)bqs;
+        PostCQ uq = (PostCQ)uqs;
+        if (bq.hasConditionQueryUser()) {
+            uq.queryUser().reflectRelationOnUnionQuery(bq.queryUser(), uq.queryUser());
+        }
     }
 
     // ===================================================================================
     //                                                                       Foreign Query
     //                                                                       =============
+    /**
+     * Get the condition-query for relation table. <br>
+     * USER by my USER_ID, named 'user'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public UserCQ queryUser() {
+        return xdfgetConditionQueryUser();
+    }
+    public UserCQ xdfgetConditionQueryUser() {
+        String prop = "user";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryUser()); xsetupOuterJoinUser(); }
+        return xgetQueRlMap(prop);
+    }
+    protected UserCQ xcreateQueryUser() {
+        String nrp = xresolveNRP("POST", "user"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new UserCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "user", nrp);
+    }
+    protected void xsetupOuterJoinUser() { xregOutJo("user"); }
+    public boolean hasConditionQueryUser() { return xhasQueRlMap("user"); }
+
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;
     }

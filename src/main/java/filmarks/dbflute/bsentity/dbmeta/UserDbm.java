@@ -65,7 +65,7 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,userFollowingByFollowerIdList,userFollowingByFollowingIdList", null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,postList,userFollowingByFollowerIdList,userFollowingByFollowingIdList", null, false);
     protected final ColumnInfo _columnUsername = cci("USERNAME", "USERNAME", null, null, String.class, "username", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, null, String.class, "password", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
@@ -137,6 +137,14 @@ public class UserDbm extends AbstractDBMeta {
     public ReferrerInfo referrerFavoriteList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), FavoriteDbm.getInstance().columnUserId());
         return cri("FK_PICK_USER", "favoriteList", this, FavoriteDbm.getInstance(), mp, false, "user");
+    }
+    /**
+     * POST by USER_ID, named 'postList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerPostList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), PostDbm.getInstance().columnUserId());
+        return cri("FK_POST_USER", "postList", this, PostDbm.getInstance(), mp, false, "user");
     }
     /**
      * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
