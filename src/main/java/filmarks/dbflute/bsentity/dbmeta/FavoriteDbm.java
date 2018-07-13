@@ -80,7 +80,7 @@ public class FavoriteDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnFavoriteId = cci("FAVORITE_ID", "FAVORITE_ID", null, null, Integer.class, "favoriteId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnFavoriteId = cci("FAVORITE_ID", "FAVORITE_ID", null, null, Integer.class, "favoriteId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "postList", null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnFavoriteCreatedAt = cci("FAVORITE_CREATED_AT", "FAVORITE_CREATED_AT", null, null, java.time.LocalDateTime.class, "favoriteCreatedAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
@@ -165,6 +165,14 @@ public class FavoriteDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * POST by TARGET_ID, named 'postList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerPostList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnFavoriteId(), PostDbm.getInstance().columnTargetId());
+        return cri("FK_POST_FAVORITE", "postList", this, PostDbm.getInstance(), mp, false, "favorite");
+    }
 
     // ===================================================================================
     //                                                                        Various Info

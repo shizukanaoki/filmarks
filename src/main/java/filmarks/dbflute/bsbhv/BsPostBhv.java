@@ -40,13 +40,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     USER
+ *     USER, FAVORITE, COMMENT
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     user
+ *     user, favorite, comment
  *
  * [referrer property]
  *     
@@ -188,7 +188,7 @@ public abstract class BsPostBhv extends AbstractBehaviorWritable<Post, PostCB> {
 
     /**
      * Select the entity by the unique-key value.
-     * @param targetId : UQ+, NotNull, INT(10). (NotNull)
+     * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
      * @param targetType : +UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
@@ -397,6 +397,22 @@ public abstract class BsPostBhv extends AbstractBehaviorWritable<Post, PostCB> {
      */
     public List<User> pulloutUser(List<Post> postList)
     { return helpPulloutInternally(postList, "user"); }
+
+    /**
+     * Pull out the list of foreign table 'Favorite'.
+     * @param postList The list of post. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Favorite> pulloutFavorite(List<Post> postList)
+    { return helpPulloutInternally(postList, "favorite"); }
+
+    /**
+     * Pull out the list of foreign table 'Comment'.
+     * @param postList The list of post. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Comment> pulloutComment(List<Post> postList)
+    { return helpPulloutInternally(postList, "comment"); }
 
     // ===================================================================================
     //                                                                      Extract Column

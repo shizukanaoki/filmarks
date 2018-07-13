@@ -18,6 +18,7 @@ import filmarks.dbflute.allcommon.ImplementedInvokerAssistant;
 import filmarks.dbflute.allcommon.ImplementedSqlClauseCreator;
 import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
+import filmarks.dbflute.cbean.nss.*;
 
 /**
  * The base condition-bean of POST.
@@ -93,7 +94,7 @@ public class BsPostCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param targetId : UQ+, NotNull, INT(10). (NotNull)
+     * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
      * @param targetType : +UQ, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
@@ -271,6 +272,64 @@ public class BsPostCB extends AbstractConditionBean {
         doSetupSelect(() -> query().queryUser());
     }
 
+    protected FavoriteNss _nssFavorite;
+    public FavoriteNss xdfgetNssFavorite() {
+        if (_nssFavorite == null) { _nssFavorite = new FavoriteNss(null); }
+        return _nssFavorite;
+    }
+    /**
+     * Set up relation columns to select clause. <br>
+     * FAVORITE by my TARGET_ID, named 'favorite'.
+     * <pre>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Favorite()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getFavorite()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public FavoriteNss setupSelect_Favorite() {
+        assertSetupSelectPurpose("favorite");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnTargetId();
+        }
+        doSetupSelect(() -> query().queryFavorite());
+        if (_nssFavorite == null || !_nssFavorite.hasConditionQuery())
+        { _nssFavorite = new FavoriteNss(query().queryFavorite()); }
+        return _nssFavorite;
+    }
+
+    protected CommentNss _nssComment;
+    public CommentNss xdfgetNssComment() {
+        if (_nssComment == null) { _nssComment = new CommentNss(null); }
+        return _nssComment;
+    }
+    /**
+     * Set up relation columns to select clause. <br>
+     * COMMENT by my TARGET_ID, named 'comment'.
+     * <pre>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Comment()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getComment()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public CommentNss setupSelect_Comment() {
+        assertSetupSelectPurpose("comment");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnTargetId();
+        }
+        doSetupSelect(() -> query().queryComment());
+        if (_nssComment == null || !_nssComment.hasConditionQuery())
+        { _nssComment = new CommentNss(query().queryComment()); }
+        return _nssComment;
+    }
+
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -313,6 +372,8 @@ public class BsPostCB extends AbstractConditionBean {
 
     public static class HpSpecification extends HpAbstractSpecification<PostCQ> {
         protected UserCB.HpSpecification _user;
+        protected FavoriteCB.HpSpecification _favorite;
+        protected CommentCB.HpSpecification _comment;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<PostCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -323,7 +384,7 @@ public class BsPostCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPostId() { return doColumn("POST_ID"); }
         /**
-         * TARGET_ID: {UQ+, NotNull, INT(10)}
+         * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnTargetId() { return doColumn("TARGET_ID"); }
@@ -351,6 +412,14 @@ public class BsPostCB extends AbstractConditionBean {
                     || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
                 columnUserId(); // FK or one-to-one referrer
             }
+            if (qyCall().qy().hasConditionQueryFavorite()
+                    || qyCall().qy().xgetReferrerQuery() instanceof FavoriteCQ) {
+                columnTargetId(); // FK or one-to-one referrer
+            }
+            if (qyCall().qy().hasConditionQueryComment()
+                    || qyCall().qy().xgetReferrerQuery() instanceof CommentCQ) {
+                columnTargetId(); // FK or one-to-one referrer
+            }
         }
         @Override
         protected String getTableDbName() { return "POST"; }
@@ -373,6 +442,46 @@ public class BsPostCB extends AbstractConditionBean {
                 }
             }
             return _user;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br>
+         * FAVORITE by my TARGET_ID, named 'favorite'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public FavoriteCB.HpSpecification specifyFavorite() {
+            assertRelation("favorite");
+            if (_favorite == null) {
+                _favorite = new FavoriteCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryFavorite()
+                                    , () -> _qyCall.qy().queryFavorite())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _favorite.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryFavorite()
+                      , () -> xsyncQyCall().qy().queryFavorite()));
+                }
+            }
+            return _favorite;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br>
+         * COMMENT by my TARGET_ID, named 'comment'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public CommentCB.HpSpecification specifyComment() {
+            assertRelation("comment");
+            if (_comment == null) {
+                _comment = new CommentCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryComment()
+                                    , () -> _qyCall.qy().queryComment())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _comment.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryComment()
+                      , () -> xsyncQyCall().qy().queryComment()));
+                }
+            }
+            return _comment;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

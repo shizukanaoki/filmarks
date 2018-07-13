@@ -31,13 +31,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     USER
+ *     USER, FAVORITE, COMMENT
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     user
+ *     user, favorite, comment
  *
  * [referrer property]
  *     
@@ -72,7 +72,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     /** POST_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _postId;
 
-    /** TARGET_ID: {UQ+, NotNull, INT(10)} */
+    /** TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE} */
     protected Integer _targetId;
 
     /** TARGET_TYPE: {+UQ, NotNull, INT(10)} */
@@ -109,7 +109,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param targetId : UQ+, NotNull, INT(10). (NotNull)
+     * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
      * @param targetType : +UQ, NotNull, INT(10). (NotNull)
      */
     public void uniqueBy(Integer targetId, Integer targetType) {
@@ -141,6 +141,48 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
      */
     public void setUser(OptionalEntity<User> user) {
         _user = user;
+    }
+
+    /** FAVORITE by my TARGET_ID, named 'favorite'. */
+    protected OptionalEntity<Favorite> _favorite;
+
+    /**
+     * [get] FAVORITE by my TARGET_ID, named 'favorite'. <br>
+     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
+     * @return The entity of foreign property 'favorite'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public OptionalEntity<Favorite> getFavorite() {
+        if (_favorite == null) { _favorite = OptionalEntity.relationEmpty(this, "favorite"); }
+        return _favorite;
+    }
+
+    /**
+     * [set] FAVORITE by my TARGET_ID, named 'favorite'.
+     * @param favorite The entity of foreign property 'favorite'. (NullAllowed)
+     */
+    public void setFavorite(OptionalEntity<Favorite> favorite) {
+        _favorite = favorite;
+    }
+
+    /** COMMENT by my TARGET_ID, named 'comment'. */
+    protected OptionalEntity<Comment> _comment;
+
+    /**
+     * [get] COMMENT by my TARGET_ID, named 'comment'. <br>
+     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
+     * @return The entity of foreign property 'comment'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public OptionalEntity<Comment> getComment() {
+        if (_comment == null) { _comment = OptionalEntity.relationEmpty(this, "comment"); }
+        return _comment;
+    }
+
+    /**
+     * [set] COMMENT by my TARGET_ID, named 'comment'.
+     * @param comment The entity of foreign property 'comment'. (NullAllowed)
+     */
+    public void setComment(OptionalEntity<Comment> comment) {
+        _comment = comment;
     }
 
     // ===================================================================================
@@ -177,6 +219,10 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_user != null && _user.isPresent())
         { sb.append(li).append(xbRDS(_user, "user")); }
+        if (_favorite != null && _favorite.isPresent())
+        { sb.append(li).append(xbRDS(_favorite, "favorite")); }
+        if (_comment != null && _comment.isPresent())
+        { sb.append(li).append(xbRDS(_comment, "comment")); }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -203,6 +249,10 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_user != null && _user.isPresent())
         { sb.append(dm).append("user"); }
+        if (_favorite != null && _favorite.isPresent())
+        { sb.append(dm).append("favorite"); }
+        if (_comment != null && _comment.isPresent())
+        { sb.append(dm).append("comment"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -238,7 +288,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] TARGET_ID: {UQ+, NotNull, INT(10)} <br>
+     * [get] TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE} <br>
      * @return The value of the column 'TARGET_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getTargetId() {
@@ -247,7 +297,7 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [set] TARGET_ID: {UQ+, NotNull, INT(10)} <br>
+     * [set] TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE} <br>
      * @param targetId The value of the column 'TARGET_ID'. (basically NotNull if update: for the constraint)
      */
     public void setTargetId(Integer targetId) {

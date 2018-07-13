@@ -1,5 +1,6 @@
 package filmarks.service;
 
+import filmarks.dbflute.exbhv.PostBhv;
 import filmarks.dbflute.exentity.Favorite;
 import filmarks.domain.FavoriteRepository;
 import org.dbflute.optional.OptionalEntity;
@@ -11,6 +12,9 @@ public class FavoriteService {
 
     @Autowired
     FavoriteRepository favoriteRepository;
+
+    @Autowired
+    PostBhv postBhv;
 
     public OptionalEntity<Favorite> loadFavoriteByUserIdAndAlbumId(int userId, int albumId) {
         return favoriteRepository.findByUserIdAndAlbumId(userId, albumId);

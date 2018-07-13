@@ -25,13 +25,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     USER
+ *     USER, FAVORITE, COMMENT
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     user
+ *     user, favorite, comment
  *
  * [referrer property]
  *     
@@ -64,6 +64,20 @@ public class LoaderOfPost {
         if (_foreignUserLoader == null)
         { _foreignUserLoader = new LoaderOfUser().ready(myBhv().pulloutUser(_selectedList), _selector); }
         return _foreignUserLoader;
+    }
+
+    protected LoaderOfFavorite _foreignFavoriteLoader;
+    public LoaderOfFavorite pulloutFavorite() {
+        if (_foreignFavoriteLoader == null)
+        { _foreignFavoriteLoader = new LoaderOfFavorite().ready(myBhv().pulloutFavorite(_selectedList), _selector); }
+        return _foreignFavoriteLoader;
+    }
+
+    protected LoaderOfComment _foreignCommentLoader;
+    public LoaderOfComment pulloutComment() {
+        if (_foreignCommentLoader == null)
+        { _foreignCommentLoader = new LoaderOfComment().ready(myBhv().pulloutComment(_selectedList), _selector); }
+        return _foreignCommentLoader;
     }
 
     // ===================================================================================

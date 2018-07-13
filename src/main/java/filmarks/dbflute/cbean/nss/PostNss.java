@@ -25,4 +25,22 @@ public class PostNss {
     public void withUser() {
         _query.xdoNss(() -> _query.queryUser());
     }
+    /**
+     * With nested relation columns to select clause. <br>
+     * FAVORITE by my TARGET_ID, named 'favorite'.
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public FavoriteNss withFavorite() {
+        _query.xdoNss(() -> _query.queryFavorite());
+        return new FavoriteNss(_query.queryFavorite());
+    }
+    /**
+     * With nested relation columns to select clause. <br>
+     * COMMENT by my TARGET_ID, named 'comment'.
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public CommentNss withComment() {
+        _query.xdoNss(() -> _query.queryComment());
+        return new CommentNss(_query.queryComment());
+    }
 }

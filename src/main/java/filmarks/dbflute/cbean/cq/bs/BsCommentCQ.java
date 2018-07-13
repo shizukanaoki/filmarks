@@ -79,6 +79,20 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
       return _commentId; }
     protected ConditionValue xgetCValueCommentId() { return xdfgetCommentId(); }
 
+    public Map<String, PostCQ> xdfgetCommentId_ExistsReferrer_PostList() { return xgetSQueMap("commentId_ExistsReferrer_PostList"); }
+    public String keepCommentId_ExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_ExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_NotExistsReferrer_PostList() { return xgetSQueMap("commentId_NotExistsReferrer_PostList"); }
+    public String keepCommentId_NotExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_NotExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_SpecifyDerivedReferrer_PostList() { return xgetSQueMap("commentId_SpecifyDerivedReferrer_PostList"); }
+    public String keepCommentId_SpecifyDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_SpecifyDerivedReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_QueryDerivedReferrer_PostList() { return xgetSQueMap("commentId_QueryDerivedReferrer_PostList"); }
+    public String keepCommentId_QueryDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_QueryDerivedReferrer_PostList", sq); }
+    public Map<String, Object> xdfgetCommentId_QueryDerivedReferrer_PostListParameter() { return xgetSQuePmMap("commentId_QueryDerivedReferrer_PostList"); }
+    public String keepCommentId_QueryDerivedReferrer_PostListParameter(Object pm) { return xkeepSQuePm("commentId_QueryDerivedReferrer_PostList", pm); }
+
     /**
      * Add order-by as ascend. <br>
      * COMMENT_ID: {PK, ID, NotNull, INT(10)}

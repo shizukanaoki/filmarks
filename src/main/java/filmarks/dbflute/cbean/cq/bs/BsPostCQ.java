@@ -101,14 +101,14 @@ public class BsPostCQ extends AbstractBsPostCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetId_Asc() { regOBA("TARGET_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetId_Desc() { regOBD("TARGET_ID"); return this; }
@@ -217,6 +217,12 @@ public class BsPostCQ extends AbstractBsPostCQ {
         if (bq.hasConditionQueryUser()) {
             uq.queryUser().reflectRelationOnUnionQuery(bq.queryUser(), uq.queryUser());
         }
+        if (bq.hasConditionQueryFavorite()) {
+            uq.queryFavorite().reflectRelationOnUnionQuery(bq.queryFavorite(), uq.queryFavorite());
+        }
+        if (bq.hasConditionQueryComment()) {
+            uq.queryComment().reflectRelationOnUnionQuery(bq.queryComment(), uq.queryComment());
+        }
     }
 
     // ===================================================================================
@@ -241,6 +247,46 @@ public class BsPostCQ extends AbstractBsPostCQ {
     }
     protected void xsetupOuterJoinUser() { xregOutJo("user"); }
     public boolean hasConditionQueryUser() { return xhasQueRlMap("user"); }
+
+    /**
+     * Get the condition-query for relation table. <br>
+     * FAVORITE by my TARGET_ID, named 'favorite'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public FavoriteCQ queryFavorite() {
+        return xdfgetConditionQueryFavorite();
+    }
+    public FavoriteCQ xdfgetConditionQueryFavorite() {
+        String prop = "favorite";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryFavorite()); xsetupOuterJoinFavorite(); }
+        return xgetQueRlMap(prop);
+    }
+    protected FavoriteCQ xcreateQueryFavorite() {
+        String nrp = xresolveNRP("POST", "favorite"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new FavoriteCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "favorite", nrp);
+    }
+    protected void xsetupOuterJoinFavorite() { xregOutJo("favorite"); }
+    public boolean hasConditionQueryFavorite() { return xhasQueRlMap("favorite"); }
+
+    /**
+     * Get the condition-query for relation table. <br>
+     * COMMENT by my TARGET_ID, named 'comment'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public CommentCQ queryComment() {
+        return xdfgetConditionQueryComment();
+    }
+    public CommentCQ xdfgetConditionQueryComment() {
+        String prop = "comment";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryComment()); xsetupOuterJoinComment(); }
+        return xgetQueRlMap(prop);
+    }
+    protected CommentCQ xcreateQueryComment() {
+        String nrp = xresolveNRP("POST", "comment"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new CommentCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "comment", nrp);
+    }
+    protected void xsetupOuterJoinComment() { xregOutJo("comment"); }
+    public boolean hasConditionQueryComment() { return xhasQueRlMap("comment"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

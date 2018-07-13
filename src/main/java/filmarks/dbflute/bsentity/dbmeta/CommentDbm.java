@@ -82,7 +82,7 @@ public class CommentDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnCommentId = cci("COMMENT_ID", "COMMENT_ID", null, null, Integer.class, "commentId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnCommentId = cci("COMMENT_ID", "COMMENT_ID", null, null, Integer.class, "commentId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "postList", null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnContent = cci("CONTENT", "CONTENT", null, null, String.class, "content", null, false, false, true, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
@@ -171,6 +171,14 @@ public class CommentDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * POST by TARGET_ID, named 'postList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerPostList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnCommentId(), PostDbm.getInstance().columnTargetId());
+        return cri("FK_POST_COMMENT", "postList", this, PostDbm.getInstance(), mp, false, "comment");
+    }
 
     // ===================================================================================
     //                                                                        Various Info

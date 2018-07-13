@@ -34,13 +34,13 @@ import filmarks.dbflute.exentity.*;
  *     ALBUM, USER
  *
  * [referrer table]
- *     
+ *     POST
  *
  * [foreign property]
  *     album, user
  *
  * [referrer property]
- *     
+ *     postList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -162,6 +162,26 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** POST by TARGET_ID, named 'postList'. */
+    protected List<Post> _postList;
+
+    /**
+     * [get] POST by TARGET_ID, named 'postList'.
+     * @return The entity list of referrer property 'postList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Post> getPostList() {
+        if (_postList == null) { _postList = newReferrerList(); }
+        return _postList;
+    }
+
+    /**
+     * [set] POST by TARGET_ID, named 'postList'.
+     * @param postList The entity list of referrer property 'postList'. (NullAllowed)
+     */
+    public void setPostList(List<Post> postList) {
+        _postList = postList;
+    }
+
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
@@ -195,6 +215,8 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
         { sb.append(li).append(xbRDS(_album, "album")); }
         if (_user != null && _user.isPresent())
         { sb.append(li).append(xbRDS(_user, "user")); }
+        if (_postList != null) { for (Post et : _postList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "postList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -222,6 +244,8 @@ public abstract class BsFavorite extends AbstractEntity implements DomainEntity 
         { sb.append(dm).append("album"); }
         if (_user != null && _user.isPresent())
         { sb.append(dm).append("user"); }
+        if (_postList != null && !_postList.isEmpty())
+        { sb.append(dm).append("postList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }

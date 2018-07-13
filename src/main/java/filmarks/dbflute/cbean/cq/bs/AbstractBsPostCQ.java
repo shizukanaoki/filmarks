@@ -174,7 +174,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_Equal(Integer targetId) {
@@ -187,7 +187,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_NotEqual(Integer targetId) {
@@ -200,7 +200,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_GreaterThan(Integer targetId) {
@@ -209,7 +209,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_LessThan(Integer targetId) {
@@ -218,7 +218,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_GreaterEqual(Integer targetId) {
@@ -227,7 +227,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetId The value of targetId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setTargetId_LessEqual(Integer targetId) {
@@ -238,7 +238,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param minNumber The min number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -251,7 +251,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param minNumber The min number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of targetId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -262,7 +262,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetIdList The collection of targetId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetId_InScope(Collection<Integer> targetIdList) {
@@ -275,7 +275,7 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @param targetIdList The collection of targetId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setTargetId_NotInScope(Collection<Integer> targetIdList) {

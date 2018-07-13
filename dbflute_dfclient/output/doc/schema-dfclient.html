@@ -456,7 +456,7 @@ dl.procedurelist dd.column pre {
 		<td class="namecell" data-name="COMMENT"><a href="#comment" title="type=TABLE, primaryKey={COMMENT_ID}, nameLength=7, columnCount=6">COMMENT</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#album" title="FK_COMMENT_PRODUCT">ALBUM</a>, <a href="#user" title="FK_COMMENT_USER">USER</a></td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_COMMENT">POST</a></td>
 		<td class="commentcell COMMENT_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Comment</td>
 		<td class="subcell">2018/07/03</td>
@@ -466,7 +466,7 @@ dl.procedurelist dd.column pre {
 		<td class="namecell" data-name="FAVORITE"><a href="#favorite" title="type=TABLE, primaryKey={FAVORITE_ID}, nameLength=8, columnCount=4">FAVORITE</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#album" title="FK_PICK_PRODUCT">ALBUM</a>, <a href="#user" title="FK_PICK_USER">USER</a></td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_FAVORITE">POST</a></td>
 		<td class="commentcell FAVORITE_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Favorite</td>
 		<td class="subcell">2018/07/09</td>
@@ -475,7 +475,7 @@ dl.procedurelist dd.column pre {
 		<td class="rownumcell">5</td>
 		<td class="namecell" data-name="POST"><a href="#post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=5">POST</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a></td>
+		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a>, <a href="#favorite" class="additionalfk" title="FK_POST_FAVORITE">FAVORITE</a>, <a href="#comment" class="additionalfk" title="FK_POST_COMMENT">COMMENT</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell POST_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Post</td>
@@ -723,7 +723,7 @@ COMMENT
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_COMMENT">POST</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
 		<td class="subcell">commentId</td>
@@ -862,7 +862,7 @@ FAVORITE
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_FAVORITE">POST</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
 		<td class="subcell">favoriteId</td>
@@ -982,7 +982,7 @@ POST
 		<td class=" columnnamecell" id="post_target_id">TARGET_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell"><a href="#favorite" class="additionalfk" title="FK_POST_FAVORITE">FAVORITE</a>,<br><a href="#comment" class="additionalfk" title="FK_POST_COMMENT">COMMENT</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>&nbsp;</pre></td>

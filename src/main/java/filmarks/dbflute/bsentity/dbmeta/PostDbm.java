@@ -60,6 +60,8 @@ public class PostDbm extends AbstractDBMeta {
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((Post)et).getUser(), (et, vl) -> ((Post)et).setUser((OptionalEntity<User>)vl), "user");
+        setupEfpg(_efpgMap, et -> ((Post)et).getFavorite(), (et, vl) -> ((Post)et).setFavorite((OptionalEntity<Favorite>)vl), "favorite");
+        setupEfpg(_efpgMap, et -> ((Post)et).getComment(), (et, vl) -> ((Post)et).setComment((OptionalEntity<Comment>)vl), "comment");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -81,7 +83,7 @@ public class PostDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnPostId = cci("POST_ID", "POST_ID", null, null, Integer.class, "postId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnTargetId = cci("TARGET_ID", "TARGET_ID", null, null, Integer.class, "targetId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnTargetId = cci("TARGET_ID", "TARGET_ID", null, null, Integer.class, "targetId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "favorite,comment", null, null, false);
     protected final ColumnInfo _columnTargetType = cci("TARGET_TYPE", "TARGET_TYPE", null, null, Integer.class, "targetType", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnCreatedAt = cci("CREATED_AT", "CREATED_AT", null, null, java.time.LocalDateTime.class, "createdAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
@@ -92,7 +94,7 @@ public class PostDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPostId() { return _columnPostId; }
     /**
-     * TARGET_ID: {UQ+, NotNull, INT(10)}
+     * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnTargetId() { return _columnTargetId; }
@@ -159,6 +161,22 @@ public class PostDbm extends AbstractDBMeta {
     public ForeignInfo foreignUser() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserDbm.getInstance().columnUserId());
         return cfi("FK_POST_USER", "user", this, UserDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "postList", false);
+    }
+    /**
+     * FAVORITE by my TARGET_ID, named 'favorite'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignFavorite() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnTargetId(), FavoriteDbm.getInstance().columnFavoriteId());
+        return cfi("FK_POST_FAVORITE", "favorite", this, FavoriteDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, true, null, null, false, "postList", false);
+    }
+    /**
+     * COMMENT by my TARGET_ID, named 'comment'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignComment() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnTargetId(), CommentDbm.getInstance().columnCommentId());
+        return cfi("FK_POST_COMMENT", "comment", this, CommentDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, false, false, false, true, null, null, false, "postList", false);
     }
 
     // -----------------------------------------------------
