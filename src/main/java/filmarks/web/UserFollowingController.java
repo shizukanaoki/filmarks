@@ -1,8 +1,8 @@
 package filmarks.web;
 
-import filmarks.dbflute.exentity.Relationship;
 import filmarks.dbflute.exentity.User;
-import filmarks.service.RelationShipService;
+import filmarks.dbflute.exentity.UserFollowing;
+import filmarks.service.UserFollowingService;
 import filmarks.service.UserService;
 import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RelationshipController {
+public class UserFollowingController {
 
     @Autowired
     UserService userService;
 
     @Autowired
-    RelationShipService relationShipService;
+    UserFollowingService userFollowingService;
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, ModelAndView mav) {
+    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following) {
         try {
             User follower = userService.findOne(followerId);
-            relationShipService.create(new Relationship(following.getUserId(), follower.getUserId()));
-            mav.setViewName("user/show");
-            mav.addObject("user", follower);
-            return mav;
+            UserFollowing userFollowing = new UserFollowing();
+            userFollowing.setFollowerId(follower.getUserId());
+            userFollowing.setFollowingId(following.getUserId());
+            userFollowingService.create(userFollowing);
+            return new ModelAndView("redirect:/users/" + follower.getUserId());
         } catch (EntityAlreadyDeletedException e) {
-            mav.setViewName("error/404");
-            return mav;
+            return new ModelAndView("redirect:/");
         }
     }
 }

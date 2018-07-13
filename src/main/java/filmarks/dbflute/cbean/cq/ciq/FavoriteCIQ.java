@@ -62,8 +62,19 @@ public class FavoriteCIQ extends AbstractBsFavoriteCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue xgetCValueFavoriteId() { return _myCQ.xdfgetFavoriteId(); }
+    public String keepFavoriteId_ExistsReferrer_PostList(PostCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepFavoriteId_NotExistsReferrer_PostList(PostCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepFavoriteId_SpecifyDerivedReferrer_PostList(PostCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepFavoriteId_QueryDerivedReferrer_PostList(PostCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepFavoriteId_QueryDerivedReferrer_PostListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
     protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
+    protected ConditionValue xgetCValueFavoriteCreatedAt() { return _myCQ.xdfgetFavoriteCreatedAt(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(FavoriteCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

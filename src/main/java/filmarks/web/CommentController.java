@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class CommentController {
 
@@ -30,7 +32,12 @@ public class CommentController {
     public ModelAndView create(@ModelAttribute("commentForm") @Validated CommentForm commentForm, BindingResult result, @PathVariable int albumId, @AuthenticationPrincipal User user, ModelAndView mav) {
         ModelAndView res;
         if (!result.hasErrors()) {
-            Comment comment = new Comment(user.getUserId(), albumId, commentForm.getContent(), commentForm.getRate());
+            Comment comment = new Comment();
+            comment.setAlbumId(albumId);
+            comment.setUserId(user.getUserId());
+            comment.setContent(commentForm.getContent());
+            comment.setRate(commentForm.getRate());
+            comment.setCommentCreatedAt(LocalDateTime.now());
             commentService.create(comment);
             res = new ModelAndView("redirect:/");
         } else {

@@ -16,15 +16,15 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The abstract condition-query of RELATIONSHIP.
+ * The abstract condition-query of USER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
-public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
+public abstract class AbstractBsUserFollowingCQ extends AbstractConditionQuery {
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public AbstractBsRelationshipCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public AbstractBsUserFollowingCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -37,7 +37,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
     }
 
     public String asTableDbName() {
-        return "RELATIONSHIP";
+        return "USER_FOLLOWING";
     }
 
     // ===================================================================================
@@ -174,7 +174,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_Equal(Integer followingId) {
@@ -187,7 +187,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_NotEqual(Integer followingId) {
@@ -200,7 +200,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_GreaterThan(Integer followingId) {
@@ -209,7 +209,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_LessThan(Integer followingId) {
@@ -218,7 +218,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_GreaterEqual(Integer followingId) {
@@ -227,7 +227,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingId The value of followingId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowingId_LessEqual(Integer followingId) {
@@ -238,7 +238,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of followingId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of followingId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -251,7 +251,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of followingId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of followingId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -262,7 +262,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingIdList The collection of followingId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setFollowingId_InScope(Collection<Integer> followingIdList) {
@@ -275,7 +275,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @param followingIdList The collection of followingId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setFollowingId_NotInScope(Collection<Integer> followingIdList) {
@@ -291,7 +291,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_Equal(Integer followerId) {
@@ -304,7 +304,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_NotEqual(Integer followerId) {
@@ -317,7 +317,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_GreaterThan(Integer followerId) {
@@ -326,7 +326,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_LessThan(Integer followerId) {
@@ -335,7 +335,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_GreaterEqual(Integer followerId) {
@@ -344,7 +344,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerId The value of followerId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setFollowerId_LessEqual(Integer followerId) {
@@ -355,7 +355,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of followerId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of followerId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -368,7 +368,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param minNumber The min number of followerId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of followerId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -379,7 +379,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerIdList The collection of followerId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setFollowerId_InScope(Collection<Integer> followerIdList) {
@@ -392,7 +392,7 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @param followerIdList The collection of followerId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
     public void setFollowerId_NotInScope(Collection<Integer> followerIdList) {
@@ -420,8 +420,8 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_Equal() {
-        return xcreateSLCFunction(CK_EQ, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_Equal() {
+        return xcreateSLCFunction(CK_EQ, UserFollowingCB.class);
     }
 
     /**
@@ -435,8 +435,8 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_NotEqual() {
-        return xcreateSLCFunction(CK_NES, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_NotEqual() {
+        return xcreateSLCFunction(CK_NES, UserFollowingCB.class);
     }
 
     /**
@@ -450,8 +450,8 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_GreaterThan() {
-        return xcreateSLCFunction(CK_GT, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_GreaterThan() {
+        return xcreateSLCFunction(CK_GT, UserFollowingCB.class);
     }
 
     /**
@@ -465,8 +465,8 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_LessThan() {
-        return xcreateSLCFunction(CK_LT, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_LessThan() {
+        return xcreateSLCFunction(CK_LT, UserFollowingCB.class);
     }
 
     /**
@@ -480,16 +480,16 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_GreaterEqual() {
-        return xcreateSLCFunction(CK_GE, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_GreaterEqual() {
+        return xcreateSLCFunction(CK_GE, UserFollowingCB.class);
     }
 
     /**
      * Prepare ScalarCondition as lessEqual. <br>
      * {where FOO &lt;= (select max(BAR) from ...)}
      * <pre>
-     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;RelationshipCB&gt;() {
-     *     public void query(RelationshipCB subCB) {
+     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;UserFollowingCB&gt;() {
+     *     public void query(UserFollowingCB subCB) {
      *         subCB.specify().setFoo... <span style="color: #3F7E5E">// derived column for function</span>
      *         subCB.query().setBar...
      *     }
@@ -497,56 +497,56 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<RelationshipCB> scalar_LessEqual() {
-        return xcreateSLCFunction(CK_LE, RelationshipCB.class);
+    public HpSLCFunction<UserFollowingCB> scalar_LessEqual() {
+        return xcreateSLCFunction(CK_LE, UserFollowingCB.class);
     }
 
     @SuppressWarnings("unchecked")
     protected <CB extends ConditionBean> void xscalarCondition(String fn, SubQuery<CB> sq, String rd, HpSLCCustomized<CB> cs, ScalarConditionOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
+        UserFollowingCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
         String pp = keepScalarCondition(cb.query()); // for saving query-value
         cs.setPartitionByCBean((CB)xcreateScalarConditionPartitionByCB()); // for using partition-by
         registerScalarCondition(fn, cb.query(), pp, rd, cs, op);
     }
-    public abstract String keepScalarCondition(RelationshipCQ sq);
+    public abstract String keepScalarCondition(UserFollowingCQ sq);
 
-    protected RelationshipCB xcreateScalarConditionCB() {
-        RelationshipCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
+    protected UserFollowingCB xcreateScalarConditionCB() {
+        UserFollowingCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
     }
 
-    protected RelationshipCB xcreateScalarConditionPartitionByCB() {
-        RelationshipCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
+    protected UserFollowingCB xcreateScalarConditionPartitionByCB() {
+        UserFollowingCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
     }
 
     // ===================================================================================
     //                                                                       MyselfDerived
     //                                                                       =============
-    public void xsmyselfDerive(String fn, SubQuery<RelationshipCB> sq, String al, DerivedReferrerOption op) {
+    public void xsmyselfDerive(String fn, SubQuery<UserFollowingCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this);
         lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
-    public abstract String keepSpecifyMyselfDerived(RelationshipCQ sq);
+    public abstract String keepSpecifyMyselfDerived(UserFollowingCQ sq);
 
     /**
      * Prepare for (Query)MyselfDerived (correlated sub-query).
      * @return The object to set up a function for myself table. (NotNull)
      */
-    public HpQDRFunction<RelationshipCB> myselfDerived() {
-        return xcreateQDRFunctionMyselfDerived(RelationshipCB.class);
+    public HpQDRFunction<UserFollowingCB> myselfDerived() {
+        return xcreateQDRFunctionMyselfDerived(UserFollowingCB.class);
     }
     @SuppressWarnings("unchecked")
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
         String pk = "ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);
     }
-    public abstract String keepQueryMyselfDerived(RelationshipCQ sq);
+    public abstract String keepQueryMyselfDerived(UserFollowingCQ sq);
     public abstract String keepQueryMyselfDerivedParameter(Object vl);
 
     // ===================================================================================
@@ -556,13 +556,13 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
      * Prepare for MyselfExists (correlated sub-query).
      * @param subCBLambda The implementation of sub-query. (NotNull)
      */
-    public void myselfExists(SubQuery<RelationshipCB> subCBLambda) {
+    public void myselfExists(SubQuery<UserFollowingCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForMyselfExists(this);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForMyselfExists(this);
         lockCall(() -> subCBLambda.query(cb)); String pp = keepMyselfExists(cb.query());
         registerMyselfExists(cb.query(), pp);
     }
-    public abstract String keepMyselfExists(RelationshipCQ sq);
+    public abstract String keepMyselfExists(UserFollowingCQ sq);
 
     // ===================================================================================
     //                                                                        Manual Order
@@ -606,12 +606,12 @@ public abstract class AbstractBsRelationshipCQ extends AbstractConditionQuery {
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
-    protected RelationshipCB newMyCB() {
-        return new RelationshipCB();
+    protected UserFollowingCB newMyCB() {
+        return new UserFollowingCB();
     }
     // very internal (for suppressing warn about 'Not Use Import')
     protected String xabUDT() { return Date.class.getName(); }
-    protected String xabCQ() { return RelationshipCQ.class.getName(); }
+    protected String xabCQ() { return UserFollowingCQ.class.getName(); }
     protected String xabLSO() { return LikeSearchOption.class.getName(); }
     protected String xabSLCS() { return HpSLCSetupper.class.getName(); }
     protected String xabSCP() { return SubQuery.class.getName(); }

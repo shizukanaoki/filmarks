@@ -34,9 +34,13 @@
 # *The line that starts with '#' means comment-out.
 #
 map:{
-    #; FK_MEMBER_MEMBER_STATUS_CODE = map:{
-    #    ; localTableName  = MEMBER             ; foreignTableName  = MEMBER_STATUS
-    #    ; localColumnName = MEMBER_STATUS_CODE ; foreignColumnName = MEMBER_STATUS_CODE
-    #}
+    ; FK_POST_FAVORITE= map:{
+        ; localTableName  = POST             ; foreignTableName  = FAVORITE
+        ; localColumnName = TARGET_ID ; foreignColumnName = FAVORITE_ID
+    }
+    ; FK_POST_COMMENT= map:{
+        ; localTableName  = POST             ; foreignTableName  = COMMENT
+        ; localColumnName = TARGET_ID ; foreignColumnName = COMMENT_ID
+    }
 }
 # ----------------/

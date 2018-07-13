@@ -85,17 +85,26 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
     public Map<String, FavoriteCQ> xdfgetAlbumId_ExistsReferrer_FavoriteList() { return xgetSQueMap("albumId_ExistsReferrer_FavoriteList"); }
     public String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_ExistsReferrer_FavoriteList", sq); }
 
+    public Map<String, SongCQ> xdfgetAlbumId_ExistsReferrer_SongList() { return xgetSQueMap("albumId_ExistsReferrer_SongList"); }
+    public String keepAlbumId_ExistsReferrer_SongList(SongCQ sq) { return xkeepSQue("albumId_ExistsReferrer_SongList", sq); }
+
     public Map<String, CommentCQ> xdfgetAlbumId_NotExistsReferrer_CommentList() { return xgetSQueMap("albumId_NotExistsReferrer_CommentList"); }
     public String keepAlbumId_NotExistsReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_NotExistsReferrer_CommentList", sq); }
 
     public Map<String, FavoriteCQ> xdfgetAlbumId_NotExistsReferrer_FavoriteList() { return xgetSQueMap("albumId_NotExistsReferrer_FavoriteList"); }
     public String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_NotExistsReferrer_FavoriteList", sq); }
 
+    public Map<String, SongCQ> xdfgetAlbumId_NotExistsReferrer_SongList() { return xgetSQueMap("albumId_NotExistsReferrer_SongList"); }
+    public String keepAlbumId_NotExistsReferrer_SongList(SongCQ sq) { return xkeepSQue("albumId_NotExistsReferrer_SongList", sq); }
+
     public Map<String, CommentCQ> xdfgetAlbumId_SpecifyDerivedReferrer_CommentList() { return xgetSQueMap("albumId_SpecifyDerivedReferrer_CommentList"); }
     public String keepAlbumId_SpecifyDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_SpecifyDerivedReferrer_CommentList", sq); }
 
     public Map<String, FavoriteCQ> xdfgetAlbumId_SpecifyDerivedReferrer_FavoriteList() { return xgetSQueMap("albumId_SpecifyDerivedReferrer_FavoriteList"); }
     public String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_SpecifyDerivedReferrer_FavoriteList", sq); }
+
+    public Map<String, SongCQ> xdfgetAlbumId_SpecifyDerivedReferrer_SongList() { return xgetSQueMap("albumId_SpecifyDerivedReferrer_SongList"); }
+    public String keepAlbumId_SpecifyDerivedReferrer_SongList(SongCQ sq) { return xkeepSQue("albumId_SpecifyDerivedReferrer_SongList", sq); }
 
     public Map<String, CommentCQ> xdfgetAlbumId_QueryDerivedReferrer_CommentList() { return xgetSQueMap("albumId_QueryDerivedReferrer_CommentList"); }
     public String keepAlbumId_QueryDerivedReferrer_CommentList(CommentCQ sq) { return xkeepSQue("albumId_QueryDerivedReferrer_CommentList", sq); }
@@ -106,6 +115,11 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
     public String keepAlbumId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq) { return xkeepSQue("albumId_QueryDerivedReferrer_FavoriteList", sq); }
     public Map<String, Object> xdfgetAlbumId_QueryDerivedReferrer_FavoriteListParameter() { return xgetSQuePmMap("albumId_QueryDerivedReferrer_FavoriteList"); }
     public String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object pm) { return xkeepSQuePm("albumId_QueryDerivedReferrer_FavoriteList", pm); }
+
+    public Map<String, SongCQ> xdfgetAlbumId_QueryDerivedReferrer_SongList() { return xgetSQueMap("albumId_QueryDerivedReferrer_SongList"); }
+    public String keepAlbumId_QueryDerivedReferrer_SongList(SongCQ sq) { return xkeepSQue("albumId_QueryDerivedReferrer_SongList", sq); }
+    public Map<String, Object> xdfgetAlbumId_QueryDerivedReferrer_SongListParameter() { return xgetSQuePmMap("albumId_QueryDerivedReferrer_SongList"); }
+    public String keepAlbumId_QueryDerivedReferrer_SongListParameter(Object pm) { return xkeepSQuePm("albumId_QueryDerivedReferrer_SongList", pm); }
 
     /**
      * Add order-by as ascend. <br>
@@ -121,45 +135,45 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
      */
     public BsAlbumCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
-    protected ConditionValue _title;
-    public ConditionValue xdfgetTitle()
-    { if (_title == null) { _title = nCV(); }
-      return _title; }
-    protected ConditionValue xgetCValueTitle() { return xdfgetTitle(); }
+    protected ConditionValue _albumTitle;
+    public ConditionValue xdfgetAlbumTitle()
+    { if (_albumTitle == null) { _albumTitle = nCV(); }
+      return _albumTitle; }
+    protected ConditionValue xgetCValueAlbumTitle() { return xdfgetAlbumTitle(); }
 
     /**
      * Add order-by as ascend. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_Title_Asc() { regOBA("TITLE"); return this; }
+    public BsAlbumCQ addOrderBy_AlbumTitle_Asc() { regOBA("ALBUM_TITLE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_Title_Desc() { regOBD("TITLE"); return this; }
+    public BsAlbumCQ addOrderBy_AlbumTitle_Desc() { regOBD("ALBUM_TITLE"); return this; }
 
-    protected ConditionValue _fileName;
-    public ConditionValue xdfgetFileName()
-    { if (_fileName == null) { _fileName = nCV(); }
-      return _fileName; }
-    protected ConditionValue xgetCValueFileName() { return xdfgetFileName(); }
+    protected ConditionValue _imageFileName;
+    public ConditionValue xdfgetImageFileName()
+    { if (_imageFileName == null) { _imageFileName = nCV(); }
+      return _imageFileName; }
+    protected ConditionValue xgetCValueImageFileName() { return xdfgetImageFileName(); }
 
     /**
      * Add order-by as ascend. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_FileName_Asc() { regOBA("FILE_NAME"); return this; }
+    public BsAlbumCQ addOrderBy_ImageFileName_Asc() { regOBA("IMAGE_FILE_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsAlbumCQ addOrderBy_FileName_Desc() { regOBD("FILE_NAME"); return this; }
+    public BsAlbumCQ addOrderBy_ImageFileName_Desc() { regOBD("IMAGE_FILE_NAME"); return this; }
 
     protected ConditionValue _artistId;
     public ConditionValue xdfgetArtistId()
@@ -225,9 +239,6 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
         if (bq.hasConditionQueryArtist()) {
             uq.queryArtist().reflectRelationOnUnionQuery(bq.queryArtist(), uq.queryArtist());
         }
-        if (bq.hasConditionQuerySongAsOne()) {
-            uq.querySongAsOne().reflectRelationOnUnionQuery(bq.querySongAsOne(), uq.querySongAsOne());
-        }
     }
 
     // ===================================================================================
@@ -252,24 +263,6 @@ public class BsAlbumCQ extends AbstractBsAlbumCQ {
     }
     protected void xsetupOuterJoinArtist() { xregOutJo("artist"); }
     public boolean hasConditionQueryArtist() { return xhasQueRlMap("artist"); }
-
-    /**
-     * Get the condition-query for relation table. <br>
-     * SONG by ALBUM_ID, named 'songAsOne'.
-     * @return The instance of condition-query. (NotNull)
-     */
-    public SongCQ querySongAsOne() { return xdfgetConditionQuerySongAsOne(); }
-    public SongCQ xdfgetConditionQuerySongAsOne() {
-        String prop = "songAsOne";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQuerySongAsOne()); xsetupOuterJoinSongAsOne(); }
-        return xgetQueRlMap(prop);
-    }
-    protected SongCQ xcreateQuerySongAsOne() {
-        String nrp = xresolveNRP("ALBUM", "songAsOne"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new SongCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "songAsOne", nrp);
-    }
-    protected void xsetupOuterJoinSongAsOne() { xregOutJo("songAsOne"); }
-    public boolean hasConditionQuerySongAsOne() { return xhasQueRlMap("songAsOne"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

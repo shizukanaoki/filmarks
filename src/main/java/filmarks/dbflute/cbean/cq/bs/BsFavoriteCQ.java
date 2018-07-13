@@ -79,6 +79,20 @@ public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
       return _favoriteId; }
     protected ConditionValue xgetCValueFavoriteId() { return xdfgetFavoriteId(); }
 
+    public Map<String, PostCQ> xdfgetFavoriteId_ExistsReferrer_PostList() { return xgetSQueMap("favoriteId_ExistsReferrer_PostList"); }
+    public String keepFavoriteId_ExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("favoriteId_ExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetFavoriteId_NotExistsReferrer_PostList() { return xgetSQueMap("favoriteId_NotExistsReferrer_PostList"); }
+    public String keepFavoriteId_NotExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("favoriteId_NotExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetFavoriteId_SpecifyDerivedReferrer_PostList() { return xgetSQueMap("favoriteId_SpecifyDerivedReferrer_PostList"); }
+    public String keepFavoriteId_SpecifyDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("favoriteId_SpecifyDerivedReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetFavoriteId_QueryDerivedReferrer_PostList() { return xgetSQueMap("favoriteId_QueryDerivedReferrer_PostList"); }
+    public String keepFavoriteId_QueryDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("favoriteId_QueryDerivedReferrer_PostList", sq); }
+    public Map<String, Object> xdfgetFavoriteId_QueryDerivedReferrer_PostListParameter() { return xgetSQuePmMap("favoriteId_QueryDerivedReferrer_PostList"); }
+    public String keepFavoriteId_QueryDerivedReferrer_PostListParameter(Object pm) { return xkeepSQuePm("favoriteId_QueryDerivedReferrer_PostList", pm); }
+
     /**
      * Add order-by as ascend. <br>
      * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
@@ -132,6 +146,26 @@ public class BsFavoriteCQ extends AbstractBsFavoriteCQ {
      * @return this. (NotNull)
      */
     public BsFavoriteCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
+
+    protected ConditionValue _favoriteCreatedAt;
+    public ConditionValue xdfgetFavoriteCreatedAt()
+    { if (_favoriteCreatedAt == null) { _favoriteCreatedAt = nCV(); }
+      return _favoriteCreatedAt; }
+    protected ConditionValue xgetCValueFavoriteCreatedAt() { return xdfgetFavoriteCreatedAt(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteCreatedAt_Asc() { regOBA("FAVORITE_CREATED_AT"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFavoriteCQ addOrderBy_FavoriteCreatedAt_Desc() { regOBD("FAVORITE_CREATED_AT"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

@@ -25,13 +25,4 @@ public class AlbumNss {
     public void withArtist() {
         _query.xdoNss(() -> _query.queryArtist());
     }
-    /**
-     * With nested relation columns to select clause. <br>
-     * SONG by ALBUM_ID, named 'songAsOne'.
-     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
-     */
-    public SongNss withSongAsOne() {
-        _query.xdoNss(() -> _query.querySongAsOne());
-        return new SongNss(_query.querySongAsOne());
-    }
 }

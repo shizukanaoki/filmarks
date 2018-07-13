@@ -13,20 +13,20 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of RELATIONSHIP.
+ * The base condition-query of USER_FOLLOWING.
  * @author DBFlute(AutoGenerator)
  */
-public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
+public class BsUserFollowingCQ extends AbstractBsUserFollowingCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected RelationshipCIQ _inlineQuery;
+    protected UserFollowingCIQ _inlineQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsRelationshipCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public BsUserFollowingCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -35,39 +35,39 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from RELATIONSHIP) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from USER_FOLLOWING) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
      * @return The condition-query for InlineView query. (NotNull)
      */
-    public RelationshipCIQ inline() {
+    public UserFollowingCIQ inline() {
         if (_inlineQuery == null) { _inlineQuery = xcreateCIQ(); }
         _inlineQuery.xsetOnClause(false); return _inlineQuery;
     }
 
-    protected RelationshipCIQ xcreateCIQ() {
-        RelationshipCIQ ciq = xnewCIQ();
+    protected UserFollowingCIQ xcreateCIQ() {
+        UserFollowingCIQ ciq = xnewCIQ();
         ciq.xsetBaseCB(_baseCB);
         return ciq;
     }
 
-    protected RelationshipCIQ xnewCIQ() {
-        return new RelationshipCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
+    protected UserFollowingCIQ xnewCIQ() {
+        return new UserFollowingCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
     }
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join RELATIONSHIP on ... and FOO = [value] ...}
+     * {select ... from ... left outer join USER_FOLLOWING on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
      * @return The condition-query for OnClause query. (NotNull)
      * @throws IllegalConditionBeanOperationException When this condition-query is base query.
      */
-    public RelationshipCIQ on() {
+    public UserFollowingCIQ on() {
         if (isBaseQuery()) { throw new IllegalConditionBeanOperationException("OnClause for local table is unavailable!"); }
-        RelationshipCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
+        UserFollowingCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
     }
 
     // ===================================================================================
@@ -84,14 +84,14 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
      * ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
      * ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
 
     protected ConditionValue _followingId;
     public ConditionValue xdfgetFollowingId()
@@ -101,17 +101,17 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_FollowingId_Asc() { regOBA("FOLLOWING_ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_FollowingId_Asc() { regOBA("FOLLOWING_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWING_ID: {UQ+, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_FollowingId_Desc() { regOBD("FOLLOWING_ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_FollowingId_Desc() { regOBD("FOLLOWING_ID"); return this; }
 
     protected ConditionValue _followerId;
     public ConditionValue xdfgetFollowerId()
@@ -121,17 +121,17 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_FollowerId_Asc() { regOBA("FOLLOWER_ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_FollowerId_Asc() { regOBA("FOLLOWER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+     * FOLLOWER_ID: {+UQ, IX, NotNull, INT(10), FK to USER}
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addOrderBy_FollowerId_Desc() { regOBD("FOLLOWER_ID"); return this; }
+    public BsUserFollowingCQ addOrderBy_FollowerId_Desc() { regOBD("FOLLOWER_ID"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -150,7 +150,7 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
+    public BsUserFollowingCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
 
     /**
      * Add order-by for specified derived column as descend.
@@ -166,14 +166,14 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsRelationshipCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
+    public BsUserFollowingCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
 
     // ===================================================================================
     //                                                                         Union Query
     //                                                                         ===========
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
-        RelationshipCQ bq = (RelationshipCQ)bqs;
-        RelationshipCQ uq = (RelationshipCQ)uqs;
+        UserFollowingCQ bq = (UserFollowingCQ)bqs;
+        UserFollowingCQ uq = (UserFollowingCQ)uqs;
         if (bq.hasConditionQueryUserByFollowerId()) {
             uq.queryUserByFollowerId().reflectRelationOnUnionQuery(bq.queryUserByFollowerId(), uq.queryUserByFollowerId());
         }
@@ -199,7 +199,7 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
         return xgetQueRlMap(prop);
     }
     protected UserCQ xcreateQueryUserByFollowerId() {
-        String nrp = xresolveNRP("RELATIONSHIP", "userByFollowerId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("USER_FOLLOWING", "userByFollowerId"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new UserCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "userByFollowerId", nrp);
     }
     protected void xsetupOuterJoinUserByFollowerId() { xregOutJo("userByFollowerId"); }
@@ -219,7 +219,7 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
         return xgetQueRlMap(prop);
     }
     protected UserCQ xcreateQueryUserByFollowingId() {
-        String nrp = xresolveNRP("RELATIONSHIP", "userByFollowingId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        String nrp = xresolveNRP("USER_FOLLOWING", "userByFollowingId"); String jan = xresolveJAN(nrp, xgetNNLvl());
         return xinitRelCQ(new UserCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "userByFollowingId", nrp);
     }
     protected void xsetupOuterJoinUserByFollowingId() { xregOutJo("userByFollowingId"); }
@@ -232,39 +232,39 @@ public class BsRelationshipCQ extends AbstractBsRelationshipCQ {
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============
-    public Map<String, RelationshipCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
-    public String keepScalarCondition(RelationshipCQ sq) { return xkeepSQue("scalarCondition", sq); }
+    public Map<String, UserFollowingCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
+    public String keepScalarCondition(UserFollowingCQ sq) { return xkeepSQue("scalarCondition", sq); }
 
     // ===================================================================================
     //                                                                       MyselfDerived
     //                                                                       =============
-    public Map<String, RelationshipCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
-    public String keepSpecifyMyselfDerived(RelationshipCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
+    public Map<String, UserFollowingCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
+    public String keepSpecifyMyselfDerived(UserFollowingCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
 
-    public Map<String, RelationshipCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
-    public String keepQueryMyselfDerived(RelationshipCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
+    public Map<String, UserFollowingCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerived(UserFollowingCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
     public Map<String, Object> xdfgetQueryMyselfDerivedParameter() { return xgetSQuePmMap("queryMyselfDerived"); }
     public String keepQueryMyselfDerivedParameter(Object pm) { return xkeepSQuePm("queryMyselfDerived", pm); }
 
     // ===================================================================================
     //                                                                        MyselfExists
     //                                                                        ============
-    protected Map<String, RelationshipCQ> _myselfExistsMap;
-    public Map<String, RelationshipCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
-    public String keepMyselfExists(RelationshipCQ sq) { return xkeepSQue("myselfExists", sq); }
+    protected Map<String, UserFollowingCQ> _myselfExistsMap;
+    public Map<String, UserFollowingCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
+    public String keepMyselfExists(UserFollowingCQ sq) { return xkeepSQue("myselfExists", sq); }
 
     // ===================================================================================
     //                                                                       MyselfInScope
     //                                                                       =============
-    public Map<String, RelationshipCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
-    public String keepMyselfInScope(RelationshipCQ sq) { return xkeepSQue("myselfInScope", sq); }
+    public Map<String, UserFollowingCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
+    public String keepMyselfInScope(UserFollowingCQ sq) { return xkeepSQue("myselfInScope", sq); }
 
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xCB() { return RelationshipCB.class.getName(); }
-    protected String xCQ() { return RelationshipCQ.class.getName(); }
+    protected String xCB() { return UserFollowingCB.class.getName(); }
+    protected String xCQ() { return UserFollowingCQ.class.getName(); }
     protected String xCHp() { return HpQDRFunction.class.getName(); }
     protected String xCOp() { return ConditionOption.class.getName(); }
     protected String xMap() { return Map.class.getName(); }

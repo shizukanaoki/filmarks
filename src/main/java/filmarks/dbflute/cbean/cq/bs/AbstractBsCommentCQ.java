@@ -45,132 +45,205 @@ public abstract class AbstractBsCommentCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Integer id) {
-        doSetId_Equal(id);
+    public void setCommentId_Equal(Integer commentId) {
+        doSetCommentId_Equal(commentId);
     }
 
-    protected void doSetId_Equal(Integer id) {
-        regId(CK_EQ, id);
+    protected void doSetCommentId_Equal(Integer commentId) {
+        regCommentId(CK_EQ, commentId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Integer id) {
-        doSetId_NotEqual(id);
+    public void setCommentId_NotEqual(Integer commentId) {
+        doSetCommentId_NotEqual(commentId);
     }
 
-    protected void doSetId_NotEqual(Integer id) {
-        regId(CK_NES, id);
+    protected void doSetCommentId_NotEqual(Integer commentId) {
+        regCommentId(CK_NES, commentId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Integer id) {
-        regId(CK_GT, id);
+    public void setCommentId_GreaterThan(Integer commentId) {
+        regCommentId(CK_GT, commentId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Integer id) {
-        regId(CK_LT, id);
+    public void setCommentId_LessThan(Integer commentId) {
+        regCommentId(CK_LT, commentId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Integer id) {
-        regId(CK_GE, id);
+    public void setCommentId_GreaterEqual(Integer commentId) {
+        regCommentId(CK_GE, commentId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentId The value of commentId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Integer id) {
-        regId(CK_LE, id);
+    public void setCommentId_LessEqual(Integer commentId) {
+        regCommentId(CK_LE, commentId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of commentId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of commentId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setCommentId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setCommentId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
     /**
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of commentId. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param maxNumber The max number of commentId. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueId(), "ID", rangeOfOption);
+    protected void setCommentId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueCommentId(), "COMMENT_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentIdList The collection of commentId as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Integer> idList) {
-        doSetId_InScope(idList);
+    public void setCommentId_InScope(Collection<Integer> commentIdList) {
+        doSetCommentId_InScope(commentIdList);
     }
 
-    protected void doSetId_InScope(Collection<Integer> idList) {
-        regINS(CK_INS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetCommentId_InScope(Collection<Integer> commentIdList) {
+        regINS(CK_INS, cTL(commentIdList), xgetCValueCommentId(), "COMMENT_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
-     * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
+     * @param commentIdList The collection of commentId as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Integer> idList) {
-        doSetId_NotInScope(idList);
+    public void setCommentId_NotInScope(Collection<Integer> commentIdList) {
+        doSetCommentId_NotInScope(commentIdList);
     }
 
-    protected void doSetId_NotInScope(Collection<Integer> idList) {
-        regINS(CK_NINS, cTL(idList), xgetCValueId(), "ID");
+    protected void doSetCommentId_NotInScope(Collection<Integer> commentIdList) {
+        regINS(CK_NINS, cTL(commentIdList), xgetCValueCommentId(), "COMMENT_ID");
     }
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select TARGET_ID from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of PostList for 'exists'. (NotNull)
+     */
+    public void existsPost(SubQuery<PostCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepCommentId_ExistsReferrer_PostList(cb.query());
+        registerExistsReferrer(cb.query(), "COMMENT_ID", "TARGET_ID", pp, "postList");
+    }
+    public abstract String keepCommentId_ExistsReferrer_PostList(PostCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select TARGET_ID from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of CommentId_NotExistsReferrer_PostList for 'not exists'. (NotNull)
+     */
+    public void notExistsPost(SubQuery<PostCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepCommentId_NotExistsReferrer_PostList(cb.query());
+        registerNotExistsReferrer(cb.query(), "COMMENT_ID", "TARGET_ID", pp, "postList");
+    }
+    public abstract String keepCommentId_NotExistsReferrer_PostList(PostCQ sq);
+
+    public void xsderivePostList(String fn, SubQuery<PostCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepCommentId_SpecifyDerivedReferrer_PostList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "COMMENT_ID", "TARGET_ID", pp, "postList", al, op);
+    }
+    public abstract String keepCommentId_SpecifyDerivedReferrer_PostList(PostCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedPost()</span>.<span style="color: #CC4747">max</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     postCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<PostCB> derivedPost() {
+        return xcreateQDRFunctionPostList();
+    }
+    protected HpQDRFunction<PostCB> xcreateQDRFunctionPostList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderivePostList(fn, sq, rd, vl, op));
+    }
+    public void xqderivePostList(String fn, SubQuery<PostCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepCommentId_QueryDerivedReferrer_PostList(cb.query()); String prpp = keepCommentId_QueryDerivedReferrer_PostListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "COMMENT_ID", "TARGET_ID", sqpp, "postList", rd, vl, prpp, op);
+    }
+    public abstract String keepCommentId_QueryDerivedReferrer_PostList(PostCQ sq);
+    public abstract String keepCommentId_QueryDerivedReferrer_PostListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNull() { regId(CK_ISN, DOBJ); }
+    public void setCommentId_IsNull() { regCommentId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      */
-    public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
+    public void setCommentId_IsNotNull() { regCommentId(CK_ISNN, DOBJ); }
 
-    protected void regId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueId(), "ID"); }
-    protected abstract ConditionValue xgetCValueId();
+    protected void regCommentId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCommentId(), "COMMENT_ID"); }
+    protected abstract ConditionValue xgetCValueCommentId();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
@@ -658,6 +731,81 @@ public abstract class AbstractBsCommentCQ extends AbstractConditionQuery {
     protected void regRate(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRate(), "RATE"); }
     protected abstract ConditionValue xgetCValueRate();
 
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param commentCreatedAt The value of commentCreatedAt as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCommentCreatedAt_Equal(java.time.LocalDateTime commentCreatedAt) {
+        regCommentCreatedAt(CK_EQ,  commentCreatedAt);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param commentCreatedAt The value of commentCreatedAt as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCommentCreatedAt_GreaterThan(java.time.LocalDateTime commentCreatedAt) {
+        regCommentCreatedAt(CK_GT,  commentCreatedAt);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param commentCreatedAt The value of commentCreatedAt as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCommentCreatedAt_LessThan(java.time.LocalDateTime commentCreatedAt) {
+        regCommentCreatedAt(CK_LT,  commentCreatedAt);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param commentCreatedAt The value of commentCreatedAt as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCommentCreatedAt_GreaterEqual(java.time.LocalDateTime commentCreatedAt) {
+        regCommentCreatedAt(CK_GE,  commentCreatedAt);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param commentCreatedAt The value of commentCreatedAt as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setCommentCreatedAt_LessEqual(java.time.LocalDateTime commentCreatedAt) {
+        regCommentCreatedAt(CK_LE, commentCreatedAt);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setCommentCreatedAt_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of commentCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of commentCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setCommentCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setCommentCreatedAt_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setCommentCreatedAt_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of commentCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of commentCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setCommentCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "COMMENT_CREATED_AT"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueCommentCreatedAt(), nm, op);
+    }
+
+    protected void regCommentCreatedAt(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCommentCreatedAt(), "COMMENT_CREATED_AT"); }
+    protected abstract ConditionValue xgetCValueCommentCreatedAt();
+
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============
@@ -777,7 +925,7 @@ public abstract class AbstractBsCommentCQ extends AbstractConditionQuery {
     public void xsmyselfDerive(String fn, SubQuery<CommentCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "ID";
+        lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "COMMENT_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(CommentCQ sq);
@@ -793,7 +941,7 @@ public abstract class AbstractBsCommentCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "ID";
+        String pk = "COMMENT_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

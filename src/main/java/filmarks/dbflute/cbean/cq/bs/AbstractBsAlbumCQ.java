@@ -196,6 +196,25 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     public abstract String keepAlbumId_ExistsReferrer_FavoriteList(FavoriteCQ sq);
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select ALBUM_ID from SONG where ...)} <br>
+     * SONG by ALBUM_ID, named 'songAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsSong</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     songCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SongList for 'exists'. (NotNull)
+     */
+    public void existsSong(SubQuery<SongCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        SongCB cb = new SongCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_ExistsReferrer_SongList(cb.query());
+        registerExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "songList");
+    }
+    public abstract String keepAlbumId_ExistsReferrer_SongList(SongCQ sq);
+
+    /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select ALBUM_ID from COMMENT where ...)} <br>
      * COMMENT by ALBUM_ID, named 'commentAsOne'.
@@ -233,6 +252,25 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     }
     public abstract String keepAlbumId_NotExistsReferrer_FavoriteList(FavoriteCQ sq);
 
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select ALBUM_ID from SONG where ...)} <br>
+     * SONG by ALBUM_ID, named 'songAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsSong</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     songCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of AlbumId_NotExistsReferrer_SongList for 'not exists'. (NotNull)
+     */
+    public void notExistsSong(SubQuery<SongCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        SongCB cb = new SongCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepAlbumId_NotExistsReferrer_SongList(cb.query());
+        registerNotExistsReferrer(cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "songList");
+    }
+    public abstract String keepAlbumId_NotExistsReferrer_SongList(SongCQ sq);
+
     public void xsderiveCommentList(String fn, SubQuery<CommentCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         CommentCB cb = new CommentCB(); cb.xsetupForDerivedReferrer(this);
@@ -248,6 +286,14 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "favoriteList", al, op);
     }
     public abstract String keepAlbumId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq);
+
+    public void xsderiveSongList(String fn, SubQuery<SongCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepAlbumId_SpecifyDerivedReferrer_SongList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", pp, "songList", al, op);
+    }
+    public abstract String keepAlbumId_SpecifyDerivedReferrer_SongList(SongCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -304,6 +350,33 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
     public abstract String keepAlbumId_QueryDerivedReferrer_FavoriteListParameter(Object vl);
 
     /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from SONG where ...)} <br>
+     * SONG by ALBUM_ID, named 'songAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedSong()</span>.<span style="color: #CC4747">max</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     songCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     songCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<SongCB> derivedSong() {
+        return xcreateQDRFunctionSongList();
+    }
+    protected HpQDRFunction<SongCB> xcreateQDRFunctionSongList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveSongList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveSongList(String fn, SubQuery<SongCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        SongCB cb = new SongCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepAlbumId_QueryDerivedReferrer_SongList(cb.query()); String prpp = keepAlbumId_QueryDerivedReferrer_SongListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "ALBUM_ID", "ALBUM_ID", sqpp, "songList", rd, vl, prpp, op);
+    }
+    public abstract String keepAlbumId_QueryDerivedReferrer_SongList(SongCQ sq);
+    public abstract String keepAlbumId_QueryDerivedReferrer_SongListParameter(Object vl);
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
      * ALBUM_ID: {PK, ID, NotNull, INT(10)}
      */
@@ -320,273 +393,273 @@ public abstract class AbstractBsAlbumCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_Equal(String title) {
-        doSetTitle_Equal(fRES(title));
+    public void setAlbumTitle_Equal(String albumTitle) {
+        doSetAlbumTitle_Equal(fRES(albumTitle));
     }
 
-    protected void doSetTitle_Equal(String title) {
-        regTitle(CK_EQ, title);
+    protected void doSetAlbumTitle_Equal(String albumTitle) {
+        regAlbumTitle(CK_EQ, albumTitle);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_NotEqual(String title) {
-        doSetTitle_NotEqual(fRES(title));
+    public void setAlbumTitle_NotEqual(String albumTitle) {
+        doSetAlbumTitle_NotEqual(fRES(albumTitle));
     }
 
-    protected void doSetTitle_NotEqual(String title) {
-        regTitle(CK_NES, title);
+    protected void doSetAlbumTitle_NotEqual(String albumTitle) {
+        regAlbumTitle(CK_NES, albumTitle);
     }
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_GreaterThan(String title) {
-        regTitle(CK_GT, fRES(title));
+    public void setAlbumTitle_GreaterThan(String albumTitle) {
+        regAlbumTitle(CK_GT, fRES(albumTitle));
     }
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_LessThan(String title) {
-        regTitle(CK_LT, fRES(title));
+    public void setAlbumTitle_LessThan(String albumTitle) {
+        regAlbumTitle(CK_LT, fRES(albumTitle));
     }
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_GreaterEqual(String title) {
-        regTitle(CK_GE, fRES(title));
+    public void setAlbumTitle_GreaterEqual(String albumTitle) {
+        regAlbumTitle(CK_GE, fRES(albumTitle));
     }
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_LessEqual(String title) {
-        regTitle(CK_LE, fRES(title));
+    public void setAlbumTitle_LessEqual(String albumTitle) {
+        regAlbumTitle(CK_LE, fRES(albumTitle));
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param titleList The collection of title as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitleList The collection of albumTitle as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_InScope(Collection<String> titleList) {
-        doSetTitle_InScope(titleList);
+    public void setAlbumTitle_InScope(Collection<String> albumTitleList) {
+        doSetAlbumTitle_InScope(albumTitleList);
     }
 
-    protected void doSetTitle_InScope(Collection<String> titleList) {
-        regINS(CK_INS, cTL(titleList), xgetCValueTitle(), "TITLE");
+    protected void doSetAlbumTitle_InScope(Collection<String> albumTitleList) {
+        regINS(CK_INS, cTL(albumTitleList), xgetCValueAlbumTitle(), "ALBUM_TITLE");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param titleList The collection of title as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitleList The collection of albumTitle as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTitle_NotInScope(Collection<String> titleList) {
-        doSetTitle_NotInScope(titleList);
+    public void setAlbumTitle_NotInScope(Collection<String> albumTitleList) {
+        doSetAlbumTitle_NotInScope(albumTitleList);
     }
 
-    protected void doSetTitle_NotInScope(Collection<String> titleList) {
-        regINS(CK_NINS, cTL(titleList), xgetCValueTitle(), "TITLE");
+    protected void doSetAlbumTitle_NotInScope(Collection<String> albumTitleList) {
+        regINS(CK_NINS, cTL(albumTitleList), xgetCValueAlbumTitle(), "ALBUM_TITLE");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setTitle_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param title The value of title as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setAlbumTitle_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param albumTitle The value of albumTitle as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setTitle_LikeSearch(String title, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setTitle_LikeSearch(title, xcLSOP(opLambda));
+    public void setAlbumTitle_LikeSearch(String albumTitle, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setAlbumTitle_LikeSearch(albumTitle, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setTitle_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param title The value of title as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setAlbumTitle_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param albumTitle The value of albumTitle as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setTitle_LikeSearch(String title, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(title), xgetCValueTitle(), "TITLE", likeSearchOption);
+    protected void setAlbumTitle_LikeSearch(String albumTitle, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(albumTitle), xgetCValueAlbumTitle(), "ALBUM_TITLE", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setTitle_NotLikeSearch(String title, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setTitle_NotLikeSearch(title, xcLSOP(opLambda));
+    public void setAlbumTitle_NotLikeSearch(String albumTitle, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setAlbumTitle_NotLikeSearch(albumTitle, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * TITLE: {UQ, NotNull, VARCHAR(100)}
-     * @param title The value of title as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * ALBUM_TITLE: {NotNull, VARCHAR(200)}
+     * @param albumTitle The value of albumTitle as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setTitle_NotLikeSearch(String title, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(title), xgetCValueTitle(), "TITLE", likeSearchOption);
+    protected void setAlbumTitle_NotLikeSearch(String albumTitle, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(albumTitle), xgetCValueAlbumTitle(), "ALBUM_TITLE", likeSearchOption);
     }
 
-    protected void regTitle(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueTitle(), "TITLE"); }
-    protected abstract ConditionValue xgetCValueTitle();
+    protected void regAlbumTitle(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumTitle(), "ALBUM_TITLE"); }
+    protected abstract ConditionValue xgetCValueAlbumTitle();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_Equal(String fileName) {
-        doSetFileName_Equal(fRES(fileName));
+    public void setImageFileName_Equal(String imageFileName) {
+        doSetImageFileName_Equal(fRES(imageFileName));
     }
 
-    protected void doSetFileName_Equal(String fileName) {
-        regFileName(CK_EQ, fileName);
+    protected void doSetImageFileName_Equal(String imageFileName) {
+        regImageFileName(CK_EQ, imageFileName);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_NotEqual(String fileName) {
-        doSetFileName_NotEqual(fRES(fileName));
+    public void setImageFileName_NotEqual(String imageFileName) {
+        doSetImageFileName_NotEqual(fRES(imageFileName));
     }
 
-    protected void doSetFileName_NotEqual(String fileName) {
-        regFileName(CK_NES, fileName);
+    protected void doSetImageFileName_NotEqual(String imageFileName) {
+        regImageFileName(CK_NES, imageFileName);
     }
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_GreaterThan(String fileName) {
-        regFileName(CK_GT, fRES(fileName));
+    public void setImageFileName_GreaterThan(String imageFileName) {
+        regImageFileName(CK_GT, fRES(imageFileName));
     }
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_LessThan(String fileName) {
-        regFileName(CK_LT, fRES(fileName));
+    public void setImageFileName_LessThan(String imageFileName) {
+        regImageFileName(CK_LT, fRES(imageFileName));
     }
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_GreaterEqual(String fileName) {
-        regFileName(CK_GE, fRES(fileName));
+    public void setImageFileName_GreaterEqual(String imageFileName) {
+        regImageFileName(CK_GE, fRES(imageFileName));
     }
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_LessEqual(String fileName) {
-        regFileName(CK_LE, fRES(fileName));
+    public void setImageFileName_LessEqual(String imageFileName) {
+        regImageFileName(CK_LE, fRES(imageFileName));
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileNameList The collection of fileName as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileNameList The collection of imageFileName as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_InScope(Collection<String> fileNameList) {
-        doSetFileName_InScope(fileNameList);
+    public void setImageFileName_InScope(Collection<String> imageFileNameList) {
+        doSetImageFileName_InScope(imageFileNameList);
     }
 
-    protected void doSetFileName_InScope(Collection<String> fileNameList) {
-        regINS(CK_INS, cTL(fileNameList), xgetCValueFileName(), "FILE_NAME");
+    protected void doSetImageFileName_InScope(Collection<String> imageFileNameList) {
+        regINS(CK_INS, cTL(imageFileNameList), xgetCValueImageFileName(), "IMAGE_FILE_NAME");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileNameList The collection of fileName as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileNameList The collection of imageFileName as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setFileName_NotInScope(Collection<String> fileNameList) {
-        doSetFileName_NotInScope(fileNameList);
+    public void setImageFileName_NotInScope(Collection<String> imageFileNameList) {
+        doSetImageFileName_NotInScope(imageFileNameList);
     }
 
-    protected void doSetFileName_NotInScope(Collection<String> fileNameList) {
-        regINS(CK_NINS, cTL(fileNameList), xgetCValueFileName(), "FILE_NAME");
+    protected void doSetImageFileName_NotInScope(Collection<String> imageFileNameList) {
+        regINS(CK_NINS, cTL(imageFileNameList), xgetCValueImageFileName(), "IMAGE_FILE_NAME");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)} <br>
-     * <pre>e.g. setFileName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param fileName The value of fileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setImageFileName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param imageFileName The value of imageFileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setFileName_LikeSearch(String fileName, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setFileName_LikeSearch(fileName, xcLSOP(opLambda));
+    public void setImageFileName_LikeSearch(String imageFileName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setImageFileName_LikeSearch(imageFileName, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)} <br>
-     * <pre>e.g. setFileName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param fileName The value of fileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)} <br>
+     * <pre>e.g. setImageFileName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param imageFileName The value of imageFileName as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setFileName_LikeSearch(String fileName, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(fileName), xgetCValueFileName(), "FILE_NAME", likeSearchOption);
+    protected void setImageFileName_LikeSearch(String imageFileName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(imageFileName), xgetCValueImageFileName(), "IMAGE_FILE_NAME", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setFileName_NotLikeSearch(String fileName, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setFileName_NotLikeSearch(fileName, xcLSOP(opLambda));
+    public void setImageFileName_NotLikeSearch(String imageFileName, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setImageFileName_NotLikeSearch(imageFileName, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * FILE_NAME: {NotNull, VARCHAR(200)}
-     * @param fileName The value of fileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
+     * @param imageFileName The value of imageFileName as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setFileName_NotLikeSearch(String fileName, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(fileName), xgetCValueFileName(), "FILE_NAME", likeSearchOption);
+    protected void setImageFileName_NotLikeSearch(String imageFileName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(imageFileName), xgetCValueImageFileName(), "IMAGE_FILE_NAME", likeSearchOption);
     }
 
-    protected void regFileName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFileName(), "FILE_NAME"); }
-    protected abstract ConditionValue xgetCValueFileName();
+    protected void regImageFileName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueImageFileName(), "IMAGE_FILE_NAME"); }
+    protected abstract ConditionValue xgetCValueImageFileName();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>

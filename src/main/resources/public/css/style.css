@@ -26,12 +26,12 @@ ul.sidebar {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.sidebar>li>a {
+.sidebar>li a {
     color: #999999;
     text-decoration: none;
 }
 
-.sidebar>li>a:hover {
+.sidebar>li a:hover {
     color: #fff;
 }
 

@@ -14,16 +14,16 @@ import filmarks.dbflute.exentity.*;
  * NEW_TABLE
  * <pre>
  * [primary-key]
- *     ID
+ *     ARTIST_ID
  *
  * [column]
- *     ID, NAME
+ *     ARTIST_ID, ARTIST_NAME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     ARTIST_ID
  *
  * [version-no]
  *     
@@ -32,20 +32,20 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     ALBUM, SONG
+ *     ALBUM
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     albumList, songList
+ *     albumList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer id = entity.getId();
- * String name = entity.getName();
- * entity.setId(id);
- * entity.setName(name);
+ * Integer artistId = entity.getArtistId();
+ * String artistName = entity.getArtistName();
+ * entity.setArtistId(artistId);
+ * entity.setArtistName(artistName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -61,11 +61,11 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** ID: {PK, ID, NotNull, INT(10)} */
-    protected Integer _id;
+    /** ARTIST_ID: {PK, ID, NotNull, INT(10)} */
+    protected Integer _artistId;
 
-    /** NAME: {NotNull, VARCHAR(100)} */
-    protected String _name;
+    /** ARTIST_NAME: {UQ, NotNull, VARCHAR(100)} */
+    protected String _artistName;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -85,8 +85,19 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (_artistId == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param artistName : UQ, NotNull, VARCHAR(100). (NotNull)
+     */
+    public void uniqueBy(String artistName) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("artistName");
+        setArtistName(artistName);
     }
 
     // ===================================================================================
@@ -115,26 +126,6 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
         _albumList = albumList;
     }
 
-    /** SONG by ARTIST_ID, named 'songList'. */
-    protected List<Song> _songList;
-
-    /**
-     * [get] SONG by ARTIST_ID, named 'songList'.
-     * @return The entity list of referrer property 'songList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<Song> getSongList() {
-        if (_songList == null) { _songList = newReferrerList(); }
-        return _songList;
-    }
-
-    /**
-     * [set] SONG by ARTIST_ID, named 'songList'.
-     * @param songList The entity list of referrer property 'songList'. (NullAllowed)
-     */
-    public void setSongList(List<Song> songList) {
-        _songList = songList;
-    }
-
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
@@ -146,7 +137,7 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsArtist) {
             BsArtist other = (BsArtist)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(_artistId, other._artistId)) { return false; }
             return true;
         } else {
             return false;
@@ -157,7 +148,7 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, _artistId);
         return hs;
     }
 
@@ -166,16 +157,14 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_albumList != null) { for (Album et : _albumList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "albumList")); } } }
-        if (_songList != null) { for (Song et : _songList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "songList")); } } }
         return sb.toString();
     }
 
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
-        sb.append(dm).append(xfND(_name));
+        sb.append(dm).append(xfND(_artistId));
+        sb.append(dm).append(xfND(_artistName));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -188,8 +177,6 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_albumList != null && !_albumList.isEmpty())
         { sb.append(dm).append("albumList"); }
-        if (_songList != null && !_songList.isEmpty())
-        { sb.append(dm).append("songList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -205,42 +192,42 @@ public abstract class BsArtist extends AbstractEntity implements DomainEntity {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [get] ARTIST_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @return The value of the column 'ID'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'ARTIST_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getId() {
-        checkSpecifiedProperty("id");
-        return _id;
+    public Integer getArtistId() {
+        checkSpecifiedProperty("artistId");
+        return _artistId;
     }
 
     /**
-     * [set] ID: {PK, ID, NotNull, INT(10)} <br>
+     * [set] ARTIST_ID: {PK, ID, NotNull, INT(10)} <br>
      * ID
-     * @param id The value of the column 'ID'. (basically NotNull if update: for the constraint)
+     * @param artistId The value of the column 'ARTIST_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setId(Integer id) {
-        registerModifiedProperty("id");
-        _id = id;
+    public void setArtistId(Integer artistId) {
+        registerModifiedProperty("artistId");
+        _artistId = artistId;
     }
 
     /**
-     * [get] NAME: {NotNull, VARCHAR(100)} <br>
+     * [get] ARTIST_NAME: {UQ, NotNull, VARCHAR(100)} <br>
      * ??
-     * @return The value of the column 'NAME'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'ARTIST_NAME'. (basically NotNull if selected: for the constraint)
      */
-    public String getName() {
-        checkSpecifiedProperty("name");
-        return _name;
+    public String getArtistName() {
+        checkSpecifiedProperty("artistName");
+        return _artistName;
     }
 
     /**
-     * [set] NAME: {NotNull, VARCHAR(100)} <br>
+     * [set] ARTIST_NAME: {UQ, NotNull, VARCHAR(100)} <br>
      * ??
-     * @param name The value of the column 'NAME'. (basically NotNull if update: for the constraint)
+     * @param artistName The value of the column 'ARTIST_NAME'. (basically NotNull if update: for the constraint)
      */
-    public void setName(String name) {
-        registerModifiedProperty("name");
-        _name = name;
+    public void setArtistName(String artistName) {
+        registerModifiedProperty("artistName");
+        _artistName = artistName;
     }
 }

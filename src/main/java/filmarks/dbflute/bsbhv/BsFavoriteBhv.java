@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     FAVORITE_ID
  *
  * [column]
- *     FAVORITE_ID, USER_ID, ALBUM_ID
+ *     FAVORITE_ID, USER_ID, ALBUM_ID, FAVORITE_CREATED_AT
  *
  * [sequence]
  *     
@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     ALBUM, USER
  *
  * [referrer table]
- *     
+ *     POST
  *
  * [foreign property]
  *     album, user
  *
  * [referrer property]
- *     
+ *     postList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -385,6 +385,70 @@ public abstract class BsFavoriteBhv extends AbstractBehaviorWritable<Favorite, F
     public void load(Favorite favorite, ReferrerLoaderHandler<LoaderOfFavorite> loaderLambda) {
         xassLRArg(favorite, loaderLambda);
         loaderLambda.handle(new LoaderOfFavorite().ready(xnewLRAryLs(favorite), _behaviorSelector));
+    }
+
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by TARGET_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">favoriteList</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Favorite favorite : <span style="color: #553000">favoriteList</span>) {
+     *     ... = favorite.<span style="color: #CC4747">getPostList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setTargetId_InScope(pkList);
+     * cb.query().addOrderBy_TargetId_Asc();
+     * </pre>
+     * @param favoriteList The entity list of favorite. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(List<Favorite> favoriteList, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(favoriteList, refCBLambda);
+        return doLoadPost(favoriteList, new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by TARGET_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">favoriteBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">favorite</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">favorite</span>.<span style="color: #CC4747">getPostList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setTargetId_InScope(pkList);
+     * cb.query().addOrderBy_TargetId_Asc();
+     * </pre>
+     * @param favorite The entity of favorite. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(Favorite favorite, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(favorite, refCBLambda);
+        return doLoadPost(xnewLRLs(favorite), new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Post> doLoadPost(List<Favorite> favoriteList, LoadReferrerOption<PostCB, Post> option) {
+        return helpLoadReferrerInternally(favoriteList, option, "postList");
     }
 
     // ===================================================================================

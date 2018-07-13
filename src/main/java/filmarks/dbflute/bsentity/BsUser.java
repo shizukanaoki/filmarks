@@ -32,13 +32,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, RELATIONSHIP
+ *     COMMENT, FAVORITE, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -151,44 +151,64 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         _favoriteList = favoriteList;
     }
 
-    /** RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'. */
-    protected List<Relationship> _relationshipByFollowerIdList;
+    /** POST by USER_ID, named 'postList'. */
+    protected List<Post> _postList;
 
     /**
-     * [get] RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
-     * @return The entity list of referrer property 'relationshipByFollowerIdList'. (NotNull: even if no loading, returns empty list)
+     * [get] POST by USER_ID, named 'postList'.
+     * @return The entity list of referrer property 'postList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<Relationship> getRelationshipByFollowerIdList() {
-        if (_relationshipByFollowerIdList == null) { _relationshipByFollowerIdList = newReferrerList(); }
-        return _relationshipByFollowerIdList;
+    public List<Post> getPostList() {
+        if (_postList == null) { _postList = newReferrerList(); }
+        return _postList;
     }
 
     /**
-     * [set] RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
-     * @param relationshipByFollowerIdList The entity list of referrer property 'relationshipByFollowerIdList'. (NullAllowed)
+     * [set] POST by USER_ID, named 'postList'.
+     * @param postList The entity list of referrer property 'postList'. (NullAllowed)
      */
-    public void setRelationshipByFollowerIdList(List<Relationship> relationshipByFollowerIdList) {
-        _relationshipByFollowerIdList = relationshipByFollowerIdList;
+    public void setPostList(List<Post> postList) {
+        _postList = postList;
     }
 
-    /** RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'. */
-    protected List<Relationship> _relationshipByFollowingIdList;
+    /** USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'. */
+    protected List<UserFollowing> _userFollowingByFollowerIdList;
 
     /**
-     * [get] RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
-     * @return The entity list of referrer property 'relationshipByFollowingIdList'. (NotNull: even if no loading, returns empty list)
+     * [get] USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
+     * @return The entity list of referrer property 'userFollowingByFollowerIdList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<Relationship> getRelationshipByFollowingIdList() {
-        if (_relationshipByFollowingIdList == null) { _relationshipByFollowingIdList = newReferrerList(); }
-        return _relationshipByFollowingIdList;
+    public List<UserFollowing> getUserFollowingByFollowerIdList() {
+        if (_userFollowingByFollowerIdList == null) { _userFollowingByFollowerIdList = newReferrerList(); }
+        return _userFollowingByFollowerIdList;
     }
 
     /**
-     * [set] RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
-     * @param relationshipByFollowingIdList The entity list of referrer property 'relationshipByFollowingIdList'. (NullAllowed)
+     * [set] USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
+     * @param userFollowingByFollowerIdList The entity list of referrer property 'userFollowingByFollowerIdList'. (NullAllowed)
      */
-    public void setRelationshipByFollowingIdList(List<Relationship> relationshipByFollowingIdList) {
-        _relationshipByFollowingIdList = relationshipByFollowingIdList;
+    public void setUserFollowingByFollowerIdList(List<UserFollowing> userFollowingByFollowerIdList) {
+        _userFollowingByFollowerIdList = userFollowingByFollowerIdList;
+    }
+
+    /** USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'. */
+    protected List<UserFollowing> _userFollowingByFollowingIdList;
+
+    /**
+     * [get] USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
+     * @return The entity list of referrer property 'userFollowingByFollowingIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<UserFollowing> getUserFollowingByFollowingIdList() {
+        if (_userFollowingByFollowingIdList == null) { _userFollowingByFollowingIdList = newReferrerList(); }
+        return _userFollowingByFollowingIdList;
+    }
+
+    /**
+     * [set] USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
+     * @param userFollowingByFollowingIdList The entity list of referrer property 'userFollowingByFollowingIdList'. (NullAllowed)
+     */
+    public void setUserFollowingByFollowingIdList(List<UserFollowing> userFollowingByFollowingIdList) {
+        _userFollowingByFollowingIdList = userFollowingByFollowingIdList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -224,10 +244,12 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { if (et != null) { sb.append(li).append(xbRDS(et, "commentList")); } } }
         if (_favoriteList != null) { for (Favorite et : _favoriteList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "favoriteList")); } } }
-        if (_relationshipByFollowerIdList != null) { for (Relationship et : _relationshipByFollowerIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "relationshipByFollowerIdList")); } } }
-        if (_relationshipByFollowingIdList != null) { for (Relationship et : _relationshipByFollowingIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "relationshipByFollowingIdList")); } } }
+        if (_postList != null) { for (Post et : _postList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "postList")); } } }
+        if (_userFollowingByFollowerIdList != null) { for (UserFollowing et : _userFollowingByFollowerIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "userFollowingByFollowerIdList")); } } }
+        if (_userFollowingByFollowingIdList != null) { for (UserFollowing et : _userFollowingByFollowingIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "userFollowingByFollowingIdList")); } } }
         return sb.toString();
     }
 
@@ -251,10 +273,12 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { sb.append(dm).append("commentList"); }
         if (_favoriteList != null && !_favoriteList.isEmpty())
         { sb.append(dm).append("favoriteList"); }
-        if (_relationshipByFollowerIdList != null && !_relationshipByFollowerIdList.isEmpty())
-        { sb.append(dm).append("relationshipByFollowerIdList"); }
-        if (_relationshipByFollowingIdList != null && !_relationshipByFollowingIdList.isEmpty())
-        { sb.append(dm).append("relationshipByFollowingIdList"); }
+        if (_postList != null && !_postList.isEmpty())
+        { sb.append(dm).append("postList"); }
+        if (_userFollowingByFollowerIdList != null && !_userFollowingByFollowerIdList.isEmpty())
+        { sb.append(dm).append("userFollowingByFollowerIdList"); }
+        if (_userFollowingByFollowingIdList != null && !_userFollowingByFollowingIdList.isEmpty())
+        { sb.append(dm).append("userFollowingByFollowingIdList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }

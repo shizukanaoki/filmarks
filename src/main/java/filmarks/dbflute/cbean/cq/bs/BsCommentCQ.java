@@ -73,25 +73,39 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _id;
-    public ConditionValue xdfgetId()
-    { if (_id == null) { _id = nCV(); }
-      return _id; }
-    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+    protected ConditionValue _commentId;
+    public ConditionValue xdfgetCommentId()
+    { if (_commentId == null) { _commentId = nCV(); }
+      return _commentId; }
+    protected ConditionValue xgetCValueCommentId() { return xdfgetCommentId(); }
+
+    public Map<String, PostCQ> xdfgetCommentId_ExistsReferrer_PostList() { return xgetSQueMap("commentId_ExistsReferrer_PostList"); }
+    public String keepCommentId_ExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_ExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_NotExistsReferrer_PostList() { return xgetSQueMap("commentId_NotExistsReferrer_PostList"); }
+    public String keepCommentId_NotExistsReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_NotExistsReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_SpecifyDerivedReferrer_PostList() { return xgetSQueMap("commentId_SpecifyDerivedReferrer_PostList"); }
+    public String keepCommentId_SpecifyDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_SpecifyDerivedReferrer_PostList", sq); }
+
+    public Map<String, PostCQ> xdfgetCommentId_QueryDerivedReferrer_PostList() { return xgetSQueMap("commentId_QueryDerivedReferrer_PostList"); }
+    public String keepCommentId_QueryDerivedReferrer_PostList(PostCQ sq) { return xkeepSQue("commentId_QueryDerivedReferrer_PostList", sq); }
+    public Map<String, Object> xdfgetCommentId_QueryDerivedReferrer_PostListParameter() { return xgetSQuePmMap("commentId_QueryDerivedReferrer_PostList"); }
+    public String keepCommentId_QueryDerivedReferrer_PostListParameter(Object pm) { return xkeepSQuePm("commentId_QueryDerivedReferrer_PostList", pm); }
 
     /**
      * Add order-by as ascend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsCommentCQ addOrderBy_CommentId_Asc() { regOBA("COMMENT_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * COMMENT_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsCommentCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsCommentCQ addOrderBy_CommentId_Desc() { regOBD("COMMENT_ID"); return this; }
 
     protected ConditionValue _userId;
     public ConditionValue xdfgetUserId()
@@ -172,6 +186,26 @@ public class BsCommentCQ extends AbstractBsCommentCQ {
      * @return this. (NotNull)
      */
     public BsCommentCQ addOrderBy_Rate_Desc() { regOBD("RATE"); return this; }
+
+    protected ConditionValue _commentCreatedAt;
+    public ConditionValue xdfgetCommentCreatedAt()
+    { if (_commentCreatedAt == null) { _commentCreatedAt = nCV(); }
+      return _commentCreatedAt; }
+    protected ConditionValue xgetCValueCommentCreatedAt() { return xdfgetCommentCreatedAt(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsCommentCQ addOrderBy_CommentCreatedAt_Asc() { regOBA("COMMENT_CREATED_AT"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * COMMENT_CREATED_AT: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsCommentCQ addOrderBy_CommentCreatedAt_Desc() { regOBD("COMMENT_CREATED_AT"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

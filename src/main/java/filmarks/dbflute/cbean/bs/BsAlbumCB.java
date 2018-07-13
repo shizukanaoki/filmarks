@@ -18,7 +18,6 @@ import filmarks.dbflute.allcommon.ImplementedInvokerAssistant;
 import filmarks.dbflute.allcommon.ImplementedSqlClauseCreator;
 import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
-import filmarks.dbflute.cbean.nss.*;
 
 /**
  * The base condition-bean of ALBUM.
@@ -89,18 +88,6 @@ public class BsAlbumCB extends AbstractConditionBean {
         assertObjectNotNull("albumId", albumId);
         BsAlbumCB cb = this;
         cb.query().setAlbumId_Equal(albumId);
-        return (AlbumCB)this;
-    }
-
-    /**
-     * Accept the query condition of unique key as equal.
-     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return this. (NotNull)
-     */
-    public AlbumCB acceptUniqueOf(String title) {
-        assertObjectNotNull("title", title);
-        BsAlbumCB cb = this;
-        cb.query().setTitle_Equal(title);
         return (AlbumCB)this;
     }
 
@@ -271,32 +258,6 @@ public class BsAlbumCB extends AbstractConditionBean {
         doSetupSelect(() -> query().queryArtist());
     }
 
-    protected SongNss _nssSongAsOne;
-    public SongNss xdfgetNssSongAsOne() {
-        if (_nssSongAsOne == null) { _nssSongAsOne = new SongNss(null); }
-        return _nssSongAsOne;
-    }
-    /**
-     * Set up relation columns to select clause. <br>
-     * SONG by ALBUM_ID, named 'songAsOne'.
-     * <pre>
-     * <span style="color: #0000C0">albumBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_SongAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">album</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">album</span>.<span style="color: #CC4747">getSongAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * });
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public SongNss setupSelect_SongAsOne() {
-        assertSetupSelectPurpose("songAsOne");
-        doSetupSelect(() -> query().querySongAsOne());
-        if (_nssSongAsOne == null || !_nssSongAsOne.hasConditionQuery())
-        { _nssSongAsOne = new SongNss(query().querySongAsOne()); }
-        return _nssSongAsOne;
-    }
-
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -339,7 +300,6 @@ public class BsAlbumCB extends AbstractConditionBean {
 
     public static class HpSpecification extends HpAbstractSpecification<AlbumCQ> {
         protected ArtistCB.HpSpecification _artist;
-        protected SongCB.HpSpecification _songAsOne;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<AlbumCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -350,15 +310,15 @@ public class BsAlbumCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         /**
-         * TITLE: {UQ, NotNull, VARCHAR(100)}
+         * ALBUM_TITLE: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnTitle() { return doColumn("TITLE"); }
+        public SpecifiedColumn columnAlbumTitle() { return doColumn("ALBUM_TITLE"); }
         /**
-         * FILE_NAME: {NotNull, VARCHAR(200)}
+         * IMAGE_FILE_NAME: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnFileName() { return doColumn("FILE_NAME"); }
+        public SpecifiedColumn columnImageFileName() { return doColumn("IMAGE_FILE_NAME"); }
         /**
          * ARTIST_ID: {IX, INT(10), FK to ARTIST}
          * @return The information object of specified column. (NotNull)
@@ -397,26 +357,6 @@ public class BsAlbumCB extends AbstractConditionBean {
             return _artist;
         }
         /**
-         * Prepare to specify functions about relation table. <br>
-         * SONG by ALBUM_ID, named 'songAsOne'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public SongCB.HpSpecification specifySongAsOne() {
-            assertRelation("songAsOne");
-            if (_songAsOne == null) {
-                _songAsOne = new SongCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQuerySongAsOne()
-                                    , () -> _qyCall.qy().querySongAsOne())
-                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
-                if (xhasSyncQyCall()) { // inherits it
-                    _songAsOne.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQuerySongAsOne()
-                      , () -> xsyncQyCall().qy().querySongAsOne()));
-                }
-            }
-            return _songAsOne;
-        }
-        /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
          * {select max(FOO) from COMMENT where ...) as FOO_MAX} <br>
          * COMMENT by ALBUM_ID, named 'commentList'.
@@ -449,6 +389,23 @@ public class BsAlbumCB extends AbstractConditionBean {
             assertDerived("favoriteList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<FavoriteCB> sq, AlbumCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveFavoriteList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from SONG where ...) as FOO_MAX} <br>
+         * SONG by ALBUM_ID, named 'songList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     songCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     songCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, Song.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<SongCB, AlbumCQ> derivedSong() {
+            assertDerived("songList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<SongCB> sq, AlbumCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveSongList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

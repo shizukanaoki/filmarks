@@ -81,23 +81,35 @@ public class BsArtistCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param artistId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public ArtistCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
+    public ArtistCB acceptPK(Integer artistId) {
+        assertObjectNotNull("artistId", artistId);
         BsArtistCB cb = this;
-        cb.query().setId_Equal(id);
+        cb.query().setArtistId_Equal(artistId);
+        return (ArtistCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param artistName : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return this. (NotNull)
+     */
+    public ArtistCB acceptUniqueOf(String artistName) {
+        assertObjectNotNull("artistName", artistName);
+        BsArtistCB cb = this;
+        cb.query().setArtistName_Equal(artistName);
         return (ArtistCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_ArtistId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_ArtistId_Desc();
         return this;
     }
 
@@ -284,20 +296,20 @@ public class BsArtistCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, ID, NotNull, INT(10)}
+         * ARTIST_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnArtistId() { return doColumn("ARTIST_ID"); }
         /**
-         * NAME: {NotNull, VARCHAR(100)}
+         * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnName() { return doColumn("NAME"); }
+        public SpecifiedColumn columnArtistName() { return doColumn("ARTIST_NAME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
+            columnArtistId(); // PK
         }
         @Override
         protected String getTableDbName() { return "ARTIST"; }
@@ -317,23 +329,6 @@ public class BsArtistCB extends AbstractConditionBean {
             assertDerived("albumList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<AlbumCB> sq, ArtistCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveAlbumList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from SONG where ...) as FOO_MAX} <br>
-         * SONG by ARTIST_ID, named 'songList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(songCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     songCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     songCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Song.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<SongCB, ArtistCQ> derivedSong() {
-            assertDerived("songList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<SongCB> sq, ArtistCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveSongList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

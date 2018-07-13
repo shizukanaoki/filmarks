@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, RELATIONSHIP
+ *     COMMENT, FAVORITE, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, relationshipByFollowerIdList, relationshipByFollowingIdList
+ *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -515,19 +515,83 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     }
 
     /**
-     * Load referrer of relationshipByFollowerIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by USER_ID, named 'postList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadRelationshipByFollowerId</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *     <span style="color: #553000">relationshipCB</span>.query().set...
-     *     <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
      * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getRelationshipByFollowerIdList()</span>;
+     *     ... = user.<span style="color: #CC4747">getPostList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param userList The entity list of user. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(List<User> userList, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(userList, refCBLambda);
+        return doLoadPost(userList, new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by USER_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">user</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getPostList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param user The entity of user. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(User user, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(user, refCBLambda);
+        return doLoadPost(xnewLRLs(user), new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Post> doLoadPost(List<User> userList, LoadReferrerOption<PostCB, Post> option) {
+        return helpLoadReferrerInternally(userList, option, "postList");
+    }
+
+    /**
+     * Load referrer of userFollowingByFollowerIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadUserFollowingByFollowerId</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">followingCB</span>.setupSelect...
+     *     <span style="color: #553000">followingCB</span>.query().set...
+     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">userList</span>) {
+     *     ... = user.<span style="color: #CC4747">getUserFollowingByFollowerIdList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -540,24 +604,24 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Relationship> loadRelationshipByFollowerId(List<User> userList, ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
+    public NestedReferrerListGateway<UserFollowing> loadUserFollowingByFollowerId(List<User> userList, ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
         xassLRArg(userList, refCBLambda);
-        return doLoadRelationshipByFollowerId(userList, new LoadReferrerOption<RelationshipCB, Relationship>().xinit(refCBLambda));
+        return doLoadUserFollowingByFollowerId(userList, new LoadReferrerOption<UserFollowingCB, UserFollowing>().xinit(refCBLambda));
     }
 
     /**
-     * Load referrer of relationshipByFollowerIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
+     * Load referrer of userFollowingByFollowerIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadRelationshipByFollowerId</span>(<span style="color: #553000">user</span>, <span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *     <span style="color: #553000">relationshipCB</span>.query().set...
-     *     <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadUserFollowingByFollowerId</span>(<span style="color: #553000">user</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">followingCB</span>.setupSelect...
+     *     <span style="color: #553000">followingCB</span>.query().set...
+     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getRelationshipByFollowerIdList()</span>;
+     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getUserFollowingByFollowerIdList()</span>;
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
@@ -569,29 +633,29 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Relationship> loadRelationshipByFollowerId(User user, ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
+    public NestedReferrerListGateway<UserFollowing> loadUserFollowingByFollowerId(User user, ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
         xassLRArg(user, refCBLambda);
-        return doLoadRelationshipByFollowerId(xnewLRLs(user), new LoadReferrerOption<RelationshipCB, Relationship>().xinit(refCBLambda));
+        return doLoadUserFollowingByFollowerId(xnewLRLs(user), new LoadReferrerOption<UserFollowingCB, UserFollowing>().xinit(refCBLambda));
     }
 
-    protected NestedReferrerListGateway<Relationship> doLoadRelationshipByFollowerId(List<User> userList, LoadReferrerOption<RelationshipCB, Relationship> option) {
-        return helpLoadReferrerInternally(userList, option, "relationshipByFollowerIdList");
+    protected NestedReferrerListGateway<UserFollowing> doLoadUserFollowingByFollowerId(List<User> userList, LoadReferrerOption<UserFollowingCB, UserFollowing> option) {
+        return helpLoadReferrerInternally(userList, option, "userFollowingByFollowerIdList");
     }
 
     /**
-     * Load referrer of relationshipByFollowingIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
+     * Load referrer of userFollowingByFollowingIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadRelationshipByFollowingId</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *     <span style="color: #553000">relationshipCB</span>.query().set...
-     *     <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadUserFollowingByFollowingId</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">followingCB</span>.setupSelect...
+     *     <span style="color: #553000">followingCB</span>.query().set...
+     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
      * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">userList</span>) {
-     *     ... = user.<span style="color: #CC4747">getRelationshipByFollowingIdList()</span>;
+     *     ... = user.<span style="color: #CC4747">getUserFollowingByFollowingIdList()</span>;
      * }
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
@@ -604,24 +668,24 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Relationship> loadRelationshipByFollowingId(List<User> userList, ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
+    public NestedReferrerListGateway<UserFollowing> loadUserFollowingByFollowingId(List<User> userList, ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
         xassLRArg(userList, refCBLambda);
-        return doLoadRelationshipByFollowingId(userList, new LoadReferrerOption<RelationshipCB, Relationship>().xinit(refCBLambda));
+        return doLoadUserFollowingByFollowingId(userList, new LoadReferrerOption<UserFollowingCB, UserFollowing>().xinit(refCBLambda));
     }
 
     /**
-     * Load referrer of relationshipByFollowingIdList by the set-upper of referrer. <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
+     * Load referrer of userFollowingByFollowingIdList by the set-upper of referrer. <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadRelationshipByFollowingId</span>(<span style="color: #553000">user</span>, <span style="color: #553000">relationshipCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">relationshipCB</span>.setupSelect...
-     *     <span style="color: #553000">relationshipCB</span>.query().set...
-     *     <span style="color: #553000">relationshipCB</span>.query().addOrderBy...
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadUserFollowingByFollowingId</span>(<span style="color: #553000">user</span>, <span style="color: #553000">followingCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">followingCB</span>.setupSelect...
+     *     <span style="color: #553000">followingCB</span>.query().set...
+     *     <span style="color: #553000">followingCB</span>.query().addOrderBy...
      * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
      * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
      * <span style="color: #3F7E5E">//    ...</span>
      * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getRelationshipByFollowingIdList()</span>;
+     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getUserFollowingByFollowingIdList()</span>;
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has settings before callback as follows:
@@ -633,13 +697,13 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
      * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
      */
-    public NestedReferrerListGateway<Relationship> loadRelationshipByFollowingId(User user, ReferrerConditionSetupper<RelationshipCB> refCBLambda) {
+    public NestedReferrerListGateway<UserFollowing> loadUserFollowingByFollowingId(User user, ReferrerConditionSetupper<UserFollowingCB> refCBLambda) {
         xassLRArg(user, refCBLambda);
-        return doLoadRelationshipByFollowingId(xnewLRLs(user), new LoadReferrerOption<RelationshipCB, Relationship>().xinit(refCBLambda));
+        return doLoadUserFollowingByFollowingId(xnewLRLs(user), new LoadReferrerOption<UserFollowingCB, UserFollowing>().xinit(refCBLambda));
     }
 
-    protected NestedReferrerListGateway<Relationship> doLoadRelationshipByFollowingId(List<User> userList, LoadReferrerOption<RelationshipCB, Relationship> option) {
-        return helpLoadReferrerInternally(userList, option, "relationshipByFollowingIdList");
+    protected NestedReferrerListGateway<UserFollowing> doLoadUserFollowingByFollowingId(List<User> userList, LoadReferrerOption<UserFollowingCB, UserFollowing> option) {
+        return helpLoadReferrerInternally(userList, option, "userFollowingByFollowingIdList");
     }
 
     // ===================================================================================

@@ -73,73 +73,59 @@ public class BsArtistCQ extends AbstractBsArtistCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _id;
-    public ConditionValue xdfgetId()
-    { if (_id == null) { _id = nCV(); }
-      return _id; }
-    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+    protected ConditionValue _artistId;
+    public ConditionValue xdfgetArtistId()
+    { if (_artistId == null) { _artistId = nCV(); }
+      return _artistId; }
+    protected ConditionValue xgetCValueArtistId() { return xdfgetArtistId(); }
 
-    public Map<String, AlbumCQ> xdfgetId_ExistsReferrer_AlbumList() { return xgetSQueMap("id_ExistsReferrer_AlbumList"); }
-    public String keepId_ExistsReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("id_ExistsReferrer_AlbumList", sq); }
+    public Map<String, AlbumCQ> xdfgetArtistId_ExistsReferrer_AlbumList() { return xgetSQueMap("artistId_ExistsReferrer_AlbumList"); }
+    public String keepArtistId_ExistsReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("artistId_ExistsReferrer_AlbumList", sq); }
 
-    public Map<String, SongCQ> xdfgetId_ExistsReferrer_SongList() { return xgetSQueMap("id_ExistsReferrer_SongList"); }
-    public String keepId_ExistsReferrer_SongList(SongCQ sq) { return xkeepSQue("id_ExistsReferrer_SongList", sq); }
+    public Map<String, AlbumCQ> xdfgetArtistId_NotExistsReferrer_AlbumList() { return xgetSQueMap("artistId_NotExistsReferrer_AlbumList"); }
+    public String keepArtistId_NotExistsReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("artistId_NotExistsReferrer_AlbumList", sq); }
 
-    public Map<String, AlbumCQ> xdfgetId_NotExistsReferrer_AlbumList() { return xgetSQueMap("id_NotExistsReferrer_AlbumList"); }
-    public String keepId_NotExistsReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("id_NotExistsReferrer_AlbumList", sq); }
+    public Map<String, AlbumCQ> xdfgetArtistId_SpecifyDerivedReferrer_AlbumList() { return xgetSQueMap("artistId_SpecifyDerivedReferrer_AlbumList"); }
+    public String keepArtistId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("artistId_SpecifyDerivedReferrer_AlbumList", sq); }
 
-    public Map<String, SongCQ> xdfgetId_NotExistsReferrer_SongList() { return xgetSQueMap("id_NotExistsReferrer_SongList"); }
-    public String keepId_NotExistsReferrer_SongList(SongCQ sq) { return xkeepSQue("id_NotExistsReferrer_SongList", sq); }
-
-    public Map<String, AlbumCQ> xdfgetId_SpecifyDerivedReferrer_AlbumList() { return xgetSQueMap("id_SpecifyDerivedReferrer_AlbumList"); }
-    public String keepId_SpecifyDerivedReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("id_SpecifyDerivedReferrer_AlbumList", sq); }
-
-    public Map<String, SongCQ> xdfgetId_SpecifyDerivedReferrer_SongList() { return xgetSQueMap("id_SpecifyDerivedReferrer_SongList"); }
-    public String keepId_SpecifyDerivedReferrer_SongList(SongCQ sq) { return xkeepSQue("id_SpecifyDerivedReferrer_SongList", sq); }
-
-    public Map<String, AlbumCQ> xdfgetId_QueryDerivedReferrer_AlbumList() { return xgetSQueMap("id_QueryDerivedReferrer_AlbumList"); }
-    public String keepId_QueryDerivedReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("id_QueryDerivedReferrer_AlbumList", sq); }
-    public Map<String, Object> xdfgetId_QueryDerivedReferrer_AlbumListParameter() { return xgetSQuePmMap("id_QueryDerivedReferrer_AlbumList"); }
-    public String keepId_QueryDerivedReferrer_AlbumListParameter(Object pm) { return xkeepSQuePm("id_QueryDerivedReferrer_AlbumList", pm); }
-
-    public Map<String, SongCQ> xdfgetId_QueryDerivedReferrer_SongList() { return xgetSQueMap("id_QueryDerivedReferrer_SongList"); }
-    public String keepId_QueryDerivedReferrer_SongList(SongCQ sq) { return xkeepSQue("id_QueryDerivedReferrer_SongList", sq); }
-    public Map<String, Object> xdfgetId_QueryDerivedReferrer_SongListParameter() { return xgetSQuePmMap("id_QueryDerivedReferrer_SongList"); }
-    public String keepId_QueryDerivedReferrer_SongListParameter(Object pm) { return xkeepSQuePm("id_QueryDerivedReferrer_SongList", pm); }
+    public Map<String, AlbumCQ> xdfgetArtistId_QueryDerivedReferrer_AlbumList() { return xgetSQueMap("artistId_QueryDerivedReferrer_AlbumList"); }
+    public String keepArtistId_QueryDerivedReferrer_AlbumList(AlbumCQ sq) { return xkeepSQue("artistId_QueryDerivedReferrer_AlbumList", sq); }
+    public Map<String, Object> xdfgetArtistId_QueryDerivedReferrer_AlbumListParameter() { return xgetSQuePmMap("artistId_QueryDerivedReferrer_AlbumList"); }
+    public String keepArtistId_QueryDerivedReferrer_AlbumListParameter(Object pm) { return xkeepSQuePm("artistId_QueryDerivedReferrer_AlbumList", pm); }
 
     /**
      * Add order-by as ascend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsArtistCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+    public BsArtistCQ addOrderBy_ArtistId_Asc() { regOBA("ARTIST_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
      * @return this. (NotNull)
      */
-    public BsArtistCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+    public BsArtistCQ addOrderBy_ArtistId_Desc() { regOBD("ARTIST_ID"); return this; }
 
-    protected ConditionValue _name;
-    public ConditionValue xdfgetName()
-    { if (_name == null) { _name = nCV(); }
-      return _name; }
-    protected ConditionValue xgetCValueName() { return xdfgetName(); }
+    protected ConditionValue _artistName;
+    public ConditionValue xdfgetArtistName()
+    { if (_artistName == null) { _artistName = nCV(); }
+      return _artistName; }
+    protected ConditionValue xgetCValueArtistName() { return xdfgetArtistName(); }
 
     /**
      * Add order-by as ascend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsArtistCQ addOrderBy_Name_Asc() { regOBA("NAME"); return this; }
+    public BsArtistCQ addOrderBy_ArtistName_Asc() { regOBA("ARTIST_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsArtistCQ addOrderBy_Name_Desc() { regOBD("NAME"); return this; }
+    public BsArtistCQ addOrderBy_ArtistName_Desc() { regOBD("ARTIST_NAME"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

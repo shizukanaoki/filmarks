@@ -1,4 +1,214 @@
 map:{
+    ; 2018/07/13 10:17:14 = map:{
+        ; diffDate = 2018/07/13 10:17:14
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = change_database
+        ; tableDiff = map:{
+            ; POST = map:{
+                ; tableName = POST
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CREATED_AT = map:{
+                        ; columnName = CREATED_AT
+                        ; diffType = ADD
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_POST_USER = map:{
+                        ; constraintName = FK_POST_USER
+                        ; diffType = ADD
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; UQ_POST_TARGET_ID_AND_TARGET_TYPE = map:{
+                        ; constraintName = UQ_POST_TARGET_ID_AND_TARGET_TYPE
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_POST_USER = map:{
+                        ; constraintName = FK_POST_USER
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/07/12 18:18:35 = map:{
+        ; diffDate = 2018/07/12 18:18:35
+        ; tableCount = map:{
+            ; next = 8
+            ; previous = 7
+        }
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = change_database
+        ; tableDiff = map:{
+            ; POST = map:{
+                ; tableName = POST
+                ; diffType = ADD
+            }
+            ; USER_FOLLOWING = map:{
+                ; tableName = USER_FOLLOWING
+                ; diffType = ADD
+            }
+            ; ALBUM = map:{
+                ; tableName = ALBUM
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ALBUM_TITLE = map:{
+                        ; columnName = ALBUM_TITLE
+                        ; diffType = ADD
+                    }
+                    ; IMAGE_FILE_NAME = map:{
+                        ; columnName = IMAGE_FILE_NAME
+                        ; diffType = ADD
+                    }
+                    ; TITLE = map:{
+                        ; columnName = TITLE
+                        ; diffType = DELETE
+                    }
+                    ; FILE_NAME = map:{
+                        ; columnName = FILE_NAME
+                        ; diffType = DELETE
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; TITLE = map:{
+                        ; constraintName = TITLE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; ARTIST = map:{
+                ; tableName = ARTIST
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ARTIST_ID = map:{
+                        ; columnName = ARTIST_ID
+                        ; diffType = ADD
+                    }
+                    ; ARTIST_NAME = map:{
+                        ; columnName = ARTIST_NAME
+                        ; diffType = ADD
+                    }
+                    ; ID = map:{
+                        ; columnName = ID
+                        ; diffType = DELETE
+                    }
+                    ; NAME = map:{
+                        ; columnName = NAME
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = ARTIST_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; ARTIST_NAME = map:{
+                        ; constraintName = ARTIST_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; COMMENT = map:{
+                ; tableName = COMMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; COMMENT_ID = map:{
+                        ; columnName = COMMENT_ID
+                        ; diffType = ADD
+                    }
+                    ; COMMENT_CREATED_AT = map:{
+                        ; columnName = COMMENT_CREATED_AT
+                        ; diffType = ADD
+                    }
+                    ; ID = map:{
+                        ; columnName = ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = COMMENT_ID
+                            ; previous = ID
+                        }
+                    }
+                }
+            }
+            ; FAVORITE = map:{
+                ; tableName = FAVORITE
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; FAVORITE_CREATED_AT = map:{
+                        ; columnName = FAVORITE_CREATED_AT
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; SONG = map:{
+                ; tableName = SONG
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SONG_ID = map:{
+                        ; columnName = SONG_ID
+                        ; diffType = ADD
+                    }
+                    ; SONG_TITLE = map:{
+                        ; columnName = SONG_TITLE
+                        ; diffType = ADD
+                    }
+                    ; ARTIST_ID = map:{
+                        ; columnName = ARTIST_ID
+                        ; diffType = DELETE
+                    }
+                    ; NAME = map:{
+                        ; columnName = NAME
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = SONG_ID
+                            ; previous = ALBUM_ID
+                        }
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_SONG_ARTIST = map:{
+                        ; constraintName = FK_SONG_ARTIST
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_SONG_PRODUCT = map:{
+                        ; constraintName = FK_SONG_PRODUCT
+                        ; diffType = ADD
+                    }
+                    ; FK_SONG_ARTIST = map:{
+                        ; constraintName = FK_SONG_ARTIST
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; RELATIONSHIP = map:{
+                ; tableName = RELATIONSHIP
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2018/07/09 17:20:24 = map:{
         ; diffDate = 2018/07/09 17:20:24
         ; diffAuthor = naoki.shizuka

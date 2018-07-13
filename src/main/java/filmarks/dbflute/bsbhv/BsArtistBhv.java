@@ -25,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of ARTIST as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     ARTIST_ID
  *
  * [column]
- *     ID, NAME
+ *     ARTIST_ID, ARTIST_NAME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     ARTIST_ID
  *
  * [version-no]
  *     
@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     ALBUM, SONG
+ *     ALBUM
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     albumList, songList
+ *     albumList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -159,31 +159,56 @@ public abstract class BsArtistBhv extends AbstractBehaviorWritable<Artist, Artis
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param artistId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Artist> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<Artist> selectByPK(Integer artistId) {
+        return facadeSelectByPK(artistId);
     }
 
-    protected OptionalEntity<Artist> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<Artist> facadeSelectByPK(Integer artistId) {
+        return doSelectOptionalByPK(artistId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Artist> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends Artist> ENTITY doSelectByPK(Integer artistId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(artistId), tp);
     }
 
-    protected <ENTITY extends Artist> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends Artist> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer artistId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(artistId, tp), artistId);
     }
 
-    protected ArtistCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected ArtistCB xprepareCBAsPK(Integer artistId) {
+        assertObjectNotNull("artistId", artistId);
+        return newConditionBean().acceptPK(artistId);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param artistName : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Artist> selectByUniqueOf(String artistName) {
+        return facadeSelectByUniqueOf(artistName);
+    }
+
+    protected OptionalEntity<Artist> facadeSelectByUniqueOf(String artistName) {
+        return doSelectByUniqueOf(artistName, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Artist> OptionalEntity<ENTITY> doSelectByUniqueOf(String artistName, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(artistName), tp), artistName);
+    }
+
+    protected ArtistCB xprepareCBAsUniqueOf(String artistName) {
+        assertObjectNotNull("artistName", artistName);
+        return newConditionBean().acceptUniqueOf(artistName);
     }
 
     // ===================================================================================
@@ -425,70 +450,6 @@ public abstract class BsArtistBhv extends AbstractBehaviorWritable<Artist, Artis
         return helpLoadReferrerInternally(artistList, option, "albumList");
     }
 
-    /**
-     * Load referrer of songList by the set-upper of referrer. <br>
-     * SONG by ARTIST_ID, named 'songList'.
-     * <pre>
-     * <span style="color: #0000C0">artistBhv</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">artistList</span>, <span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">songCB</span>.setupSelect...
-     *     <span style="color: #553000">songCB</span>.query().set...
-     *     <span style="color: #553000">songCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Artist artist : <span style="color: #553000">artistList</span>) {
-     *     ... = artist.<span style="color: #CC4747">getSongList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setArtistId_InScope(pkList);
-     * cb.query().addOrderBy_ArtistId_Asc();
-     * </pre>
-     * @param artistList The entity list of artist. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Song> loadSong(List<Artist> artistList, ReferrerConditionSetupper<SongCB> refCBLambda) {
-        xassLRArg(artistList, refCBLambda);
-        return doLoadSong(artistList, new LoadReferrerOption<SongCB, Song>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of songList by the set-upper of referrer. <br>
-     * SONG by ARTIST_ID, named 'songList'.
-     * <pre>
-     * <span style="color: #0000C0">artistBhv</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">artist</span>, <span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">songCB</span>.setupSelect...
-     *     <span style="color: #553000">songCB</span>.query().set...
-     *     <span style="color: #553000">songCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">artist</span>.<span style="color: #CC4747">getSongList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setArtistId_InScope(pkList);
-     * cb.query().addOrderBy_ArtistId_Asc();
-     * </pre>
-     * @param artist The entity of artist. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<Song> loadSong(Artist artist, ReferrerConditionSetupper<SongCB> refCBLambda) {
-        xassLRArg(artist, refCBLambda);
-        return doLoadSong(xnewLRLs(artist), new LoadReferrerOption<SongCB, Song>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<Song> doLoadSong(List<Artist> artistList, LoadReferrerOption<SongCB, Song> option) {
-        return helpLoadReferrerInternally(artistList, option, "songList");
-    }
-
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
@@ -496,12 +457,20 @@ public abstract class BsArtistBhv extends AbstractBehaviorWritable<Artist, Artis
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
+     * Extract the value list of (single) primary key artistId.
      * @param artistList The list of artist. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<Artist> artistList)
-    { return helpExtractListInternally(artistList, "id"); }
+    public List<Integer> extractArtistIdList(List<Artist> artistList)
+    { return helpExtractListInternally(artistList, "artistId"); }
+
+    /**
+     * Extract the value list of (single) unique key artistName.
+     * @param artistList The list of artist. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<String> extractArtistNameList(List<Artist> artistList)
+    { return helpExtractListInternally(artistList, "artistName"); }
 
     // ===================================================================================
     //                                                                       Entity Update

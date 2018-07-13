@@ -20,13 +20,6 @@ public class SongNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br>
-     * ARTIST by my ARTIST_ID, named 'artist'.
-     */
-    public void withArtist() {
-        _query.xdoNss(() -> _query.queryArtist());
-    }
-    /**
-     * With nested relation columns to select clause. <br>
      * ALBUM by my ALBUM_ID, named 'album'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */

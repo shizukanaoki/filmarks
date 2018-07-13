@@ -18,22 +18,23 @@ import filmarks.dbflute.allcommon.ImplementedInvokerAssistant;
 import filmarks.dbflute.allcommon.ImplementedSqlClauseCreator;
 import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
+import filmarks.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of RELATIONSHIP.
+ * The base condition-bean of POST.
  * @author DBFlute(AutoGenerator)
  */
-public class BsRelationshipCB extends AbstractConditionBean {
+public class BsPostCB extends AbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected RelationshipCQ _conditionQuery;
+    protected PostCQ _conditionQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsRelationshipCB() {
+    public BsPostCB() {
         if (DBFluteConfig.getInstance().isPagingCountLater()) {
             enablePagingCountLater();
         }
@@ -73,7 +74,7 @@ public class BsRelationshipCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "RELATIONSHIP";
+        return "POST";
     }
 
     // ===================================================================================
@@ -81,23 +82,36 @@ public class BsRelationshipCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param postId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public RelationshipCB acceptPK(Integer id) {
-        assertObjectNotNull("id", id);
-        BsRelationshipCB cb = this;
-        cb.query().setId_Equal(id);
-        return (RelationshipCB)this;
+    public PostCB acceptPK(Integer postId) {
+        assertObjectNotNull("postId", postId);
+        BsPostCB cb = this;
+        cb.query().setPostId_Equal(postId);
+        return (PostCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
+     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public PostCB acceptUniqueOf(Integer targetId, Integer targetType) {
+        assertObjectNotNull("targetId", targetId);assertObjectNotNull("targetType", targetType);
+        BsPostCB cb = this;
+        cb.query().setTargetId_Equal(targetId);cb.query().setTargetType_Equal(targetType);
+        return (PostCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_Id_Asc();
+        query().addOrderBy_PostId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_Id_Desc();
+        query().addOrderBy_PostId_Desc();
         return this;
     }
 
@@ -161,34 +175,34 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * </pre>
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
-    public RelationshipCQ query() {
+    public PostCQ query() {
         assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
-    public RelationshipCQ xdfgetConditionQuery() { // public for parameter comment and internal
+    public PostCQ xdfgetConditionQuery() { // public for parameter comment and internal
         return doGetConditionQuery();
     }
 
-    protected RelationshipCQ doGetConditionQuery() {
+    protected PostCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected RelationshipCQ createLocalCQ() {
+    protected PostCQ createLocalCQ() {
         return xcreateCQ(null, getSqlClause(), getSqlClause().getBasePointAliasName(), 0);
     }
 
-    protected RelationshipCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        RelationshipCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected PostCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        PostCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
         cq.xsetBaseCB(this);
         return cq;
     }
 
-    protected RelationshipCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        return new RelationshipCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected PostCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        return new PostCQ(childQuery, sqlClause, aliasName, nestLevel);
     }
 
     /**
@@ -212,10 +226,10 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
-    public void union(UnionQuery<RelationshipCB> unionCBLambda) {
-        final RelationshipCB cb = new RelationshipCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void union(UnionQuery<PostCB> unionCBLambda) {
+        final PostCB cb = new PostCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final RelationshipCQ cq = cb.query(); query().xsetUnionQuery(cq);
+        final PostCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
 
     /**
@@ -229,10 +243,10 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union all'. (NotNull)
      */
-    public void unionAll(UnionQuery<RelationshipCB> unionCBLambda) {
-        final RelationshipCB cb = new RelationshipCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void unionAll(UnionQuery<PostCB> unionCBLambda) {
+        final PostCB cb = new PostCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final RelationshipCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
+        final PostCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
     }
 
     // ===================================================================================
@@ -240,42 +254,80 @@ public class BsRelationshipCB extends AbstractConditionBean {
     //                                                                         ===========
     /**
      * Set up relation columns to select clause. <br>
-     * USER by my FOLLOWER_ID, named 'userByFollowerId'.
+     * USER by my USER_ID, named 'user'.
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_UserByFollowerId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_User()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">relationship</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">relationship</span>.<span style="color: #CC4747">getUserByFollowerId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getUser()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      */
-    public void setupSelect_UserByFollowerId() {
-        assertSetupSelectPurpose("userByFollowerId");
+    public void setupSelect_User() {
+        assertSetupSelectPurpose("user");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnFollowerId();
+            specify().columnUserId();
         }
-        doSetupSelect(() -> query().queryUserByFollowerId());
+        doSetupSelect(() -> query().queryUser());
     }
 
+    protected FavoriteNss _nssFavorite;
+    public FavoriteNss xdfgetNssFavorite() {
+        if (_nssFavorite == null) { _nssFavorite = new FavoriteNss(null); }
+        return _nssFavorite;
+    }
     /**
      * Set up relation columns to select clause. <br>
-     * USER by my FOLLOWING_ID, named 'userByFollowingId'.
+     * FAVORITE by my TARGET_ID, named 'favorite'.
      * <pre>
-     * <span style="color: #0000C0">relationshipBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_UserByFollowingId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Favorite()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">relationship</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">relationship</span>.<span style="color: #CC4747">getUserByFollowingId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getFavorite()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public void setupSelect_UserByFollowingId() {
-        assertSetupSelectPurpose("userByFollowingId");
+    public FavoriteNss setupSelect_Favorite() {
+        assertSetupSelectPurpose("favorite");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnFollowingId();
+            specify().columnTargetId();
         }
-        doSetupSelect(() -> query().queryUserByFollowingId());
+        doSetupSelect(() -> query().queryFavorite());
+        if (_nssFavorite == null || !_nssFavorite.hasConditionQuery())
+        { _nssFavorite = new FavoriteNss(query().queryFavorite()); }
+        return _nssFavorite;
+    }
+
+    protected CommentNss _nssComment;
+    public CommentNss xdfgetNssComment() {
+        if (_nssComment == null) { _nssComment = new CommentNss(null); }
+        return _nssComment;
+    }
+    /**
+     * Set up relation columns to select clause. <br>
+     * COMMENT by my TARGET_ID, named 'comment'.
+     * <pre>
+     * <span style="color: #0000C0">postBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Comment()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">post</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">post</span>.<span style="color: #CC4747">getComment()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public CommentNss setupSelect_Comment() {
+        assertSetupSelectPurpose("comment");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnTargetId();
+        }
+        doSetupSelect(() -> query().queryComment());
+        if (_nssComment == null || !_nssComment.hasConditionQuery())
+        { _nssComment = new CommentNss(query().queryComment()); }
+        return _nssComment;
     }
 
     // [DBFlute-0.7.4]
@@ -318,91 +370,126 @@ public class BsRelationshipCB extends AbstractConditionBean {
         return _specification != null && _specification.hasSpecifiedColumn();
     }
 
-    public static class HpSpecification extends HpAbstractSpecification<RelationshipCQ> {
-        protected UserCB.HpSpecification _userByFollowerId;
-        protected UserCB.HpSpecification _userByFollowingId;
-        public HpSpecification(ConditionBean baseCB, HpSpQyCall<RelationshipCQ> qyCall
+    public static class HpSpecification extends HpAbstractSpecification<PostCQ> {
+        protected UserCB.HpSpecification _user;
+        protected FavoriteCB.HpSpecification _favorite;
+        protected CommentCB.HpSpecification _comment;
+        public HpSpecification(ConditionBean baseCB, HpSpQyCall<PostCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ID: {PK, ID, NotNull, INT(10)}
+         * POST_ID: {PK, ID, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        public SpecifiedColumn columnPostId() { return doColumn("POST_ID"); }
         /**
-         * FOLLOWING_ID: {IX, NotNull, INT(10), FK to USER}
+         * TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnFollowingId() { return doColumn("FOLLOWING_ID"); }
+        public SpecifiedColumn columnTargetId() { return doColumn("TARGET_ID"); }
         /**
-         * FOLLOWER_ID: {IX, NotNull, INT(10), FK to USER}
+         * TARGET_TYPE: {+UQ, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnFollowerId() { return doColumn("FOLLOWER_ID"); }
+        public SpecifiedColumn columnTargetType() { return doColumn("TARGET_TYPE"); }
+        /**
+         * USER_ID: {IX, NotNull, INT(10), FK to USER}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
+        /**
+         * CREATED_AT: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnCreatedAt() { return doColumn("CREATED_AT"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnId(); // PK
-            if (qyCall().qy().hasConditionQueryUserByFollowerId()
+            columnPostId(); // PK
+            if (qyCall().qy().hasConditionQueryUser()
                     || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
-                columnFollowerId(); // FK or one-to-one referrer
+                columnUserId(); // FK or one-to-one referrer
             }
-            if (qyCall().qy().hasConditionQueryUserByFollowingId()
-                    || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
-                columnFollowingId(); // FK or one-to-one referrer
+            if (qyCall().qy().hasConditionQueryFavorite()
+                    || qyCall().qy().xgetReferrerQuery() instanceof FavoriteCQ) {
+                columnTargetId(); // FK or one-to-one referrer
+            }
+            if (qyCall().qy().hasConditionQueryComment()
+                    || qyCall().qy().xgetReferrerQuery() instanceof CommentCQ) {
+                columnTargetId(); // FK or one-to-one referrer
             }
         }
         @Override
-        protected String getTableDbName() { return "RELATIONSHIP"; }
+        protected String getTableDbName() { return "POST"; }
         /**
          * Prepare to specify functions about relation table. <br>
-         * USER by my FOLLOWER_ID, named 'userByFollowerId'.
+         * USER by my USER_ID, named 'user'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public UserCB.HpSpecification specifyUserByFollowerId() {
-            assertRelation("userByFollowerId");
-            if (_userByFollowerId == null) {
-                _userByFollowerId = new UserCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryUserByFollowerId()
-                                    , () -> _qyCall.qy().queryUserByFollowerId())
+        public UserCB.HpSpecification specifyUser() {
+            assertRelation("user");
+            if (_user == null) {
+                _user = new UserCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryUser()
+                                    , () -> _qyCall.qy().queryUser())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _userByFollowerId.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryUserByFollowerId()
-                      , () -> xsyncQyCall().qy().queryUserByFollowerId()));
+                    _user.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryUser()
+                      , () -> xsyncQyCall().qy().queryUser()));
                 }
             }
-            return _userByFollowerId;
+            return _user;
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * USER by my FOLLOWING_ID, named 'userByFollowingId'.
+         * FAVORITE by my TARGET_ID, named 'favorite'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public UserCB.HpSpecification specifyUserByFollowingId() {
-            assertRelation("userByFollowingId");
-            if (_userByFollowingId == null) {
-                _userByFollowingId = new UserCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryUserByFollowingId()
-                                    , () -> _qyCall.qy().queryUserByFollowingId())
+        public FavoriteCB.HpSpecification specifyFavorite() {
+            assertRelation("favorite");
+            if (_favorite == null) {
+                _favorite = new FavoriteCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryFavorite()
+                                    , () -> _qyCall.qy().queryFavorite())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _userByFollowingId.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryUserByFollowingId()
-                      , () -> xsyncQyCall().qy().queryUserByFollowingId()));
+                    _favorite.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryFavorite()
+                      , () -> xsyncQyCall().qy().queryFavorite()));
                 }
             }
-            return _userByFollowingId;
+            return _favorite;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br>
+         * COMMENT by my TARGET_ID, named 'comment'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public CommentCB.HpSpecification specifyComment() {
+            assertRelation("comment");
+            if (_comment == null) {
+                _comment = new CommentCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryComment()
+                                    , () -> _qyCall.qy().queryComment())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _comment.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryComment()
+                      , () -> xsyncQyCall().qy().queryComment()));
+                }
+            }
+            return _comment;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)
          */
-        public HpSDRFunction<RelationshipCB, RelationshipCQ> myselfDerived() {
+        public HpSDRFunction<PostCB, PostCQ> myselfDerived() {
             assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<RelationshipCB> sq, RelationshipCQ cq, String al, DerivedReferrerOption op)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<PostCB> sq, PostCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
         }
     }
@@ -415,9 +502,9 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * This is very specialty so you can get the frontier spirit. Bon voyage!
      * @return The condition-bean for dream cruise, which is linked to main condition-bean.
      */
-    public RelationshipCB dreamCruiseCB() {
-        RelationshipCB cb = new RelationshipCB();
-        cb.xsetupForDreamCruise((RelationshipCB) this);
+    public PostCB dreamCruiseCB() {
+        PostCB cb = new PostCB();
+        cb.xsetupForDreamCruise((PostCB) this);
         return cb;
     }
 
@@ -442,15 +529,15 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * @param colCBLambda The callback for specify-query of left column. (NotNull)
      * @return The object for setting up operand and right column. (NotNull)
      */
-    public HpColQyOperand<RelationshipCB> columnQuery(final SpecifyQuery<RelationshipCB> colCBLambda) {
+    public HpColQyOperand<PostCB> columnQuery(final SpecifyQuery<PostCB> colCBLambda) {
         return xcreateColQyOperand((rightSp, operand) -> {
             return xcolqy(xcreateColumnQueryCB(), xcreateColumnQueryCB(), colCBLambda, rightSp, operand);
         });
     }
 
-    protected RelationshipCB xcreateColumnQueryCB() {
-        RelationshipCB cb = new RelationshipCB();
-        cb.xsetupForColumnQuery((RelationshipCB)this);
+    protected PostCB xcreateColumnQueryCB() {
+        PostCB cb = new PostCB();
+        cb.xsetupForColumnQuery((PostCB)this);
         return cb;
     }
 
@@ -470,8 +557,8 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * </pre>
      * @param orCBLambda The callback for query of or-condition. (NotNull)
      */
-    public void orScopeQuery(OrQuery<RelationshipCB> orCBLambda) {
-        xorSQ((RelationshipCB)this, orCBLambda);
+    public void orScopeQuery(OrQuery<PostCB> orCBLambda) {
+        xorSQ((PostCB)this, orCBLambda);
     }
 
     /**
@@ -489,8 +576,8 @@ public class BsRelationshipCB extends AbstractConditionBean {
      * </pre>
      * @param andCBLambda The callback for query of and-condition. (NotNull)
      */
-    public void orScopeQueryAndPart(AndQuery<RelationshipCB> andCBLambda) {
-        xorSQAP((RelationshipCB)this, andCBLambda);
+    public void orScopeQueryAndPart(AndQuery<PostCB> andCBLambda) {
+        xorSQAP((PostCB)this, andCBLambda);
     }
 
     // ===================================================================================
@@ -520,11 +607,11 @@ public class BsRelationshipCB extends AbstractConditionBean {
     //                                                                        ============
     @Override
     protected void xprepareSyncQyCall(ConditionBean mainCB) {
-        final RelationshipCB cb;
+        final PostCB cb;
         if (mainCB != null) {
-            cb = (RelationshipCB)mainCB;
+            cb = (PostCB)mainCB;
         } else {
-            cb = new RelationshipCB();
+            cb = new PostCB();
         }
         specify().xsetSyncQyCall(xcreateSpQyCall(() -> true, () -> cb.query()));
     }
@@ -533,8 +620,8 @@ public class BsRelationshipCB extends AbstractConditionBean {
     //                                                                            Internal
     //                                                                            ========
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xgetConditionBeanClassNameInternally() { return RelationshipCB.class.getName(); }
-    protected String xgetConditionQueryClassNameInternally() { return RelationshipCQ.class.getName(); }
+    protected String xgetConditionBeanClassNameInternally() { return PostCB.class.getName(); }
+    protected String xgetConditionQueryClassNameInternally() { return PostCQ.class.getName(); }
     protected String xgetSubQueryClassNameInternally() { return SubQuery.class.getName(); }
     protected String xgetConditionOptionClassNameInternally() { return ConditionOption.class.getName(); }
 }

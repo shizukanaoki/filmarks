@@ -8,18 +8,15 @@
             javaType="Integer" name="ALBUM_ID" pkName="PRIMARY"
             pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="????" dbType="VARCHAR" javaType="String"
-            name="TITLE" required="true" size="100" type="VARCHAR"/>
+            name="ALBUM_TITLE" required="true" size="200" type="VARCHAR"/>
         <column comment="?????" dbType="VARCHAR" javaType="String"
-            name="FILE_NAME" required="true" size="200" type="VARCHAR"/>
+            name="IMAGE_FILE_NAME" required="true" size="200" type="VARCHAR"/>
         <column comment="??????ID" dbType="INT" javaType="Integer"
             name="ARTIST_ID" size="10" type="INTEGER"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ARTIST" name="FK_PRODUCT_ARTIST">
-            <reference foreign="ID" local="ARTIST_ID"/>
+            <reference foreign="ARTIST_ID" local="ARTIST_ID"/>
         </foreign-key>
-        <unique name="TITLE">
-            <unique-column name="TITLE" position="1"/>
-        </unique>
         <index name="FK_PRODUCT_ARTIST">
             <index-column name="ARTIST_ID" position="1"/>
         </index>
@@ -27,16 +24,19 @@
     <table comment="NEW_TABLE" name="ARTIST"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="ID" dbType="INT"
-            javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
-            primaryKey="true" required="true" size="10" type="INTEGER"/>
+            javaType="Integer" name="ARTIST_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="??" dbType="VARCHAR" javaType="String"
-            name="NAME" required="true" size="100" type="VARCHAR"/>
+            name="ARTIST_NAME" required="true" size="100" type="VARCHAR"/>
+        <unique name="ARTIST_NAME">
+            <unique-column name="ARTIST_NAME" position="1"/>
+        </unique>
     </table>
     <table comment="NEW_TABLE" name="COMMENT"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="ID" dbType="INT"
-            javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
-            primaryKey="true" required="true" size="10" type="INTEGER"/>
+            javaType="Integer" name="COMMENT_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="USER_ID" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
@@ -46,6 +46,9 @@
         <column comment="???" dbType="FLOAT"
             javaType="java.math.BigDecimal" name="RATE" required="true"
             size="12" type="REAL"/>
+        <column comment="??" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="COMMENT_CREATED_AT"
+            required="true" size="19" type="TIMESTAMP"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ALBUM" name="FK_COMMENT_PRODUCT">
             <reference foreign="ALBUM_ID" local="ALBUM_ID"/>
@@ -70,6 +73,9 @@
             name="USER_ID" required="true" size="10" type="INTEGER"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="ALBUM_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="??" dbType="DATETIME"
+            javaType="java.time.LocalDateTime"
+            name="FAVORITE_CREATED_AT" required="true" size="19" type="TIMESTAMP"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ALBUM" name="FK_PICK_PRODUCT">
             <reference foreign="ALBUM_ID" local="ALBUM_ID"/>
@@ -86,7 +92,63 @@
             <index-column name="ALBUM_ID" position="1"/>
         </index>
     </table>
-    <table comment="NEW_TABLE" name="RELATIONSHIP"
+    <table comment="NEW_TABLE" name="POST"
+        schema="filmarks.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="ID" dbType="INT"
+            javaType="Integer" name="POST_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="" dbType="INT" javaType="Integer"
+            name="TARGET_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="" dbType="INT" javaType="Integer"
+            name="TARGET_TYPE" required="true" size="10" type="INTEGER"/>
+        <column comment="????ID" dbType="INT" javaType="Integer"
+            name="USER_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="CREATED_AT"
+            required="true" size="19" type="TIMESTAMP"/>
+        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
+            foreignTable="USER" name="FK_POST_USER">
+            <reference foreign="USER_ID" local="USER_ID"/>
+        </foreign-key>
+        <unique name="UQ_POST_TARGET_ID_AND_TARGET_TYPE">
+            <unique-column name="TARGET_ID" position="1"/>
+            <unique-column name="TARGET_TYPE" position="2"/>
+        </unique>
+        <index name="FK_POST_USER">
+            <index-column name="USER_ID" position="1"/>
+        </index>
+    </table>
+    <table comment="NEW_TABLE" name="SONG"
+        schema="filmarks.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="ID" dbType="INT"
+            javaType="Integer" name="SONG_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="????ID" dbType="INT" javaType="Integer"
+            name="ALBUM_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="??" dbType="VARCHAR" javaType="String"
+            name="SONG_TITLE" required="true" size="200" type="VARCHAR"/>
+        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
+            foreignTable="ALBUM" name="FK_SONG_PRODUCT">
+            <reference foreign="ALBUM_ID" local="ALBUM_ID"/>
+        </foreign-key>
+        <index name="FK_SONG_PRODUCT">
+            <index-column name="ALBUM_ID" position="1"/>
+        </index>
+    </table>
+    <table comment="NEW_TABLE" name="USER"
+        schema="filmarks.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="ID" dbType="INT"
+            javaType="Integer" name="USER_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="??" dbType="VARCHAR" javaType="String"
+            name="USERNAME" required="true" size="100" type="VARCHAR"/>
+        <column comment="?????" dbType="VARCHAR" javaType="String"
+            name="PASSWORD" required="true" size="100" type="VARCHAR"/>
+        <unique name="USERNAME">
+            <unique-column name="USERNAME" position="1"/>
+        </unique>
+    </table>
+    <table comment="NEW_TABLE" name="USER_FOLLOWING"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="ID" dbType="INT"
             javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
@@ -103,45 +165,12 @@
             foreignTable="USER" name="FK_RELATIONSHIP_FOLLOWING">
             <reference foreign="USER_ID" local="FOLLOWING_ID"/>
         </foreign-key>
+        <unique name="UQ_RELATIONSHIP_FOLLOWING_ID_AND_FOLLOWER_ID">
+            <unique-column name="FOLLOWING_ID" position="1"/>
+            <unique-column name="FOLLOWER_ID" position="2"/>
+        </unique>
         <index name="FK_RELATIONSHIP_FOLLOWER">
             <index-column name="FOLLOWER_ID" position="1"/>
         </index>
-        <index name="FK_RELATIONSHIP_FOLLOWING">
-            <index-column name="FOLLOWING_ID" position="1"/>
-        </index>
-    </table>
-    <table comment="NEW_TABLE" name="SONG"
-        schema="filmarks.$$NoNameSchema$$" type="TABLE">
-        <column comment="ID" dbType="INT" javaType="Integer"
-            name="ALBUM_ID" pkName="PRIMARY" pkPosition="1"
-            primaryKey="true" required="true" size="10" type="INTEGER"/>
-        <column comment="??????ID" dbType="INT" javaType="Integer"
-            name="ARTIST_ID" required="true" size="10" type="INTEGER"/>
-        <column comment="??" dbType="VARCHAR" javaType="String"
-            name="NAME" required="true" size="100" type="VARCHAR"/>
-        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
-            foreignTable="ARTIST" name="FK_SONG_ARTIST">
-            <reference foreign="ID" local="ARTIST_ID"/>
-        </foreign-key>
-        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
-            foreignTable="ALBUM" name="FK_SONG_PRODUCT">
-            <reference foreign="ALBUM_ID" local="ALBUM_ID"/>
-        </foreign-key>
-        <index name="FK_SONG_ARTIST">
-            <index-column name="ARTIST_ID" position="1"/>
-        </index>
-    </table>
-    <table comment="NEW_TABLE" name="USER"
-        schema="filmarks.$$NoNameSchema$$" type="TABLE">
-        <column autoIncrement="true" comment="ID" dbType="INT"
-            javaType="Integer" name="USER_ID" pkName="PRIMARY"
-            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
-        <column comment="??" dbType="VARCHAR" javaType="String"
-            name="USERNAME" required="true" size="100" type="VARCHAR"/>
-        <column comment="?????" dbType="VARCHAR" javaType="String"
-            name="PASSWORD" required="true" size="100" type="VARCHAR"/>
-        <unique name="USERNAME">
-            <unique-column name="USERNAME" position="1"/>
-        </unique>
     </table>
 </database>

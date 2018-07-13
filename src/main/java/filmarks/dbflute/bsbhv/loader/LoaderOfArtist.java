@@ -12,16 +12,16 @@ import filmarks.dbflute.cbean.*;
  * The referrer loader of ARTIST as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     ARTIST_ID
  *
  * [column]
- *     ID, NAME
+ *     ARTIST_ID, ARTIST_NAME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     ARTIST_ID
  *
  * [version-no]
  *     
@@ -30,13 +30,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     ALBUM, SONG
+ *     ALBUM
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     albumList, songList
+ *     albumList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -93,40 +93,6 @@ public class LoaderOfArtist {
     public NestedReferrerLoaderGateway<LoaderOfAlbum> loadAlbum(ReferrerConditionSetupper<AlbumCB> refCBLambda) {
         myBhv().loadAlbum(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerAlbum = refLs);
         return hd -> hd.handle(new LoaderOfAlbum().ready(_referrerAlbum, _selector));
-    }
-
-    protected List<Song> _referrerSong;
-
-    /**
-     * Load referrer of songList by the set-upper of referrer. <br>
-     * SONG by ARTIST_ID, named 'songList'.
-     * <pre>
-     * <span style="color: #0000C0">artistBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">artistList</span>, <span style="color: #553000">artistLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">artistLoader</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">songCB</span>.setupSelect...
-     *         <span style="color: #553000">songCB</span>.query().set...
-     *         <span style="color: #553000">songCB</span>.query().addOrderBy...
-     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">songLoader</span> -&gt; {</span>
-     *     <span style="color: #3F7E5E">//    songLoader.load...</span>
-     *     <span style="color: #3F7E5E">//});</span>
-     * });
-     * for (Artist artist : <span style="color: #553000">artistList</span>) {
-     *     ... = artist.<span style="color: #CC4747">getSongList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setArtistId_InScope(pkList);
-     * cb.query().addOrderBy_ArtistId_Asc();
-     * </pre>
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerLoaderGateway<LoaderOfSong> loadSong(ReferrerConditionSetupper<SongCB> refCBLambda) {
-        myBhv().loadSong(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerSong = refLs);
-        return hd -> hd.handle(new LoaderOfSong().ready(_referrerSong, _selector));
     }
 
     // ===================================================================================

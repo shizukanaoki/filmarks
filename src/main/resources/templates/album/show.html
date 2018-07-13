@@ -28,7 +28,7 @@
         <div class="album_info">
             <div class="album_info_left">
                 <div class="album_info_img">
-                    <img th:src="@{'/image/album/' + ${album.getFileName()}}" width="300" height="300"/>
+                    <img th:src="@{'/image/album/' + ${album.getImageFileName()}}" width="300" height="300"/>
                 </div>
                 <div class="album_action_button">
                     <button type="button" data-toggle="modal" data-target="#comment_form">

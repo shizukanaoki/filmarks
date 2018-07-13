@@ -82,23 +82,23 @@ public class BsSongCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param albumId : PK, NotNull, INT(10), FK to ALBUM. (NotNull)
+     * @param songId : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public SongCB acceptPK(Integer albumId) {
-        assertObjectNotNull("albumId", albumId);
+    public SongCB acceptPK(Integer songId) {
+        assertObjectNotNull("songId", songId);
         BsSongCB cb = this;
-        cb.query().setAlbumId_Equal(albumId);
+        cb.query().setSongId_Equal(songId);
         return (SongCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_AlbumId_Asc();
+        query().addOrderBy_SongId_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_AlbumId_Desc();
+        query().addOrderBy_SongId_Desc();
         return this;
     }
 
@@ -239,26 +239,6 @@ public class BsSongCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    /**
-     * Set up relation columns to select clause. <br>
-     * ARTIST by my ARTIST_ID, named 'artist'.
-     * <pre>
-     * <span style="color: #0000C0">songBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Artist()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     *     <span style="color: #553000">cb</span>.query().set...
-     * }).alwaysPresent(<span style="color: #553000">song</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">song</span>.<span style="color: #CC4747">getArtist()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * });
-     * </pre>
-     */
-    public void setupSelect_Artist() {
-        assertSetupSelectPurpose("artist");
-        if (hasSpecifiedLocalColumn()) {
-            specify().columnArtistId();
-        }
-        doSetupSelect(() -> query().queryArtist());
-    }
-
     protected AlbumNss _nssAlbum;
     public AlbumNss xdfgetNssAlbum() {
         if (_nssAlbum == null) { _nssAlbum = new AlbumNss(null); }
@@ -279,6 +259,9 @@ public class BsSongCB extends AbstractConditionBean {
      */
     public AlbumNss setupSelect_Album() {
         assertSetupSelectPurpose("album");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnAlbumId();
+        }
         doSetupSelect(() -> query().queryAlbum());
         if (_nssAlbum == null || !_nssAlbum.hasConditionQuery())
         { _nssAlbum = new AlbumNss(query().queryAlbum()); }
@@ -326,59 +309,38 @@ public class BsSongCB extends AbstractConditionBean {
     }
 
     public static class HpSpecification extends HpAbstractSpecification<SongCQ> {
-        protected ArtistCB.HpSpecification _artist;
         protected AlbumCB.HpSpecification _album;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<SongCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+         * SONG_ID: {PK, ID, NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnSongId() { return doColumn("SONG_ID"); }
+        /**
+         * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnAlbumId() { return doColumn("ALBUM_ID"); }
         /**
-         * ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST}
+         * SONG_TITLE: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnArtistId() { return doColumn("ARTIST_ID"); }
-        /**
-         * NAME: {NotNull, VARCHAR(100)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnName() { return doColumn("NAME"); }
+        public SpecifiedColumn columnSongTitle() { return doColumn("SONG_TITLE"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnAlbumId(); // PK
-            if (qyCall().qy().hasConditionQueryArtist()
-                    || qyCall().qy().xgetReferrerQuery() instanceof ArtistCQ) {
-                columnArtistId(); // FK or one-to-one referrer
+            columnSongId(); // PK
+            if (qyCall().qy().hasConditionQueryAlbum()
+                    || qyCall().qy().xgetReferrerQuery() instanceof AlbumCQ) {
+                columnAlbumId(); // FK or one-to-one referrer
             }
         }
         @Override
         protected String getTableDbName() { return "SONG"; }
-        /**
-         * Prepare to specify functions about relation table. <br>
-         * ARTIST by my ARTIST_ID, named 'artist'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public ArtistCB.HpSpecification specifyArtist() {
-            assertRelation("artist");
-            if (_artist == null) {
-                _artist = new ArtistCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryArtist()
-                                    , () -> _qyCall.qy().queryArtist())
-                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
-                if (xhasSyncQyCall()) { // inherits it
-                    _artist.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryArtist()
-                      , () -> xsyncQyCall().qy().queryArtist()));
-                }
-            }
-            return _artist;
-        }
         /**
          * Prepare to specify functions about relation table. <br>
          * ALBUM by my ALBUM_ID, named 'album'.

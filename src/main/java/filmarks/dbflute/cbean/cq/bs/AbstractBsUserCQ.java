@@ -197,41 +197,60 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select FOLLOWER_ID from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdAsOne'.
+     * {exists (select USER_ID from POST where ...)} <br>
+     * POST by USER_ID, named 'postAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">existsRelationshipByFollowerId</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.query().set...
+     * cb.query().<span style="color: #CC4747">existsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of RelationshipByFollowerIdList for 'exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of PostList for 'exists'. (NotNull)
      */
-    public void existsRelationshipByFollowerId(SubQuery<RelationshipCB> subCBLambda) {
+    public void existsPost(SubQuery<PostCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_RelationshipByFollowerIdList(cb.query());
-        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_PostList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "postList");
     }
-    public abstract String keepUserId_ExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_ExistsReferrer_PostList(PostCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select FOLLOWING_ID from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdAsOne'.
+     * {exists (select FOLLOWER_ID from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">existsRelationshipByFollowingId</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.query().set...
+     * cb.query().<span style="color: #CC4747">existsUserFollowingByFollowerId</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of RelationshipByFollowingIdList for 'exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserFollowingByFollowerIdList for 'exists'. (NotNull)
      */
-    public void existsRelationshipByFollowingId(SubQuery<RelationshipCB> subCBLambda) {
+    public void existsUserFollowingByFollowerId(SubQuery<UserFollowingCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_RelationshipByFollowingIdList(cb.query());
-        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_UserFollowingByFollowerIdList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "userFollowingByFollowerIdList");
     }
-    public abstract String keepUserId_ExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_ExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select FOLLOWING_ID from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsUserFollowingByFollowingId</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserFollowingByFollowingIdList for 'exists'. (NotNull)
+     */
+    public void existsUserFollowingByFollowingId(SubQuery<UserFollowingCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_UserFollowingByFollowingIdList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "userFollowingByFollowingIdList");
+    }
+    public abstract String keepUserId_ExistsReferrer_UserFollowingByFollowingIdList(UserFollowingCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -273,41 +292,60 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select FOLLOWER_ID from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdAsOne'.
+     * {not exists (select USER_ID from POST where ...)} <br>
+     * POST by USER_ID, named 'postAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsRelationshipByFollowerId</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.query().set...
+     * cb.query().<span style="color: #CC4747">notExistsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_RelationshipByFollowerIdList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_PostList for 'not exists'. (NotNull)
      */
-    public void notExistsRelationshipByFollowerId(SubQuery<RelationshipCB> subCBLambda) {
+    public void notExistsPost(SubQuery<PostCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_RelationshipByFollowerIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList");
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_PostList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "postList");
     }
-    public abstract String keepUserId_NotExistsReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_PostList(PostCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select FOLLOWING_ID from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdAsOne'.
+     * {not exists (select FOLLOWER_ID from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsRelationshipByFollowingId</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.query().set...
+     * cb.query().<span style="color: #CC4747">notExistsUserFollowingByFollowerId</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.query().set...
      * });
      * </pre>
-     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_RelationshipByFollowingIdList for 'not exists'. (NotNull)
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_UserFollowingByFollowerIdList for 'not exists'. (NotNull)
      */
-    public void notExistsRelationshipByFollowingId(SubQuery<RelationshipCB> subCBLambda) {
+    public void notExistsUserFollowingByFollowerId(SubQuery<UserFollowingCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_RelationshipByFollowingIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList");
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_UserFollowingByFollowerIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWER_ID", pp, "userFollowingByFollowerIdList");
     }
-    public abstract String keepUserId_NotExistsReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_NotExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select FOLLOWING_ID from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsUserFollowingByFollowingId</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_UserFollowingByFollowingIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsUserFollowingByFollowingId(SubQuery<UserFollowingCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_UserFollowingByFollowingIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "FOLLOWING_ID", pp, "userFollowingByFollowingIdList");
+    }
+    public abstract String keepUserId_NotExistsReferrer_UserFollowingByFollowingIdList(UserFollowingCQ sq);
 
     public void xsderiveCommentList(String fn, SubQuery<CommentCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -325,21 +363,29 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq);
 
-    public void xsderiveRelationshipByFollowerIdList(String fn, SubQuery<RelationshipCB> sq, String al, DerivedReferrerOption op) {
+    public void xsderivePostList(String fn, SubQuery<PostCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", pp, "relationshipByFollowerIdList", al, op);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_PostList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "postList", al, op);
     }
-    public abstract String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_PostList(PostCQ sq);
 
-    public void xsderiveRelationshipByFollowingIdList(String fn, SubQuery<RelationshipCB> sq, String al, DerivedReferrerOption op) {
+    public void xsderiveUserFollowingByFollowerIdList(String fn, SubQuery<UserFollowingCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", pp, "relationshipByFollowingIdList", al, op);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", pp, "userFollowingByFollowerIdList", al, op);
     }
-    public abstract String keepUserId_SpecifyDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
+    public abstract String keepUserId_SpecifyDerivedReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq);
+
+    public void xsderiveUserFollowingByFollowingIdList(String fn, SubQuery<UserFollowingCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_UserFollowingByFollowingIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", pp, "userFollowingByFollowingIdList", al, op);
+    }
+    public abstract String keepUserId_SpecifyDerivedReferrer_UserFollowingByFollowingIdList(UserFollowingCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -397,57 +443,84 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdAsOne'.
+     * {FOO &lt;= (select max(BAR) from POST where ...)} <br>
+     * POST by USER_ID, named 'postAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">derivedRelationshipByFollowerId()</span>.<span style="color: #CC4747">max</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     relationshipCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * cb.query().<span style="color: #CC4747">derivedPost()</span>.<span style="color: #CC4747">max</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     postCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
      * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
      * </pre>
      * @return The object to set up a function for referrer table. (NotNull)
      */
-    public HpQDRFunction<RelationshipCB> derivedRelationshipByFollowerId() {
-        return xcreateQDRFunctionRelationshipByFollowerIdList();
+    public HpQDRFunction<PostCB> derivedPost() {
+        return xcreateQDRFunctionPostList();
     }
-    protected HpQDRFunction<RelationshipCB> xcreateQDRFunctionRelationshipByFollowerIdList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveRelationshipByFollowerIdList(fn, sq, rd, vl, op));
+    protected HpQDRFunction<PostCB> xcreateQDRFunctionPostList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderivePostList(fn, sq, rd, vl, op));
     }
-    public void xqderiveRelationshipByFollowerIdList(String fn, SubQuery<RelationshipCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xqderivePostList(String fn, SubQuery<PostCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", sqpp, "relationshipByFollowerIdList", rd, vl, prpp, op);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_PostList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_PostListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "postList", rd, vl, prpp, op);
     }
-    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdList(RelationshipCQ sq);
-    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowerIdListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_PostList(PostCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_PostListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from RELATIONSHIP where ...)} <br>
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdAsOne'.
+     * {FOO &lt;= (select max(BAR) from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #CC4747">derivedRelationshipByFollowingId()</span>.<span style="color: #CC4747">max</span>(relationshipCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     relationshipCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     relationshipCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * cb.query().<span style="color: #CC4747">derivedUserFollowingByFollowerId()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     followingCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
      * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
      * </pre>
      * @return The object to set up a function for referrer table. (NotNull)
      */
-    public HpQDRFunction<RelationshipCB> derivedRelationshipByFollowingId() {
-        return xcreateQDRFunctionRelationshipByFollowingIdList();
+    public HpQDRFunction<UserFollowingCB> derivedUserFollowingByFollowerId() {
+        return xcreateQDRFunctionUserFollowingByFollowerIdList();
     }
-    protected HpQDRFunction<RelationshipCB> xcreateQDRFunctionRelationshipByFollowingIdList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveRelationshipByFollowingIdList(fn, sq, rd, vl, op));
+    protected HpQDRFunction<UserFollowingCB> xcreateQDRFunctionUserFollowingByFollowerIdList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveUserFollowingByFollowerIdList(fn, sq, rd, vl, op));
     }
-    public void xqderiveRelationshipByFollowingIdList(String fn, SubQuery<RelationshipCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xqderiveUserFollowingByFollowerIdList(String fn, SubQuery<UserFollowingCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        RelationshipCB cb = new RelationshipCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", sqpp, "relationshipByFollowingIdList", rd, vl, prpp, op);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_UserFollowingByFollowerIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_UserFollowingByFollowerIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWER_ID", sqpp, "userFollowingByFollowerIdList", rd, vl, prpp, op);
     }
-    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdList(RelationshipCQ sq);
-    public abstract String keepUserId_QueryDerivedReferrer_RelationshipByFollowingIdListParameter(Object vl);
+    public abstract String keepUserId_QueryDerivedReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_UserFollowingByFollowerIdListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from USER_FOLLOWING where ...)} <br>
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedUserFollowingByFollowingId()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     followingCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     followingCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<UserFollowingCB> derivedUserFollowingByFollowingId() {
+        return xcreateQDRFunctionUserFollowingByFollowingIdList();
+    }
+    protected HpQDRFunction<UserFollowingCB> xcreateQDRFunctionUserFollowingByFollowingIdList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveUserFollowingByFollowingIdList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveUserFollowingByFollowingIdList(String fn, SubQuery<UserFollowingCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserFollowingCB cb = new UserFollowingCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_UserFollowingByFollowingIdList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_UserFollowingByFollowingIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "FOLLOWING_ID", sqpp, "userFollowingByFollowingIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepUserId_QueryDerivedReferrer_UserFollowingByFollowingIdList(UserFollowingCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_UserFollowingByFollowingIdListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>

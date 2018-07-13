@@ -158,6 +158,79 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
     }
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select TARGET_ID from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of PostList for 'exists'. (NotNull)
+     */
+    public void existsPost(SubQuery<PostCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepFavoriteId_ExistsReferrer_PostList(cb.query());
+        registerExistsReferrer(cb.query(), "FAVORITE_ID", "TARGET_ID", pp, "postList");
+    }
+    public abstract String keepFavoriteId_ExistsReferrer_PostList(PostCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select TARGET_ID from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsPost</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of FavoriteId_NotExistsReferrer_PostList for 'not exists'. (NotNull)
+     */
+    public void notExistsPost(SubQuery<PostCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        PostCB cb = new PostCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepFavoriteId_NotExistsReferrer_PostList(cb.query());
+        registerNotExistsReferrer(cb.query(), "FAVORITE_ID", "TARGET_ID", pp, "postList");
+    }
+    public abstract String keepFavoriteId_NotExistsReferrer_PostList(PostCQ sq);
+
+    public void xsderivePostList(String fn, SubQuery<PostCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepFavoriteId_SpecifyDerivedReferrer_PostList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "FAVORITE_ID", "TARGET_ID", pp, "postList", al, op);
+    }
+    public abstract String keepFavoriteId_SpecifyDerivedReferrer_PostList(PostCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from POST where ...)} <br>
+     * POST by TARGET_ID, named 'postAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedPost()</span>.<span style="color: #CC4747">max</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     postCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     postCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<PostCB> derivedPost() {
+        return xcreateQDRFunctionPostList();
+    }
+    protected HpQDRFunction<PostCB> xcreateQDRFunctionPostList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderivePostList(fn, sq, rd, vl, op));
+    }
+    public void xqderivePostList(String fn, SubQuery<PostCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        PostCB cb = new PostCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepFavoriteId_QueryDerivedReferrer_PostList(cb.query()); String prpp = keepFavoriteId_QueryDerivedReferrer_PostListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "FAVORITE_ID", "TARGET_ID", sqpp, "postList", rd, vl, prpp, op);
+    }
+    public abstract String keepFavoriteId_QueryDerivedReferrer_PostList(PostCQ sq);
+    public abstract String keepFavoriteId_QueryDerivedReferrer_PostListParameter(Object vl);
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
      * FAVORITE_ID: {PK, ID, NotNull, INT(10)}
      */
@@ -405,6 +478,81 @@ public abstract class AbstractBsFavoriteCQ extends AbstractConditionQuery {
 
     protected void regAlbumId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueAlbumId(), "ALBUM_ID"); }
     protected abstract ConditionValue xgetCValueAlbumId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_Equal(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_EQ,  favoriteCreatedAt);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as greaterThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_GreaterThan(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_GT,  favoriteCreatedAt);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as lessThan. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_LessThan(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_LT,  favoriteCreatedAt);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_GreaterEqual(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_GE,  favoriteCreatedAt);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * @param favoriteCreatedAt The value of favoriteCreatedAt as lessEqual. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setFavoriteCreatedAt_LessEqual(java.time.LocalDateTime favoriteCreatedAt) {
+        regFavoriteCreatedAt(CK_LE, favoriteCreatedAt);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setFavoriteCreatedAt_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setFavoriteCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setFavoriteCreatedAt_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * FAVORITE_CREATED_AT: {NotNull, DATETIME(19)}
+     * <pre>e.g. setFavoriteCreatedAt_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of favoriteCreatedAt. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setFavoriteCreatedAt_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "FAVORITE_CREATED_AT"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueFavoriteCreatedAt(), nm, op);
+    }
+
+    protected void regFavoriteCreatedAt(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueFavoriteCreatedAt(), "FAVORITE_CREATED_AT"); }
+    protected abstract ConditionValue xgetCValueFavoriteCreatedAt();
 
     // ===================================================================================
     //                                                                     ScalarCondition

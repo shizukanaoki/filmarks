@@ -65,7 +65,7 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,relationshipByFollowerIdList,relationshipByFollowingIdList", null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "commentList,favoriteList,postList,userFollowingByFollowerIdList,userFollowingByFollowingIdList", null, false);
     protected final ColumnInfo _columnUsername = cci("USERNAME", "USERNAME", null, null, String.class, "username", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, null, String.class, "password", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
@@ -139,20 +139,28 @@ public class UserDbm extends AbstractDBMeta {
         return cri("FK_PICK_USER", "favoriteList", this, FavoriteDbm.getInstance(), mp, false, "user");
     }
     /**
-     * RELATIONSHIP by FOLLOWER_ID, named 'relationshipByFollowerIdList'.
+     * POST by USER_ID, named 'postList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerRelationshipByFollowerIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), RelationshipDbm.getInstance().columnFollowerId());
-        return cri("FK_RELATIONSHIP_FOLLOWER", "relationshipByFollowerIdList", this, RelationshipDbm.getInstance(), mp, false, "userByFollowerId");
+    public ReferrerInfo referrerPostList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), PostDbm.getInstance().columnUserId());
+        return cri("FK_POST_USER", "postList", this, PostDbm.getInstance(), mp, false, "user");
     }
     /**
-     * RELATIONSHIP by FOLLOWING_ID, named 'relationshipByFollowingIdList'.
+     * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerRelationshipByFollowingIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), RelationshipDbm.getInstance().columnFollowingId());
-        return cri("FK_RELATIONSHIP_FOLLOWING", "relationshipByFollowingIdList", this, RelationshipDbm.getInstance(), mp, false, "userByFollowingId");
+    public ReferrerInfo referrerUserFollowingByFollowerIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserFollowingDbm.getInstance().columnFollowerId());
+        return cri("FK_RELATIONSHIP_FOLLOWER", "userFollowingByFollowerIdList", this, UserFollowingDbm.getInstance(), mp, false, "userByFollowerId");
+    }
+    /**
+     * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerUserFollowingByFollowingIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserFollowingDbm.getInstance().columnFollowingId());
+        return cri("FK_RELATIONSHIP_FOLLOWING", "userFollowingByFollowingIdList", this, UserFollowingDbm.getInstance(), mp, false, "userByFollowingId");
     }
 
     // ===================================================================================

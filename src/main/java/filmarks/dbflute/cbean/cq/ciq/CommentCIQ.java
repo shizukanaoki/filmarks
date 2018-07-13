@@ -61,11 +61,22 @@ public class CommentCIQ extends AbstractBsCommentCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
+    protected ConditionValue xgetCValueCommentId() { return _myCQ.xdfgetCommentId(); }
+    public String keepCommentId_ExistsReferrer_PostList(PostCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepCommentId_NotExistsReferrer_PostList(PostCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepCommentId_SpecifyDerivedReferrer_PostList(PostCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepCommentId_QueryDerivedReferrer_PostList(PostCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepCommentId_QueryDerivedReferrer_PostListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
     protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
     protected ConditionValue xgetCValueContent() { return _myCQ.xdfgetContent(); }
     protected ConditionValue xgetCValueRate() { return _myCQ.xdfgetRate(); }
+    protected ConditionValue xgetCValueCommentCreatedAt() { return _myCQ.xdfgetCommentCreatedAt(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(CommentCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

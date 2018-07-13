@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     ALBUM_ID
  *
  * [column]
- *     ALBUM_ID, TITLE, FILE_NAME, ARTIST_ID
+ *     ALBUM_ID, ALBUM_TITLE, IMAGE_FILE_NAME, ARTIST_ID
  *
  * [sequence]
  *     
@@ -40,16 +40,16 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     ARTIST, SONG(AsOne)
+ *     ARTIST
  *
  * [referrer table]
  *     COMMENT, FAVORITE, SONG
  *
  * [foreign property]
- *     artist, songAsOne
+ *     artist
  *
  * [referrer property]
- *     commentList, favoriteList
+ *     commentList, favoriteList, songList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -184,31 +184,6 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     protected AlbumCB xprepareCBAsPK(Integer albumId) {
         assertObjectNotNull("albumId", albumId);
         return newConditionBean().acceptPK(albumId);
-    }
-
-    /**
-     * Select the entity by the unique-key value.
-     * @param title : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
-     */
-    public OptionalEntity<Album> selectByUniqueOf(String title) {
-        return facadeSelectByUniqueOf(title);
-    }
-
-    protected OptionalEntity<Album> facadeSelectByUniqueOf(String title) {
-        return doSelectByUniqueOf(title, typeOfSelectedEntity());
-    }
-
-    protected <ENTITY extends Album> OptionalEntity<ENTITY> doSelectByUniqueOf(String title, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(title), tp), title);
-    }
-
-    protected AlbumCB xprepareCBAsUniqueOf(String title) {
-        assertObjectNotNull("title", title);
-        return newConditionBean().acceptUniqueOf(title);
     }
 
     // ===================================================================================
@@ -514,6 +489,70 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
         return helpLoadReferrerInternally(albumList, option, "favoriteList");
     }
 
+    /**
+     * Load referrer of songList by the set-upper of referrer. <br>
+     * SONG by ALBUM_ID, named 'songList'.
+     * <pre>
+     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">albumList</span>, <span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">songCB</span>.setupSelect...
+     *     <span style="color: #553000">songCB</span>.query().set...
+     *     <span style="color: #553000">songCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Album album : <span style="color: #553000">albumList</span>) {
+     *     ... = album.<span style="color: #CC4747">getSongList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
+     * </pre>
+     * @param albumList The entity list of album. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Song> loadSong(List<Album> albumList, ReferrerConditionSetupper<SongCB> refCBLambda) {
+        xassLRArg(albumList, refCBLambda);
+        return doLoadSong(albumList, new LoadReferrerOption<SongCB, Song>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of songList by the set-upper of referrer. <br>
+     * SONG by ALBUM_ID, named 'songList'.
+     * <pre>
+     * <span style="color: #0000C0">albumBhv</span>.<span style="color: #CC4747">loadSong</span>(<span style="color: #553000">album</span>, <span style="color: #553000">songCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">songCB</span>.setupSelect...
+     *     <span style="color: #553000">songCB</span>.query().set...
+     *     <span style="color: #553000">songCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">album</span>.<span style="color: #CC4747">getSongList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setAlbumId_InScope(pkList);
+     * cb.query().addOrderBy_AlbumId_Asc();
+     * </pre>
+     * @param album The entity of album. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Song> loadSong(Album album, ReferrerConditionSetupper<SongCB> refCBLambda) {
+        xassLRArg(album, refCBLambda);
+        return doLoadSong(xnewLRLs(album), new LoadReferrerOption<SongCB, Song>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Song> doLoadSong(List<Album> albumList, LoadReferrerOption<SongCB, Song> option) {
+        return helpLoadReferrerInternally(albumList, option, "songList");
+    }
+
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
@@ -525,14 +564,6 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
     public List<Artist> pulloutArtist(List<Album> albumList)
     { return helpPulloutInternally(albumList, "artist"); }
 
-    /**
-     * Pull out the list of referrer-as-one table 'Song'.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
-     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<Song> pulloutSongAsOne(List<Album> albumList)
-    { return helpPulloutInternally(albumList, "songAsOne"); }
-
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
@@ -543,14 +574,6 @@ public abstract class BsAlbumBhv extends AbstractBehaviorWritable<Album, AlbumCB
      */
     public List<Integer> extractAlbumIdList(List<Album> albumList)
     { return helpExtractListInternally(albumList, "albumId"); }
-
-    /**
-     * Extract the value list of (single) unique key title.
-     * @param albumList The list of album. (NotNull, EmptyAllowed)
-     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<String> extractTitleList(List<Album> albumList)
-    { return helpExtractListInternally(albumList, "title"); }
 
     // ===================================================================================
     //                                                                       Entity Update

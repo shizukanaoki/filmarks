@@ -2,17 +2,17 @@ package filmarks.dbflute.cbean.cq;
 
 import org.dbflute.cbean.ConditionQuery;
 import org.dbflute.cbean.sqlclause.SqlClause;
-import filmarks.dbflute.cbean.cq.bs.BsRelationshipCQ;
+import filmarks.dbflute.cbean.cq.bs.BsUserFollowingCQ;
 
 /**
- * The condition-query of RELATIONSHIP.
+ * The condition-query of USER_FOLLOWING.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
  */
-public class RelationshipCQ extends BsRelationshipCQ {
+public class UserFollowingCQ extends BsUserFollowingCQ {
 
     // ===================================================================================
     //                                                                         Constructor
@@ -25,7 +25,7 @@ public class RelationshipCQ extends BsRelationshipCQ {
      * @param aliasName The alias name for this query. (NotNull)
      * @param nestLevel The nest level of this query. (if zero, this is base query)
      */
-    public RelationshipCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public UserFollowingCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 

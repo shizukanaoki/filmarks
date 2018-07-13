@@ -443,49 +443,49 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td class="namecell" data-name="ARTIST"><a href="#artist" title="type=TABLE, primaryKey={ID}, nameLength=6, columnCount=2">ARTIST</a></td>
+		<td class="namecell" data-name="ARTIST"><a href="#artist" title="type=TABLE, primaryKey={ARTIST_ID}, nameLength=6, columnCount=2">ARTIST</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#album" title="FK_PRODUCT_ARTIST">ALBUM</a>, <a href="#song" title="FK_SONG_ARTIST">SONG</a></td>
+		<td class="relcell"><a href="#album" title="FK_PRODUCT_ARTIST">ALBUM</a></td>
 		<td class="commentcell ARTIST_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Artist</td>
 		<td class="subcell">2018/07/03</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
-		<td class="namecell" data-name="COMMENT"><a href="#comment" title="type=TABLE, primaryKey={ID}, nameLength=7, columnCount=5">COMMENT</a></td>
+		<td class="namecell" data-name="COMMENT"><a href="#comment" title="type=TABLE, primaryKey={COMMENT_ID}, nameLength=7, columnCount=6">COMMENT</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#album" title="FK_COMMENT_PRODUCT">ALBUM</a>, <a href="#user" title="FK_COMMENT_USER">USER</a></td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_COMMENT">POST</a></td>
 		<td class="commentcell COMMENT_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Comment</td>
 		<td class="subcell">2018/07/03</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
-		<td class="namecell" data-name="FAVORITE"><a href="#favorite" title="type=TABLE, primaryKey={FAVORITE_ID}, nameLength=8, columnCount=3">FAVORITE</a></td>
+		<td class="namecell" data-name="FAVORITE"><a href="#favorite" title="type=TABLE, primaryKey={FAVORITE_ID}, nameLength=8, columnCount=4">FAVORITE</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#album" title="FK_PICK_PRODUCT">ALBUM</a>, <a href="#user" title="FK_PICK_USER">USER</a></td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_FAVORITE">POST</a></td>
 		<td class="commentcell FAVORITE_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Favorite</td>
 		<td class="subcell">2018/07/09</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">5</td>
-		<td class="namecell" data-name="RELATIONSHIP"><a href="#relationship" title="type=TABLE, primaryKey={ID}, nameLength=12, columnCount=3">RELATIONSHIP</a></td>
+		<td class="namecell" data-name="POST"><a href="#post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=5">POST</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWER">USER</a>, <a href="#user" title="FK_RELATIONSHIP_FOLLOWING">USER</a></td>
+		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a>, <a href="#favorite" class="additionalfk" title="FK_POST_FAVORITE">FAVORITE</a>, <a href="#comment" class="additionalfk" title="FK_POST_COMMENT">COMMENT</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell RELATIONSHIP_comment"><pre>NEW_TABLE</pre></td>
-		<td class="subcell">Relationship</td>
-		<td class="subcell">2018/07/03</td>
+		<td class="commentcell POST_comment"><pre>NEW_TABLE</pre></td>
+		<td class="subcell">Post</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
-		<td class="namecell" data-name="SONG"><a href="#song" title="type=TABLE, primaryKey={ALBUM_ID}, nameLength=4, columnCount=3">SONG</a></td>
+		<td class="namecell" data-name="SONG"><a href="#song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=3">SONG</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#artist" title="FK_SONG_ARTIST">ARTIST</a>, <a href="#album" title="FK_SONG_PRODUCT">ALBUM</a></td>
+		<td class="relcell"><a href="#album" title="FK_SONG_PRODUCT">ALBUM</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell SONG_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">Song</td>
@@ -496,10 +496,20 @@ dl.procedurelist dd.column pre {
 		<td class="namecell" data-name="USER"><a href="#user" title="type=TABLE, primaryKey={USER_ID}, nameLength=4, columnCount=3">USER</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#favorite" title="FK_PICK_USER">FAVORITE</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWER">RELATIONSHIP</a>, <a href="#relationship" title="FK_RELATIONSHIP_FOLLOWING">RELATIONSHIP</a></td>
+		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>, <a href="#favorite" title="FK_PICK_USER">FAVORITE</a>, <a href="#post" title="FK_POST_USER">POST</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>, <a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a></td>
 		<td class="commentcell USER_comment"><pre>NEW_TABLE</pre></td>
 		<td class="subcell">User</td>
 		<td class="subcell">2018/07/03</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="namecell" data-name="USER_FOLLOWING"><a href="#user_following" title="type=TABLE, primaryKey={ID}, nameLength=14, columnCount=3">USER_FOLLOWING</a></td>
+		<td class="typecell">TABLE</td>
+		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWER">USER</a>, <a href="#user" title="FK_RELATIONSHIP_FOLLOWING">USER</a></td>
+		<td class="relcell">&nbsp;</td>
+		<td class="commentcell USER_FOLLOWING_comment"><pre>NEW_TABLE</pre></td>
+		<td class="subcell">UserFollowing</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	</tbody>
 </table>
@@ -554,19 +564,19 @@ ALBUM
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="TITLE(TITLE)">o</td>
+		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="album_title">TITLE</td>
+		<td class=" columnnamecell" id="album_album_title">ALBUM_TITLE</td>
 		<td class="typecell">VARCHAR</td>
-		<td class="sizecell"> 100 </td>
+		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>????</pre></td>
-		<td class="subcell">title</td>
+		<td class="subcell">albumTitle</td>
 		<td class="subcell">String</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
@@ -575,16 +585,16 @@ ALBUM
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="album_file_name">FILE_NAME</td>
+		<td class=" columnnamecell" id="album_image_file_name">IMAGE_FILE_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>?????</pre></td>
-		<td class="subcell">fileName</td>
+		<td class="subcell">imageFileName</td>
 		<td class="subcell">String</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
@@ -607,7 +617,7 @@ ALBUM
 	</tbody>
 </table>
 
-<h2 id="artist" title="type=TABLE, primaryKey={ID}, nameLength=6, columnCount=2">
+<h2 id="artist" title="type=TABLE, primaryKey={ARTIST_ID}, nameLength=6, columnCount=2">
 ARTIST
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -642,39 +652,39 @@ ARTIST
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="artist_id">ID</td>
+		<td class=" columnnamecell" id="artist_artist_id">ARTIST_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#album" title="FK_PRODUCT_ARTIST">ALBUM</a>,<br><a href="#song" title="FK_SONG_ARTIST">SONG</a>&nbsp;</td>
+		<td class="relcell"><a href="#album" title="FK_PRODUCT_ARTIST">ALBUM</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
-		<td class="subcell">id</td>
+		<td class="subcell">artistId</td>
 		<td class="subcell">Integer</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="ARTIST_NAME(ARTIST_NAME)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="artist_name">NAME</td>
+		<td class=" columnnamecell" id="artist_artist_name">ARTIST_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>??</pre></td>
-		<td class="subcell">name</td>
+		<td class="subcell">artistName</td>
 		<td class="subcell">String</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	</tbody>
 </table>
 
-<h2 id="comment" title="type=TABLE, primaryKey={ID}, nameLength=7, columnCount=5">
+<h2 id="comment" title="type=TABLE, primaryKey={COMMENT_ID}, nameLength=7, columnCount=6">
 COMMENT
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -709,16 +719,16 @@ COMMENT
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="comment_id">ID</td>
+		<td class=" columnnamecell" id="comment_comment_id">COMMENT_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_COMMENT">POST</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
-		<td class="subcell">id</td>
+		<td class="subcell">commentId</td>
 		<td class="subcell">Integer</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
@@ -792,10 +802,28 @@ COMMENT
 		<td class="subcell">BigDecimal</td>
 		<td class="subcell">first</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="comment_comment_created_at">COMMENT_CREATED_AT</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>??</pre></td>
+		<td class="subcell">commentCreatedAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">2018/07/12</td>
+	</tr>
 	</tbody>
 </table>
 
-<h2 id="favorite" title="type=TABLE, primaryKey={FAVORITE_ID}, nameLength=8, columnCount=3">
+<h2 id="favorite" title="type=TABLE, primaryKey={FAVORITE_ID}, nameLength=8, columnCount=4">
 FAVORITE
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/09</span>
 </h2>
@@ -834,7 +862,7 @@ FAVORITE
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell"><a href="#post" class="additionalfk" title="FK_POST_FAVORITE">POST</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
 		<td class="subcell">favoriteId</td>
@@ -877,15 +905,33 @@ FAVORITE
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="favorite_favorite_created_at">FAVORITE_CREATED_AT</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>??</pre></td>
+		<td class="subcell">favoriteCreatedAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">2018/07/12</td>
+	</tr>
 	</tbody>
 </table>
 
-<h2 id="relationship" title="type=TABLE, primaryKey={ID}, nameLength=12, columnCount=3">
-RELATIONSHIP
-&nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
+<h2 id="post" title="type=TABLE, primaryKey={POST_ID}, nameLength=4, columnCount=5">
+POST
+&nbsp;<span class="tablefirstdatetitle">since 2018/07/12</span>
 </h2>
-<div class="tablecomment RELATIONSHIP_comment" data-name="RELATIONSHIP"><pre>NEW_TABLE</pre></div>
-<input type="hidden" value="RELATIONSHIP">
+<div class="tablecomment POST_comment" data-name="POST"><pre>NEW_TABLE</pre></div>
+<input type="hidden" value="POST">
 <table class="tablecontent">
 	<thead>
 	<tr>
@@ -907,7 +953,7 @@ RELATIONSHIP
 		<th>Since</th>
 	</tr>
 	</thead>
-	<tbody id="relationship-body">
+	<tbody id="post-body">
 	<tr>
 		<td class="rownumcell">1</td>
 		<td class="flgcell" title="PRIMARY">o</td>
@@ -915,32 +961,32 @@ RELATIONSHIP
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="relationship_id">ID</td>
+		<td class=" columnnamecell" id="post_post_id">POST_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
-		<td class="subcell">id</td>
+		<td class="subcell">postId</td>
 		<td class="subcell">Integer</td>
-		<td class="subcell">2018/07/09</td>
+		<td class="subcell">first</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="UQ_POST_TARGET_ID_AND_TARGET_TYPE(TARGET_ID, TARGET_TYPE)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="FK_RELATIONSHIP_FOLLOWING(FOLLOWING_ID)">o</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="relationship_following_id">FOLLOWING_ID</td>
+		<td class=" columnnamecell" id="post_target_id">TARGET_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWING">USER</a>&nbsp;</td>
+		<td class="relcell"><a href="#favorite" class="additionalfk" title="FK_POST_FAVORITE">FAVORITE</a>,<br><a href="#comment" class="additionalfk" title="FK_POST_COMMENT">COMMENT</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>????ID</pre></td>
-		<td class="subcell">followingId</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">targetId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
 	</tr>
@@ -948,24 +994,60 @@ RELATIONSHIP
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="UQ_POST_TARGET_ID_AND_TARGET_TYPE(TARGET_ID, TARGET_TYPE)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="FK_RELATIONSHIP_FOLLOWER(FOLLOWER_ID)">o</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="relationship_follower_id">FOLLOWER_ID</td>
+		<td class=" columnnamecell" id="post_target_type">TARGET_TYPE</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWER">USER</a>&nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>?????ID</pre></td>
-		<td class="subcell">followerId</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">targetType</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="FK_POST_USER(USER_ID)">o</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="post_user_id">USER_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell"><a href="#user" title="FK_POST_USER">USER</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>????ID</pre></td>
+		<td class="subcell">userId</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="post_created_at">CREATED_AT</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">createdAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">2018/07/13</td>
 	</tr>
 	</tbody>
 </table>
 
-<h2 id="song" title="type=TABLE, primaryKey={ALBUM_ID}, nameLength=4, columnCount=3">
+<h2 id="song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=3">
 SONG
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -996,9 +1078,27 @@ SONG
 	<tr>
 		<td class="rownumcell">1</td>
 		<td class="flgcell" title="PRIMARY">o</td>
+		<td class="flgcell">o</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="song_song_id">SONG_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>ID</pre></td>
+		<td class="subcell">songId</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">2018/07/12</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">2</td>
+		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="FK_SONG_PRODUCT(ALBUM_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td class=" columnnamecell" id="song_album_id">ALBUM_ID</td>
 		<td class="typecell">INT</td>
@@ -1006,28 +1106,10 @@ SONG
 		<td class="relcell"><a href="#album" title="FK_SONG_PRODUCT">ALBUM</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>ID</pre></td>
+		<td class="commentcell"><pre>????ID</pre></td>
 		<td class="subcell">albumId</td>
 		<td class="subcell">Integer</td>
 		<td class="subcell">2018/07/09</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">2</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="FK_SONG_ARTIST(ARTIST_ID)">o</td>
-		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="song_artist_id">ARTIST_ID</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#artist" title="FK_SONG_ARTIST">ARTIST</a>&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>??????ID</pre></td>
-		<td class="subcell">artistId</td>
-		<td class="subcell">Integer</td>
-		<td class="subcell">first</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
@@ -1036,16 +1118,16 @@ SONG
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="song_name">NAME</td>
+		<td class=" columnnamecell" id="song_song_title">SONG_TITLE</td>
 		<td class="typecell">VARCHAR</td>
-		<td class="sizecell"> 100 </td>
+		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>??</pre></td>
-		<td class="subcell">name</td>
+		<td class="subcell">songTitle</td>
 		<td class="subcell">String</td>
-		<td class="subcell">first</td>
+		<td class="subcell">2018/07/12</td>
 	</tr>
 	</tbody>
 </table>
@@ -1089,7 +1171,7 @@ USER
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>,<br><a href="#favorite" title="FK_PICK_USER">FAVORITE</a>,<br><a href="#relationship" title="FK_RELATIONSHIP_FOLLOWER">RELATIONSHIP</a>,<br><a href="#relationship" title="FK_RELATIONSHIP_FOLLOWING">RELATIONSHIP</a>&nbsp;</td>
+		<td class="relcell"><a href="#comment" title="FK_COMMENT_USER">COMMENT</a>,<br><a href="#favorite" title="FK_PICK_USER">FAVORITE</a>,<br><a href="#post" title="FK_POST_USER">POST</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWER">USER_FOLLOWING</a>,<br><a href="#user_following" title="FK_RELATIONSHIP_FOLLOWING">USER_FOLLOWING</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"><pre>ID</pre></td>
 		<td class="subcell">userId</td>
@@ -1130,6 +1212,91 @@ USER
 		<td class="commentcell"><pre>?????</pre></td>
 		<td class="subcell">password</td>
 		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	</tbody>
+</table>
+
+<h2 id="user_following" title="type=TABLE, primaryKey={ID}, nameLength=14, columnCount=3">
+USER_FOLLOWING
+&nbsp;<span class="tablefirstdatetitle">since 2018/07/12</span>
+</h2>
+<div class="tablecomment USER_FOLLOWING_comment" data-name="USER_FOLLOWING"><pre>NEW_TABLE</pre></div>
+<input type="hidden" value="USER_FOLLOWING">
+<table class="tablecontent">
+	<thead>
+	<tr>
+		<th class="rownumhead">No.</th>
+		<th>PK</th>
+		<th>ID</th>
+		<th>UQ</th>
+		<th>IX</th>
+		<th>Not<br />Null</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Size</th>
+		<th>ForeignTable</th>
+		<th>ReferrerTable</th>
+		<th>Classification</th>
+		<th>ColumnComment</th>
+		<th>PropertyName</th>
+		<th>JavaType</th>
+		<th>Since</th>
+	</tr>
+	</thead>
+	<tbody id="user_following-body">
+	<tr>
+		<td class="rownumcell">1</td>
+		<td class="flgcell" title="PRIMARY">o</td>
+		<td class="flgcell">o</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="user_following_id">ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>ID</pre></td>
+		<td class="subcell">id</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">2</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="UQ_RELATIONSHIP_FOLLOWING_ID_AND_FOLLOWER_ID(FOLLOWING_ID, FOLLOWER_ID)">o<span class="flgplus">+</span></td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="user_following_following_id">FOLLOWING_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWING">USER</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>????ID</pre></td>
+		<td class="subcell">followingId</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="UQ_RELATIONSHIP_FOLLOWING_ID_AND_FOLLOWER_ID(FOLLOWING_ID, FOLLOWER_ID)"><span class="flgplus">+</span>o</td>
+		<td class="flgcell" title="FK_RELATIONSHIP_FOLLOWER(FOLLOWER_ID)">o</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="user_following_follower_id">FOLLOWER_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell"><a href="#user" title="FK_RELATIONSHIP_FOLLOWER">USER</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>?????ID</pre></td>
+		<td class="subcell">followerId</td>
+		<td class="subcell">Integer</td>
 		<td class="subcell">first</td>
 	</tr>
 	</tbody>
@@ -1665,10 +1832,10 @@ function StoreClient() {
 				'ALBUM_ID': {
 					'databaseComment': 'ID'
 				}
-				, 'TITLE': {
+				, 'ALBUM_TITLE': {
 					'databaseComment': '????'
 				}
-				, 'FILE_NAME': {
+				, 'IMAGE_FILE_NAME': {
 					'databaseComment': '?????'
 				}
 				, 'ARTIST_ID': {
@@ -1679,10 +1846,10 @@ function StoreClient() {
 		, 'ARTIST': {
 			'databaseComment': 'NEW_TABLE'
 			, 'columns': {
-				'ID': {
+				'ARTIST_ID': {
 					'databaseComment': 'ID'
 				}
-				, 'NAME': {
+				, 'ARTIST_NAME': {
 					'databaseComment': '??'
 				}
 			}
@@ -1690,7 +1857,7 @@ function StoreClient() {
 		, 'COMMENT': {
 			'databaseComment': 'NEW_TABLE'
 			, 'columns': {
-				'ID': {
+				'COMMENT_ID': {
 					'databaseComment': 'ID'
 				}
 				, 'USER_ID': {
@@ -1704,6 +1871,9 @@ function StoreClient() {
 				}
 				, 'RATE': {
 					'databaseComment': '???'
+				}
+				, 'COMMENT_CREATED_AT': {
+					'databaseComment': '??'
 				}
 			}
 		}
@@ -1719,32 +1889,41 @@ function StoreClient() {
 				, 'ALBUM_ID': {
 					'databaseComment': '????ID'
 				}
+				, 'FAVORITE_CREATED_AT': {
+					'databaseComment': '??'
+				}
 			}
 		}
-		, 'RELATIONSHIP': {
+		, 'POST': {
 			'databaseComment': 'NEW_TABLE'
 			, 'columns': {
-				'ID': {
+				'POST_ID': {
 					'databaseComment': 'ID'
 				}
-				, 'FOLLOWING_ID': {
+				, 'TARGET_ID': {
+					'databaseComment': ''
+				}
+				, 'TARGET_TYPE': {
+					'databaseComment': ''
+				}
+				, 'USER_ID': {
 					'databaseComment': '????ID'
 				}
-				, 'FOLLOWER_ID': {
-					'databaseComment': '?????ID'
+				, 'CREATED_AT': {
+					'databaseComment': ''
 				}
 			}
 		}
 		, 'SONG': {
 			'databaseComment': 'NEW_TABLE'
 			, 'columns': {
-				'ALBUM_ID': {
+				'SONG_ID': {
 					'databaseComment': 'ID'
 				}
-				, 'ARTIST_ID': {
-					'databaseComment': '??????ID'
+				, 'ALBUM_ID': {
+					'databaseComment': '????ID'
 				}
-				, 'NAME': {
+				, 'SONG_TITLE': {
 					'databaseComment': '??'
 				}
 			}
@@ -1760,6 +1939,20 @@ function StoreClient() {
 				}
 				, 'PASSWORD': {
 					'databaseComment': '?????'
+				}
+			}
+		}
+		, 'USER_FOLLOWING': {
+			'databaseComment': 'NEW_TABLE'
+			, 'columns': {
+				'ID': {
+					'databaseComment': 'ID'
+				}
+				, 'FOLLOWING_ID': {
+					'databaseComment': '????ID'
+				}
+				, 'FOLLOWER_ID': {
+					'databaseComment': '?????ID'
 				}
 			}
 		}

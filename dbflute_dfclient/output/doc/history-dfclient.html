@@ -213,6 +213,152 @@ dl.column-content dd span {
 <p class="sisterlink"><a href="./schema-dfclient.html">to SchemaHTML</a></p>
 </div>
 
+<div class="section diffCode_20180713101714">
+	<h2>
+		<span class="titlediffno">diffNo. 13:</span> <span class="titlediffdatepart">2018/07/13</span> <span class="titledifftimepart">10:17:14</span>
+		<span class="titlediffauthor">by naoki.shizuka</span>
+		<span class="titlediffgitbranch">on change_database</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-dfclient.html#post">POST</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CREATED_AT</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_POST_USER</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>UQ_POST_TARGET_ID_AND_TARGET_TYPE</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_POST_USER</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section diffCode_20180712181835">
+	<h2>
+		<span class="titlediffno">diffNo. 12:</span> <span class="titlediffdatepart">2018/07/12</span> <span class="titledifftimepart">18:18:35</span>
+		<span class="titlediffauthor">by naoki.shizuka</span>
+		<span class="titlediffgitbranch">on change_database</span>
+	</h2>
+	<pre class="diffcomment"></pre>
+	<p class="tablecount">table count: 7&nbsp;-&gt;&nbsp;8</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>POST</li>
+		<li>USER_FOLLOWING</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>ALBUM</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>ALBUM_TITLE</li>
+				<li>IMAGE_FILE_NAME</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>TITLE</li>
+				<li>FILE_NAME</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>TITLE</li>
+			</ul>
+		</div>
+		<h4>ARTIST</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>ARTIST_ID</li>
+				<li>ARTIST_NAME</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ID</li>
+				<li>NAME</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>ID&nbsp;-&gt;&nbsp;ARTIST_ID</dd>
+			</dl>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>ARTIST_NAME</li>
+			</ul>
+		</div>
+		<h4>COMMENT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>COMMENT_ID</li>
+				<li>COMMENT_CREATED_AT</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ID</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>ID&nbsp;-&gt;&nbsp;COMMENT_ID</dd>
+			</dl>
+		</div>
+		<h4>FAVORITE</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>FAVORITE_CREATED_AT</li>
+			</ul>
+		</div>
+		<h4>SONG</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>SONG_ID</li>
+				<li>SONG_TITLE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ARTIST_ID</li>
+				<li>NAME</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>ALBUM_ID&nbsp;-&gt;&nbsp;SONG_ID</dd>
+			</dl>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_SONG_ARTIST</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_SONG_PRODUCT</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_SONG_ARTIST</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>RELATIONSHIP</li>
+	</ul>
+</div>
 <div class="section diffCode_20180709172024">
 	<h2>
 		<span class="titlediffno">diffNo. 11:</span> <span class="titlediffdatepart">2018/07/09</span> <span class="titledifftimepart">17:20:24</span>
@@ -223,7 +369,7 @@ dl.column-content dd span {
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-dfclient.html#favorite">FAVORITE</a></h4>
+		<h4>FAVORITE</h4>
 		<div class="change-table-content">
 			<h5>Add UQ</h5>
 			<ul class="column-content">
@@ -670,7 +816,15 @@ dl.column-content dd span {
             ]
         };
         this.pickupStore = {
-            '20180709172024' : {
+            '20180713101714' : {
+                'diffDate' : '2018/07/13 10:17:14',
+                'diffComment' : ''
+            }
+            , '20180712181835' : {
+                'diffDate' : '2018/07/12 18:18:35',
+                'diffComment' : ''
+            }
+            , '20180709172024' : {
                 'diffDate' : '2018/07/09 17:20:24',
                 'diffComment' : ''
             }

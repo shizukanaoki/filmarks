@@ -25,16 +25,16 @@ import filmarks.dbflute.cbean.*;
  * The behavior of COMMENT as TABLE. <br>
  * <pre>
  * [primary key]
- *     ID
+ *     COMMENT_ID
  *
  * [column]
- *     ID, USER_ID, ALBUM_ID, CONTENT, RATE
+ *     COMMENT_ID, USER_ID, ALBUM_ID, CONTENT, RATE, COMMENT_CREATED_AT
  *
  * [sequence]
  *     
  *
  * [identity]
- *     ID
+ *     COMMENT_ID
  *
  * [version-no]
  *     
@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     ALBUM, USER
  *
  * [referrer table]
- *     
+ *     POST
  *
  * [foreign property]
  *     album, user
  *
  * [referrer property]
- *     
+ *     postList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -159,31 +159,31 @@ public abstract class BsCommentBhv extends AbstractBehaviorWritable<Comment, Com
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, INT(10). (NotNull)
+     * @param commentId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Comment> selectByPK(Integer id) {
-        return facadeSelectByPK(id);
+    public OptionalEntity<Comment> selectByPK(Integer commentId) {
+        return facadeSelectByPK(commentId);
     }
 
-    protected OptionalEntity<Comment> facadeSelectByPK(Integer id) {
-        return doSelectOptionalByPK(id, typeOfSelectedEntity());
+    protected OptionalEntity<Comment> facadeSelectByPK(Integer commentId) {
+        return doSelectOptionalByPK(commentId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Comment> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(id), tp);
+    protected <ENTITY extends Comment> ENTITY doSelectByPK(Integer commentId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(commentId), tp);
     }
 
-    protected <ENTITY extends Comment> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(id, tp), id);
+    protected <ENTITY extends Comment> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer commentId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(commentId, tp), commentId);
     }
 
-    protected CommentCB xprepareCBAsPK(Integer id) {
-        assertObjectNotNull("id", id);
-        return newConditionBean().acceptPK(id);
+    protected CommentCB xprepareCBAsPK(Integer commentId) {
+        assertObjectNotNull("commentId", commentId);
+        return newConditionBean().acceptPK(commentId);
     }
 
     // ===================================================================================
@@ -361,6 +361,70 @@ public abstract class BsCommentBhv extends AbstractBehaviorWritable<Comment, Com
         loaderLambda.handle(new LoaderOfComment().ready(xnewLRAryLs(comment), _behaviorSelector));
     }
 
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by TARGET_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">commentBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">commentList</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Comment comment : <span style="color: #553000">commentList</span>) {
+     *     ... = comment.<span style="color: #CC4747">getPostList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setTargetId_InScope(pkList);
+     * cb.query().addOrderBy_TargetId_Asc();
+     * </pre>
+     * @param commentList The entity list of comment. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(List<Comment> commentList, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(commentList, refCBLambda);
+        return doLoadPost(commentList, new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of postList by the set-upper of referrer. <br>
+     * POST by TARGET_ID, named 'postList'.
+     * <pre>
+     * <span style="color: #0000C0">commentBhv</span>.<span style="color: #CC4747">loadPost</span>(<span style="color: #553000">comment</span>, <span style="color: #553000">postCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">postCB</span>.setupSelect...
+     *     <span style="color: #553000">postCB</span>.query().set...
+     *     <span style="color: #553000">postCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">comment</span>.<span style="color: #CC4747">getPostList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setTargetId_InScope(pkList);
+     * cb.query().addOrderBy_TargetId_Asc();
+     * </pre>
+     * @param comment The entity of comment. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Post> loadPost(Comment comment, ReferrerConditionSetupper<PostCB> refCBLambda) {
+        xassLRArg(comment, refCBLambda);
+        return doLoadPost(xnewLRLs(comment), new LoadReferrerOption<PostCB, Post>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Post> doLoadPost(List<Comment> commentList, LoadReferrerOption<PostCB, Post> option) {
+        return helpLoadReferrerInternally(commentList, option, "postList");
+    }
+
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
@@ -384,12 +448,12 @@ public abstract class BsCommentBhv extends AbstractBehaviorWritable<Comment, Com
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key id.
+     * Extract the value list of (single) primary key commentId.
      * @param commentList The list of comment. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractIdList(List<Comment> commentList)
-    { return helpExtractListInternally(commentList, "id"); }
+    public List<Integer> extractCommentIdList(List<Comment> commentList)
+    { return helpExtractListInternally(commentList, "commentId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

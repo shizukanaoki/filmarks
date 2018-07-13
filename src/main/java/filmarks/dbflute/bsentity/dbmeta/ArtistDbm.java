@@ -42,8 +42,8 @@ public class ArtistDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((Artist)et).getId(), (et, vl) -> ((Artist)et).setId(cti(vl)), "id");
-        setupEpg(_epgMap, et -> ((Artist)et).getName(), (et, vl) -> ((Artist)et).setName((String)vl), "name");
+        setupEpg(_epgMap, et -> ((Artist)et).getArtistId(), (et, vl) -> ((Artist)et).setArtistId(cti(vl)), "artistId");
+        setupEpg(_epgMap, et -> ((Artist)et).getArtistName(), (et, vl) -> ((Artist)et).setArtistName((String)vl), "artistName");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -64,24 +64,24 @@ public class ArtistDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("ID", "ID", null, null, Integer.class, "id", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "albumList,songList", null, false);
-    protected final ColumnInfo _columnName = cci("NAME", "NAME", null, null, String.class, "name", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnArtistId = cci("ARTIST_ID", "ARTIST_ID", null, null, Integer.class, "artistId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "albumList", null, false);
+    protected final ColumnInfo _columnArtistName = cci("ARTIST_NAME", "ARTIST_NAME", null, null, String.class, "artistName", null, false, false, true, "VARCHAR", 100, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * ID: {PK, ID, NotNull, INT(10)}
+     * ARTIST_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnId() { return _columnId; }
+    public ColumnInfo columnArtistId() { return _columnArtistId; }
     /**
-     * NAME: {NotNull, VARCHAR(100)}
+     * ARTIST_NAME: {UQ, NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnName() { return _columnName; }
+    public ColumnInfo columnArtistName() { return _columnArtistName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnId());
-        ls.add(columnName());
+        ls.add(columnArtistId());
+        ls.add(columnArtistName());
         return ls;
     }
 
@@ -93,9 +93,14 @@ public class ArtistDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnArtistId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnArtistName()); }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -114,16 +119,8 @@ public class ArtistDbm extends AbstractDBMeta {
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerAlbumList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), AlbumDbm.getInstance().columnArtistId());
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnArtistId(), AlbumDbm.getInstance().columnArtistId());
         return cri("FK_PRODUCT_ARTIST", "albumList", this, AlbumDbm.getInstance(), mp, false, "artist");
-    }
-    /**
-     * SONG by ARTIST_ID, named 'songList'.
-     * @return The information object of referrer property. (NotNull)
-     */
-    public ReferrerInfo referrerSongList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), SongDbm.getInstance().columnArtistId());
-        return cri("FK_SONG_ARTIST", "songList", this, SongDbm.getInstance(), mp, false, "artist");
     }
 
     // ===================================================================================

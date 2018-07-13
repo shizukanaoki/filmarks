@@ -73,6 +73,26 @@ public class BsSongCQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
+    protected ConditionValue _songId;
+    public ConditionValue xdfgetSongId()
+    { if (_songId == null) { _songId = nCV(); }
+      return _songId; }
+    protected ConditionValue xgetCValueSongId() { return xdfgetSongId(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * SONG_ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongId_Asc() { regOBA("SONG_ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * SONG_ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongId_Desc() { regOBD("SONG_ID"); return this; }
+
     protected ConditionValue _albumId;
     public ConditionValue xdfgetAlbumId()
     { if (_albumId == null) { _albumId = nCV(); }
@@ -81,57 +101,37 @@ public class BsSongCQ extends AbstractBsSongCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
     public BsSongCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ALBUM_ID: {PK, NotNull, INT(10), FK to ALBUM}
+     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
      * @return this. (NotNull)
      */
     public BsSongCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
 
-    protected ConditionValue _artistId;
-    public ConditionValue xdfgetArtistId()
-    { if (_artistId == null) { _artistId = nCV(); }
-      return _artistId; }
-    protected ConditionValue xgetCValueArtistId() { return xdfgetArtistId(); }
+    protected ConditionValue _songTitle;
+    public ConditionValue xdfgetSongTitle()
+    { if (_songTitle == null) { _songTitle = nCV(); }
+      return _songTitle; }
+    protected ConditionValue xgetCValueSongTitle() { return xdfgetSongTitle(); }
 
     /**
      * Add order-by as ascend. <br>
-     * ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST}
+     * SONG_TITLE: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_ArtistId_Asc() { regOBA("ARTIST_ID"); return this; }
+    public BsSongCQ addOrderBy_SongTitle_Asc() { regOBA("SONG_TITLE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ARTIST_ID: {IX, NotNull, INT(10), FK to ARTIST}
+     * SONG_TITLE: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_ArtistId_Desc() { regOBD("ARTIST_ID"); return this; }
-
-    protected ConditionValue _name;
-    public ConditionValue xdfgetName()
-    { if (_name == null) { _name = nCV(); }
-      return _name; }
-    protected ConditionValue xgetCValueName() { return xdfgetName(); }
-
-    /**
-     * Add order-by as ascend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_Name_Asc() { regOBA("NAME"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * NAME: {NotNull, VARCHAR(100)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_Name_Desc() { regOBD("NAME"); return this; }
+    public BsSongCQ addOrderBy_SongTitle_Desc() { regOBD("SONG_TITLE"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -174,9 +174,6 @@ public class BsSongCQ extends AbstractBsSongCQ {
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
         SongCQ bq = (SongCQ)bqs;
         SongCQ uq = (SongCQ)uqs;
-        if (bq.hasConditionQueryArtist()) {
-            uq.queryArtist().reflectRelationOnUnionQuery(bq.queryArtist(), uq.queryArtist());
-        }
         if (bq.hasConditionQueryAlbum()) {
             uq.queryAlbum().reflectRelationOnUnionQuery(bq.queryAlbum(), uq.queryAlbum());
         }
@@ -185,26 +182,6 @@ public class BsSongCQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                       Foreign Query
     //                                                                       =============
-    /**
-     * Get the condition-query for relation table. <br>
-     * ARTIST by my ARTIST_ID, named 'artist'.
-     * @return The instance of condition-query. (NotNull)
-     */
-    public ArtistCQ queryArtist() {
-        return xdfgetConditionQueryArtist();
-    }
-    public ArtistCQ xdfgetConditionQueryArtist() {
-        String prop = "artist";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryArtist()); xsetupOuterJoinArtist(); }
-        return xgetQueRlMap(prop);
-    }
-    protected ArtistCQ xcreateQueryArtist() {
-        String nrp = xresolveNRP("SONG", "artist"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new ArtistCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "artist", nrp);
-    }
-    protected void xsetupOuterJoinArtist() { xregOutJo("artist"); }
-    public boolean hasConditionQueryArtist() { return xhasQueRlMap("artist"); }
-
     /**
      * Get the condition-query for relation table. <br>
      * ALBUM by my ALBUM_ID, named 'album'.

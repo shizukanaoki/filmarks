@@ -35,9 +35,10 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
         tmpMap.put("ARTIST", "filmarks.dbflute.bsentity.dbmeta.ArtistDbm");
         tmpMap.put("COMMENT", "filmarks.dbflute.bsentity.dbmeta.CommentDbm");
         tmpMap.put("FAVORITE", "filmarks.dbflute.bsentity.dbmeta.FavoriteDbm");
-        tmpMap.put("RELATIONSHIP", "filmarks.dbflute.bsentity.dbmeta.RelationshipDbm");
+        tmpMap.put("POST", "filmarks.dbflute.bsentity.dbmeta.PostDbm");
         tmpMap.put("SONG", "filmarks.dbflute.bsentity.dbmeta.SongDbm");
         tmpMap.put("USER", "filmarks.dbflute.bsentity.dbmeta.UserDbm");
+        tmpMap.put("USER_FOLLOWING", "filmarks.dbflute.bsentity.dbmeta.UserFollowingDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 
