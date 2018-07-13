@@ -121,14 +121,14 @@ public class BsPostCQ extends AbstractBsPostCQ {
 
     /**
      * Add order-by as ascend. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetType_Asc() { regOBA("TARGET_TYPE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
      * @return this. (NotNull)
      */
     public BsPostCQ addOrderBy_TargetType_Desc() { regOBD("TARGET_TYPE"); return this; }

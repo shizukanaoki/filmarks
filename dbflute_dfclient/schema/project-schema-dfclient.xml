@@ -99,8 +99,8 @@
             pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="" dbType="INT" javaType="Integer"
             name="TARGET_ID" required="true" size="10" type="INTEGER"/>
-        <column comment="" dbType="INT" javaType="Integer"
-            name="TARGET_TYPE" required="true" size="10" type="INTEGER"/>
+        <column comment="" dbType="VARCHAR" javaType="String"
+            name="TARGET_TYPE" required="true" size="30" type="VARCHAR"/>
         <column comment="????ID" dbType="INT" javaType="Integer"
             name="USER_ID" required="true" size="10" type="INTEGER"/>
         <column comment="" dbType="DATETIME"

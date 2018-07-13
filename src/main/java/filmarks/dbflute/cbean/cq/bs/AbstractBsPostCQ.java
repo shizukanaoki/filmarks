@@ -290,117 +290,135 @@ public abstract class AbstractBsPostCQ extends AbstractConditionQuery {
     protected abstract ConditionValue xgetCValueTargetId();
 
     /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as equal. (basically NotNull: error as default, or no condition as option)
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_Equal(Integer targetType) {
-        doSetTargetType_Equal(targetType);
+    public void setTargetType_Equal(String targetType) {
+        doSetTargetType_Equal(fRES(targetType));
     }
 
-    protected void doSetTargetType_Equal(Integer targetType) {
+    protected void doSetTargetType_Equal(String targetType) {
         regTargetType(CK_EQ, targetType);
     }
 
     /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as notEqual. (basically NotNull: error as default, or no condition as option)
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_NotEqual(Integer targetType) {
-        doSetTargetType_NotEqual(targetType);
+    public void setTargetType_NotEqual(String targetType) {
+        doSetTargetType_NotEqual(fRES(targetType));
     }
 
-    protected void doSetTargetType_NotEqual(Integer targetType) {
+    protected void doSetTargetType_NotEqual(String targetType) {
         regTargetType(CK_NES, targetType);
     }
 
     /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_GreaterThan(Integer targetType) {
-        regTargetType(CK_GT, targetType);
+    public void setTargetType_GreaterThan(String targetType) {
+        regTargetType(CK_GT, fRES(targetType));
     }
 
     /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as lessThan. (basically NotNull: error as default, or no condition as option)
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_LessThan(Integer targetType) {
-        regTargetType(CK_LT, targetType);
+    public void setTargetType_LessThan(String targetType) {
+        regTargetType(CK_LT, fRES(targetType));
     }
 
     /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_GreaterEqual(Integer targetType) {
-        regTargetType(CK_GE, targetType);
+    public void setTargetType_GreaterEqual(String targetType) {
+        regTargetType(CK_GE, fRES(targetType));
     }
 
     /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param targetType The value of targetType as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_LessEqual(Integer targetType) {
-        regTargetType(CK_LE, targetType);
+    public void setTargetType_LessEqual(String targetType) {
+        regTargetType(CK_LE, fRES(targetType));
     }
 
     /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param minNumber The min number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setTargetType_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setTargetType_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
-     * @param minNumber The min number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param maxNumber The max number of targetType. (basically NotNull: if op.allowOneSide(), null allowed)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setTargetType_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueTargetType(), "TARGET_TYPE", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
      * @param targetTypeList The collection of targetType as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_InScope(Collection<Integer> targetTypeList) {
+    public void setTargetType_InScope(Collection<String> targetTypeList) {
         doSetTargetType_InScope(targetTypeList);
     }
 
-    protected void doSetTargetType_InScope(Collection<Integer> targetTypeList) {
+    protected void doSetTargetType_InScope(Collection<String> targetTypeList) {
         regINS(CK_INS, cTL(targetTypeList), xgetCValueTargetType(), "TARGET_TYPE");
     }
 
     /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
      * @param targetTypeList The collection of targetType as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setTargetType_NotInScope(Collection<Integer> targetTypeList) {
+    public void setTargetType_NotInScope(Collection<String> targetTypeList) {
         doSetTargetType_NotInScope(targetTypeList);
     }
 
-    protected void doSetTargetType_NotInScope(Collection<Integer> targetTypeList) {
+    protected void doSetTargetType_NotInScope(Collection<String> targetTypeList) {
         regINS(CK_NINS, cTL(targetTypeList), xgetCValueTargetType(), "TARGET_TYPE");
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)} <br>
+     * <pre>e.g. setTargetType_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param targetType The value of targetType as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setTargetType_LikeSearch(String targetType, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setTargetType_LikeSearch(targetType, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)} <br>
+     * <pre>e.g. setTargetType_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param targetType The value of targetType as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setTargetType_LikeSearch(String targetType, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(targetType), xgetCValueTargetType(), "TARGET_TYPE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setTargetType_NotLikeSearch(String targetType, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setTargetType_NotLikeSearch(targetType, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
+     * @param targetType The value of targetType as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setTargetType_NotLikeSearch(String targetType, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(targetType), xgetCValueTargetType(), "TARGET_TYPE", likeSearchOption);
     }
 
     protected void regTargetType(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueTargetType(), "TARGET_TYPE"); }

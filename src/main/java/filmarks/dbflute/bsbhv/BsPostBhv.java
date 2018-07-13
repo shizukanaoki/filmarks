@@ -189,25 +189,25 @@ public abstract class BsPostBhv extends AbstractBehaviorWritable<Post, PostCB> {
     /**
      * Select the entity by the unique-key value.
      * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
-     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     * @param targetType : +UQ, NotNull, VARCHAR(30). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Post> selectByUniqueOf(Integer targetId, Integer targetType) {
+    public OptionalEntity<Post> selectByUniqueOf(Integer targetId, String targetType) {
         return facadeSelectByUniqueOf(targetId, targetType);
     }
 
-    protected OptionalEntity<Post> facadeSelectByUniqueOf(Integer targetId, Integer targetType) {
+    protected OptionalEntity<Post> facadeSelectByUniqueOf(Integer targetId, String targetType) {
         return doSelectByUniqueOf(targetId, targetType, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Post> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer targetId, Integer targetType, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Post> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer targetId, String targetType, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(targetId, targetType), tp), targetId, targetType);
     }
 
-    protected PostCB xprepareCBAsUniqueOf(Integer targetId, Integer targetType) {
+    protected PostCB xprepareCBAsUniqueOf(Integer targetId, String targetType) {
         assertObjectNotNull("targetId", targetId);assertObjectNotNull("targetType", targetType);
         return newConditionBean().acceptUniqueOf(targetId, targetType);
     }

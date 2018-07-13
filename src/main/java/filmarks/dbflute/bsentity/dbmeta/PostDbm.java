@@ -45,7 +45,7 @@ public class PostDbm extends AbstractDBMeta {
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((Post)et).getPostId(), (et, vl) -> ((Post)et).setPostId(cti(vl)), "postId");
         setupEpg(_epgMap, et -> ((Post)et).getTargetId(), (et, vl) -> ((Post)et).setTargetId(cti(vl)), "targetId");
-        setupEpg(_epgMap, et -> ((Post)et).getTargetType(), (et, vl) -> ((Post)et).setTargetType(cti(vl)), "targetType");
+        setupEpg(_epgMap, et -> ((Post)et).getTargetType(), (et, vl) -> ((Post)et).setTargetType((String)vl), "targetType");
         setupEpg(_epgMap, et -> ((Post)et).getUserId(), (et, vl) -> ((Post)et).setUserId(cti(vl)), "userId");
         setupEpg(_epgMap, et -> ((Post)et).getCreatedAt(), (et, vl) -> ((Post)et).setCreatedAt(ctldt(vl)), "createdAt");
     }
@@ -84,7 +84,7 @@ public class PostDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnPostId = cci("POST_ID", "POST_ID", null, null, Integer.class, "postId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnTargetId = cci("TARGET_ID", "TARGET_ID", null, null, Integer.class, "targetId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "favorite,comment", null, null, false);
-    protected final ColumnInfo _columnTargetType = cci("TARGET_TYPE", "TARGET_TYPE", null, null, Integer.class, "targetType", null, false, false, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnTargetType = cci("TARGET_TYPE", "TARGET_TYPE", null, null, String.class, "targetType", null, false, false, true, "VARCHAR", 30, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, null, Integer.class, "userId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "user", null, null, false);
     protected final ColumnInfo _columnCreatedAt = cci("CREATED_AT", "CREATED_AT", null, null, java.time.LocalDateTime.class, "createdAt", null, false, false, true, "DATETIME", 19, 0, null, null, false, null, null, null, null, null, false);
 
@@ -99,7 +99,7 @@ public class PostDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnTargetId() { return _columnTargetId; }
     /**
-     * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+     * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnTargetType() { return _columnTargetType; }

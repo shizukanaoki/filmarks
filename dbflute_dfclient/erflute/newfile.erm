@@ -148,15 +148,14 @@
 					<auto_increment>true</auto_increment>
 				</normal_column>
 				<normal_column>
-					<physical_name>TITLE</physical_name>
+					<physical_name>ALBUM_TITLE</physical_name>
 					<logical_name>タイトル</logical_name>
 					<type>varchar(n)</type>
-					<length>100</length>
+					<length>200</length>
 					<not_null>true</not_null>
-					<unique_key>true</unique_key>
 				</normal_column>
 				<normal_column>
-					<physical_name>FILE_NAME</physical_name>
+					<physical_name>IMAGE_FILE_NAME</physical_name>
 					<logical_name>ファイル名</logical_name>
 					<type>varchar(n)</type>
 					<length>200</length>
@@ -165,7 +164,7 @@
 				<normal_column>
 					<physical_name>ARTIST_ID</physical_name>
 					<logical_name>アーティストID</logical_name>
-					<referred_column>table.ARTIST.ID</referred_column>
+					<referred_column>table.ARTIST.ARTIST_ID</referred_column>
 					<relationship>FK_PRODUCT_ARTIST</relationship>
 				</normal_column>
 			</columns>
@@ -181,11 +180,11 @@
 			<logical_name>NEW_TABLE</logical_name>
 			<description></description>
 			<height>75</height>
-			<width>137</width>
+			<width>188</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>118</x>
-			<y>-80</y>
+			<x>128</x>
+			<y>11</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -195,7 +194,7 @@
 			</connections>
 			<columns>
 				<normal_column>
-					<physical_name>ID</physical_name>
+					<physical_name>ARTIST_ID</physical_name>
 					<logical_name>ID</logical_name>
 					<type>integer</type>
 					<not_null>true</not_null>
@@ -203,11 +202,12 @@
 					<auto_increment>true</auto_increment>
 				</normal_column>
 				<normal_column>
-					<physical_name>NAME</physical_name>
+					<physical_name>ARTIST_NAME</physical_name>
 					<logical_name>名前</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
 					<not_null>true</not_null>
+					<unique_key>true</unique_key>
 				</normal_column>
 			</columns>
 			<indexes>
@@ -266,7 +266,7 @@
 			</connections>
 			<columns>
 				<normal_column>
-					<physical_name>ID</physical_name>
+					<physical_name>COMMENT_ID</physical_name>
 					<logical_name>ID</logical_name>
 					<type>integer</type>
 					<not_null>true</not_null>
@@ -297,6 +297,12 @@
 					<physical_name>RATE</physical_name>
 					<logical_name>レート</logical_name>
 					<type>float</type>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>COMMENT_CREATED_AT</physical_name>
+					<logical_name>時間</logical_name>
+					<type>datetime</type>
 					<not_null>true</not_null>
 				</normal_column>
 			</columns>
@@ -378,6 +384,169 @@
 					<relationship>FK_PICK_PRODUCT</relationship>
 					<not_null>true</not_null>
 				</normal_column>
+				<normal_column>
+					<physical_name>FAVORITE_CREATED_AT</physical_name>
+					<logical_name>時間</logical_name>
+					<type>datetime</type>
+					<not_null>true</not_null>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<compound_unique_key_list>
+				<compound_unique_key>
+					<name>UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE</name>
+					<columns>
+						<column>
+							<column_id>table.FAVORITE.USER_ID</column_id>
+						</column>
+						<column>
+							<column_id>table.FAVORITE.ALBUM_ID</column_id>
+						</column>
+					</columns>
+				</compound_unique_key>
+			</compound_unique_key_list>
+			<table_properties>
+			</table_properties>
+		</table>
+		<table>
+			<physical_name>POST</physical_name>
+			<logical_name>NEW_TABLE</logical_name>
+			<description></description>
+			<height>126</height>
+			<width>256</width>
+			<font_name>.AppleSystemUIFont</font_name>
+			<font_size>9</font_size>
+			<x>788</x>
+			<y>-63</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+				<relationship>
+					<name>FK_POST_USER</name>
+					<source>table.USER</source>
+					<target>table.POST</target>
+					<fk_columns>
+						<fk_column>
+							<fk_column_name>USER_ID</fk_column_name>
+						</fk_column>
+					</fk_columns>
+					<parent_cardinality>1</parent_cardinality>
+					<child_cardinality>0..n</child_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+				</relationship>
+			</connections>
+			<columns>
+				<normal_column>
+					<physical_name>POST_ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
+					<physical_name>TARGET_ID</physical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>TARGET_TYPE</physical_name>
+					<type>varchar(n)</type>
+					<length>30</length>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>USER_ID</physical_name>
+					<logical_name>ユーザーID</logical_name>
+					<referred_column>table.USER.USER_ID</referred_column>
+					<relationship>FK_POST_USER</relationship>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>CREATED_AT</physical_name>
+					<type>datetime</type>
+					<not_null>true</not_null>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<compound_unique_key_list>
+				<compound_unique_key>
+					<name>UQ_POST_TARGET_ID_AND_TARGET_TYPE</name>
+					<columns>
+						<column>
+							<column_id>table.POST.TARGET_ID</column_id>
+						</column>
+						<column>
+							<column_id>table.POST.TARGET_TYPE</column_id>
+						</column>
+					</columns>
+				</compound_unique_key>
+			</compound_unique_key_list>
+			<table_properties>
+			</table_properties>
+		</table>
+		<table>
+			<physical_name>SONG</physical_name>
+			<logical_name>NEW_TABLE</logical_name>
+			<description></description>
+			<height>84</height>
+			<width>166</width>
+			<font_name>.AppleSystemUIFont</font_name>
+			<font_size>9</font_size>
+			<x>45</x>
+			<y>166</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+				<relationship>
+					<name>FK_SONG_PRODUCT</name>
+					<source>table.ALBUM</source>
+					<target>table.SONG</target>
+					<fk_columns>
+						<fk_column>
+							<fk_column_name>ALBUM_ID</fk_column_name>
+						</fk_column>
+					</fk_columns>
+					<parent_cardinality>1</parent_cardinality>
+					<child_cardinality>0..n</child_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+				</relationship>
+			</connections>
+			<columns>
+				<normal_column>
+					<physical_name>SONG_ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
+					<physical_name>ALBUM_ID</physical_name>
+					<logical_name>アルバムID</logical_name>
+					<referred_column>table.ALBUM.ALBUM_ID</referred_column>
+					<relationship>FK_SONG_PRODUCT</relationship>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>SONG_TITLE</physical_name>
+					<logical_name>名前</logical_name>
+					<type>varchar(n)</type>
+					<length>200</length>
+					<not_null>true</not_null>
+				</normal_column>
 			</columns>
 			<indexes>
 			</indexes>
@@ -387,15 +556,65 @@
 			</table_properties>
 		</table>
 		<table>
-			<physical_name>RELATIONSHIP</physical_name>
+			<physical_name>USER</physical_name>
+			<logical_name>NEW_TABLE</logical_name>
+			<description></description>
+			<height>84</height>
+			<width>177</width>
+			<font_name>.AppleSystemUIFont</font_name>
+			<font_size>9</font_size>
+			<x>673</x>
+			<y>155</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+			</connections>
+			<columns>
+				<normal_column>
+					<physical_name>USER_ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>true</unique_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
+					<physical_name>USERNAME</physical_name>
+					<logical_name>名前</logical_name>
+					<type>varchar(n)</type>
+					<length>100</length>
+					<not_null>true</not_null>
+					<unique_key>true</unique_key>
+				</normal_column>
+				<normal_column>
+					<physical_name>PASSWORD</physical_name>
+					<logical_name>パスワード</logical_name>
+					<type>varchar(n)</type>
+					<length>100</length>
+					<not_null>true</not_null>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<compound_unique_key_list>
+			</compound_unique_key_list>
+			<table_properties>
+			</table_properties>
+		</table>
+		<table>
+			<physical_name>USER_FOLLOWING</physical_name>
 			<logical_name>NEW_TABLE</logical_name>
 			<description></description>
 			<height>111</height>
 			<width>211</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>845</x>
-			<y>318</y>
+			<x>837</x>
+			<y>325</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -405,7 +624,7 @@
 				<relationship>
 					<name>FK_RELATIONSHIP_FOLLOWING</name>
 					<source>table.USER</source>
-					<target>table.RELATIONSHIP</target>
+					<target>table.USER_FOLLOWING</target>
 					<fk_columns>
 						<fk_column>
 							<fk_column_name>FOLLOWING_ID</fk_column_name>
@@ -420,7 +639,7 @@
 				<relationship>
 					<name>FK_RELATIONSHIP_FOLLOWER</name>
 					<source>table.USER</source>
-					<target>table.RELATIONSHIP</target>
+					<target>table.USER_FOLLOWING</target>
 					<fk_columns>
 						<fk_column>
 							<fk_column_name>FOLLOWER_ID</fk_column_name>
@@ -460,133 +679,17 @@
 			<indexes>
 			</indexes>
 			<compound_unique_key_list>
-			</compound_unique_key_list>
-			<table_properties>
-			</table_properties>
-		</table>
-		<table>
-			<physical_name>SONG</physical_name>
-			<logical_name>NEW_TABLE</logical_name>
-			<description></description>
-			<height>84</height>
-			<width>137</width>
-			<font_name>.AppleSystemUIFont</font_name>
-			<font_size>9</font_size>
-			<x>63</x>
-			<y>156</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-				<relationship>
-					<name>FK_SONG_ARTIST</name>
-					<source>table.ARTIST</source>
-					<target>table.SONG</target>
-					<fk_columns>
-						<fk_column>
-							<fk_column_name>ARTIST_ID</fk_column_name>
-						</fk_column>
-					</fk_columns>
-					<parent_cardinality>1</parent_cardinality>
-					<child_cardinality>1</child_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-				</relationship>
-				<relationship>
-					<name>FK_SONG_PRODUCT</name>
-					<source>table.ALBUM</source>
-					<target>table.SONG</target>
-					<fk_columns>
-						<fk_column>
-							<fk_column_name>ALBUM_ID</fk_column_name>
-						</fk_column>
-					</fk_columns>
-					<parent_cardinality>1</parent_cardinality>
-					<child_cardinality>0..n</child_cardinality>
-					<reference_for_pk>true</reference_for_pk>
-					<on_delete_action>RESTRICT</on_delete_action>
-					<on_update_action>RESTRICT</on_update_action>
-				</relationship>
-			</connections>
-			<columns>
-				<normal_column>
-					<physical_name>ALBUM_ID</physical_name>
-					<referred_column>table.ALBUM.ALBUM_ID</referred_column>
-					<relationship>FK_SONG_PRODUCT</relationship>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-				</normal_column>
-				<normal_column>
-					<physical_name>ARTIST_ID</physical_name>
-					<logical_name>アーティストID</logical_name>
-					<referred_column>table.ARTIST.ID</referred_column>
-					<relationship>FK_SONG_ARTIST</relationship>
-					<not_null>true</not_null>
-				</normal_column>
-				<normal_column>
-					<physical_name>NAME</physical_name>
-					<logical_name>名前</logical_name>
-					<type>varchar(n)</type>
-					<length>100</length>
-					<not_null>true</not_null>
-				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<compound_unique_key_list>
-			</compound_unique_key_list>
-			<table_properties>
-			</table_properties>
-		</table>
-		<table>
-			<physical_name>USER</physical_name>
-			<logical_name>NEW_TABLE</logical_name>
-			<description></description>
-			<height>84</height>
-			<width>162</width>
-			<font_name>.AppleSystemUIFont</font_name>
-			<font_size>9</font_size>
-			<x>675</x>
-			<y>155</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-			</connections>
-			<columns>
-				<normal_column>
-					<physical_name>USER_ID</physical_name>
-					<logical_name>ID</logical_name>
-					<type>integer</type>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>true</unique_key>
-					<auto_increment>true</auto_increment>
-				</normal_column>
-				<normal_column>
-					<physical_name>USERNAME</physical_name>
-					<logical_name>名前</logical_name>
-					<type>varchar(n)</type>
-					<length>100</length>
-					<not_null>true</not_null>
-					<unique_key>true</unique_key>
-				</normal_column>
-				<normal_column>
-					<physical_name>PASSWORD</physical_name>
-					<logical_name>パスワード</logical_name>
-					<type>varchar(n)</type>
-					<length>100</length>
-					<not_null>true</not_null>
-				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<compound_unique_key_list>
+				<compound_unique_key>
+					<name>UQ_RELATIONSHIP_FOLLOWING_ID_AND_FOLLOWER_ID</name>
+					<columns>
+						<column>
+							<column_id>table.USER_FOLLOWING.FOLLOWING_ID</column_id>
+						</column>
+						<column>
+							<column_id>table.USER_FOLLOWING.FOLLOWER_ID</column_id>
+						</column>
+					</columns>
+				</compound_unique_key>
 			</compound_unique_key_list>
 			<table_properties>
 			</table_properties>

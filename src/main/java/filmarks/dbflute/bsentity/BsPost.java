@@ -46,7 +46,7 @@ import filmarks.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer postId = entity.getPostId();
  * Integer targetId = entity.getTargetId();
- * Integer targetType = entity.getTargetType();
+ * String targetType = entity.getTargetType();
  * Integer userId = entity.getUserId();
  * java.time.LocalDateTime createdAt = entity.getCreatedAt();
  * entity.setPostId(postId);
@@ -75,8 +75,8 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     /** TARGET_ID: {UQ+, NotNull, INT(10), FK to FAVORITE} */
     protected Integer _targetId;
 
-    /** TARGET_TYPE: {+UQ, NotNull, INT(10)} */
-    protected Integer _targetType;
+    /** TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)} */
+    protected String _targetType;
 
     /** USER_ID: {IX, NotNull, INT(10), FK to USER} */
     protected Integer _userId;
@@ -110,9 +110,9 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
      * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
-     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     * @param targetType : +UQ, NotNull, VARCHAR(30). (NotNull)
      */
-    public void uniqueBy(Integer targetId, Integer targetType) {
+    public void uniqueBy(Integer targetId, String targetType) {
         __uniqueDrivenProperties.clear();
         __uniqueDrivenProperties.addPropertyName("targetId");
         __uniqueDrivenProperties.addPropertyName("targetType");
@@ -306,19 +306,19 @@ public abstract class BsPost extends AbstractEntity implements DomainEntity {
     }
 
     /**
-     * [get] TARGET_TYPE: {+UQ, NotNull, INT(10)} <br>
+     * [get] TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)} <br>
      * @return The value of the column 'TARGET_TYPE'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getTargetType() {
+    public String getTargetType() {
         checkSpecifiedProperty("targetType");
         return _targetType;
     }
 
     /**
-     * [set] TARGET_TYPE: {+UQ, NotNull, INT(10)} <br>
+     * [set] TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)} <br>
      * @param targetType The value of the column 'TARGET_TYPE'. (basically NotNull if update: for the constraint)
      */
-    public void setTargetType(Integer targetType) {
+    public void setTargetType(String targetType) {
         registerModifiedProperty("targetType");
         _targetType = targetType;
     }

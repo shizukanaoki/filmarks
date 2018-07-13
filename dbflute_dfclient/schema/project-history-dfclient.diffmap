@@ -1,4 +1,29 @@
 map:{
+    ; 2018/07/13 11:06:20 = map:{
+        ; diffDate = 2018/07/13 11:06:20
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = master
+        ; tableDiff = map:{
+            ; POST = map:{
+                ; tableName = POST
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; TARGET_TYPE = map:{
+                        ; columnName = TARGET_TYPE
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = VARCHAR
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 30
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/13 10:17:14 = map:{
         ; diffDate = 2018/07/13 10:17:14
         ; diffAuthor = naoki.shizuka

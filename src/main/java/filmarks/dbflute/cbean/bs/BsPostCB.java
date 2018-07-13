@@ -95,10 +95,10 @@ public class BsPostCB extends AbstractConditionBean {
     /**
      * Accept the query condition of unique key as equal.
      * @param targetId : UQ+, NotNull, INT(10), FK to FAVORITE. (NotNull)
-     * @param targetType : +UQ, NotNull, INT(10). (NotNull)
+     * @param targetType : +UQ, NotNull, VARCHAR(30). (NotNull)
      * @return this. (NotNull)
      */
-    public PostCB acceptUniqueOf(Integer targetId, Integer targetType) {
+    public PostCB acceptUniqueOf(Integer targetId, String targetType) {
         assertObjectNotNull("targetId", targetId);assertObjectNotNull("targetType", targetType);
         BsPostCB cb = this;
         cb.query().setTargetId_Equal(targetId);cb.query().setTargetType_Equal(targetType);
@@ -389,7 +389,7 @@ public class BsPostCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnTargetId() { return doColumn("TARGET_ID"); }
         /**
-         * TARGET_TYPE: {+UQ, NotNull, INT(10)}
+         * TARGET_TYPE: {+UQ, NotNull, VARCHAR(30)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnTargetType() { return doColumn("TARGET_TYPE"); }
