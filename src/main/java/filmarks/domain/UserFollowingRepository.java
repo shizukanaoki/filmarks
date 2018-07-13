@@ -9,10 +9,21 @@ import org.springframework.stereotype.Repository;
 public class UserFollowingRepository {
 
     @Autowired
-    private UserFollowingBhv userFollowingBhvBhv;
+    private UserFollowingBhv userFollowingBhv;
 
     public UserFollowing save(UserFollowing userFollowing) {
-        userFollowingBhvBhv.insert(userFollowing);
+        userFollowingBhv.insert(userFollowing);
         return userFollowing;
+    }
+
+    public void delete(UserFollowing userFollowing) {
+        userFollowingBhv.delete(userFollowing);
+    }
+
+    public UserFollowing findByFollowingAndFollowerId(int followingId, int followerId) {
+        return userFollowingBhv.selectEntity(cb -> {
+            cb.query().setFollowingId_Equal(followingId);
+            cb.query().setFollowerId_Equal(followerId);
+        }).get();
     }
 }

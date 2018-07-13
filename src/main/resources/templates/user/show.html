@@ -31,9 +31,14 @@
             <li>
                 <a href="">follower</a>
             </li>
-            <li>
+            <li th:if="${!loginUser.isFollowing(user.getUserId())}">
                 <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
                     <a href="javascript:form.submit()">follow</a>
+                </form>
+            </li>
+            <li th:if="${loginUser.isFollowing(user.getUserId())}">
+                <form name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <a href="javascript:form.submit()">unfollow</a>
                 </form>
             </li>
         </ul>

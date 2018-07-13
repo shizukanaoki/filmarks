@@ -11,8 +11,16 @@ public class UserFollowingService {
     @Autowired
     private UserFollowingRepository userFollowingRepository;
 
+    public UserFollowing loadUserFollowingByFollowingAndFollowerId(int followingId, int followerId) {
+        return userFollowingRepository.findByFollowingAndFollowerId(followingId, followerId);
+    }
+
     public UserFollowing create(UserFollowing userFollowing) {
         userFollowingRepository.save(userFollowing);
         return userFollowing;
+    }
+
+    public void delete(UserFollowing userFollowing) {
+        userFollowingRepository.delete(userFollowing);
     }
 }

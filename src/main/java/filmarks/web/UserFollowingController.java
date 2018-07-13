@@ -35,4 +35,15 @@ public class UserFollowingController {
             return new ModelAndView("redirect:/");
         }
     }
+
+    @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable int followerId, @AuthenticationPrincipal User following) {
+        try {
+            UserFollowing userFollowing = userFollowingService.loadUserFollowingByFollowingAndFollowerId(following.getUserId(), followerId);
+            userFollowingService.delete(userFollowing);
+            return new ModelAndView("redirect:/users/" + followerId);
+        } catch (EntityAlreadyDeletedException e) {
+            return new ModelAndView("redirect:/");
+        }
+    }
 }

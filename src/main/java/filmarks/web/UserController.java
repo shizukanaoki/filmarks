@@ -1,10 +1,12 @@
 package filmarks.web;
 
+import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.Album;
 import filmarks.dbflute.exentity.User;
 import filmarks.service.UserService;
 import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserBhv userBhv;
+
     @RequestMapping("/users/{userId}")
-    public ModelAndView show (@PathVariable int userId, ModelAndView mav) {
+    public ModelAndView show (@AuthenticationPrincipal User loginUser, @PathVariable int userId, ModelAndView mav) {
+        mav.addObject("loginUser", loginUser);
+        userBhv.loadUserFollowingByFollowingId(loginUser, cb -> {});
         try {
             User user = userService.findOne(userId);
             mav.addObject("user", user);
