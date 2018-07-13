@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RelationshipController {
+public class UserFollowingController {
 
     @Autowired
     UserService userService;
@@ -23,19 +23,16 @@ public class RelationshipController {
     UserFollowingService userFollowingService;
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, ModelAndView mav) {
+    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following) {
         try {
             User follower = userService.findOne(followerId);
             UserFollowing userFollowing = new UserFollowing();
             userFollowing.setFollowerId(follower.getUserId());
             userFollowing.setFollowingId(following.getUserId());
             userFollowingService.create(userFollowing);
-            mav.setViewName("user/show");
-            mav.addObject("user", follower);
-            return mav;
+            return new ModelAndView("redirect:/users/" + follower.getUserId());
         } catch (EntityAlreadyDeletedException e) {
-            mav.setViewName("error/404");
-            return mav;
+            return new ModelAndView("redirect:/");
         }
     }
 }
