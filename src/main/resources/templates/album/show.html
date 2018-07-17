@@ -2,11 +2,13 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/album.css">
-    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="wrapper">
@@ -25,7 +27,7 @@
 
     </div>
     <div class="main">
-        <div class="album_info">
+        <div class="album">
             <div class="album_info_left">
                 <div class="album_info_img">
                     <img th:src="@{'/image/album/' + ${album.getImageFileName()}}" width="300" height="300"/>
@@ -52,7 +54,7 @@
             </div>
             <div class="album_info_right">
                 <div class="album_info_header">
-                    <h2 class="album_info_title">with the beatles</h2>
+                    <h2 class="album_info_title">With the Beatles</h2>
                     <p class="album_info_artist">beatles</p>
                 </div>
                 <p class="album_info_rate">RATE: 5.4</p>
@@ -87,54 +89,108 @@
                         <td>It Won't Be Long [Remastered 2009]</td>
                         <td>02:13</td>
                     </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>8.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>9.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>10.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>11.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>12.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
                 </table>
             </div>
-        </div>
-        <div class="comment_list">
-            <h2 class="comment_list_title">Comments</h2>
             <ul class="comments">
-                <li class="comment" th:each="comment:${album.getCommentList()}">
-                    <div class="comment_header">
-                        <a class="comment_username" th:href="@{'/users/' + ${comment.getUserId()}}" th:text="${comment.getUser().get().getUsername()}">
-                        </a>
-                        <span class="comment_rate" th:text="${comment.getRate()}"></span>
-                    </div>
-                    <div class="comment_datetime">2018/07/09 02:24</div>
-                    <div class="comment_content" th:text="${comment.getContent()}"></div>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                </li>
+                <li class="comment">
+                    <div class="comment_username">naoki</div>
+                    <div class="comment_rate">5.6</div>
+                    <div class="comment_datetime">2018/09/01 12:22:44</div>
+                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="modal fade" id="comment_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLongTitle">コメントを投稿</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="comment_form">
-                        <form class="form-horizontal" method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea th:field="*{content}" rows="8" class="form-control" id="InputTextarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input th:field="*{rate}" type="number" class="form-control" id="InputNumber">
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit">投稿</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 </body>
 </html>
