@@ -7,6 +7,7 @@ import filmarks.dbflute.exentity.Post;
 import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class FavoriteRepository {
@@ -24,6 +25,7 @@ public class FavoriteRepository {
         });
     }
 
+    @Transactional
     public Favorite save(Favorite favorite) {
         favoriteBhv.insert(favorite);
         Post post = new Post();

@@ -6,6 +6,7 @@ import filmarks.dbflute.exentity.Comment;
 import filmarks.dbflute.exentity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class CommentRepository {
@@ -16,6 +17,7 @@ public class CommentRepository {
     @Autowired
     private PostBhv postBhv;
 
+    @Transactional
     public Comment save(Comment comment) {
         commentBhv.insert(comment);
         Post post = new Post();
