@@ -39,7 +39,7 @@ public class CommentController {
             comment.setRate(commentForm.getRate());
             comment.setCommentCreatedAt(LocalDateTime.now());
             commentService.create(comment);
-            res = new ModelAndView("redirect:/");
+            res = new ModelAndView("redirect:/albums/" + albumId);
         } else {
             mav.setViewName("album/show");
             OptionalEntity<Album> albumOptionalEntity = albumBhv.selectEntity(cb -> cb.query().setAlbumId_Equal(albumId));
