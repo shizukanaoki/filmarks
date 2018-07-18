@@ -125,71 +125,11 @@
                 </table>
             </div>
             <ul class="comments">
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
-                </li>
-                <li class="comment">
-                    <div class="comment_username">naoki</div>
-                    <div class="comment_rate">5.6</div>
-                    <div class="comment_datetime">2018/09/01 12:22:44</div>
-                    <div class="comment_content">結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ結構好きですねぇ</div>
+                <li class="comment" th:each="comment : ${album.getCommentList()}">
+                    <div class="comment_username" th:text="${comment.getUser().get().getUsername()}"></div>
+                    <div class="comment_rate" th:text="${'RATE: ' + comment.getRate()}"></div>
+                    <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
+                    <div class="comment_content" th:text="${comment.getContent()}"></div>
                 </li>
             </ul>
         </div>
