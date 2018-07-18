@@ -22,10 +22,6 @@ ul.sidebar {
     padding: 20px;
 }
 
-.sidebar>li:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
 .sidebar>li a {
     color: #999999;
     text-decoration: none;
@@ -41,4 +37,16 @@ ul.sidebar {
 
 .sidebar>.sidebar_brand>a {
     color: orange;
+}
+
+.sidebar .sidebar_username {
+    color: #999999;
+}
+
+.sidebar .sidebar_active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar .sidebar_active a {
+    color: #fff;
 }

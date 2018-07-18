@@ -1,8 +1,6 @@
 package filmarks.web;
 
-import filmarks.dbflute.cbean.FavoriteCB;
 import filmarks.dbflute.exbhv.UserBhv;
-import filmarks.dbflute.exentity.Album;
 import filmarks.dbflute.exentity.Favorite;
 import filmarks.dbflute.exentity.User;
 import filmarks.service.FavoriteService;
@@ -17,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author naoki.shizuka
@@ -52,16 +48,5 @@ public class FavoriteController {
         OptionalEntity<Favorite> favoriteOptionalEntity = favoriteService.loadFavoriteByUserIdAndAlbumId(user.getUserId(), albumID);
         favoriteOptionalEntity.ifPresent(favorite -> favoriteService.delete(favorite));
         return new ModelAndView("redirect:/albums/" + String.valueOf(albumID));
-    }
-
-    @RequestMapping("/favorites")
-    public ModelAndView index(ModelAndView mav, Principal principal) {
-        Authentication auth = (Authentication)principal;
-        User user = (User)auth.getPrincipal();
-        userBhv.loadFavorite(user, FavoriteCB::setupSelect_Album);
-        List<Album> albums = user.getFavoriteList().stream().map(favorite -> favorite.getAlbum().get()).collect(Collectors.toList());
-        mav.addObject("albums", albums);
-        mav.setViewName("favorite/index");
-        return mav;
     }
 }

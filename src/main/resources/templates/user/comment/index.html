@@ -19,9 +19,12 @@
                 <a href="/" th:text="BLAND"></a>
             </li>
             <li>
-                <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+                <span class="sidebar_username" th:text="${user.getUsername()} + 'さん'"></span>
             </li>
             <li>
+                <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+            </li>
+            <li class="sidebar_active">
                 <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
             </li>
             <li>
@@ -29,6 +32,16 @@
             </li>
             <li>
                 <a href="">follower</a>
+            </li>
+            <li th:if="${!loginUser.isFollowing(user.getUserId())}">
+                <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <a href="javascript:form.submit()">follow</a>
+                </form>
+            </li>
+            <li th:if="${loginUser.isFollowing(user.getUserId())}">
+                <form name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <a href="javascript:form.submit()">unfollow</a>
+                </form>
             </li>
         </ul>
         <div class="sidebar_width">
