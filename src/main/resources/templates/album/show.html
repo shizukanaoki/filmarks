@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/album.css">
+    <link rel="stylesheet" type="text/css" href="/lib/modaal.css">
+    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/lib/modaal.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -33,7 +36,7 @@
                     <img th:src="@{'/image/album/' + ${album.getImageFileName()}}" width="300" height="300"/>
                 </div>
                 <div class="album_action_button">
-                    <button type="button" data-toggle="modal" data-target="#comment_form">
+                    <button type="button" class="comment_button">
                         コメントを投稿
                     </button>
                 </div>
@@ -192,5 +195,25 @@
         </div>
     </div>
 </div>
+<div id="modal_body" style="display:none;">
+    <form method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}" class="comment_form">
+        <textarea class="comment_form_content" th:field="*{content}"></textarea>
+        <input class="comment_form_rate" th:field="*{rate}" type="number">
+        <div class="album_action_button">
+            <button class="comment_form_submit_button" type="submit">投稿</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(".comment_button").modaal(
+        {
+            content_source: '#modal_body',
+            hide_close: true,
+            overlay_opacity: 0.8,
+            height: 500,
+            width: 500
+        }
+    );
+</script>
 </body>
 </html>
