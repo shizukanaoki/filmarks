@@ -31,10 +31,17 @@
         <div class="main">
             <div class="posts">
                 <div th:each="post : ${posts}" class="post">
-                    <img th:src="@{'/image/album/' + ${post.getAlbum().getImageFileName()}}" class="post_img" alt="">
+                    <a th:href="@{'/albums/' + ${post.getAlbum().getAlbumId()}}">
+                        <img th:src="@{'/image/album/' + ${post.getAlbum().getImageFileName()}}" class="post_img" alt="">
+                    </a>
                     <div class="post_info">
-                        <div th:text="${post.getUser().get().getUsername()} + ${post.getAlbum().getAlbumTitle()}" class="post_info_title"></div>
-                        <div th:text="${post.getCreatedAt()}" class="post_info_datetime"></div>
+                        <div class="post_info_title">
+                            <div class="post_info_username">
+                                <a th:text="${post.getUser().get().getUsername()}" th:href="@{'/users/'} + ${post.getUser().get().getUserId()}"></a>
+                            </div>
+                            <div th:text="${post.getCreatedAt()}" class="post_info_datetime"></div>
+                        </div>
+                        <div th:text="${post.getAlbum().getAlbumTitle()}" class="post_info_album_title"></div>
                         <div th:text="${post.getContent()}" class="post_info_content"></div>
                     </div>
                 </div>

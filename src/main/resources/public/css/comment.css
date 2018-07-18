@@ -32,4 +32,5 @@
 
 .comment_content {
     margin-top: 10px;
+    word-wrap:break-word;
 }

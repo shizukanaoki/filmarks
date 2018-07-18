@@ -19,31 +19,31 @@
                 <!--<input type="submit" value="Sign Out"/>-->
             <!--</form>-->
         <!--</div>-->
-        <div class="wrapper">
-            <ul class="sidebar">
-                <li class="sidebar_brand">
-                    <a href="">BLAND</a>
-                </li>
-                <li>
-                    <a href="">timeline</a>
-                </li>
-                <li>
-                    <a href="">favorites</a>
-                </li>
-            </ul>
-            <div class="sidebar_width">
+    <div class="wrapper">
+        <ul class="sidebar">
+            <li class="sidebar_brand">
+                <a href="">BLAND</a>
+            </li>
+            <li>
+                <a href="">timeline</a>
+            </li>
+            <li>
+                <a href="">favorites</a>
+            </li>
+        </ul>
+        <div class="sidebar_width">
 
-            </div>
-            <div class="main">
-                <div class="products">
-                    <div class="product" th:each="album:${albums}">
-                        <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
-                            <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
-                        </a>
-                    </div>
+        </div>
+        <div class="main">
+            <div class="products">
+                <div class="product" th:each="album:${albums}">
+                    <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
+                        <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
 
