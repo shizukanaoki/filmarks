@@ -126,7 +126,9 @@
             </div>
             <ul class="comments">
                 <li class="comment" th:each="comment : ${album.getCommentList()}">
-                    <div class="comment_username" th:text="${comment.getUser().get().getUsername()}"></div>
+                    <div class="comment_username">
+                        <a th:text="${comment.getUser().get().getUsername()}" th:href="${'/users/' + comment.getUser().get().getUserId()}"></a>
+                    </div>
                     <div class="comment_rate" th:text="${'RATE: ' + comment.getRate()}"></div>
                     <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
                     <div class="comment_content" th:text="${comment.getContent()}"></div>

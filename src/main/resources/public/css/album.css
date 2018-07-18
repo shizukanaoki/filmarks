@@ -110,6 +110,11 @@ table.album_info_songs {
     font-size: 20px;
 }
 
+.comment_username a {
+    text-decoration: none;
+    color: #000;
+}
+
 .comment_rate {
     margin-top: 5px;
 }
