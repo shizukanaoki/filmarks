@@ -126,6 +126,7 @@ table.album_info_songs {
 }
 
 .comment_content {
+    word-wrap:break-word;
     margin-top: 5px;
 }
 

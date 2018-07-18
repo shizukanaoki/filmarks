@@ -1,8 +1,10 @@
 package filmarks.web;
 
 import filmarks.dbflute.exbhv.AlbumBhv;
+import filmarks.dbflute.exbhv.FavoriteBhv;
 import filmarks.dbflute.exentity.Album;
 import filmarks.dbflute.exentity.Comment;
+import filmarks.dbflute.exentity.Favorite;
 import filmarks.dbflute.exentity.User;
 import filmarks.service.CommentService;
 import filmarks.web.form.CommentForm;
@@ -26,6 +28,9 @@ public class CommentController {
     AlbumBhv albumBhv;
 
     @Autowired
+    FavoriteBhv favoriteBhv;
+
+    @Autowired
     CommentService commentService;
 
     @RequestMapping("albums/{albumId}/comments")
@@ -47,6 +52,11 @@ public class CommentController {
                 albumBhv.loadComment(album, commentCB-> {
                     commentCB.setupSelect_User();
                 });
+                OptionalEntity<Favorite> favoriteOptionalEntity = favoriteBhv.selectEntity(favoriteCB -> {
+                    favoriteCB.query().setUserId_Equal(user.getUserId());
+                    favoriteCB.query().setAlbumId_Equal(album.getAlbumId());
+                });
+                mav.addObject("favoriteOptionalEntity", favoriteOptionalEntity);
                 mav.addObject("album", album);
                 mav.setViewName("album/show");
             }).orElse(() -> {
