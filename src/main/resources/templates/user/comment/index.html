@@ -48,75 +48,14 @@
         </div>
         <div class="main">
             <div class="comments">
-                <div class="comment">
-                    <img src="/image/album/1.jpg" alt="">
+                <div th:each="comment: ${user.getCommentList()}" class="comment">
+                    <a th:href="${'/albums/' + comment.getAlbum().get().getAlbumId()}">
+                        <img th:src="${'/image/album/' + comment.getAlbum().get().getImageFileName()}" alt="">
+                    </a>
                     <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/2.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/3.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/4.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/5.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/6.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/7.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
+                        <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
+                        <div class="comment_rate" th:text="'RATE: ' + ${comment.getRate()}"></div>
+                        <div class="comment_content" th:text="${comment.getContent()}"></div>
                     </div>
                 </div>
             </div>
