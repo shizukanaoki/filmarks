@@ -25,22 +25,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            // TODO 全てのPOSTが許可されているので、特定のPOSTのみ許可する仕様に変更する必要がある
-            .csrf().disable()
-            .authorizeRequests()
-                .antMatchers("/", "/albums", "/signup")
+        http.authorizeRequests()
+                .antMatchers("/login", "/signup")
                 .permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
+                .anyRequest()
+                .authenticated();
+        http.formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();
+                .defaultSuccessUrl("/");
     }
 
     @Configuration
