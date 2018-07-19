@@ -22,38 +22,38 @@ import filmarks.dbflute.bsentity.dbmeta.*;
 import filmarks.dbflute.cbean.*;
 
 /**
- * The behavior of SONG as TABLE. <br>
+ * The behavior of LYRICS_RECOMMENDATION as TABLE. <br>
  * <pre>
  * [primary key]
- *     SONG_ID
+ *     ID
  *
  * [column]
- *     SONG_ID, ALBUM_ID, SONG_TITLE, SONG_LYRICS
+ *     ID, USER_ID, SONG_ID, LYRICS
  *
  * [sequence]
  *     
  *
  * [identity]
- *     SONG_ID
+ *     ID
  *
  * [version-no]
  *     
  *
  * [foreign table]
- *     ALBUM
+ *     SONG, USER
  *
  * [referrer table]
- *     LYRICS_RECOMMENDATION
+ *     
  *
  * [foreign property]
- *     album
+ *     song, user
  *
  * [referrer property]
- *     lyricsRecommendationList
+ *     
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
+public abstract class BsLyricsRecommendationBhv extends AbstractBehaviorWritable<LyricsRecommendation, LyricsRecommendationCB> {
 
     // ===================================================================================
     //                                                                          Definition
@@ -65,15 +65,15 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     //                                                                             DB Meta
     //                                                                             =======
     /** {@inheritDoc} */
-    public SongDbm asDBMeta() { return SongDbm.getInstance(); }
+    public LyricsRecommendationDbm asDBMeta() { return LyricsRecommendationDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "SONG"; }
+    public String asTableDbName() { return "LYRICS_RECOMMENDATION"; }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public SongCB newConditionBean() { return new SongCB(); }
+    public LyricsRecommendationCB newConditionBean() { return new LyricsRecommendationCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -82,14 +82,14 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br>
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(CBCall<SongCB> cbLambda) {
+    public int selectCount(CBCall<LyricsRecommendationCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
@@ -103,38 +103,38 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * <span style="color: #AD4747; font-size: 120%">If it might be no data, isPresent() and orElse(), ...</span>
      * <pre>
      * <span style="color: #3F7E5E">// if the data always exists as your business rule</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">song</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">lyricsRecommendation</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
-     *     ... = <span style="color: #553000">song</span>.get...
+     *     ... = <span style="color: #553000">lyricsRecommendation</span>.get...
      * });
      *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">song</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">lyricsRecommendation</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present</span>
-     *     ... = <span style="color: #553000">song</span>.get...
+     *     ... = <span style="color: #553000">lyricsRecommendation</span>.get...
      * }).<span style="color: #994747">orElse</span>(() <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if not present</span>
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Song> selectEntity(CBCall<SongCB> cbLambda) {
+    public OptionalEntity<LyricsRecommendation> selectEntity(CBCall<LyricsRecommendationCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<Song> facadeSelectEntity(SongCB cb) {
+    protected OptionalEntity<LyricsRecommendation> facadeSelectEntity(LyricsRecommendationCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalEntity(SongCB cb, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends LyricsRecommendation> OptionalEntity<ENTITY> doSelectOptionalEntity(LyricsRecommendationCB cb, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -144,46 +144,46 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Select the entity by the condition-bean with deleted check. <br>
      * <span style="color: #AD4747; font-size: 120%">If the data is always present as your business rule, this method is good.</span>
      * <pre>
-     * Song <span style="color: #553000">song</span> = <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
-     * ... = <span style="color: #553000">song</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * LyricsRecommendation <span style="color: #553000">lyricsRecommendation</span> = <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
+     * ... = <span style="color: #553000">lyricsRecommendation</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Song selectEntityWithDeletedCheck(CBCall<SongCB> cbLambda) {
+    public LyricsRecommendation selectEntityWithDeletedCheck(CBCall<LyricsRecommendationCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
     /**
      * Select the entity by the primary-key value.
-     * @param songId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Song> selectByPK(Integer songId) {
-        return facadeSelectByPK(songId);
+    public OptionalEntity<LyricsRecommendation> selectByPK(Integer id) {
+        return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<Song> facadeSelectByPK(Integer songId) {
-        return doSelectOptionalByPK(songId, typeOfSelectedEntity());
+    protected OptionalEntity<LyricsRecommendation> facadeSelectByPK(Integer id) {
+        return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Song> ENTITY doSelectByPK(Integer songId, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(songId), tp);
+    protected <ENTITY extends LyricsRecommendation> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected <ENTITY extends Song> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer songId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(songId, tp), songId);
+    protected <ENTITY extends LyricsRecommendation> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
-    protected SongCB xprepareCBAsPK(Integer songId) {
-        assertObjectNotNull("songId", songId);
-        return newConditionBean().acceptPK(songId);
+    protected LyricsRecommendationCB xprepareCBAsPK(Integer id) {
+        assertObjectNotNull("id", id);
+        return newConditionBean().acceptPK(id);
     }
 
     // ===================================================================================
@@ -192,19 +192,19 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     /**
      * Select the list as result bean.
      * <pre>
-     * ListResultBean&lt;Song&gt; <span style="color: #553000">songList</span> = <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * ListResultBean&lt;LyricsRecommendation&gt; <span style="color: #553000">lyricsRecommendationList</span> = <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...;
      *     <span style="color: #553000">cb</span>.query().addOrderBy...;
      * });
-     * <span style="color: #70226C">for</span> (Song <span style="color: #553000">song</span> : <span style="color: #553000">songList</span>) {
-     *     ... = <span style="color: #553000">song</span>.get...;
+     * <span style="color: #70226C">for</span> (LyricsRecommendation <span style="color: #553000">lyricsRecommendation</span> : <span style="color: #553000">lyricsRecommendationList</span>) {
+     *     ... = <span style="color: #553000">lyricsRecommendation</span>.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<Song> selectList(CBCall<SongCB> cbLambda) {
+    public ListResultBean<LyricsRecommendation> selectList(CBCall<LyricsRecommendationCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
@@ -218,7 +218,7 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Select the page as result bean. <br>
      * (both count-select and paging-select are executed)
      * <pre>
-     * PagingResultBean&lt;Song&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * PagingResultBean&lt;LyricsRecommendation&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      *     <span style="color: #553000">cb</span>.query().addOrderBy...
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
@@ -228,15 +228,15 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * <span style="color: #70226C">boolean</span> isExistPrePage = <span style="color: #553000">page</span>.isExistPrePage();
      * <span style="color: #70226C">boolean</span> isExistNextPage = <span style="color: #553000">page</span>.isExistNextPage();
      * ...
-     * <span style="color: #70226C">for</span> (Song song : <span style="color: #553000">page</span>) {
-     *     ... = song.get...;
+     * <span style="color: #70226C">for</span> (LyricsRecommendation lyricsRecommendation : <span style="color: #553000">page</span>) {
+     *     ... = lyricsRecommendation.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<Song> selectPage(CBCall<SongCB> cbLambda) {
+    public PagingResultBean<LyricsRecommendation> selectPage(CBCall<LyricsRecommendationCB> cbLambda) {
         return facadeSelectPage(createCB(cbLambda));
     }
 
@@ -246,16 +246,16 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * }, <span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     ... = <span style="color: #553000">member</span>.getMemberName();
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
-     * @param entityLambda The handler of entity row of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
+     * @param entityLambda The handler of entity row of LyricsRecommendation. (NotNull)
      */
-    public void selectCursor(CBCall<SongCB> cbLambda, EntityRowHandler<Song> entityLambda) {
+    public void selectCursor(CBCall<LyricsRecommendationCB> cbLambda, EntityRowHandler<LyricsRecommendation> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
@@ -266,7 +266,7 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Select the scalar value derived by a function from uniquely-selected records. <br>
      * You should call a function method after this method called like as follows:
      * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">column...</span>; <span style="color: #3F7E5E">// required for the function</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * });
@@ -275,7 +275,7 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<SongCB, RESULT> selectScalar(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<LyricsRecommendationCB, RESULT> selectScalar(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
@@ -320,12 +320,12 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param songList The entity list of song. (NotNull)
+     * @param lyricsRecommendationList The entity list of lyricsRecommendation. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<Song> songList, ReferrerLoaderHandler<LoaderOfSong> loaderLambda) {
-        xassLRArg(songList, loaderLambda);
-        loaderLambda.handle(new LoaderOfSong().ready(songList, _behaviorSelector));
+    public void load(List<LyricsRecommendation> lyricsRecommendationList, ReferrerLoaderHandler<LoaderOfLyricsRecommendation> loaderLambda) {
+        xassLRArg(lyricsRecommendationList, loaderLambda);
+        loaderLambda.handle(new LoaderOfLyricsRecommendation().ready(lyricsRecommendationList, _behaviorSelector));
     }
 
     /**
@@ -353,99 +353,43 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param song The entity of song. (NotNull)
+     * @param lyricsRecommendation The entity of lyricsRecommendation. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(Song song, ReferrerLoaderHandler<LoaderOfSong> loaderLambda) {
-        xassLRArg(song, loaderLambda);
-        loaderLambda.handle(new LoaderOfSong().ready(xnewLRAryLs(song), _behaviorSelector));
-    }
-
-    /**
-     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
-     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
-     * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">songList</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
-     *     <span style="color: #553000">recommendationCB</span>.query().set...
-     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (Song song : <span style="color: #553000">songList</span>) {
-     *     ... = song.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setSongId_InScope(pkList);
-     * cb.query().addOrderBy_SongId_Asc();
-     * </pre>
-     * @param songList The entity list of song. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(List<Song> songList, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
-        xassLRArg(songList, refCBLambda);
-        return doLoadLyricsRecommendation(songList, new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
-     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
-     * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">song</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
-     *     <span style="color: #553000">recommendationCB</span>.query().set...
-     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">song</span>.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setSongId_InScope(pkList);
-     * cb.query().addOrderBy_SongId_Asc();
-     * </pre>
-     * @param song The entity of song. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(Song song, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
-        xassLRArg(song, refCBLambda);
-        return doLoadLyricsRecommendation(xnewLRLs(song), new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<LyricsRecommendation> doLoadLyricsRecommendation(List<Song> songList, LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation> option) {
-        return helpLoadReferrerInternally(songList, option, "lyricsRecommendationList");
+    public void load(LyricsRecommendation lyricsRecommendation, ReferrerLoaderHandler<LoaderOfLyricsRecommendation> loaderLambda) {
+        xassLRArg(lyricsRecommendation, loaderLambda);
+        loaderLambda.handle(new LoaderOfLyricsRecommendation().ready(xnewLRAryLs(lyricsRecommendation), _behaviorSelector));
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
     /**
-     * Pull out the list of foreign table 'Album'.
-     * @param songList The list of song. (NotNull, EmptyAllowed)
+     * Pull out the list of foreign table 'Song'.
+     * @param lyricsRecommendationList The list of lyricsRecommendation. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Album> pulloutAlbum(List<Song> songList)
-    { return helpPulloutInternally(songList, "album"); }
+    public List<Song> pulloutSong(List<LyricsRecommendation> lyricsRecommendationList)
+    { return helpPulloutInternally(lyricsRecommendationList, "song"); }
+
+    /**
+     * Pull out the list of foreign table 'User'.
+     * @param lyricsRecommendationList The list of lyricsRecommendation. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<User> pulloutUser(List<LyricsRecommendation> lyricsRecommendationList)
+    { return helpPulloutInternally(lyricsRecommendationList, "user"); }
 
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key songId.
-     * @param songList The list of song. (NotNull, EmptyAllowed)
+     * Extract the value list of (single) primary key id.
+     * @param lyricsRecommendationList The list of lyricsRecommendation. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractSongIdList(List<Song> songList)
-    { return helpExtractListInternally(songList, "songId"); }
+    public List<Integer> extractIdList(List<LyricsRecommendation> lyricsRecommendationList)
+    { return helpExtractListInternally(lyricsRecommendationList, "id"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -453,80 +397,80 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * song.setFoo...(value);
-     * song.setBar...(value);
+     * lyricsRecommendation.setFoo...(value);
+     * lyricsRecommendation.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//song.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//song.set...;</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">insert</span>(song);
-     * ... = song.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.set...;</span>
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">insert</span>(lyricsRecommendation);
+     * ... = lyricsRecommendation.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param song The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param lyricsRecommendation The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(Song song) {
-        doInsert(song, null);
+    public void insert(LyricsRecommendation lyricsRecommendation) {
+        doInsert(lyricsRecommendation, null);
     }
 
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
-     * song.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * song.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
+     * lyricsRecommendation.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * lyricsRecommendation.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//song.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//song.set...;</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * song.<span style="color: #CC4747">setVersionNo</span>(value);
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">update</span>(song);
+     * lyricsRecommendation.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">update</span>(lyricsRecommendation);
      * </pre>
-     * @param song The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param lyricsRecommendation The entity of update. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(Song song) {
-        doUpdate(song, null);
+    public void update(LyricsRecommendation lyricsRecommendation) {
+        doUpdate(lyricsRecommendation, null);
     }
 
     /**
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param song The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param lyricsRecommendation The entity of insert or update. (NotNull, ...depends on insert or update)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(Song song) {
-        doInsertOrUpdate(song, null, null);
+    public void insertOrUpdate(LyricsRecommendation lyricsRecommendation) {
+        doInsertOrUpdate(lyricsRecommendation, null, null);
     }
 
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
-     * song.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
+     * lyricsRecommendation.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * song.<span style="color: #CC4747">setVersionNo</span>(value);
+     * lyricsRecommendation.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #70226C">try</span> {
-     *     <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">delete</span>(song);
+     *     <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">delete</span>(lyricsRecommendation);
      * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param song The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param lyricsRecommendation The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(Song song) {
-        doDelete(song, null);
+    public void delete(LyricsRecommendation lyricsRecommendation) {
+        doDelete(lyricsRecommendation, null);
     }
 
     // ===================================================================================
@@ -538,26 +482,26 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * <span style="color: #70226C">for</span> (... : ...) {
-     *     Song song = <span style="color: #70226C">new</span> Song();
-     *     song.setFooName("foo");
+     *     LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
+     *     lyricsRecommendation.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         song.setFooPrice(123);
+     *         lyricsRecommendation.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     songList.add(song);
+     *     lyricsRecommendationList.add(lyricsRecommendation);
      * }
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">batchInsert</span>(songList);
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">batchInsert</span>(lyricsRecommendationList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<Song> songList) {
-        return doBatchInsert(songList, null);
+    public int[] batchInsert(List<LyricsRecommendation> lyricsRecommendationList) {
+        return doBatchInsert(lyricsRecommendationList, null);
     }
 
     /**
@@ -566,37 +510,37 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     Song song = <span style="color: #70226C">new</span> Song();
-     *     song.setFooName("foo");
+     *     LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
+     *     lyricsRecommendation.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         song.setFooPrice(123);
+     *         lyricsRecommendation.setFooPrice(123);
      *     } <span style="color: #70226C">else</span> {
-     *         song.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//song.setFooDate(...); // *not allowed, fragmented</span>
+     *         lyricsRecommendation.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//lyricsRecommendation.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     songList.add(song);
+     *     lyricsRecommendationList.add(lyricsRecommendation);
      * }
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">batchUpdate</span>(songList);
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">batchUpdate</span>(lyricsRecommendationList);
      * </pre>
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<Song> songList) {
-        return doBatchUpdate(songList, null);
+    public int[] batchUpdate(List<LyricsRecommendation> lyricsRecommendationList) {
+        return doBatchUpdate(lyricsRecommendationList, null);
     }
 
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<Song> songList) {
-        return doBatchDelete(songList, null);
+    public int[] batchDelete(List<LyricsRecommendation> lyricsRecommendationList) {
+        return doBatchDelete(lyricsRecommendationList, null);
     }
 
     // ===================================================================================
@@ -605,8 +549,8 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Song, SongCB&gt;() {
-     *     public ConditionBean setup(Song entity, SongCB intoCB) {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;LyricsRecommendation, LyricsRecommendationCB&gt;() {
+     *     public ConditionBean setup(LyricsRecommendation entity, LyricsRecommendationCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -628,48 +572,48 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * @param manyArgLambda The callback to set up query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<Song, SongCB> manyArgLambda) {
+    public int queryInsert(QueryInsertSetupper<LyricsRecommendation, LyricsRecommendationCB> manyArgLambda) {
         return doQueryInsert(manyArgLambda, null);
     }
 
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//song.setPK...(value);</span>
-     * song.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setPK...(value);</span>
+     * lyricsRecommendation.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//song.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//song.set...;</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//song.setVersionNo(value);</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">queryUpdate</span>(song, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setVersionNo(value);</span>
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">queryUpdate</span>(lyricsRecommendation, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param song The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param lyricsRecommendation The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(Song song, CBCall<SongCB> cbLambda) {
-        return doQueryUpdate(song, createCB(cbLambda), null);
+    public int queryUpdate(LyricsRecommendation lyricsRecommendation, CBCall<LyricsRecommendationCB> cbLambda) {
+        return doQueryUpdate(lyricsRecommendation, createCB(cbLambda), null);
     }
 
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">queryDelete</span>(song, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">queryDelete</span>(lyricsRecommendation, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(CBCall<SongCB> cbLambda) {
+    public int queryDelete(CBCall<LyricsRecommendationCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
@@ -684,22 +628,22 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
      * Other specifications are same as insert(entity).
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * song.setFoo...(value);
-     * song.setBar...(value);
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">varyingInsert</span>(song, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * lyricsRecommendation.setFoo...(value);
+     * lyricsRecommendation.setBar...(value);
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">varyingInsert</span>(lyricsRecommendation, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
      * });
-     * ... = song.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * ... = lyricsRecommendation.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param song The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param lyricsRecommendation The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(Song song, WritableOptionCall<SongCB, InsertOption<SongCB>> opLambda) {
-        doInsert(song, createInsertOption(opLambda));
+    public void varyingInsert(LyricsRecommendation lyricsRecommendation, WritableOptionCall<LyricsRecommendationCB, InsertOption<LyricsRecommendationCB>> opLambda) {
+        doInsert(lyricsRecommendation, createInsertOption(opLambda));
     }
 
     /**
@@ -707,53 +651,53 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
-     * Song song = <span style="color: #70226C">new</span> Song();
-     * song.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * song.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
+     * lyricsRecommendation.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * lyricsRecommendation.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * song.<span style="color: #CC4747">setVersionNo</span>(value);
+     * lyricsRecommendation.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(song, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(lyricsRecommendation, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param song The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param lyricsRecommendation The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(Song song, WritableOptionCall<SongCB, UpdateOption<SongCB>> opLambda) {
-        doUpdate(song, createUpdateOption(opLambda));
+    public void varyingUpdate(LyricsRecommendation lyricsRecommendation, WritableOptionCall<LyricsRecommendationCB, UpdateOption<LyricsRecommendationCB>> opLambda) {
+        doUpdate(lyricsRecommendation, createUpdateOption(opLambda));
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
-     * @param song The entity of insert or update. (NotNull)
+     * @param lyricsRecommendation The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(Song song, WritableOptionCall<SongCB, InsertOption<SongCB>> insertOpLambda, WritableOptionCall<SongCB, UpdateOption<SongCB>> updateOpLambda) {
-        doInsertOrUpdate(song, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    public void varyingInsertOrUpdate(LyricsRecommendation lyricsRecommendation, WritableOptionCall<LyricsRecommendationCB, InsertOption<LyricsRecommendationCB>> insertOpLambda, WritableOptionCall<LyricsRecommendationCB, UpdateOption<LyricsRecommendationCB>> updateOpLambda) {
+        doInsertOrUpdate(lyricsRecommendation, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
-     * @param song The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param lyricsRecommendation The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(Song song, WritableOptionCall<SongCB, DeleteOption<SongCB>> opLambda) {
-        doDelete(song, createDeleteOption(opLambda));
+    public void varyingDelete(LyricsRecommendation lyricsRecommendation, WritableOptionCall<LyricsRecommendationCB, DeleteOption<LyricsRecommendationCB>> opLambda) {
+        doDelete(lyricsRecommendation, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -764,12 +708,12 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
      * Other specifications are same as batchInsert(entityList).
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<Song> songList, WritableOptionCall<SongCB, InsertOption<SongCB>> opLambda) {
-        return doBatchInsert(songList, createInsertOption(opLambda));
+    public int[] varyingBatchInsert(List<LyricsRecommendation> lyricsRecommendationList, WritableOptionCall<LyricsRecommendationCB, InsertOption<LyricsRecommendationCB>> opLambda) {
+        return doBatchInsert(lyricsRecommendationList, createInsertOption(opLambda));
     }
 
     /**
@@ -777,24 +721,24 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
      * Other specifications are same as batchUpdate(entityList).
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<Song> songList, WritableOptionCall<SongCB, UpdateOption<SongCB>> opLambda) {
-        return doBatchUpdate(songList, createUpdateOption(opLambda));
+    public int[] varyingBatchUpdate(List<LyricsRecommendation> lyricsRecommendationList, WritableOptionCall<LyricsRecommendationCB, UpdateOption<LyricsRecommendationCB>> opLambda) {
+        return doBatchUpdate(lyricsRecommendationList, createUpdateOption(opLambda));
     }
 
     /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
-     * @param songList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lyricsRecommendationList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<Song> songList, WritableOptionCall<SongCB, DeleteOption<SongCB>> opLambda) {
-        return doBatchDelete(songList, createDeleteOption(opLambda));
+    public int[] varyingBatchDelete(List<LyricsRecommendation> lyricsRecommendationList, WritableOptionCall<LyricsRecommendationCB, DeleteOption<LyricsRecommendationCB>> opLambda) {
+        return doBatchDelete(lyricsRecommendationList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -808,7 +752,7 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<Song, SongCB> manyArgLambda, WritableOptionCall<SongCB, InsertOption<SongCB>> opLambda) {
+    public int varyingQueryInsert(QueryInsertSetupper<LyricsRecommendation, LyricsRecommendationCB> manyArgLambda, WritableOptionCall<LyricsRecommendationCB, InsertOption<LyricsRecommendationCB>> opLambda) {
         return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
     }
 
@@ -819,14 +763,14 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * Song song = <span style="color: #70226C">new</span> Song();
+     * LyricsRecommendation lyricsRecommendation = <span style="color: #70226C">new</span> LyricsRecommendation();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//song.setPK...(value);</span>
-     * song.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setPK...(value);</span>
+     * lyricsRecommendation.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//song.setVersionNo(value);</span>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(song, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//lyricsRecommendation.setVersionNo(value);</span>
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(lyricsRecommendation, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -834,14 +778,14 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
      * });
      * </pre>
-     * @param song The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param lyricsRecommendation The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(Song song, CBCall<SongCB> cbLambda, WritableOptionCall<SongCB, UpdateOption<SongCB>> opLambda) {
-        return doQueryUpdate(song, createCB(cbLambda), createUpdateOption(opLambda));
+    public int varyingQueryUpdate(LyricsRecommendation lyricsRecommendation, CBCall<LyricsRecommendationCB> cbLambda, WritableOptionCall<LyricsRecommendationCB, UpdateOption<LyricsRecommendationCB>> opLambda) {
+        return doQueryUpdate(lyricsRecommendation, createCB(cbLambda), createUpdateOption(opLambda));
     }
 
     /**
@@ -849,18 +793,18 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * For example, allowNonQueryDelete(). <br>
      * Other specifications are same as queryDelete(cb).
      * <pre>
-     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">queryDelete</span>(song, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.<span style="color: #CC4747">queryDelete</span>(lyricsRecommendation, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of Song. (NotNull)
+     * @param cbLambda The callback for condition-bean of LyricsRecommendation. (NotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(CBCall<SongCB> cbLambda, WritableOptionCall<SongCB, DeleteOption<SongCB>> opLambda) {
+    public int varyingQueryDelete(CBCall<LyricsRecommendationCB> cbLambda, WritableOptionCall<LyricsRecommendationCB, DeleteOption<LyricsRecommendationCB>> opLambda) {
         return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
     }
 
@@ -871,40 +815,40 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
      * <span style="color: #3F7E5E">// main style</span>
-     * songBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
-     * songBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * songBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
-     * songBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * songBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
-     * songBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
-     * songBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
+     * lyricsRecommendationBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
+     * lyricsRecommendationBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * lyricsRecommendationBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
+     * lyricsRecommendationBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * lyricsRecommendationBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
+     * lyricsRecommendationBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
+     * lyricsRecommendationBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
      * <span style="color: #3F7E5E">// traditional style</span>
-     * songBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
-     * songBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
-     * songBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
-     * songBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
-     * songBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
-     * songBhv.outideSql().traditionalStyle().execute(path, pmb);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
+     * lyricsRecommendationBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
      * <span style="color: #3F7E5E">// options</span>
-     * songBhv.outideSql().removeBlockComment().selectList()
-     * songBhv.outideSql().removeLineComment().selectList()
-     * songBhv.outideSql().formatSql().selectList()
+     * lyricsRecommendationBhv.outideSql().removeBlockComment().selectList()
+     * lyricsRecommendationBhv.outideSql().removeLineComment().selectList()
+     * lyricsRecommendationBhv.outideSql().formatSql().selectList()
      * </pre>
      * <p>The invoker of behavior command should be not null when you call this method.</p>
      * @return The new-created all facade executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlAllFacadeExecutor<SongBhv> outsideSql() {
+    public OutsideSqlAllFacadeExecutor<LyricsRecommendationBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
-    protected Class<? extends Song> typeOfSelectedEntity() { return Song.class; }
-    protected Class<Song> typeOfHandlingEntity() { return Song.class; }
-    protected Class<SongCB> typeOfHandlingConditionBean() { return SongCB.class; }
+    protected Class<? extends LyricsRecommendation> typeOfSelectedEntity() { return LyricsRecommendation.class; }
+    protected Class<LyricsRecommendation> typeOfHandlingEntity() { return LyricsRecommendation.class; }
+    protected Class<LyricsRecommendationCB> typeOfHandlingConditionBean() { return LyricsRecommendationCB.class; }
 
     // ===================================================================================
     //                                                                            Accessor

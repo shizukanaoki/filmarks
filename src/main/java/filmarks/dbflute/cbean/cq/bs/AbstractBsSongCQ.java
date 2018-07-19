@@ -158,6 +158,79 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
     }
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select SONG_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of LyricsRecommendationList for 'exists'. (NotNull)
+     */
+    public void existsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSongId_ExistsReferrer_LyricsRecommendationList(cb.query());
+        registerExistsReferrer(cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select SONG_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SongId_NotExistsReferrer_LyricsRecommendationList for 'not exists'. (NotNull)
+     */
+    public void notExistsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSongId_NotExistsReferrer_LyricsRecommendationList(cb.query());
+        registerNotExistsReferrer(cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    public void xsderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList", al, op);
+    }
+    public abstract String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedLyricsRecommendation()</span>.<span style="color: #CC4747">max</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     recommendationCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<LyricsRecommendationCB> derivedLyricsRecommendation() {
+        return xcreateQDRFunctionLyricsRecommendationList();
+    }
+    protected HpQDRFunction<LyricsRecommendationCB> xcreateQDRFunctionLyricsRecommendationList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveLyricsRecommendationList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepSongId_QueryDerivedReferrer_LyricsRecommendationList(cb.query()); String prpp = keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "SONG_ID", "SONG_ID", sqpp, "lyricsRecommendationList", rd, vl, prpp, op);
+    }
+    public abstract String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+    public abstract String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl);
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
      * SONG_ID: {PK, ID, NotNull, INT(10)}
      */

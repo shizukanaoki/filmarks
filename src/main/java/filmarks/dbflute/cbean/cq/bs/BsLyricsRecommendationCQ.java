@@ -13,20 +13,20 @@ import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The base condition-query of SONG.
+ * The base condition-query of LYRICS_RECOMMENDATION.
  * @author DBFlute(AutoGenerator)
  */
-public class BsSongCQ extends AbstractBsSongCQ {
+public class BsLyricsRecommendationCQ extends AbstractBsLyricsRecommendationCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected SongCIQ _inlineQuery;
+    protected LyricsRecommendationCIQ _inlineQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsSongCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public BsLyricsRecommendationCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -35,137 +35,123 @@ public class BsSongCQ extends AbstractBsSongCQ {
     //                                                                 ===================
     /**
      * Prepare InlineView query. <br>
-     * {select ... from ... left outer join (select * from SONG) where FOO = [value] ...}
+     * {select ... from ... left outer join (select * from LYRICS_RECOMMENDATION) where FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">inline()</span>.setFoo...;
      * </pre>
      * @return The condition-query for InlineView query. (NotNull)
      */
-    public SongCIQ inline() {
+    public LyricsRecommendationCIQ inline() {
         if (_inlineQuery == null) { _inlineQuery = xcreateCIQ(); }
         _inlineQuery.xsetOnClause(false); return _inlineQuery;
     }
 
-    protected SongCIQ xcreateCIQ() {
-        SongCIQ ciq = xnewCIQ();
+    protected LyricsRecommendationCIQ xcreateCIQ() {
+        LyricsRecommendationCIQ ciq = xnewCIQ();
         ciq.xsetBaseCB(_baseCB);
         return ciq;
     }
 
-    protected SongCIQ xnewCIQ() {
-        return new SongCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
+    protected LyricsRecommendationCIQ xnewCIQ() {
+        return new LyricsRecommendationCIQ(xgetReferrerQuery(), xgetSqlClause(), xgetAliasName(), xgetNestLevel(), this);
     }
 
     /**
      * Prepare OnClause query. <br>
-     * {select ... from ... left outer join SONG on ... and FOO = [value] ...}
+     * {select ... from ... left outer join LYRICS_RECOMMENDATION on ... and FOO = [value] ...}
      * <pre>
      * cb.query().queryMemberStatus().<span style="color: #CC4747">on()</span>.setFoo...;
      * </pre>
      * @return The condition-query for OnClause query. (NotNull)
      * @throws IllegalConditionBeanOperationException When this condition-query is base query.
      */
-    public SongCIQ on() {
+    public LyricsRecommendationCIQ on() {
         if (isBaseQuery()) { throw new IllegalConditionBeanOperationException("OnClause for local table is unavailable!"); }
-        SongCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
+        LyricsRecommendationCIQ inlineQuery = inline(); inlineQuery.xsetOnClause(true); return inlineQuery;
     }
 
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
+    protected ConditionValue _id;
+    public ConditionValue xdfgetId()
+    { if (_id == null) { _id = nCV(); }
+      return _id; }
+    protected ConditionValue xgetCValueId() { return xdfgetId(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsLyricsRecommendationCQ addOrderBy_Id_Asc() { regOBA("ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * ID: {PK, ID, NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsLyricsRecommendationCQ addOrderBy_Id_Desc() { regOBD("ID"); return this; }
+
+    protected ConditionValue _userId;
+    public ConditionValue xdfgetUserId()
+    { if (_userId == null) { _userId = nCV(); }
+      return _userId; }
+    protected ConditionValue xgetCValueUserId() { return xdfgetUserId(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * @return this. (NotNull)
+     */
+    public BsLyricsRecommendationCQ addOrderBy_UserId_Asc() { regOBA("USER_ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * USER_ID: {IX, NotNull, INT(10), FK to USER}
+     * @return this. (NotNull)
+     */
+    public BsLyricsRecommendationCQ addOrderBy_UserId_Desc() { regOBD("USER_ID"); return this; }
+
     protected ConditionValue _songId;
     public ConditionValue xdfgetSongId()
     { if (_songId == null) { _songId = nCV(); }
       return _songId; }
     protected ConditionValue xgetCValueSongId() { return xdfgetSongId(); }
 
-    public Map<String, LyricsRecommendationCQ> xdfgetSongId_ExistsReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_ExistsReferrer_LyricsRecommendationList"); }
-    public String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_ExistsReferrer_LyricsRecommendationList", sq); }
-
-    public Map<String, LyricsRecommendationCQ> xdfgetSongId_NotExistsReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_NotExistsReferrer_LyricsRecommendationList"); }
-    public String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_NotExistsReferrer_LyricsRecommendationList", sq); }
-
-    public Map<String, LyricsRecommendationCQ> xdfgetSongId_SpecifyDerivedReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_SpecifyDerivedReferrer_LyricsRecommendationList"); }
-    public String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_SpecifyDerivedReferrer_LyricsRecommendationList", sq); }
-
-    public Map<String, LyricsRecommendationCQ> xdfgetSongId_QueryDerivedReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_QueryDerivedReferrer_LyricsRecommendationList"); }
-    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_QueryDerivedReferrer_LyricsRecommendationList", sq); }
-    public Map<String, Object> xdfgetSongId_QueryDerivedReferrer_LyricsRecommendationListParameter() { return xgetSQuePmMap("songId_QueryDerivedReferrer_LyricsRecommendationList"); }
-    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object pm) { return xkeepSQuePm("songId_QueryDerivedReferrer_LyricsRecommendationList", pm); }
-
     /**
      * Add order-by as ascend. <br>
-     * SONG_ID: {PK, ID, NotNull, INT(10)}
+     * SONG_ID: {IX, NotNull, INT(10), FK to SONG}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_SongId_Asc() { regOBA("SONG_ID"); return this; }
+    public BsLyricsRecommendationCQ addOrderBy_SongId_Asc() { regOBA("SONG_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * SONG_ID: {PK, ID, NotNull, INT(10)}
+     * SONG_ID: {IX, NotNull, INT(10), FK to SONG}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_SongId_Desc() { regOBD("SONG_ID"); return this; }
+    public BsLyricsRecommendationCQ addOrderBy_SongId_Desc() { regOBD("SONG_ID"); return this; }
 
-    protected ConditionValue _albumId;
-    public ConditionValue xdfgetAlbumId()
-    { if (_albumId == null) { _albumId = nCV(); }
-      return _albumId; }
-    protected ConditionValue xgetCValueAlbumId() { return xdfgetAlbumId(); }
+    protected ConditionValue _lyrics;
+    public ConditionValue xdfgetLyrics()
+    { if (_lyrics == null) { _lyrics = nCV(); }
+      return _lyrics; }
+    protected ConditionValue xgetCValueLyrics() { return xdfgetLyrics(); }
 
     /**
      * Add order-by as ascend. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * LYRICS: {NotNull, TEXT(65535)}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_AlbumId_Asc() { regOBA("ALBUM_ID"); return this; }
+    public BsLyricsRecommendationCQ addOrderBy_Lyrics_Asc() { regOBA("LYRICS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * ALBUM_ID: {IX, NotNull, INT(10), FK to ALBUM}
+     * LYRICS: {NotNull, TEXT(65535)}
      * @return this. (NotNull)
      */
-    public BsSongCQ addOrderBy_AlbumId_Desc() { regOBD("ALBUM_ID"); return this; }
-
-    protected ConditionValue _songTitle;
-    public ConditionValue xdfgetSongTitle()
-    { if (_songTitle == null) { _songTitle = nCV(); }
-      return _songTitle; }
-    protected ConditionValue xgetCValueSongTitle() { return xdfgetSongTitle(); }
-
-    /**
-     * Add order-by as ascend. <br>
-     * SONG_TITLE: {NotNull, VARCHAR(200)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_SongTitle_Asc() { regOBA("SONG_TITLE"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * SONG_TITLE: {NotNull, VARCHAR(200)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_SongTitle_Desc() { regOBD("SONG_TITLE"); return this; }
-
-    protected ConditionValue _songLyrics;
-    public ConditionValue xdfgetSongLyrics()
-    { if (_songLyrics == null) { _songLyrics = nCV(); }
-      return _songLyrics; }
-    protected ConditionValue xgetCValueSongLyrics() { return xdfgetSongLyrics(); }
-
-    /**
-     * Add order-by as ascend. <br>
-     * SONG_LYRICS: {TEXT(65535)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_SongLyrics_Asc() { regOBA("SONG_LYRICS"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * SONG_LYRICS: {TEXT(65535)}
-     * @return this. (NotNull)
-     */
-    public BsSongCQ addOrderBy_SongLyrics_Desc() { regOBD("SONG_LYRICS"); return this; }
+    public BsLyricsRecommendationCQ addOrderBy_Lyrics_Desc() { regOBD("LYRICS"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -184,7 +170,7 @@ public class BsSongCQ extends AbstractBsSongCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsSongCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
+    public BsLyricsRecommendationCQ addSpecifiedDerivedOrderBy_Asc(String aliasName) { registerSpecifiedDerivedOrderBy_Asc(aliasName); return this; }
 
     /**
      * Add order-by for specified derived column as descend.
@@ -200,16 +186,19 @@ public class BsSongCQ extends AbstractBsSongCQ {
      * @param aliasName The alias name specified at (Specify)DerivedReferrer. (NotNull)
      * @return this. (NotNull)
      */
-    public BsSongCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
+    public BsLyricsRecommendationCQ addSpecifiedDerivedOrderBy_Desc(String aliasName) { registerSpecifiedDerivedOrderBy_Desc(aliasName); return this; }
 
     // ===================================================================================
     //                                                                         Union Query
     //                                                                         ===========
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
-        SongCQ bq = (SongCQ)bqs;
-        SongCQ uq = (SongCQ)uqs;
-        if (bq.hasConditionQueryAlbum()) {
-            uq.queryAlbum().reflectRelationOnUnionQuery(bq.queryAlbum(), uq.queryAlbum());
+        LyricsRecommendationCQ bq = (LyricsRecommendationCQ)bqs;
+        LyricsRecommendationCQ uq = (LyricsRecommendationCQ)uqs;
+        if (bq.hasConditionQuerySong()) {
+            uq.querySong().reflectRelationOnUnionQuery(bq.querySong(), uq.querySong());
+        }
+        if (bq.hasConditionQueryUser()) {
+            uq.queryUser().reflectRelationOnUnionQuery(bq.queryUser(), uq.queryUser());
         }
     }
 
@@ -218,23 +207,43 @@ public class BsSongCQ extends AbstractBsSongCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br>
-     * ALBUM by my ALBUM_ID, named 'album'.
+     * SONG by my SONG_ID, named 'song'.
      * @return The instance of condition-query. (NotNull)
      */
-    public AlbumCQ queryAlbum() {
-        return xdfgetConditionQueryAlbum();
+    public SongCQ querySong() {
+        return xdfgetConditionQuerySong();
     }
-    public AlbumCQ xdfgetConditionQueryAlbum() {
-        String prop = "album";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryAlbum()); xsetupOuterJoinAlbum(); }
+    public SongCQ xdfgetConditionQuerySong() {
+        String prop = "song";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQuerySong()); xsetupOuterJoinSong(); }
         return xgetQueRlMap(prop);
     }
-    protected AlbumCQ xcreateQueryAlbum() {
-        String nrp = xresolveNRP("SONG", "album"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new AlbumCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "album", nrp);
+    protected SongCQ xcreateQuerySong() {
+        String nrp = xresolveNRP("LYRICS_RECOMMENDATION", "song"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new SongCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "song", nrp);
     }
-    protected void xsetupOuterJoinAlbum() { xregOutJo("album"); }
-    public boolean hasConditionQueryAlbum() { return xhasQueRlMap("album"); }
+    protected void xsetupOuterJoinSong() { xregOutJo("song"); }
+    public boolean hasConditionQuerySong() { return xhasQueRlMap("song"); }
+
+    /**
+     * Get the condition-query for relation table. <br>
+     * USER by my USER_ID, named 'user'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public UserCQ queryUser() {
+        return xdfgetConditionQueryUser();
+    }
+    public UserCQ xdfgetConditionQueryUser() {
+        String prop = "user";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryUser()); xsetupOuterJoinUser(); }
+        return xgetQueRlMap(prop);
+    }
+    protected UserCQ xcreateQueryUser() {
+        String nrp = xresolveNRP("LYRICS_RECOMMENDATION", "user"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new UserCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "user", nrp);
+    }
+    protected void xsetupOuterJoinUser() { xregOutJo("user"); }
+    public boolean hasConditionQueryUser() { return xhasQueRlMap("user"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;
@@ -243,39 +252,39 @@ public class BsSongCQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============
-    public Map<String, SongCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
-    public String keepScalarCondition(SongCQ sq) { return xkeepSQue("scalarCondition", sq); }
+    public Map<String, LyricsRecommendationCQ> xdfgetScalarCondition() { return xgetSQueMap("scalarCondition"); }
+    public String keepScalarCondition(LyricsRecommendationCQ sq) { return xkeepSQue("scalarCondition", sq); }
 
     // ===================================================================================
     //                                                                       MyselfDerived
     //                                                                       =============
-    public Map<String, SongCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
-    public String keepSpecifyMyselfDerived(SongCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
+    public Map<String, LyricsRecommendationCQ> xdfgetSpecifyMyselfDerived() { return xgetSQueMap("specifyMyselfDerived"); }
+    public String keepSpecifyMyselfDerived(LyricsRecommendationCQ sq) { return xkeepSQue("specifyMyselfDerived", sq); }
 
-    public Map<String, SongCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
-    public String keepQueryMyselfDerived(SongCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
+    public Map<String, LyricsRecommendationCQ> xdfgetQueryMyselfDerived() { return xgetSQueMap("queryMyselfDerived"); }
+    public String keepQueryMyselfDerived(LyricsRecommendationCQ sq) { return xkeepSQue("queryMyselfDerived", sq); }
     public Map<String, Object> xdfgetQueryMyselfDerivedParameter() { return xgetSQuePmMap("queryMyselfDerived"); }
     public String keepQueryMyselfDerivedParameter(Object pm) { return xkeepSQuePm("queryMyselfDerived", pm); }
 
     // ===================================================================================
     //                                                                        MyselfExists
     //                                                                        ============
-    protected Map<String, SongCQ> _myselfExistsMap;
-    public Map<String, SongCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
-    public String keepMyselfExists(SongCQ sq) { return xkeepSQue("myselfExists", sq); }
+    protected Map<String, LyricsRecommendationCQ> _myselfExistsMap;
+    public Map<String, LyricsRecommendationCQ> xdfgetMyselfExists() { return xgetSQueMap("myselfExists"); }
+    public String keepMyselfExists(LyricsRecommendationCQ sq) { return xkeepSQue("myselfExists", sq); }
 
     // ===================================================================================
     //                                                                       MyselfInScope
     //                                                                       =============
-    public Map<String, SongCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
-    public String keepMyselfInScope(SongCQ sq) { return xkeepSQue("myselfInScope", sq); }
+    public Map<String, LyricsRecommendationCQ> xdfgetMyselfInScope() { return xgetSQueMap("myselfInScope"); }
+    public String keepMyselfInScope(LyricsRecommendationCQ sq) { return xkeepSQue("myselfInScope", sq); }
 
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xCB() { return SongCB.class.getName(); }
-    protected String xCQ() { return SongCQ.class.getName(); }
+    protected String xCB() { return LyricsRecommendationCB.class.getName(); }
+    protected String xCQ() { return LyricsRecommendationCQ.class.getName(); }
     protected String xCHp() { return HpQDRFunction.class.getName(); }
     protected String xCOp() { return ConditionOption.class.getName(); }
     protected String xMap() { return Map.class.getName(); }

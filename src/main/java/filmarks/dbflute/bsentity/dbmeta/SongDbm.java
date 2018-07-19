@@ -79,7 +79,7 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnSongId = cci("SONG_ID", "SONG_ID", null, null, Integer.class, "songId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSongId = cci("SONG_ID", "SONG_ID", null, null, Integer.class, "songId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "lyricsRecommendationList", null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnSongTitle = cci("SONG_TITLE", "SONG_TITLE", null, null, String.class, "songTitle", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnSongLyrics = cci("SONG_LYRICS", "SONG_LYRICS", null, null, String.class, "songLyrics", null, false, false, false, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
@@ -146,6 +146,14 @@ public class SongDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerLyricsRecommendationList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSongId(), LyricsRecommendationDbm.getInstance().columnSongId());
+        return cri("FK_LYRICS_RECOMMENDATION_SONG", "lyricsRecommendationList", this, LyricsRecommendationDbm.getInstance(), mp, false, "song");
+    }
 
     // ===================================================================================
     //                                                                        Various Info

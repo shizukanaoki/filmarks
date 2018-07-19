@@ -496,12 +496,12 @@
 			<physical_name>SONG</physical_name>
 			<logical_name>NEW_TABLE</logical_name>
 			<description></description>
-			<height>84</height>
+			<height>102</height>
 			<width>166</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>45</x>
-			<y>166</y>
+			<x>43</x>
+			<y>150</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -546,6 +546,10 @@
 					<type>varchar(n)</type>
 					<length>200</length>
 					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>SONG_LYRICS</physical_name>
+					<type>text</type>
 				</normal_column>
 			</columns>
 			<indexes>
@@ -690,6 +694,89 @@
 						</column>
 					</columns>
 				</compound_unique_key>
+			</compound_unique_key_list>
+			<table_properties>
+			</table_properties>
+		</table>
+		<table>
+			<physical_name>lyrics_recommendation</physical_name>
+			<logical_name>NEW_TABLE</logical_name>
+			<description></description>
+			<height>75</height>
+			<width>120</width>
+			<font_name>.AppleSystemUIFont</font_name>
+			<font_size>9</font_size>
+			<x>78</x>
+			<y>349</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+				<relationship>
+					<name>FK_lyrics_recommendation_SONG</name>
+					<source>table.SONG</source>
+					<target>table.lyrics_recommendation</target>
+					<fk_columns>
+						<fk_column>
+							<fk_column_name>SONG_ID</fk_column_name>
+						</fk_column>
+					</fk_columns>
+					<parent_cardinality>1</parent_cardinality>
+					<child_cardinality>0..n</child_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+				</relationship>
+				<relationship>
+					<name>FK_lyrics_recommendation_USER</name>
+					<source>table.USER</source>
+					<target>table.lyrics_recommendation</target>
+					<fk_columns>
+						<fk_column>
+							<fk_column_name>USER_ID</fk_column_name>
+						</fk_column>
+					</fk_columns>
+					<parent_cardinality>1</parent_cardinality>
+					<child_cardinality>0..n</child_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+				</relationship>
+			</connections>
+			<columns>
+				<normal_column>
+					<physical_name>ID</physical_name>
+					<logical_name>ID</logical_name>
+					<type>integer</type>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<auto_increment>true</auto_increment>
+				</normal_column>
+				<normal_column>
+					<physical_name>USER_ID</physical_name>
+					<logical_name>ユーザーID</logical_name>
+					<referred_column>table.USER.USER_ID</referred_column>
+					<relationship>FK_lyrics_recommendation_USER</relationship>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>SONG_ID</physical_name>
+					<referred_column>table.SONG.SONG_ID</referred_column>
+					<relationship>FK_lyrics_recommendation_SONG</relationship>
+					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>LYRICS</physical_name>
+					<logical_name>歌詞</logical_name>
+					<type>text</type>
+					<not_null>true</not_null>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<compound_unique_key_list>
 			</compound_unique_key_list>
 			<table_properties>
 			</table_properties>
