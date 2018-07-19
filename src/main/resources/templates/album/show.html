@@ -57,34 +57,11 @@
                 </div>
                 <p class="album_info_rate">RATE: 5.4</p>
                 <table class="album_info_songs">
-                    <tr>
-                        <td>1.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
-                        <td>02:13</td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
-                        <td>02:13</td>
-                    </tr>
-                    <tr>
-                        <td>3.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
-                        <td>02:13</td>
-                    </tr>
-                    <tr>
-                        <td>4.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
-                        <td>02:13</td>
-                    </tr>
-                    <tr>
-                        <td>5.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
-                        <td>02:13</td>
-                    </tr>
-                    <tr>
-                        <td>6.</td>
-                        <td>It Won't Be Long [Remastered 2009]</td>
+                    <tr th:each="song, stat : ${album.getSongList()}">
+                        <td th:text="${stat.count + '.'}"></td>
+                        <td>
+                            <a th:text="${song.getSongTitle()}" th:href="${'/songs/' + song.getSongId()}"></a>
+                        </td>
                         <td>02:13</td>
                     </tr>
                 </table>

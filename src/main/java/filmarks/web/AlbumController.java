@@ -42,8 +42,6 @@ public class AlbumController {
         return mav;
     }
 
-
-
     @RequestMapping("/albums/{albumId}")
     @ResponseBody
     public ModelAndView show(@ModelAttribute("commentForm") CommentForm commentForm, @PathVariable int albumId, ModelAndView mav, Principal principal) {
@@ -53,6 +51,7 @@ public class AlbumController {
         OptionalEntity<Album> albumOptionalEntity = albumBhv.selectByPK(albumId);
         albumOptionalEntity.alwaysPresent(album -> {
             albumBhv.loadComment(album, CommentCB::setupSelect_User);
+            albumBhv.loadSong(album, refCB -> refCB.query().addOrderBy_SongId_Asc());
             OptionalEntity<Favorite> favoriteOptionalEntity = favoriteBhv.selectEntity(favoriteCB -> {
                 favoriteCB.query().setUserId_Equal(user.getUserId());
                 favoriteCB.query().setAlbumId_Equal(album.getAlbumId());
