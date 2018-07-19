@@ -483,7 +483,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
-		<td class="namecell" data-name="SONG"><a href="#song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=3">SONG</a></td>
+		<td class="namecell" data-name="SONG"><a href="#song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=4">SONG</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#album" title="FK_SONG_PRODUCT">ALBUM</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -1047,7 +1047,7 @@ POST
 	</tbody>
 </table>
 
-<h2 id="song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=3">
+<h2 id="song" title="type=TABLE, primaryKey={SONG_ID}, nameLength=4, columnCount=4">
 SONG
 &nbsp;<span class="tablefirstdatetitle">since 2018/07/03</span>
 </h2>
@@ -1128,6 +1128,24 @@ SONG
 		<td class="subcell">songTitle</td>
 		<td class="subcell">String</td>
 		<td class="subcell">2018/07/12</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class=" columnnamecell" id="song_song_lyrics">SONG_LYRICS</td>
+		<td class="typecell">TEXT</td>
+		<td class="sizecell"> 65535 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>&nbsp;</pre></td>
+		<td class="subcell">songLyrics</td>
+		<td class="subcell">String</td>
+		<td class="subcell">2018/07/19</td>
 	</tr>
 	</tbody>
 </table>
@@ -1925,6 +1943,9 @@ function StoreClient() {
 				}
 				, 'SONG_TITLE': {
 					'databaseComment': '??'
+				}
+				, 'SONG_LYRICS': {
+					'databaseComment': ''
 				}
 			}
 		}

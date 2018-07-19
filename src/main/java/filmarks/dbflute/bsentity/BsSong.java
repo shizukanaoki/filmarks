@@ -19,7 +19,7 @@ import filmarks.dbflute.exentity.*;
  *     SONG_ID
  *
  * [column]
- *     SONG_ID, ALBUM_ID, SONG_TITLE
+ *     SONG_ID, ALBUM_ID, SONG_TITLE, SONG_LYRICS
  *
  * [sequence]
  *     
@@ -47,9 +47,11 @@ import filmarks.dbflute.exentity.*;
  * Integer songId = entity.getSongId();
  * Integer albumId = entity.getAlbumId();
  * String songTitle = entity.getSongTitle();
+ * String songLyrics = entity.getSongLyrics();
  * entity.setSongId(songId);
  * entity.setAlbumId(albumId);
  * entity.setSongTitle(songTitle);
+ * entity.setSongLyrics(songLyrics);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -73,6 +75,9 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
 
     /** SONG_TITLE: {NotNull, VARCHAR(200)} */
     protected String _songTitle;
+
+    /** SONG_LYRICS: {TEXT(65535)} */
+    protected String _songLyrics;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -166,6 +171,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_songId));
         sb.append(dm).append(xfND(_albumId));
         sb.append(dm).append(xfND(_songTitle));
+        sb.append(dm).append(xfND(_songLyrics));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -250,5 +256,23 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     public void setSongTitle(String songTitle) {
         registerModifiedProperty("songTitle");
         _songTitle = songTitle;
+    }
+
+    /**
+     * [get] SONG_LYRICS: {TEXT(65535)} <br>
+     * @return The value of the column 'SONG_LYRICS'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getSongLyrics() {
+        checkSpecifiedProperty("songLyrics");
+        return _songLyrics;
+    }
+
+    /**
+     * [set] SONG_LYRICS: {TEXT(65535)} <br>
+     * @param songLyrics The value of the column 'SONG_LYRICS'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setSongLyrics(String songLyrics) {
+        registerModifiedProperty("songLyrics");
+        _songLyrics = songLyrics;
     }
 }

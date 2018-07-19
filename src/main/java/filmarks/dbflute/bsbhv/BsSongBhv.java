@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     SONG_ID
  *
  * [column]
- *     SONG_ID, ALBUM_ID, SONG_TITLE
+ *     SONG_ID, ALBUM_ID, SONG_TITLE, SONG_LYRICS
  *
  * [sequence]
  *     

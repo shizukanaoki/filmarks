@@ -329,6 +329,11 @@ public class BsSongCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSongTitle() { return doColumn("SONG_TITLE"); }
+        /**
+         * SONG_LYRICS: {TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnSongLyrics() { return doColumn("SONG_LYRICS"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

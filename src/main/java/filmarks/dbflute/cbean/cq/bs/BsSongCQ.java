@@ -133,6 +133,26 @@ public class BsSongCQ extends AbstractBsSongCQ {
      */
     public BsSongCQ addOrderBy_SongTitle_Desc() { regOBD("SONG_TITLE"); return this; }
 
+    protected ConditionValue _songLyrics;
+    public ConditionValue xdfgetSongLyrics()
+    { if (_songLyrics == null) { _songLyrics = nCV(); }
+      return _songLyrics; }
+    protected ConditionValue xgetCValueSongLyrics() { return xdfgetSongLyrics(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongLyrics_Asc() { regOBA("SONG_LYRICS"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongLyrics_Desc() { regOBD("SONG_LYRICS"); return this; }
+
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

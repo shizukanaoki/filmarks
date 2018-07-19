@@ -1,4 +1,21 @@
 map:{
+    ; 2018/07/19 15:44:30 = map:{
+        ; diffDate = 2018/07/19 15:44:30
+        ; diffAuthor = naoki.shizuka
+        ; diffGitBranch = add_recommend_lyrics_function
+        ; tableDiff = map:{
+            ; SONG = map:{
+                ; tableName = SONG
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SONG_LYRICS = map:{
+                        ; columnName = SONG_LYRICS
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2018/07/13 11:06:20 = map:{
         ; diffDate = 2018/07/13 11:06:20
         ; diffAuthor = naoki.shizuka

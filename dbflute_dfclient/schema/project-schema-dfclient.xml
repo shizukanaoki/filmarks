@@ -127,6 +127,8 @@
             name="ALBUM_ID" required="true" size="10" type="INTEGER"/>
         <column comment="??" dbType="VARCHAR" javaType="String"
             name="SONG_TITLE" required="true" size="200" type="VARCHAR"/>
+        <column comment="" dbType="TEXT" javaType="String"
+            name="SONG_LYRICS" size="65535" type="LONGVARCHAR"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ALBUM" name="FK_SONG_PRODUCT">
             <reference foreign="ALBUM_ID" local="ALBUM_ID"/>
