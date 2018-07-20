@@ -5,6 +5,8 @@ import filmarks.domain.LyricsRecommendationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LyricsRecommendationService {
 
@@ -12,8 +14,11 @@ public class LyricsRecommendationService {
     LyricsRecommendationRepository lyricsRecommendationRepository;
 
     public LyricsRecommendation create(LyricsRecommendation lyricsRecommendation) {
-
         lyricsRecommendationRepository.save(lyricsRecommendation);
         return lyricsRecommendation;
+    }
+
+    public List<LyricsRecommendation> findAll() {
+        return lyricsRecommendationRepository.findAll();
     }
 }
