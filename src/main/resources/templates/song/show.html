@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/album.css">
+    <link rel="stylesheet" type="text/css" href="/css/song.css">
 </head>
 <body>
 <div class="wrapper">
@@ -24,8 +24,19 @@
 
     </div>
     <div class="main">
-        <h1 th:text="${song.getSongTitle()}"></h1>
-        <div>
+        <div class="song_info">
+            <div class="song_info_left">
+                <img th:src="'/image/album/' + ${song.getAlbum().get().getImageFileName()}" width="200" height="200">
+            </div>
+            <div class="song_info_right">
+                <div class="song_info_header">
+                    <div class="song_title" th:text="${song.getSongTitle()}"></div>
+                    <div class="song_album_title" th:text="${song.getAlbum().get().getArtist().get().getArtistName()}">name</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="song_lyrics">
             <th:block th:if="${song.getSongLyrics()}">
                 <th:block th:each="str, stat : ${song.getSongLyrics().split('\r\n|\r|\n', -1)}">
                     <th:block th:text="${str}"/>
@@ -33,11 +44,29 @@
                 </th:block>
             </th:block>
         </div>
-        <form th:action="@{'/songs/' + ${song.getSongId()} + '/lyricsRecommendation' }" th:object="${form}" th:method="post">
-            <textarea th:field="*{lyrics}"></textarea>
-            <button th:type="submit">投稿</button>
-            <input type="hidden" th:field="*{songId}">
-        </form>
+        <div class="recommendataion_form">
+            <form th:action="@{'/songs/' + ${song.getSongId()} + '/lyricsRecommendation' }" th:object="${form}" th:method="post">
+                <div>
+                    <textarea class="form_lyrics" th:field="*{lyrics}"></textarea>
+                </div>
+                <div>
+                    <button class="form_submit" th:type="submit">投稿</button>
+                </div>
+                <input type="hidden" th:field="*{songId}">
+            </form>
+        </div>
+        <h2 class="recommendations_title">RECOMMENDATIONS</h2>
+        <div class="recommendations">
+            <div class="recommendation" th:each="recommendation : ${song.getLyricsRecommendationList()}">
+                <div class="user_name" th:text="${recommendation.getUser().get().getUsername()}"></div>
+                <div class="recommendation_content">
+                    <th:block th:each="str, stat : ${recommendation.getLyrics().split('\r\n|\r|\n', -1)}">
+                        <th:block th:text="${str}"/>
+                        <br th:if="${!stat.last}"/>
+                    </th:block>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

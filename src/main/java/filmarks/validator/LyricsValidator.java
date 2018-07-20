@@ -22,10 +22,10 @@ public class LyricsValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         LyricsRecommendationForm form = (LyricsRecommendationForm) target;
-        String lyrics = form.getLyrics();
+        String lyrics = form.getLyrics().replaceAll("\\r\\n|\\r|\\n", "");
         Song song = songService.findOne(form.getSongId());
 
-        if (!song.getSongLyrics().contains(lyrics)) {
+        if (!song.getSongLyrics().replaceAll("\\r\\n|\\r|\\n", " ").contains(lyrics)) {
             errors.rejectValue("lyrics", "LyricsValidator.LyricsRecommendationForm.lyrics", "入力した値は歌詞に含まれていません");
         }
     }

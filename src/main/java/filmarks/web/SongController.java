@@ -19,8 +19,14 @@ public class SongController {
 
     @RequestMapping("/songs/{songId}")
     public ModelAndView show(@ModelAttribute("form") LyricsRecommendationForm form, @PathVariable int songId, ModelAndView mav) {
-        OptionalEntity<Song> songOptionalEntity = songBhv.selectByPK(songId);
+        OptionalEntity<Song> songOptionalEntity = songBhv.selectEntity(songCB -> {
+            songCB.query().setSongId_Equal(songId);
+            songCB.setupSelect_Album().withArtist();
+        });
         songOptionalEntity.alwaysPresent(song -> {
+            songBhv.loadLyricsRecommendation(song, cb -> {
+                cb.setupSelect_User();
+            });
             mav.addObject("song", song);
         });
         mav.setViewName("song/show");
