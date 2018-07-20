@@ -26,6 +26,11 @@
     <div class="main">
         <h1 th:text="${song.getSongTitle()}"></h1>
         <div th:text="${song.getSongLyrics()}"></div>
+        <form th:action="@{'/songs/' + ${song.getSongId()} + '/lyricsRecommendation' }" th:object="${form}" th:method="post">
+            <textarea th:field="*{lyrics}"></textarea>
+            <button th:type="submit">投稿</button>
+            <input type="hidden" th:field="*{songId}">
+        </form>
     </div>
 </div>
 </body>
