@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
+ * タイムライン関係のページのコントローラ
+ *
  * @author naoki.shizuka
  */
 @Controller

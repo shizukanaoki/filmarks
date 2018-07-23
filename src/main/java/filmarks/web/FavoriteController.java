@@ -17,9 +17,10 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 
 /**
+ * お気に入り関係のページのコントローラ
+ *
  * @author naoki.shizuka
  */
-
 @Controller
 public class FavoriteController {
 

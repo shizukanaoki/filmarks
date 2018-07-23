@@ -20,6 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * ユーザー関係のページのコントローラ
+ *
+ * @author naoki.shizuka
+ */
 @Controller
 public class UserController {
 

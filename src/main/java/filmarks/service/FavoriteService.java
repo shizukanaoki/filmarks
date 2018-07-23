@@ -7,6 +7,11 @@ import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Favoriteに関係する操作を担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Service
 public class FavoriteService {
 

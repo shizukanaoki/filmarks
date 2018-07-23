@@ -5,6 +5,11 @@ import filmarks.domain.UserFollowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * UserFollowingに関係する操作を担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Service
 public class UserFollowingService {
 

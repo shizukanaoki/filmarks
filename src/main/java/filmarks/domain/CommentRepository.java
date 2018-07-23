@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * CommentのCRUDを担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Repository
 public class CommentRepository {
 

@@ -5,6 +5,11 @@ import filmarks.dbflute.exentity.UserFollowing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * UserFollowingのCRUDを担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Repository
 public class UserFollowingRepository {
 

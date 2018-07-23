@@ -21,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 
+/**
+ * コメント関係のページのコントローラ
+ *
+ * @author naoki.shizuka
+ */
 @Controller
 public class CommentController {
 

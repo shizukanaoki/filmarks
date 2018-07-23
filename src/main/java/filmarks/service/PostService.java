@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Postに関係する操作を担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Service
 public class PostService {
 
