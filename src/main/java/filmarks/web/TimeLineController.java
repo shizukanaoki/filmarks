@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class TimeLineController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/timeline")
+    @RequestMapping(value = "/timeline", method = RequestMethod.GET)
     public ModelAndView show(@AuthenticationPrincipal User user, ModelAndView mav) {
         List<Post> posts = postService.findPostListByUserId(user.getUserId());
         mav.addObject("posts", posts);

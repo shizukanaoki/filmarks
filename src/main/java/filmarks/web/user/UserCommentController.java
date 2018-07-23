@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -24,7 +25,7 @@ public class UserCommentController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/users/{userId}/comments")
+    @RequestMapping(value = "/users/{userId}/comments", method = RequestMethod.GET)
     public ModelAndView index(@AuthenticationPrincipal User loginUser, @PathVariable int userId, ModelAndView mav) {
         mav.addObject("loginUser", loginUser);
         userBhv.loadUserFollowingByFollowingId(loginUser, cb -> {});

@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping("albums/{albumId}/comments")
+    @RequestMapping(value = "albums/{albumId}/comments", method = RequestMethod.POST)
     public ModelAndView create(@ModelAttribute("commentForm") @Validated CommentForm commentForm, BindingResult result, @PathVariable int albumId, @AuthenticationPrincipal User user, ModelAndView mav) {
         ModelAndView res;
         if (!result.hasErrors()) {

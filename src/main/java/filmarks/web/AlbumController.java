@@ -13,10 +13,7 @@ import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -37,7 +34,7 @@ public class AlbumController {
     @Autowired
     private FavoriteBhv favoriteBhv;
 
-    @RequestMapping(value = {"/", "/albums"})
+    @RequestMapping(value = {"/", "/albums"}, method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView index(ModelAndView mav) {
         ListResultBean<Album> albums = albumBhv.selectList(cb -> cb.query().addOrderBy_AlbumId_Asc());
@@ -49,7 +46,7 @@ public class AlbumController {
 
 
 
-    @RequestMapping("/albums/{albumId}")
+    @RequestMapping(value = "/albums/{albumId}", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView show(@ModelAttribute("commentForm") CommentForm commentForm, @PathVariable int albumId, ModelAndView mav, Principal principal) {
         Authentication auth = (Authentication)principal;

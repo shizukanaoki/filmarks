@@ -34,7 +34,7 @@ public class UserController {
     @Autowired
     private UserBhv userBhv;
 
-    @RequestMapping("/users/{userId}")
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
     public ModelAndView show (@AuthenticationPrincipal User loginUser, @PathVariable int userId, ModelAndView mav) {
         mav.addObject("loginUser", loginUser);
         userBhv.loadUserFollowingByFollowingId(loginUser, cb -> {});
