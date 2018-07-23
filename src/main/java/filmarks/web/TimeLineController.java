@@ -20,7 +20,7 @@ import java.util.List;
 public class TimeLineController {
 
     @Autowired
-    PostService postService;
+    private PostService postService;
 
     @RequestMapping("/timeline")
     public ModelAndView show(@AuthenticationPrincipal User user, ModelAndView mav) {

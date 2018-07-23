@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 public class PostService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    PostBhv postBhv;
+    private PostBhv postBhv;
 
 
     public List<Post> findPostListByUserId(int userId) {

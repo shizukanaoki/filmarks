@@ -29,10 +29,10 @@ import java.util.stream.Collectors;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserBhv userBhv;
+    private UserBhv userBhv;
 
     @RequestMapping("/users/{userId}")
     public ModelAndView show (@AuthenticationPrincipal User loginUser, @PathVariable int userId, ModelAndView mav) {

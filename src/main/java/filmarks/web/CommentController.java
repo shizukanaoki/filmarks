@@ -30,13 +30,13 @@ import java.time.LocalDateTime;
 public class CommentController {
 
     @Autowired
-    AlbumBhv albumBhv;
+    private AlbumBhv albumBhv;
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    private FavoriteBhv favoriteBhv;
 
     @Autowired
-    CommentService commentService;
+    private CommentService commentService;
 
     @RequestMapping("albums/{albumId}/comments")
     public ModelAndView create(@ModelAttribute("commentForm") @Validated CommentForm commentForm, BindingResult result, @PathVariable int albumId, @AuthenticationPrincipal User user, ModelAndView mav) {

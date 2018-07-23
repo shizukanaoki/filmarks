@@ -25,10 +25,10 @@ import java.time.LocalDateTime;
 public class FavoriteController {
 
     @Autowired
-    FavoriteService favoriteService;
+    private FavoriteService favoriteService;
 
     @Autowired
-    UserBhv userBhv;
+    private UserBhv userBhv;
 
     @RequestMapping(value = "albums/{albumID}/favorites", method = RequestMethod.POST)
     public ModelAndView create(@PathVariable int albumID, Principal principal) {

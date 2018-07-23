@@ -29,13 +29,13 @@ import java.security.Principal;
 @Controller
 public class AlbumController {
     @Autowired
-    AlbumBhv albumBhv;
+    private AlbumBhv albumBhv;
 
     @Autowired
-    UserBhv userBhv;
+    private UserBhv userBhv;
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    private FavoriteBhv favoriteBhv;
 
     @RequestMapping(value = {"/", "/albums"})
     @ResponseBody

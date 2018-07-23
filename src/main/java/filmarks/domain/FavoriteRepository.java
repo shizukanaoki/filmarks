@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class FavoriteRepository {
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    private FavoriteBhv favoriteBhv;
 
     @Autowired
-    PostBhv postBhv;
+    private PostBhv postBhv;
 
     public OptionalEntity<Favorite> findByUserIdAndAlbumId(int userId, int albumId) {
         return favoriteBhv.selectEntity(cb -> {

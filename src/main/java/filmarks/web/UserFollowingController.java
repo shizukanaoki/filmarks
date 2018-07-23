@@ -22,10 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserFollowingController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserFollowingService userFollowingService;
+    private UserFollowingService userFollowingService;
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
     public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following) {

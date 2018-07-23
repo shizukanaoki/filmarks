@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Configuration
     protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
         @Autowired
-        UserService userService;
+        private UserService userService;
 
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
