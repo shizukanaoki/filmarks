@@ -23,6 +23,7 @@ public class LyricsRecommendationRepository {
         ListResultBean<LyricsRecommendation> lyricsRecommendations = lyricsRecommendationBhv.selectList(cb -> {
             cb.query().addOrderBy_Id_Desc();
             cb.setupSelect_User();
+            cb.setupSelect_Song().withAlbum().withArtist();
         });
         return lyricsRecommendations;
     }
