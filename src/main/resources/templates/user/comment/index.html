@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div>
@@ -54,7 +55,12 @@
                     </a>
                     <div class="comment_info">
                         <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
-                        <div class="comment_rate" th:text="'RATE: ' + ${comment.getRate()}"></div>
+                        <div class="comment_rate">
+                            <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                                <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
+                                <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
+                            </th:block>
+                        </div>
                         <div class="comment_content" th:text="${comment.getContent()}"></div>
                     </div>
                 </div>
