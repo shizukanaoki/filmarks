@@ -117,6 +117,7 @@ table.album_info_songs {
 
 .comment_rate {
     margin-top: 5px;
+    font-size: 12px;
 }
 
 .comment_datetime {
@@ -127,7 +128,7 @@ table.album_info_songs {
 
 .comment_content {
     word-wrap:break-word;
-    margin-top: 5px;
+    margin-top:10px;
 }
 
 .comment_form_content, .comment_form_rate {

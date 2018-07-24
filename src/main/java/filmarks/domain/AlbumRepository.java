@@ -24,6 +24,9 @@ public class AlbumRepository {
     public Album findOne(int albumId) {
         Album album = albumBhv.selectByPK(albumId).get();
         albumBhv.loadFavorite(album, cb -> {});
+        albumBhv.loadComment(album, cb -> {
+            cb.setupSelect_User();
+        });
         return album;
     }
 }

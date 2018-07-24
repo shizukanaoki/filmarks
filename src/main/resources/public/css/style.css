@@ -50,3 +50,7 @@ ul.sidebar {
 .sidebar .sidebar_active a {
     color: #fff;
 }
+
+.checked {
+    color: orange;
+}

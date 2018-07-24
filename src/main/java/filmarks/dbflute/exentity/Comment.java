@@ -3,6 +3,9 @@ package filmarks.dbflute.exentity;
 import filmarks.dbflute.bsentity.BsComment;
 import filmarks.domain.Postable;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * The entity of COMMENT.
  * <p>
@@ -24,5 +27,9 @@ public class Comment extends BsComment implements Postable {
     @Override
     public Album getRelatedAlbum() {
         return getAlbum().get();
+    }
+
+    public int getDisplayRate() {
+        return getRate().divide(new BigDecimal(2.0), 0, RoundingMode.HALF_UP).intValue();
     }
 }

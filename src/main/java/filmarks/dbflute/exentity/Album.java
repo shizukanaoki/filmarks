@@ -3,6 +3,7 @@ package filmarks.dbflute.exentity;
 import filmarks.dbflute.bsentity.BsAlbum;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -29,5 +30,9 @@ public class Album extends BsAlbum {
             sum = sum.add(commentList.get(i).getRate());
         }
         return sum.divide(BigDecimal.valueOf(commentList.size()), 2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    public int getDisplayRate() {
+        return getAvgRate().divide(new BigDecimal(2.0), 0, RoundingMode.HALF_UP).intValue();
     }
 }

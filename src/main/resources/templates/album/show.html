@@ -10,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/album.css">
     <link rel="stylesheet" type="text/css" href="/lib/modaal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/jquery-bar-rating/themes/fontawesome-stars.css">
     <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/lib/jquery-bar-rating/jquery.barrating.min.js"></script>
     <script src="/lib/modaal.js"></script>
 </head>
 <body>
@@ -60,7 +63,12 @@
                     <h2 class="album_info_title">With the Beatles</h2>
                     <p class="album_info_artist">beatles</p>
                 </div>
-                <p class="album_info_rate">RATE: 5.4</p>
+                <p class="album_info_rate">
+                    <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                        <span th:if="${seq <= album.getDisplayRate()}" class="fa fa-star checked"></span>
+                        <span th:unless="${seq <= album.getDisplayRate()}" class="fa fa-star"></span>
+                    </th:block>
+                </p>
                 <table class="album_info_songs">
                     <tr>
                         <td>1.</td>
@@ -129,7 +137,12 @@
                     <div class="comment_username">
                         <a th:text="${comment.getUser().get().getUsername()}" th:href="${'/users/' + comment.getUser().get().getUserId()}"></a>
                     </div>
-                    <div class="comment_rate" th:text="${'RATE: ' + comment.getRate()}"></div>
+                    <div class="comment_rate">
+                        <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                            <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
+                            <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
+                        </th:block>
+                    </div>
                     <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
                     <div class="comment_content" th:text="${comment.getContent()}"></div>
                 </li>
@@ -140,7 +153,13 @@
 <div id="modal_body" style="display:none;">
     <form method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}" class="comment_form">
         <textarea class="comment_form_content" th:field="*{content}" placeholder="コメント" maxlength="500" required></textarea>
-        <input class="comment_form_rate" th:field="*{rate}" type="number" placeholder="0〜10" min="0" max="10" step="1" required>
+        <select class="comment_form_rate">
+            <option value="2"></option>
+            <option value="4"></option>
+            <option value="6"></option>
+            <option value="8"></option>
+            <option value="10"></option>
+        </select>
         <div class="album_action_button">
             <button class="comment_form_submit_button" type="submit">投稿</button>
         </div>
@@ -156,6 +175,12 @@
             width: 500
         }
     );
+
+    $(function() {
+        $('.comment_form_rate').barrating({
+            theme: 'fontawesome-stars'
+        });
+    });
 </script>
 </body>
 </html>
