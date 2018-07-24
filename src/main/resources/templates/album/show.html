@@ -153,7 +153,7 @@
 <div id="modal_body" style="display:none;">
     <form method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}" class="comment_form">
         <textarea class="comment_form_content" th:field="*{content}" placeholder="コメント" maxlength="500" required></textarea>
-        <select class="comment_form_rate">
+        <select class="comment_form_rate" th:field="*{rate}" required>
             <option value="2"></option>
             <option value="4"></option>
             <option value="6"></option>
