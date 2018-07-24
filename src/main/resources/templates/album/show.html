@@ -144,7 +144,13 @@
                         </th:block>
                     </div>
                     <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
-                    <div class="comment_content" th:text="${comment.getContent()}"></div>
+                    <div class="comment_content">
+                        <th:block th:if="${comment.getContent()}">
+                            <th:block th:each="str, stat : ${comment.getContent().split('\r\n|\r|\n', -1)}">
+                                <th:block th:text="${str}"/>
+                                <br th:if="${!stat.last}"/>
+                            </th:block>
+                    </div>
                 </li>
             </ul>
         </div>
