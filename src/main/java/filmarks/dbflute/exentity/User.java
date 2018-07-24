@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The entity of USER.
@@ -45,12 +44,5 @@ public class User extends BsUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public boolean isFollowing(int followerId) {
-        return getUserFollowingByFollowingIdList().stream()
-                .map(UserFollowing::getFollowerId)
-                .collect(Collectors.toList())
-                .contains(followerId);
     }
 }

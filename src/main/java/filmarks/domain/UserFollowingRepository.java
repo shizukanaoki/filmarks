@@ -5,6 +5,8 @@ import filmarks.dbflute.exentity.UserFollowing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * UserFollowingのCRUDを担当するクラス
  *
@@ -30,5 +32,18 @@ public class UserFollowingRepository {
             cb.query().setFollowingId_Equal(followingId);
             cb.query().setFollowerId_Equal(followerId);
         }).get();
+    }
+
+    public List<UserFollowing> findByUserId(int userId) {
+        return userFollowingBhv.selectList(cb -> {
+            cb.query().setFollowingId_Equal(userId);
+        });
+    }
+
+    public boolean isFollowing(int followingId, int followerId) {
+        return userFollowingBhv.selectEntity(cb -> {
+            cb.query().setFollowingId_Equal(followingId);
+            cb.query().setFollowerId_Equal(followerId);
+        }).isPresent();
     }
 }

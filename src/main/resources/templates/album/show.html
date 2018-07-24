@@ -40,14 +40,14 @@
                         コメントを投稿
                     </button>
                 </div>
-                <div class="album_action_button" th:if="${favoriteOptionalEntity.orElse(false)}">
+                <div class="album_action_button" th:if="${isFollowing}">
                     <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="delete">
                         <button type="submit">
                             お気に入りから削除
                         </button>
                     </form>
                 </div>
-                <div class="album_action_button" th:unless="${favoriteOptionalEntity.orElse(false)}">
+                <div class="album_action_button" th:unless="${isFollowing}">
                     <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
                         <button type="submit">
                             お気に入りに追加
@@ -139,8 +139,8 @@
 </div>
 <div id="modal_body" style="display:none;">
     <form method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}" class="comment_form">
-        <textarea class="comment_form_content" th:field="*{content}"></textarea>
-        <input class="comment_form_rate" th:field="*{rate}" type="number">
+        <textarea class="comment_form_content" th:field="*{content}" placeholder="コメント" maxlength="500" required></textarea>
+        <input class="comment_form_rate" th:field="*{rate}" type="number" placeholder="0〜10" min="0" max="10" step="1" required>
         <div class="album_action_button">
             <button class="comment_form_submit_button" type="submit">投稿</button>
         </div>

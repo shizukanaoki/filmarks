@@ -31,6 +31,9 @@ public class UserRepository {
         userBhv.loadFavorite(user, cb -> {
             cb.setupSelect_Album();
         });
+        userBhv.loadComment(user, cb -> {
+            cb.setupSelect_Album();
+        });
         userBhv.loadUserFollowingByFollowingId(user, cb -> {
             cb.setupSelect_UserByFollowerId();
         });
@@ -44,5 +47,9 @@ public class UserRepository {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userBhv.insert(user);
         return user;
+    }
+
+    public void loadFollowing(User user) {
+        userBhv.loadUserFollowingByFollowingId(user, cb -> {});
     }
 }

@@ -1,7 +1,7 @@
 package filmarks.web.user;
 
-import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.User;
+import filmarks.service.UserFollowingService;
 import filmarks.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,20 +20,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserCommentController {
 
     @Autowired
-    private UserBhv userBhv;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    private UserFollowingService userFollowingService;
 
     @RequestMapping(value = "/users/{userId}/comments", method = RequestMethod.GET)
     public ModelAndView index(@AuthenticationPrincipal User loginUser, @PathVariable int userId, ModelAndView mav) {
         mav.addObject("loginUser", loginUser);
-        userBhv.loadUserFollowingByFollowingId(loginUser, cb -> {});
         User user = userService.findOne(userId);
-        userBhv.loadComment(user, cb -> {
-            cb.setupSelect_Album();
-        });
         mav.addObject("user", user);
+        boolean isFollowing = userFollowingService.isFollowing(loginUser.getUserId(), user.getUserId());
+        mav.addObject("isFollowing", isFollowing);
         mav.setViewName("/user/comment/index");
         return mav;
     }
