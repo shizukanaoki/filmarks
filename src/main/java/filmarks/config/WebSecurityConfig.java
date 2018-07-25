@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * SpringSecurityの設定用のクラス
+ *
+ * @author naoki.shizuka
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,28 +30,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            // TODO 全てのPOSTが許可されているので、特定のPOSTのみ許可する仕様に変更する必要がある
-            .csrf().disable()
-            .authorizeRequests()
-                .antMatchers("/", "/albums", "/signup")
+        http.authorizeRequests()
+                .antMatchers("/login", "/signup")
                 .permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
+                .anyRequest()
+                .authenticated();
+        http.formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll()
-                .and()
-            .logout()
-                .permitAll();
+                .defaultSuccessUrl("/");
     }
 
+    /**
+     * SpringSecurityの認証に関する設定を行うクラス
+     *
+     * @author naoki.shizuka
+     */
     @Configuration
     protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
         @Autowired
-        UserService userService;
+        private UserService userService;
 
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {

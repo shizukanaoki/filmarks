@@ -7,17 +7,22 @@
 }
 
 .post {
-    display: flex;
     height: 200px;
     max-width: 600px;
     min-width: 400px;
     margin: 40px;
+    display: flex;
 }
 
-.post_img {
+.post img {
     height: 200px;
     width: 200px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.post img:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .post_info {
@@ -25,10 +30,36 @@
     overflow: scroll;
 }
 
+.post_info_album_title {
+    margin-top: 20px;
+    font-size: 18px;
+    border-bottom: solid 2px orange;
+}
+
+.post_info_username {
+    font-size: 16px;
+}
+
+.post_info_username a {
+    text-decoration: none;
+    color: black;
+}
+
 .post_info_datetime {
-    margin-top: 10px;
+    color: #7e7e7e;
+    margin-top: 5px;
+    font-size: 10px;
 }
 
 .post_info_content {
-    margin-top: 10px;
+    word-wrap:break-word;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.post_info_description {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #7e7e7e;
 }

@@ -120,7 +120,7 @@
         .login-input {
             display: block;
             width: 100%;
-            font-size: 2rem;
+            font-size: 0.9rem;
             padding: 0.5rem 1rem;
             box-shadow: none;
             border-color: #ccc;
@@ -168,6 +168,18 @@
             border-left-color: orange;
         }
 
+        .to_login_page {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .to_login_page a {
+            color: #999;
+            text-decoration: none;
+        }
+
+
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -178,9 +190,11 @@
 
 <div class="login">
     <header class="login-header"><span class="text">SIGNUP</span><span class="loader"></span></header>
-    <form class="login-form" th:method="post" action="/signup" th:object="${formmodel}">
-        <input class="login-input" type="text" placeholder="Username" th:value="*{username}" th:name="username"/>
-        <input class="login-input" type="password" placeholder="Password" th:value="*{password}" th:name="password"/>
+    <form class="login-form" th:method="post" action="/signup" th:object="${userForm}">
+        <input class="login-input" type="text" placeholder="ユーザ名" th:value="*{username}" th:name="username" required>
+        <input class="login-input" type="password" placeholder="パスワード(英数字8文字以上)" th:value="*{password}" th:name="password" pattern="^[A-Za-z\d$@$!%*#?&]{8,55}$" required>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="to_login_page"><a href="/login">ログインはこちらから</a></div>
         <button class="login-btn" type="submit">login</button>
     </form>
 </div>

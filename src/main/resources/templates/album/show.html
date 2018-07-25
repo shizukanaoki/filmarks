@@ -2,11 +2,20 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/album.css">
-    <link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/lib/modaal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/jquery-bar-rating/themes/fontawesome-stars.css">
+    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/lib/jquery-bar-rating/jquery.barrating.min.js"></script>
+    <script src="/lib/modaal.js"></script>
+    <script src="/javascript/common.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -15,34 +24,40 @@
             <a href="">BLAND</a>
         </li>
         <li>
-            <a href="">timeline</a>
+            <a href="/">Recommendations</a>
         </li>
         <li>
-            <a href="">favorites</a>
+            <a href="/">Lyrics</a>
+        </li>
+        <li>
+            <a href="/timeline">Timeline</a>
+        </li>
+        <li>
+            <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
         </li>
     </ul>
     <div class="sidebar_width">
 
     </div>
     <div class="main">
-        <div class="album_info">
+        <div class="album">
             <div class="album_info_left">
                 <div class="album_info_img">
                     <img th:src="@{'/image/album/' + ${album.getImageFileName()}}" width="300" height="300"/>
                 </div>
                 <div class="album_action_button">
-                    <button type="button" data-toggle="modal" data-target="#comment_form">
+                    <button type="button" class="comment_button">
                         コメントを投稿
                     </button>
                 </div>
-                <div class="album_action_button" th:if="${favoriteOptionalEntity.orElse(false)}">
+                <div class="album_action_button" th:if="${isFollowing}">
                     <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="delete">
                         <button type="submit">
                             お気に入りから削除
                         </button>
                     </form>
                 </div>
-                <div class="album_action_button" th:unless="${favoriteOptionalEntity.orElse(false)}">
+                <div class="album_action_button" th:unless="${isFollowing}">
                     <form th:action="'/albums/' + ${album.getAlbumId()} + '/favorites'" th:method="post">
                         <button type="submit">
                             お気に入りに追加
@@ -52,10 +67,15 @@
             </div>
             <div class="album_info_right">
                 <div class="album_info_header">
-                    <h2 class="album_info_title">with the beatles</h2>
+                    <h2 class="album_info_title">With the Beatles</h2>
                     <p class="album_info_artist">beatles</p>
                 </div>
-                <p class="album_info_rate">RATE: 5.4</p>
+                <p class="album_info_rate">
+                    <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                        <span th:if="${seq <= album.getDisplayRate()}" class="fa fa-star checked"></span>
+                        <span th:unless="${seq <= album.getDisplayRate()}" class="fa fa-star"></span>
+                    </th:block>
+                </p>
                 <table class="album_info_songs">
                     <tr>
                         <td>1.</td>
@@ -87,54 +107,94 @@
                         <td>It Won't Be Long [Remastered 2009]</td>
                         <td>02:13</td>
                     </tr>
+                    <tr>
+                        <td>7.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>8.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>9.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>10.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>11.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
+                    <tr>
+                        <td>12.</td>
+                        <td>It Won't Be Long [Remastered 2009]</td>
+                        <td>02:13</td>
+                    </tr>
                 </table>
             </div>
-        </div>
-        <div class="comment_list">
-            <h2 class="comment_list_title">Comments</h2>
             <ul class="comments">
-                <li class="comment" th:each="comment:${album.getCommentList()}">
-                    <div class="comment_header">
-                        <a class="comment_username" th:href="@{'/users/' + ${comment.getUserId()}}" th:text="${comment.getUser().get().getUsername()}">
-                        </a>
-                        <span class="comment_rate" th:text="${comment.getRate()}"></span>
+                <li class="comment" th:each="comment : ${album.getCommentList()}">
+                    <div class="comment_username">
+                        <a th:text="${comment.getUser().get().getUsername()}" th:href="${'/users/' + comment.getUser().get().getUserId()}"></a>
                     </div>
-                    <div class="comment_datetime">2018/07/09 02:24</div>
-                    <div class="comment_content" th:text="${comment.getContent()}"></div>
+                    <div class="comment_rate">
+                        <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                            <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
+                            <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
+                        </th:block>
+                    </div>
+                    <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
+                    <div class="comment_content">
+                        <th:block th:if="${comment.getContent()}">
+                            <th:block th:each="str, stat : ${comment.getContent().split('\r\n|\r|\n', -1)}">
+                                <th:block th:text="${str}"/>
+                                <br th:if="${!stat.last}"/>
+                            </th:block>
+                        </th:block>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="modal fade" id="comment_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLongTitle">コメントを投稿</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="comment_form">
-                        <form class="form-horizontal" method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea th:field="*{content}" rows="8" class="form-control" id="InputTextarea"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input th:field="*{rate}" type="number" class="form-control" id="InputNumber">
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit">投稿</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-<script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<div id="modal_body" style="display:none;">
+    <form method="post" th:action="@{'/albums/' + ${album.getAlbumId()} + '/comments'}" th:object="${commentForm}" class="comment_form">
+        <textarea class="comment_form_content" th:field="*{content}" placeholder="コメント" maxlength="500" required></textarea>
+        <select class="comment_form_rate" th:field="*{rate}" required>
+            <option value="2"></option>
+            <option value="4"></option>
+            <option value="6"></option>
+            <option value="8"></option>
+            <option value="10"></option>
+        </select>
+        <div class="album_action_button">
+            <button class="comment_form_submit_button" type="submit">投稿</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(".comment_button").modaal(
+        {
+            content_source: '#modal_body',
+            hide_close: true,
+            overlay_opacity: 0.8,
+            height: 500,
+            width: 500
+        }
+    );
+
+    $(function() {
+        $('.comment_form_rate').barrating({
+            theme: 'fontawesome-stars'
+        });
+    });
+</script>
 </body>
 </html>

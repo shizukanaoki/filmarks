@@ -11,6 +11,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
+/**
+ * Commentを登録、更新する際に使用するフォームクラス
+ *
+ * @author naoki.shizuka
+ */
 @Getter
 @Setter
 public class CommentForm {

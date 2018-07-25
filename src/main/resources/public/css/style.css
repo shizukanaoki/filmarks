@@ -12,6 +12,7 @@ ul.sidebar {
     width: 200px;
     background-color: #333;
     box-shadow: 8px 0px 8px -1px rgba(0,0,0,0.2);
+    z-index: 999;
 }
 
 .sidebar_width {
@@ -20,10 +21,7 @@ ul.sidebar {
 
 .sidebar>li {
     padding: 20px;
-}
-
-.sidebar>li:hover {
-    background: rgba(255, 255, 255, 0.2);
+    overflow-wrap: break-word;
 }
 
 .sidebar>li a {
@@ -41,4 +39,60 @@ ul.sidebar {
 
 .sidebar>.sidebar_brand>a {
     color: orange;
+}
+
+.sidebar .sidebar_user_info {
+    padding: 0 20px;
+    margin-bottom: 40px;
+}
+
+.sidebar .sidebar_username {
+    font-size: 20px;
+    color: #999999;
+}
+
+.sidebar .sidebar_description {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+.sidebar .sidebar_active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar .sidebar_active a {
+    color: #fff;
+}
+
+.checked {
+    color: orange;
+}
+
+.follow_btn {
+    display: inline-block;
+    background-color: rgba(0,0,0,0);
+    width: 120px;
+    font-size: 16px;
+    text-decoration: none;
+    color: orange;
+    border: solid 1px orange;
+    padding: 8px 0;
+    transition: .4s;
+}
+
+.follow_btn:hover {
+    color: #333;
+    background-color: orange;
+}
+
+.follow_form {
+    text-align: center;
+}
+
+.suggestion {
+    padding: 40px;
+    font-size: 20px;
+    line-height: 3rem;
 }

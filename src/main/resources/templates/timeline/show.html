@@ -20,93 +20,47 @@
                     <a href="">BLAND</a>
                 </li>
                 <li>
-                    <a href="">timeline</a>
+                    <a href="/">Recommendations</a>
                 </li>
                 <li>
-                    <a href="">favorites</a>
+                    <a href="/">Lyrics</a>
+                </li>
+                <li class="sidebar_active">
+                    <a href="/timeline">Timeline</a>
+                </li>
+                <li>
+                    <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
                 </li>
             </ul>
             <div class="sidebar_width">
             </div>
         <div class="main">
-            <div class="posts">
-                <div class="post">
-                    <img class="post_img" src="/image/album/2.jpg" alt="">
-                    <div class="post_info">
-                        <div class="post_info_title">
-                            naokiさんがwith the beatlesにコメントしました
-                        </div>
-                        <div class="post_info_datetime">
-                            2018/07/12 13:27
-                        </div>
-                        <div class="post_info_content">
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                        </div>
-                    </div>
-                </div>
-                <div class="post">
-                    <img class="post_img" src="/image/album/2.jpg" alt="">
-                    <div class="post_info">
-                        <div class="post_info_title">
-                            <span class="post_info_username">naoki</span>
-                            comments on
-                            <span class="post_info_album_title">with the beatles</span>
-                        </div>
-                        <div class="post_info_datetime">
-                            2018/07/12 13:27
-                        </div>
-                        <div class="post_info_content">
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
+            <th:block th:if="${!posts.isEmpty()}">
+                <div class="posts">
+                    <div th:each="post : ${posts}" class="post">
+                        <a th:href="@{'/albums/' + ${post.getAlbum().getAlbumId()}}">
+                            <img th:src="@{'/image/album/' + ${post.getAlbum().getImageFileName()}}" class="post_img" alt="">
+                        </a>
+                        <div class="post_info">
+                            <div class="post_info_title">
+                                <div th:text="${#temporals.format(post.getCreatedAt(), 'yyyy/MM/dd HH:mm')}" class="post_info_datetime"></div>
+                                <div class="post_info_username">
+                                    <a th:text="${post.getUser().get().getUsername()}" th:href="@{'/users/'} + ${post.getUser().get().getUserId()}"></a>
+                                </div>
+                            </div>
+                            <div th:text="${post.getAlbum().getAlbumTitle()}" class="post_info_album_title"></div>
+                            <div th:text="${post.getDescription()}" class="post_info_description"></div>
+                            <div th:text="${post.getContent()}" class="post_info_content"></div>
                         </div>
                     </div>
                 </div>
-                <div class="post">
-                    <img class="post_img" src="/image/album/2.jpg" alt="">
-                    <div class="post_info">
-                        <div class="post_info_title">
-                            naokiさんがwith the beatlesにコメントしました
-                        </div>
-                        <div class="post_info_datetime">
-                            2018/07/12 13:27
-                        </div>
-                        <div class="post_info_content">
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                        </div>
-                    </div>
+            </th:block>
+            <th:block th:if="${posts.isEmpty()}">
+                <div class="suggestion">
+                    タイムラインにイベントはありません。
+                    <br>気になる人をフォローしてみましょう。
                 </div>
-                <div class="post">
-                    <img class="post_img" src="/image/album/2.jpg" alt="">
-                    <div class="post_info">
-                        <div class="post_info_title">
-                            naokiさんがwith the beatlesにコメントしました
-                        </div>
-                        <div class="post_info_datetime">
-                            2018/07/12 13:27
-                        </div>
-                        <div class="post_info_content">
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                        </div>
-                    </div>
-                </div>
-                <div class="post">
-                    <img class="post_img" src="/image/album/2.jpg" alt="">
-                    <div class="post_info">
-                        <div class="post_info_title">
-                            naokiさんがwith the beatlesにコメントしました
-                        </div>
-                        <div class="post_info_datetime">
-                            2018/07/12 13:27
-                        </div>
-                        <div class="post_info_content">
-                            めっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやんめっちゃいいやん
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
         </div>
     </div>
 </div>

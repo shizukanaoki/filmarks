@@ -8,6 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * UserのCRUDを担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Repository
 public class UserRepository {
 
@@ -26,6 +34,9 @@ public class UserRepository {
         userBhv.loadFavorite(user, cb -> {
             cb.setupSelect_Album();
         });
+        userBhv.loadComment(user, cb -> {
+            cb.setupSelect_Album();
+        });
         userBhv.loadUserFollowingByFollowingId(user, cb -> {
             cb.setupSelect_UserByFollowerId();
         });
@@ -35,9 +46,39 @@ public class UserRepository {
         return user;
     }
 
+    public List<User> findFollowings(int userId) {
+        User user = userBhv.selectByPK(userId).get();
+        userBhv.loadUserFollowingByFollowingId(user, cb -> {
+            cb.setupSelect_UserByFollowerId();
+        });
+        List<User> followings = user.getUserFollowingByFollowingIdList().stream()
+                .map(userFollowing -> userFollowing.getUserByFollowerId().get()).collect(Collectors.toList());
+        userBhv.loadFavorite(followings, cb -> {
+            cb.setupSelect_Album();
+        });
+        return followings;
+    }
+
+    public List<User> findFollowers(int userId) {
+        User user = userBhv.selectByPK(userId).get();
+        userBhv.loadUserFollowingByFollowerId(user, cb -> {
+            cb.setupSelect_UserByFollowingId();
+        });
+        List<User> followers = user.getUserFollowingByFollowerIdList().stream()
+                .map(userFollowing -> userFollowing.getUserByFollowingId().get()).collect(Collectors.toList());
+        userBhv.loadFavorite(followers, cb -> {
+            cb.setupSelect_Album();
+        });
+        return followers;
+    }
+
     public User save(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userBhv.insert(user);
         return user;
+    }
+
+    public void loadFollowing(User user) {
+        userBhv.loadUserFollowingByFollowingId(user, cb -> {});
     }
 }

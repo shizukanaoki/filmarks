@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/comment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
 </head>
 <body>
 <div>
@@ -18,95 +21,64 @@
             <li class="sidebar_brand">
                 <a href="/" th:text="BLAND"></a>
             </li>
-            <li>
-                <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+            <li class="sidebar_user_info">
+                <span class="sidebar_username" th:text="${user.getUsername()}"></span>
+                <div class="sidebar_description">のマイページ</div>
             </li>
             <li>
-                <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
+                <a th:href="@{'/users/' + ${user.getUserId()}}">Favorites</a>
+            </li>
+            <li class="sidebar_active">
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">Comments</a>
             </li>
             <li>
-                <a href="">following</a>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/followings'}">Following</a>
             </li>
             <li>
-                <a href="">follower</a>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/followers'}">Follower</a>
+            </li>
+            <li th:if="${!isFollowing}">
+                <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">follow</button>
+                </form>
+            </li>
+            <li th:if="${isFollowing}">
+                <form class="follow_form" name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">unfollow</button>
+                </form>
             </li>
         </ul>
         <div class="sidebar_width">
         </div>
         <div class="main">
-            <div class="comments">
-                <div class="comment">
-                    <img src="/image/album/1.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
+            <th:block th:if="${!user.getCommentList().isEmpty()}">
+                <div class="comments">
+                    <div th:each="comment: ${user.getCommentList()}" class="comment">
+                        <a th:href="${'/albums/' + comment.getAlbum().get().getAlbumId()}">
+                            <img th:src="${'/image/album/' + comment.getAlbum().get().getImageFileName()}" alt="">
+                        </a>
+                        <div class="comment_info">
+                            <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
+                            <div class="comment_rate">
+                                <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                                    <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
+                                    <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
+                                </th:block>
+                            </div>
+                            <div class="comment_content" th:text="${comment.getContent()}"></div>
                         </div>
                     </div>
                 </div>
-                <div class="comment">
-                    <img src="/image/album/2.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
+            </th:block>
+            <th:block th:if="${user.getCommentList().isEmpty()}">
+                <div class="suggestion">
+                    投稿されたコメントはありません。
+                    <th:block th:if="${loginUser.equals(user)}">
+                        <br>アルバムにコメントをしてみましょう。
+                    </th:block>
                 </div>
-                <div class="comment">
-                    <img src="/image/album/3.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/4.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/5.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/6.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <img src="/image/album/7.jpg" alt="">
-                    <div class="comment_info">
-                        <div class="comment_datetime">2018/07/12 00:56</div>
-                        <div class="comment_rate">RATE: 5</div>
-                        <div class="comment_content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.R
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
+
         </div>
     </div>
 </div>
