@@ -30,18 +30,14 @@
     overflow: scroll;
 }
 
-.post_info_title {
-    border-left: 3px solid orange;
-    padding-left: 3px;
-}
-
 .post_info_album_title {
     margin-top: 20px;
-    font-size: 16px;
+    font-size: 18px;
+    border-bottom: solid 2px orange;
 }
 
 .post_info_username {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .post_info_username a {
@@ -59,4 +55,11 @@
     word-wrap:break-word;
     font-size: 14px;
     margin-top: 20px;
+}
+
+.post_info_description {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+    color: #7e7e7e;
 }

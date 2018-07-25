@@ -8,6 +8,7 @@ import filmarks.dbflute.exentity.Album;
  * @author naoki.shizuka
  */
 public interface Postable {
+    public String getDescription();
     public String getContent();
     public Album getRelatedAlbum();
 }

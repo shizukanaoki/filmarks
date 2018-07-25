@@ -26,4 +26,9 @@ public class Favorite extends BsFavorite implements Postable {
     public Album getRelatedAlbum() {
         return getAlbum().get();
     }
+
+    @Override
+    public String getDescription() {
+        return "お気に入りしました";
+    }
 }

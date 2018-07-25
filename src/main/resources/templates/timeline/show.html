@@ -43,12 +43,13 @@
                         </a>
                         <div class="post_info">
                             <div class="post_info_title">
+                                <div th:text="${#temporals.format(post.getCreatedAt(), 'yyyy/MM/dd HH:mm')}" class="post_info_datetime"></div>
                                 <div class="post_info_username">
                                     <a th:text="${post.getUser().get().getUsername()}" th:href="@{'/users/'} + ${post.getUser().get().getUserId()}"></a>
                                 </div>
-                                <div th:text="${post.getCreatedAt()}" class="post_info_datetime"></div>
                             </div>
                             <div th:text="${post.getAlbum().getAlbumTitle()}" class="post_info_album_title"></div>
+                            <div th:text="${post.getDescription()}" class="post_info_description"></div>
                             <div th:text="${post.getContent()}" class="post_info_content"></div>
                         </div>
                     </div>

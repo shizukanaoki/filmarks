@@ -29,6 +29,11 @@ public class Comment extends BsComment implements Postable {
         return getAlbum().get();
     }
 
+    @Override
+    public String getDescription() {
+        return "コメントしました";
+    }
+
     public int getDisplayRate() {
         return getRate().divide(new BigDecimal(2.0), 0, RoundingMode.HALF_UP).intValue();
     }

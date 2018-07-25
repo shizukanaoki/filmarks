@@ -36,4 +36,6 @@ public class Post extends BsPost {
     public Album getAlbum() {
         return postable.getRelatedAlbum();
     }
+
+    public String getDescription() { return postable.getDescription(); }
 }
