@@ -13,6 +13,13 @@ public class SongRepository {
     private SongBhv songBhv;
 
     public Song findOne(int songId) throws EntityAlreadyDeletedException {
-        return songBhv.selectByPK(songId).get();
+        Song song = songBhv.selectEntity(cb -> {
+            cb.query().setAlbumId_Equal(songId);
+            cb.setupSelect_Album().withArtist();
+        }).get();
+        songBhv.loadLyricsRecommendation(song, cb -> {
+            cb.setupSelect_User();
+        });
+        return song;
     }
 }

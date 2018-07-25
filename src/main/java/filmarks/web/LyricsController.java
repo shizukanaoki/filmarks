@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * LyricsRecommendation関係のページを扱うコントローラー
+ */
 @Controller
 public class LyricsController {
 
