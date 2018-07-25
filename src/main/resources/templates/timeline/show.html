@@ -19,11 +19,17 @@
                 <li class="sidebar_brand">
                     <a href="">BLAND</a>
                 </li>
-                <li class="sidebar_active">
-                    <a href="/timeline">timeline</a>
+                <li>
+                    <a href="/">Recommendations</a>
                 </li>
                 <li>
-                    <a href="/">favorites</a>
+                    <a href="/">Lyrics</a>
+                </li>
+                <li class="sidebar_active">
+                    <a href="/timeline">Timeline</a>
+                </li>
+                <li>
+                    <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
                 </li>
             </ul>
             <div class="sidebar_width">

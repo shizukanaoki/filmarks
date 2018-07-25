@@ -14,21 +14,22 @@
     <script type="text/javascript" src="/javascript/top_page.js"></script>
 </head>
 <body>
-        <!--<div sec:authorize="isAuthenticated()">-->
-            <!--<form th:action="@{/logout}" method="post">-->
-                <!--<input type="submit" value="Sign Out"/>-->
-            <!--</form>-->
-        <!--</div>-->
     <div class="wrapper">
         <ul class="sidebar">
             <li class="sidebar_brand">
                 <a href="">BLAND</a>
             </li>
-            <li>
-                <a href="/timeline">timeline</a>
-            </li>
             <li class="sidebar_active">
-                <a href="/">favorites</a>
+                <a href="/">Recommendations</a>
+            </li>
+            <li>
+                <a href="/">Lyrics</a>
+            </li>
+            <li>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
             </li>
         </ul>
         <div class="sidebar_width">

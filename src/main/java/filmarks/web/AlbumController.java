@@ -36,7 +36,8 @@ public class AlbumController {
 
     @RequestMapping(value = {"/", "/albums"}, method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(@AuthenticationPrincipal User user, ModelAndView mav) {
+        mav.addObject("user", user);
         List<Album> albums = albumService.findAlbums();
         mav.addObject("albums", albums);
         mav.setViewName("album/index");
@@ -50,6 +51,7 @@ public class AlbumController {
         boolean isFollowing = album.getFavoriteList().stream().anyMatch(favorite -> user.getUserId().equals(favorite.getUserId()));
         mav.addObject("album", album);
         mav.addObject("isFollowing", isFollowing);
+        mav.addObject("user", user);
         mav.setViewName("album/show");
         return mav;
     }

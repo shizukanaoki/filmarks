@@ -41,6 +41,11 @@ ul.sidebar {
     color: orange;
 }
 
+.sidebar .sidebar_user_info {
+    padding: 0 20px;
+    margin-bottom: 40px;
+}
+
 .sidebar .sidebar_username {
     font-size: 20px;
     color: #999999;

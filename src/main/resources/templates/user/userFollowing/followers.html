@@ -18,21 +18,21 @@
         <li class="sidebar_brand">
             <a href="/" th:text="BLAND"></a>
         </li>
-        <li>
+        <li class="sidebar_user_info">
             <span class="sidebar_username" th:text="${user.getUsername()}"></span>
             <div class="sidebar_description">のマイページ</div>
         </li>
         <li>
-            <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
+            <a th:href="@{'/users/' + ${user.getUserId()}}">Favorites</a>
         </li>
         <li>
-            <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
+            <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">Comments</a>
         </li>
         <li>
-            <a th:href="@{'/users/' + ${user.getUserId()} + '/followings'}">following</a>
+            <a th:href="@{'/users/' + ${user.getUserId()} + '/followings'}">Following</a>
         </li>
         <li class="sidebar_active">
-            <a th:href="@{'/users/' + ${user.getUserId()} + '/followers'}">follower</a>
+            <a th:href="@{'/users/' + ${user.getUserId()} + '/followers'}">Follower</a>
         </li>
         <li th:if="${!isFollowing}">
             <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
