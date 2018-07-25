@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -54,25 +55,27 @@ public class UserFollowingController {
     }
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following) {
+    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, HttpServletRequest request) {
         try {
             User follower = userService.findOne(followerId);
             UserFollowing userFollowing = new UserFollowing();
             userFollowing.setFollowerId(follower.getUserId());
             userFollowing.setFollowingId(following.getUserId());
             userFollowingService.create(userFollowing);
-            return new ModelAndView("redirect:/users/" + follower.getUserId());
+            String referer = request.getHeader("Referer");
+            return new ModelAndView("redirect:"+ referer);
         } catch (EntityAlreadyDeletedException e) {
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.DELETE)
-    public ModelAndView delete(@PathVariable int followerId, @AuthenticationPrincipal User following) {
+    public ModelAndView delete(@PathVariable int followerId, @AuthenticationPrincipal User following, HttpServletRequest request) {
         try {
             UserFollowing userFollowing = userFollowingService.loadUserFollowingByFollowingAndFollowerId(following.getUserId(), followerId);
             userFollowingService.delete(userFollowing);
-            return new ModelAndView("redirect:/users/" + followerId);
+            String referer = request.getHeader("Referer");
+            return new ModelAndView("redirect:"+ referer);
         } catch (EntityAlreadyDeletedException e) {
             return new ModelAndView("redirect:/");
         }
