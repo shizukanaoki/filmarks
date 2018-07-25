@@ -1,45 +1,39 @@
 package filmarks.service;
 
-import filmarks.dbflute.exbhv.ArtistBhv;
-import filmarks.dbflute.exbhv.FavoriteBhv;
-import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.Artist;
 import filmarks.dbflute.exentity.Favorite;
 import filmarks.dbflute.exentity.User;
+import filmarks.domain.ArtistRepository;
+import filmarks.domain.FavoriteRepository;
+import filmarks.domain.UserRepository;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
-import org.dbflute.cbean.result.ListResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class RecommendService {
 
     @Autowired
-    UserBhv userBhv;
+    ArtistRepository artistRepository;
 
     @Autowired
-    ArtistBhv artistBhv;
+    FavoriteRepository favoriteRepository;
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    UserRepository userRepository;
 
     public List<Artist> findRecommendedArtists(User targetUser) {
-        ListResultBean<User> users = userBhv.selectList(userCB -> {
-            userCB.query().addOrderBy_UserId_Asc();
-        });
+        List<User> users = userRepository.findAll();
 
-        userBhv.loadFavorite(users, refCB -> {
-            refCB.setupSelect_Album();
-        });
-
-        ListResultBean<Favorite> favorites = favoriteBhv.selectList(favoriteCB -> {
-            favoriteCB.setupSelect_Album();
-        });
+        List<Favorite> favorites = favoriteRepository.findAll();
 
         List<Integer> favoritedArtistIds = favorites.stream()
                 .map(favorite -> favorite.getAlbum().get().getArtistId())
@@ -51,10 +45,7 @@ public class RecommendService {
             return Collections.EMPTY_LIST;
         }
 
-        ListResultBean<Artist> artists = artistBhv.selectList(artistCB -> {
-            artistCB.query().addOrderBy_ArtistId_Asc();
-            artistCB.query().setArtistId_InScope(favoritedArtistIds);
-        });
+        List<Artist> artists = artistRepository.findByScope(favoritedArtistIds);
 
         double[][] matrixData = new double[users.size()][artists.size()];
         double[][] targetUserFavoriteData = new double[1][artists.size()];

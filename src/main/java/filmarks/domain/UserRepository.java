@@ -2,6 +2,7 @@ package filmarks.domain;
 
 import filmarks.dbflute.exbhv.UserBhv;
 import filmarks.dbflute.exentity.User;
+import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.exception.EntityAlreadyDeletedException;
 import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,16 @@ public class UserRepository {
 
     @Autowired
     private UserBhv userBhv;
+
+    public List<User> findAll() {
+        ListResultBean<User> users = userBhv.selectList(cb -> {
+            cb.query().addOrderBy_UserId_Asc();
+        });
+        userBhv.loadFavorite(users, cb -> {
+            cb.setupSelect_Album();
+        });
+        return users;
+    }
 
     public User findByUsername(String username) {
         OptionalEntity<User> userOptionalEntity = userBhv.selectEntity(cb -> {
