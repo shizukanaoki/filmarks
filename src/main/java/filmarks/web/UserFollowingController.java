@@ -13,24 +13,71 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+/**
+ * フォロー関係のページのコントローラ
+ *
+ * @author naoki.shizuka
+ */
 @Controller
 public class UserFollowingController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserFollowingService userFollowingService;
+    private UserFollowingService userFollowingService;
+
+    @RequestMapping(value = "/users/{userId}/followings", method = RequestMethod.GET)
+    public ModelAndView followings(@PathVariable int userId, @AuthenticationPrincipal User loginUser, ModelAndView mav) {
+        mav.addObject("loginUser", loginUser);
+        User user = userService.findOne(userId);
+        mav.addObject("user", user);
+        boolean isFollowing = userFollowingService.isFollowing(loginUser.getUserId(), user.getUserId());
+        mav.addObject("isFollowing", isFollowing);
+        List<User> followings = userService.findFollowings(userId);
+        mav.addObject("followings", followings);
+        mav.setViewName("user/userFollowing/followings");
+        return mav;
+    }
+
+    @RequestMapping(value = "/users/{userId}/followers", method = RequestMethod.GET)
+    public ModelAndView followers(@PathVariable int userId, @AuthenticationPrincipal User loginUser, ModelAndView mav) {
+        mav.addObject("loginUser", loginUser);
+        User user = userService.findOne(userId);
+        mav.addObject("user", user);
+        boolean isFollowing = userFollowingService.isFollowing(loginUser.getUserId(), user.getUserId());
+        mav.addObject("isFollowing", isFollowing);
+        List<User> followers = userService.findFollowers(userId);
+        mav.addObject("followers", followers);
+        mav.setViewName("user/userFollowing/followers");
+        return mav;
+    }
 
     @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.POST)
-    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following) {
+    public ModelAndView create(@PathVariable int followerId, @AuthenticationPrincipal User following, HttpServletRequest request) {
         try {
             User follower = userService.findOne(followerId);
             UserFollowing userFollowing = new UserFollowing();
             userFollowing.setFollowerId(follower.getUserId());
             userFollowing.setFollowingId(following.getUserId());
             userFollowingService.create(userFollowing);
-            return new ModelAndView("redirect:/users/" + follower.getUserId());
+            String referer = request.getHeader("Referer");
+            return new ModelAndView("redirect:"+ referer);
+        } catch (EntityAlreadyDeletedException e) {
+            return new ModelAndView("redirect:/");
+        }
+    }
+
+    @RequestMapping(value = "/relationships/{followerId}", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable int followerId, @AuthenticationPrincipal User following, HttpServletRequest request) {
+        try {
+            UserFollowing userFollowing = userFollowingService.loadUserFollowingByFollowingAndFollowerId(following.getUserId(), followerId);
+            userFollowingService.delete(userFollowing);
+            String referer = request.getHeader("Referer");
+            return new ModelAndView("redirect:"+ referer);
         } catch (EntityAlreadyDeletedException e) {
             return new ModelAndView("redirect:/");
         }

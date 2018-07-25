@@ -1,0 +1,56 @@
+.follows {
+    padding: 20px 0;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.follow {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    margin: 10px 0 10px 20px;
+    color: #ddd;
+    background-size: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.follow:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.follow_mask {
+    color: #ccc;
+    position: relative;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    transition: .4s;
+}
+
+.follow_mask:hover {
+    color: #fff;
+    background: rgba(0,0,0,0.3);
+}
+
+.follow_username {
+    text-align: right;
+    font-size: 24px;
+    margin: 0 20px;
+    width: 210px;
+    position: absolute;
+    top: 40%;
+}
+
+.follow_info_bottom {
+    margin: 0 20px;
+    width: 210px;
+    position: absolute;
+    bottom: 20px;
+}
+
+.follow_info_bottom_title {
+    font-size: 10px;
+    margin-bottom: 10px;
+}

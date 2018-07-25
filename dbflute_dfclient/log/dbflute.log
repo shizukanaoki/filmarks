@@ -7021,3 +7021,733 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     * Failure *
     * * * * * *
 _/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-07-25 16:15:55,245 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-07-25 16:15:55,247 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-07-25 16:15:55,247 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-07-25 16:15:55,253 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-07-25 16:15:55,253 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-07-25 16:15:55,254 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-07-25 16:15:57,102 [main] INFO  (DfReplaceSchemaTask#begin():108) - *The execution of ReplaceSchema was cancelled.
+2018-07-25 16:15:57,113 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s879ms *Abort
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+    * * * * * * *
+    * Cancelled *
+    * * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-07-25 16:16:03,324 [main] INFO  (DfReplaceSchemaTask#begin():92) - +------------------------------------------+
+2018-07-25 16:16:03,327 [main] INFO  (DfReplaceSchemaTask#begin():93) - |                                          |
+2018-07-25 16:16:03,327 [main] INFO  (DfReplaceSchemaTask#begin():94) - |              ReplaceSchema               |
+2018-07-25 16:16:03,332 [main] INFO  (DfReplaceSchemaTask#begin():102) - |                                          |
+2018-07-25 16:16:03,332 [main] INFO  (DfReplaceSchemaTask#begin():103) - +------------------------------------------+
+2018-07-25 16:16:03,333 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():401) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2018-07-25 16:16:04,469 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:04,470 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:04,470 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:04,470 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:04,478 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-07-25 16:16:04,975 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.22
+2018-07-25 16:16:04,975 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-07-25 16:16:04,988 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():229) - 
+2018-07-25 16:16:04,988 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():230) - * * * * * * * * * * *
+2018-07-25 16:16:04,988 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():231) - *                   *
+2018-07-25 16:16:04,989 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():232) - * Initialize Schema *
+2018-07-25 16:16:04,989 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():233) - *                   *
+2018-07-25 16:16:04,989 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():234) - * * * * * * * * * * *
+2018-07-25 16:16:04,999 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-25 16:16:05,000 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-25 16:16:05,000 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-25 16:16:05,035 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table COMMENT
+2018-07-25 16:16:05,042 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table FAVORITE
+2018-07-25 16:16:05,048 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table POST
+2018-07-25 16:16:05,055 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table SONG
+2018-07-25 16:16:05,064 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - truncate table USER_FOLLOWING
+2018-07-25 16:16:05,073 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table ALBUM drop foreign key FK_PRODUCT_ARTIST
+2018-07-25 16:16:05,080 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table COMMENT drop foreign key FK_COMMENT_PRODUCT
+2018-07-25 16:16:05,085 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table COMMENT drop foreign key FK_COMMENT_USER
+2018-07-25 16:16:05,090 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table FAVORITE drop foreign key FK_PICK_PRODUCT
+2018-07-25 16:16:05,095 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table FAVORITE drop foreign key FK_PICK_USER
+2018-07-25 16:16:05,100 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table POST drop foreign key FK_POST_USER
+2018-07-25 16:16:05,106 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table SONG drop foreign key FK_SONG_PRODUCT
+2018-07-25 16:16:05,113 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table USER_FOLLOWING drop foreign key FK_RELATIONSHIP_FOLLOWER
+2018-07-25 16:16:05,117 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - alter table USER_FOLLOWING drop foreign key FK_RELATIONSHIP_FOLLOWING
+2018-07-25 16:16:05,123 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table ALBUM
+2018-07-25 16:16:05,127 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table ARTIST
+2018-07-25 16:16:05,132 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table COMMENT
+2018-07-25 16:16:05,136 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table FAVORITE
+2018-07-25 16:16:05,140 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table POST
+2018-07-25 16:16:05,144 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table SONG
+2018-07-25 16:16:05,148 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table USER
+2018-07-25 16:16:05,152 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():614) - drop table USER_FOLLOWING
+2018-07-25 16:16:05,171 [main] INFO  (DfCreateSchemaProcess#createSchema():266) - 
+2018-07-25 16:16:05,171 [main] INFO  (DfCreateSchemaProcess#createSchema():267) - * * * * * * * * *
+2018-07-25 16:16:05,171 [main] INFO  (DfCreateSchemaProcess#createSchema():268) - *               *
+2018-07-25 16:16:05,171 [main] INFO  (DfCreateSchemaProcess#createSchema():269) - * Create Schema *
+2018-07-25 16:16:05,172 [main] INFO  (DfCreateSchemaProcess#createSchema():270) - *               *
+2018-07-25 16:16:05,172 [main] INFO  (DfCreateSchemaProcess#createSchema():271) - * * * * * * * * *
+2018-07-25 16:16:05,175 [main] INFO  (DfSqlFileFireMan#fire():68) - ...Firing: replace-schema.sql
+2018-07-25 16:16:05,178 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE ALBUM
+(
+	ALBUM_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	ALBUM_TITLE VARCHAR(200) NOT NULL COMMENT 'タイトル',
+	IMAGE_FILE_NAME VARCHAR(200) NOT NULL COMMENT 'ファイル名',
+	ARTIST_ID INT COMMENT 'アーティストID',
+	PRIMARY KEY (ALBUM_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,189 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE ARTIST
+(
+	ARTIST_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	ARTIST_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '名前',
+	PRIMARY KEY (ARTIST_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,199 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE COMMENT
+(
+	COMMENT_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	ALBUM_ID INT NOT NULL COMMENT 'アルバムID',
+	CONTENT TEXT NOT NULL COMMENT '内容',
+	RATE FLOAT NOT NULL COMMENT 'レート',
+	COMMENT_CREATED_AT DATETIME NOT NULL COMMENT '時間',
+	PRIMARY KEY (COMMENT_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,209 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE FAVORITE
+(
+	FAVORITE_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	ALBUM_ID INT NOT NULL COMMENT 'アルバムID',
+	FAVORITE_CREATED_AT DATETIME NOT NULL COMMENT '時間',
+	PRIMARY KEY (FAVORITE_ID),
+	CONSTRAINT UQ_USER_ID_AND_ALBUM_ID_ON_FAVORITE UNIQUE (USER_ID, ALBUM_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,221 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LYRICS_RECOMMENDATION
+(
+	ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	SONG_ID INT NOT NULL COMMENT 'ID',
+	LYRICS TEXT NOT NULL COMMENT '歌詞',
+	PRIMARY KEY (ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,230 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE POST
+(
+	POST_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	TARGET_ID INT NOT NULL,
+	TARGET_TYPE VARCHAR(30) NOT NULL,
+	USER_ID INT NOT NULL COMMENT 'ユーザーID',
+	CREATED_AT DATETIME NOT NULL,
+	PRIMARY KEY (POST_ID),
+	CONSTRAINT UQ_POST_TARGET_ID_AND_TARGET_TYPE UNIQUE (TARGET_ID, TARGET_TYPE)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,240 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE SONG
+(
+	SONG_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	ALBUM_ID INT NOT NULL COMMENT 'アルバムID',
+	SONG_TITLE VARCHAR(200) NOT NULL COMMENT '名前',
+	SONG_LYRICS TEXT,
+	PRIMARY KEY (SONG_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,250 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE USER
+(
+	USER_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'ID',
+	USERNAME VARCHAR(100) NOT NULL UNIQUE COMMENT '名前',
+	PASSWORD VARCHAR(100) NOT NULL COMMENT 'パスワード',
+	PRIMARY KEY (USER_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,261 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE USER_FOLLOWING
+(
+	ID INT NOT NULL AUTO_INCREMENT COMMENT 'ID',
+	FOLLOWING_ID INT NOT NULL COMMENT 'フォローID',
+	FOLLOWER_ID INT NOT NULL COMMENT 'フォロワーID',
+	PRIMARY KEY (ID),
+	CONSTRAINT UQ_RELATIONSHIP_FOLLOWING_ID_AND_FOLLOWER_ID UNIQUE (FOLLOWING_ID, FOLLOWER_ID)
+) COMMENT = 'NEW_TABLE'
+2018-07-25 16:16:05,269 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE COMMENT
+	ADD CONSTRAINT FK_COMMENT_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,284 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FAVORITE
+	ADD CONSTRAINT FK_PICK_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,301 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE SONG
+	ADD CONSTRAINT FK_SONG_PRODUCT FOREIGN KEY (ALBUM_ID)
+	REFERENCES ALBUM (ALBUM_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,315 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE ALBUM
+	ADD CONSTRAINT FK_PRODUCT_ARTIST FOREIGN KEY (ARTIST_ID)
+	REFERENCES ARTIST (ARTIST_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,330 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LYRICS_RECOMMENDATION
+	ADD CONSTRAINT FK_LYRICS_RECOMMENDATION_SONG FOREIGN KEY (SONG_ID)
+	REFERENCES SONG (SONG_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,344 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE COMMENT
+	ADD CONSTRAINT FK_COMMENT_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,359 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FAVORITE
+	ADD CONSTRAINT FK_PICK_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,376 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LYRICS_RECOMMENDATION
+	ADD CONSTRAINT FK_LYRICS_RECOMMENDATION_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,393 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE POST
+	ADD CONSTRAINT FK_POST_USER FOREIGN KEY (USER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,408 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE USER_FOLLOWING
+	ADD CONSTRAINT FK_RELATIONSHIP_FOLLOWING FOREIGN KEY (FOLLOWING_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,422 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE USER_FOLLOWING
+	ADD CONSTRAINT FK_RELATIONSHIP_FOLLOWER FOREIGN KEY (FOLLOWER_ID)
+	REFERENCES USER (USER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2018-07-25 16:16:05,438 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=20 failure=0
+2018-07-25 16:16:05,438 [main] INFO  (DfSqlFileFireMan#fire():93) - {Create Schema}: success=20 failure=0 (in 1 files)
+2018-07-25 16:16:05,494 [main] INFO  (DfLoadDataProcess#execute():130) - 
+2018-07-25 16:16:05,494 [main] INFO  (DfLoadDataProcess#execute():131) - * * * * * * * * * * *
+2018-07-25 16:16:05,494 [main] INFO  (DfLoadDataProcess#execute():132) - *                   *
+2018-07-25 16:16:05,495 [main] INFO  (DfLoadDataProcess#execute():133) - * Load Data         *
+2018-07-25 16:16:05,495 [main] INFO  (DfLoadDataProcess#execute():134) - *                   *
+2018-07-25 16:16:05,495 [main] INFO  (DfLoadDataProcess#execute():135) - * * * * * * * * * * *
+2018-07-25 16:16:05,515 [main] INFO  (DfDelimiterDataWriterImpl#writeData():87) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2018-07-25 16:16:05,515 [main] INFO  (DfDelimiterDataWriterImpl#writeData():88) - writeData(playsql/data/common/csv/UTF-8/10-ALBUM.csv)
+2018-07-25 16:16:05,515 [main] INFO  (DfDelimiterDataWriterImpl#writeData():89) - = = = = = = =/
+2018-07-25 16:16:05,516 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-25 16:16:05,516 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-25 16:16:05,516 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-25 16:16:05,532 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{please please me, 1.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{stereo, 2.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{hard day's night, 3.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Sgt Pepper's Lonely Hearts Club Band, 4.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Abbey Road, 5.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 6.jpg}
+2018-07-25 16:16:05,544 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{I Want To Hold Your Hand, 7.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1962-1966, 8.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1967-1970, 9.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 10.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles (White Album), 11.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Let it be, 12.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{REVOLVER, 13.jpg}
+2018-07-25 16:16:05,545 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Live At The Hollywood Bowl, 14.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Rubber Soul, 15.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{On Air -Live At The BBC Vol.2, 16.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{please please me, 1.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{stereo, 2.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{hard day's night, 3.jpg}
+2018-07-25 16:16:05,546 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Sgt Pepper's Lonely Hearts Club Band, 4.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Abbey Road, 5.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 6.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{I Want To Hold Your Hand, 7.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1962-1966, 8.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1967-1970, 9.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 10.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles (White Album), 11.jpg}
+2018-07-25 16:16:05,547 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Let it be, 12.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{REVOLVER, 13.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Live At The Hollywood Bowl, 14.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Rubber Soul, 15.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{On Air -Live At The BBC Vol.2, 16.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{please please me, 1.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{stereo, 2.jpg}
+2018-07-25 16:16:05,548 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{hard day's night, 3.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Sgt Pepper's Lonely Hearts Club Band, 4.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Abbey Road, 5.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 6.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{I Want To Hold Your Hand, 7.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1962-1966, 8.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles 1967-1970, 9.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{HELP!, 10.jpg}
+2018-07-25 16:16:05,549 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Beatles (White Album), 11.jpg}
+2018-07-25 16:16:05,550 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Let it be, 12.jpg}
+2018-07-25 16:16:05,550 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{REVOLVER, 13.jpg}
+2018-07-25 16:16:05,550 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Live At The Hollywood Bowl, 14.jpg}
+2018-07-25 16:16:05,550 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{Rubber Soul, 15.jpg}
+2018-07-25 16:16:05,550 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - ALBUM:{On Air -Live At The BBC Vol.2, 16.jpg}
+2018-07-25 16:16:05,582 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1099) -  -> 48 rows are loaded to ALBUM
+2018-07-25 16:16:05,584 [main] INFO  (DfDelimiterDataWriterImpl#writeData():87) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2018-07-25 16:16:05,585 [main] INFO  (DfDelimiterDataWriterImpl#writeData():88) - writeData(playsql/data/common/csv/UTF-8/10-USER.csv)
+2018-07-25 16:16:05,585 [main] INFO  (DfDelimiterDataWriterImpl#writeData():89) - = = = = = = =/
+2018-07-25 16:16:05,585 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-25 16:16:05,585 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-25 16:16:05,585 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test1, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test2, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test3, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test4, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,592 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test5, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test6, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test7, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test8, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test9, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test10, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test11, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test12, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test13, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,593 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test14, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,594 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test15, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,594 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER:{test16, $2a$10$y9N8hrEdpGHfWfmqoeFA3eoJ/9AQrOdhYIOWnF2pVuQ495e14lOhm}
+2018-07-25 16:16:05,606 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1099) -  -> 17 rows are loaded to USER
+2018-07-25 16:16:05,607 [main] INFO  (DfDelimiterDataWriterImpl#writeData():87) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2018-07-25 16:16:05,607 [main] INFO  (DfDelimiterDataWriterImpl#writeData():88) - writeData(playsql/data/common/csv/UTF-8/10-USER_FOLLOWING.csv)
+2018-07-25 16:16:05,607 [main] INFO  (DfDelimiterDataWriterImpl#writeData():89) - = = = = = = =/
+2018-07-25 16:16:05,607 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-25 16:16:05,607 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-25 16:16:05,607 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-25 16:16:05,614 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 2}
+2018-07-25 16:16:05,632 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 3}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 4}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 5}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 6}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 7}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 8}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 9}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 10}
+2018-07-25 16:16:05,633 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 11}
+2018-07-25 16:16:05,634 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 12}
+2018-07-25 16:16:05,634 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 13}
+2018-07-25 16:16:05,634 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 14}
+2018-07-25 16:16:05,634 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 15}
+2018-07-25 16:16:05,634 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1083) - USER_FOLLOWING:{1, 16}
+2018-07-25 16:16:05,647 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1099) -  -> 15 rows are loaded to USER_FOLLOWING
+2018-07-25 16:16:05,653 [main] INFO  (DfLoadDataProcess#lazyCheckLoadedClassifiaction():381) - ...Checking implicit set of classification
+2018-07-25 16:16:05,662 [main] INFO  (DfTakeFinallyProcess#takeFinally():237) - 
+2018-07-25 16:16:05,662 [main] INFO  (DfTakeFinallyProcess#takeFinally():238) - * * * * * * * **
+2018-07-25 16:16:05,663 [main] INFO  (DfTakeFinallyProcess#takeFinally():239) - *              *
+2018-07-25 16:16:05,663 [main] INFO  (DfTakeFinallyProcess#takeFinally():240) - * Take Finally *
+2018-07-25 16:16:05,663 [main] INFO  (DfTakeFinallyProcess#takeFinally():241) - *              *
+2018-07-25 16:16:05,663 [main] INFO  (DfTakeFinallyProcess#takeFinally():242) - * * * * * * * **
+2018-07-25 16:16:05,671 [main] INFO  (DfSqlFileFireMan#fire():68) - ...Firing: take-finally.sql
+2018-07-25 16:16:05,674 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2018-07-25 16:16:05,674 [main] INFO  (DfSqlFileFireMan#fire():93) - {Take Finally}: success=0 failure=0 (in 1 files)
+2018-07-25 16:16:05,675 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-07-25 16:16:05,679 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s367ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.22)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Create Schema}: success=20 failure=0 (in 1 files)
+  o replace-schema.sql
+
+ {Load Data}: loaded-files=3
+  (common)
+  o 10-ALBUM.csv
+  o 10-USER.csv
+  o 10-USER_FOLLOWING.csv
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2018-07-25 16:16:10,028 [main] INFO  (TorqueJDBCTransformTask#begin():104) - +------------------------------------------+
+2018-07-25 16:16:10,030 [main] INFO  (TorqueJDBCTransformTask#begin():105) - |                                          |
+2018-07-25 16:16:10,030 [main] INFO  (TorqueJDBCTransformTask#begin():106) - |                   JDBC                   |
+2018-07-25 16:16:10,030 [main] INFO  (TorqueJDBCTransformTask#begin():107) - |                                          |
+2018-07-25 16:16:10,031 [main] INFO  (TorqueJDBCTransformTask#begin():108) - +------------------------------------------+
+2018-07-25 16:16:10,047 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:10,047 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:10,047 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:10,048 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:10,076 [main] INFO  (DfSchemaXmlSerializer#serialize():286) - 
+2018-07-25 16:16:10,076 [main] INFO  (DfSchemaXmlSerializer#serialize():287) - ...Starting to process JDBC to SchemaXML
+2018-07-25 16:16:10,076 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1532) - ...Loading previous schema (schema diff process)
+2018-07-25 16:16:10,086 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2018-07-25 16:16:10,147 [main] INFO  (DfSchemaXmlSerializer#generateXML():360) - ...Getting DB connection
+2018-07-25 16:16:10,153 [main] INFO  (DfDataSourceHandler#createConnection():166) - ...Connecting to database by data source:
+2018-07-25 16:16:10,661 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():233) -   product = MySQL 5.7.22
+2018-07-25 16:16:10,662 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():234) -   driver  = MySQL Connector Java mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) for JDBC 4.0
+2018-07-25 16:16:10,663 [main] INFO  (DfSchemaXmlSerializer#generateXML():363) - ...Getting DB meta data
+2018-07-25 16:16:10,664 [main] INFO  (DfTableExtractor#doGetTableList():66) - ...Getting tables:
+2018-07-25 16:16:10,664 [main] INFO  (DfTableExtractor#doGetTableList():67) -   schema = {filmarks.$$NoNameSchema$$ as main}
+2018-07-25 16:16:10,664 [main] INFO  (DfTableExtractor#doGetTableList():68) -   types  = [TABLE, VIEW]
+2018-07-25 16:16:10,673 [main] INFO  (DfDbCommentExtractorBase#doSelectUserTabComments():121) - select table_type as OBJECT_TYPE, table_name as TABLE_NAME, table_comment as COMMENTS from information_schema.tables where table_schema = 'filmarks' order by table_name asc
+2018-07-25 16:16:10,677 [main] INFO  (DfDbCommentExtractorBase#doSelectUserColComments():168) - select table_name as TABLE_NAME, column_name as COLUMN_NAME, column_comment as COMMENTS from information_schema.columns where table_schema = 'filmarks' order by table_name asc, column_name asc
+2018-07-25 16:16:10,683 [main] INFO  (DfDatetimePrecisionExtractorMySQL#extractDatetimePrecisionMap():59) - select TABLE_NAME, COLUMN_NAME, DATETIME_PRECISION from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA = 'filmarks' and DATA_TYPE = 'datetime'
+2018-07-25 16:16:10,692 [main] INFO  (DfSchemaXmlSerializer#processTable():420) - 
+2018-07-25 16:16:10,692 [main] INFO  (DfSchemaXmlSerializer#processTable():421) - $ /= = = = = = = = = = = = = = = = = = = = = = = = = =
+2018-07-25 16:16:10,692 [main] INFO  (DfSchemaXmlSerializer#processTable():422) - $ [Table List]
+2018-07-25 16:16:10,692 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.ALBUM(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,720 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.ARTIST(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,732 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.COMMENT(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,748 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.FAVORITE(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,760 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.LYRICS_RECOMMENDATION(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,775 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.POST(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,790 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.SONG(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,804 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.USER(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,821 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():502) - $ filmarks.USER_FOLLOWING(TABLE) // NEW_TABLE
+2018-07-25 16:16:10,847 [main] INFO  (DfSchemaXmlSerializer#processTable():434) - $ 
+2018-07-25 16:16:10,847 [main] INFO  (DfSchemaXmlSerializer#processTable():435) - $ [Table Count]
+2018-07-25 16:16:10,847 [main] INFO  (DfSchemaXmlSerializer#processTable():436) - $ 9
+2018-07-25 16:16:10,847 [main] INFO  (DfSchemaXmlSerializer#processTable():437) - $ = = = = = = = = = =/
+2018-07-25 16:16:10,848 [main] INFO  (DfSchemaXmlSerializer#processTable():438) - 
+2018-07-25 16:16:10,850 [main] INFO  (DfSchemaXmlSerializer#processSequence():805) - ...Getting sequences
+2018-07-25 16:16:10,854 [main] INFO  (DfSchemaXmlSerializer#serialize():301) - ...Serializing XML:
+2018-07-25 16:16:10,854 [main] INFO  (DfSchemaXmlSerializer#serialize():302) -   filePath = ./schema/project-schema-dfclient.xml
+2018-07-25 16:16:10,854 [main] INFO  (DfSchemaXmlSerializer#serialize():303) -   encoding = UTF-8
+2018-07-25 16:16:10,886 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1550) - ...Loading next schema (schema diff process)
+2018-07-25 16:16:10,888 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2018-07-25 16:16:10,963 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1565) -  -> same as previous (schema diff)
+2018-07-25 16:16:10,963 [main] INFO  (DfDataSourceHandler#destroy():120) - ...closeReally()
+2018-07-25 16:16:10,976 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s954ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql (MySQL 5.7.22)
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {JDBC}
+2018-07-25 16:16:11,954 [main] INFO  (TorqueDocumentationTask#begin():187) - +------------------------------------------+
+2018-07-25 16:16:11,956 [main] INFO  (TorqueDocumentationTask#begin():188) - |                                          |
+2018-07-25 16:16:11,956 [main] INFO  (TorqueDocumentationTask#begin():189) - |                   Doc                    |
+2018-07-25 16:16:11,956 [main] INFO  (TorqueDocumentationTask#begin():197) - |                                          |
+2018-07-25 16:16:11,957 [main] INFO  (TorqueDocumentationTask#begin():198) - +------------------------------------------+
+2018-07-25 16:16:11,981 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:11,982 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:11,982 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:11,982 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:11,984 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():259) - 
+2018-07-25 16:16:11,985 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():260) - * * * * * * * * * * *
+2018-07-25 16:16:11,985 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():261) - *                   *
+2018-07-25 16:16:11,985 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():262) - *    Schema HTML    *
+2018-07-25 16:16:11,986 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():263) - *                   *
+2018-07-25 16:16:11,986 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():264) - * * * * * * * * * * *
+2018-07-25 16:16:12,126 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2018-07-25 16:16:12,204 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("doc/ControlDocument.vm", ctx);
+2018-07-25 16:16:12,400 [main] INFO  (Database#doEnableDocumentOutputDirectory():1224) - ...Setting up documentOutputDirectory: ./output/doc
+2018-07-25 16:16:12,410 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2018-07-25 16:16:12,410 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2018-07-25 16:16:12,412 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2018-07-25 16:16:12,412 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2018-07-25 16:16:12,413 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2018-07-25 16:16:12,413 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2018-07-25 16:16:12,415 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2018-07-25 16:16:12,415 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2018-07-25 16:16:12,419 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_POST_FAVORITE
+2018-07-25 16:16:12,420 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():349) -   Add foreign key POST.[TARGET_ID] to FAVORITE.[FAVORITE_ID]
+2018-07-25 16:16:12,420 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_POST_COMMENT
+2018-07-25 16:16:12,421 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():349) -   Add foreign key POST.[TARGET_ID] to COMMENT.[COMMENT_ID]
+2018-07-25 16:16:12,421 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2018-07-25 16:16:12,432 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():233) - ...Loading schema history
+2018-07-25 16:16:12,471 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():237) -  -> found history: count=16
+2018-07-25 16:16:12,742 [main] INFO  (DfRefreshMan#resolveProjectAutoDetect():105) - *Cannot auto-detect your refresh Eclipse proejct.
+2018-07-25 16:16:12,743 [main] INFO  (DfRefreshResourceProcess#show():299) - /===========================================================================
+2018-07-25 16:16:12,744 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Refreshing [$$AutoDetect$$] by http://localhost:8386/
+2018-07-25 16:16:12,750 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2018-07-25 16:16:12,752 [main] INFO  (DfRefreshResourceProcess#show():299) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to refresh the resources.
+
+[Project List]
+[$$AutoDetect$$]
+
+[Request URL]
+http://localhost:8386/
+
+[IOExpception]
+ConnectException
+Connection refused (Connection refused)
+* * * * * * * * * */
+2018-07-25 16:16:12,752 [main] INFO  (DfRefreshResourceProcess#show():299) - ==========/
+2018-07-25 16:16:12,758 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s826ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2018-07-25 16:16:14,959 [main] INFO  (TorqueDataModelTask#begin():110) - +------------------------------------------+
+2018-07-25 16:16:14,961 [main] INFO  (TorqueDataModelTask#begin():111) - |                                          |
+2018-07-25 16:16:14,961 [main] INFO  (TorqueDataModelTask#begin():112) - |                 Generate                 |
+2018-07-25 16:16:14,961 [main] INFO  (TorqueDataModelTask#begin():113) - |                                          |
+2018-07-25 16:16:14,961 [main] INFO  (TorqueDataModelTask#begin():114) - +------------------------------------------+
+2018-07-25 16:16:14,998 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:14,998 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:14,998 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:14,998 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:15,015 [main] INFO  (TorqueDataModelTask#setupControlTemplate():166) - 
+2018-07-25 16:16:15,016 [main] INFO  (TorqueDataModelTask#setupControlTemplate():167) - ...Using Java control: om/ControlGenerateJava.vm
+2018-07-25 16:16:15,051 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2018-07-25 16:16:15,092 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("om/ControlGenerateJava.vm", ctx);
+2018-07-25 16:16:15,239 [main] INFO  (Database#doEnableGenerateOutputDirectory():1192) - ...Setting up generateOutputDirectory: ../src/main/java
+2018-07-25 16:16:15,243 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2018-07-25 16:16:15,243 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2018-07-25 16:16:15,244 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2018-07-25 16:16:15,245 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2018-07-25 16:16:15,245 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2018-07-25 16:16:15,247 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2018-07-25 16:16:15,248 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - /=======================================
+2018-07-25 16:16:15,248 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():69) - ...Initializing additional foreign keys.
+2018-07-25 16:16:15,253 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_POST_FAVORITE
+2018-07-25 16:16:15,254 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():349) -   Add foreign key POST.[TARGET_ID] to FAVORITE.[FAVORITE_ID]
+2018-07-25 16:16:15,254 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():79) - FK_POST_COMMENT
+2018-07-25 16:16:15,254 [main] INFO  (DfAdditionalForeignKeyInitializer#showResult():349) -   Add foreign key POST.[TARGET_ID] to COMMENT.[COMMENT_ID]
+2018-07-25 16:16:15,255 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():88) - ==========/
+2018-07-25 16:16:15,271 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():58) - /=============================
+2018-07-25 16:16:15,272 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - ...Initializing include query.
+2018-07-25 16:16:15,272 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - String
+2018-07-25 16:16:15,272 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Number
+2018-07-25 16:16:15,272 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - Date
+2018-07-25 16:16:15,273 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotEqual -> []
+2018-07-25 16:16:15,273 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   InScope -> []
+2018-07-25 16:16:15,273 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():86) -   NotInScope -> []
+2018-07-25 16:16:15,273 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():81) - OrderBy
+2018-07-25 16:16:15,273 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():61) - ========/
+2018-07-25 16:16:15,289 [main] INFO  (Database#info():2785) - public void parseAllCommon() {
+2018-07-25 16:16:15,291 [main] INFO  (Database#info():2785) -     parse('DBCurrent');
+2018-07-25 16:16:15,302 [main] INFO  (Database#info():2785) -     parse('DBFluteConfig');
+2018-07-25 16:16:15,319 [main] INFO  (Database#info():2785) -     parse('DBFluteInitializer');
+2018-07-25 16:16:15,329 [main] INFO  (Database#info():2785) -     parse('DBMetaInstanceHandler');
+2018-07-25 16:16:15,352 [main] INFO  (Database#info():2785) -     parse('EntityDefinedCommonColumn');
+2018-07-25 16:16:15,360 [main] INFO  (Database#info():2785) -     parse('ImplementedBehaviorSelector');
+2018-07-25 16:16:15,370 [main] INFO  (Database#info():2785) -     parse('ImplementedCommonColumnAutoSetupper');
+2018-07-25 16:16:15,377 [main] INFO  (Database#info():2785) -     parse('ImplementedInvokerAssistant');
+2018-07-25 16:16:15,385 [main] INFO  (Database#info():2785) -     parse('ImplementedSqlClauseCreator');
+2018-07-25 16:16:15,392 [main] INFO  (Database#info():2785) - }
+2018-07-25 16:16:15,392 [main] INFO  (Database#info():2785) - public void parseContainerConfig() {
+2018-07-25 16:16:15,392 [main] INFO  (Database#info():2785) -     parse('filmarks/dbflute/allcommon/DBFluteBeansJavaConfig.java')
+2018-07-25 16:16:15,406 [main] INFO  (Database#info():2785) - }
+2018-07-25 16:16:15,410 [main] INFO  (DfOldClassHandler#info():1045) - public void deleteOldTableClass() {
+2018-07-25 16:16:15,430 [main] INFO  (DfOldClassHandler#info():1045) - }
+2018-07-25 16:16:15,430 [main] INFO  (Database#info():2785) - public void parseTableClass() {
+2018-07-25 16:16:15,430 [main] INFO  (Database#info():2785) -     parse('ALBUM');
+2018-07-25 16:16:15,685 [main] INFO  (Database#info():2785) -     parse('ARTIST');
+2018-07-25 16:16:15,806 [main] INFO  (Database#info():2785) -     parse('COMMENT');
+2018-07-25 16:16:15,981 [main] INFO  (Database#info():2785) -     parse('FAVORITE');
+2018-07-25 16:16:16,116 [main] INFO  (Database#info():2785) -     parse('LYRICS_RECOMMENDATION');
+2018-07-25 16:16:16,214 [main] INFO  (Database#info():2785) -     parse('POST');
+2018-07-25 16:16:16,335 [main] INFO  (Database#info():2785) -     parse('SONG');
+2018-07-25 16:16:16,438 [main] INFO  (Database#info():2785) -     parse('USER');
+2018-07-25 16:16:16,573 [main] INFO  (Database#info():2785) -     parse('USER_FOLLOWING');
+2018-07-25 16:16:16,675 [main] INFO  (Database#info():2785) - }
+2018-07-25 16:16:16,676 [main] INFO  (Database#info():2785) -  
+2018-07-25 16:16:16,692 [main] INFO  (DfRefreshMan#resolveProjectAutoDetect():105) - *Cannot auto-detect your refresh Eclipse proejct.
+2018-07-25 16:16:16,693 [main] INFO  (DfRefreshResourceProcess#show():299) - /===========================================================================
+2018-07-25 16:16:16,694 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Refreshing [$$AutoDetect$$] by http://localhost:8386/
+2018-07-25 16:16:16,695 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2018-07-25 16:16:16,696 [main] INFO  (DfRefreshResourceProcess#show():299) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to refresh the resources.
+
+[Project List]
+[$$AutoDetect$$]
+
+[Request URL]
+http://localhost:8386/
+
+[IOExpception]
+ConnectException
+Connection refused (Connection refused)
+* * * * * * * * * */
+2018-07-25 16:16:16,696 [main] INFO  (DfRefreshResourceProcess#show():299) - ==========/
+2018-07-25 16:16:16,703 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s759ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2018-07-25 16:16:17,447 [main] INFO  (DfOutsideSqlTestTask#begin():77) - +------------------------------------------+
+2018-07-25 16:16:17,449 [main] INFO  (DfOutsideSqlTestTask#begin():78) - |                                          |
+2018-07-25 16:16:17,449 [main] INFO  (DfOutsideSqlTestTask#begin():79) - |              OutsideSqlTest              |
+2018-07-25 16:16:17,449 [main] INFO  (DfOutsideSqlTestTask#begin():80) - |                                          |
+2018-07-25 16:16:17,449 [main] INFO  (DfOutsideSqlTestTask#begin():81) - +------------------------------------------+
+2018-07-25 16:16:17,465 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:17,465 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:17,465 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:17,466 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:17,491 [main] INFO  (DfSqlFileFireMan#fire():93) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2018-07-25 16:16:17,503 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s060ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+
+ {Checked SQL}
+_/_/_/_/_/_/_/_/_/_/ {OutsideSqlTest}
+2018-07-25 16:16:18,197 [main] INFO  (DfSql2EntityTask#begin():106) - +------------------------------------------+
+2018-07-25 16:16:18,198 [main] INFO  (DfSql2EntityTask#begin():107) - |                                          |
+2018-07-25 16:16:18,199 [main] INFO  (DfSql2EntityTask#begin():108) - |                Sql2Entity                |
+2018-07-25 16:16:18,199 [main] INFO  (DfSql2EntityTask#begin():109) - |                                          |
+2018-07-25 16:16:18,199 [main] INFO  (DfSql2EntityTask#begin():110) - +------------------------------------------+
+2018-07-25 16:16:18,220 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2018-07-25 16:16:18,221 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2018-07-25 16:16:18,221 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:13306/filmarks
+2018-07-25 16:16:18,221 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = root
+2018-07-25 16:16:18,235 [main] INFO  (DfSql2EntityTask#setupControlTemplate():177) - 
+2018-07-25 16:16:18,235 [main] INFO  (DfSql2EntityTask#setupControlTemplate():178) - ...Using Java control: om/ControlSql2EntityJava.vm
+2018-07-25 16:16:18,243 [main] INFO  (DTDResolver#resolveEntity():195) - ...Resolving XML by database.dtd in same package
+2018-07-25 16:16:18,305 [main] INFO  (DfSqlFileFireMan#fire():93) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2018-07-25 16:16:18,336 [main] INFO  (DfSql2EntityTask#initControlContext():311) - 
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#initControlContext():312) - ...Preparing generation of customize-entities and parameter-beans
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#initControlContext():313) - * * * * * * * * * *
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#initControlContext():314) - * CustomizeEntity *
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#initControlContext():315) - * * * * * * * * * *
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#showParameterBean():932) - * * * * * * * * *
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#showParameterBean():933) - * ParameterBean *
+2018-07-25 16:16:18,337 [main] INFO  (DfSql2EntityTask#showParameterBean():934) - * * * * * * * * *
+2018-07-25 16:16:18,341 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():253) - generator.parse("om/ControlSql2EntityJava.vm", ctx);
+2018-07-25 16:16:18,485 [main] INFO  (Database#doEnableSql2EntityOutputDirectory():1208) - ...Setting up sql2EntityOutputDirectory: ../src/main/java
+2018-07-25 16:16:18,487 [main] INFO  (DfOldClassHandler#info():1045) - public void deleteOldCustomizeClass() {
+2018-07-25 16:16:18,492 [main] INFO  (DfOldClassHandler#info():1045) - }
+2018-07-25 16:16:18,493 [main] INFO  (Database#info():2785) - public void parseCustomizeEntity() {
+2018-07-25 16:16:18,494 [main] INFO  (Database#info():2785) - }
+2018-07-25 16:16:18,505 [main] INFO  (DfSql2EntityTask#showTargetSqlFileInformation():303) - 
+/- - - - - - - - - - - - - - - - - - - - - - - -
+Target SQL files: 0
+
+- - - - - - - - - -/
+2018-07-25 16:16:18,506 [main] INFO  (DfRefreshMan#resolveProjectAutoDetect():105) - *Cannot auto-detect your refresh Eclipse proejct.
+2018-07-25 16:16:18,507 [main] INFO  (DfRefreshResourceProcess#show():299) - /===========================================================================
+2018-07-25 16:16:18,508 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Refreshing [$$AutoDetect$$] by http://localhost:8386/
+2018-07-25 16:16:18,509 [main] INFO  (DfRefreshResourceProcess#show():299) - ...Retrying refreshing by default secondary URL http://localhost:8387/
+2018-07-25 16:16:18,510 [main] INFO  (DfRefreshResourceProcess#show():299) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to refresh the resources.
+
+[Project List]
+[$$AutoDetect$$]
+
+[Request URL]
+http://localhost:8386/
+
+[IOExpception]
+ConnectException
+Connection refused (Connection refused)
+* * * * * * * * * */
+2018-07-25 16:16:18,510 [main] INFO  (DfRefreshResourceProcess#show():299) - ==========/
+2018-07-25 16:16:18,515 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():139) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s331ms
+
+  DBFLUTE_CLIENT: {dfclient}
+    database  = mysql
+    language  = java
+    container = spring
+    package   = filmarks.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:13306/filmarks
+    schema = {filmarks.$$NoNameSchema$$ as main}
+    user   = root
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = $$AutoDetect$$
+_/_/_/_/_/_/_/_/_/_/ {Sql2Entity}

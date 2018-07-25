@@ -46,6 +46,10 @@ public class RecommendService {
                 .distinct()
                 .collect(Collectors.toList());
 
+        if (favoritedArtistIds.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+
         ListResultBean<Artist> artists = artistBhv.selectList(artistCB -> {
             artistCB.query().addOrderBy_ArtistId_Asc();
             artistCB.query().setArtistId_InScope(favoritedArtistIds);
@@ -81,11 +85,9 @@ public class RecommendService {
             map.put(artists.get(k), scores.getEntry(0, k));
         }
 
-        int numberOfRecommendedArtist = 5;
         return map.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList())
-                .subList(0, numberOfRecommendedArtist - 1);
+                .collect(Collectors.toList());
     }
 }

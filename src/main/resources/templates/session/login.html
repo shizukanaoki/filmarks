@@ -120,7 +120,7 @@
         .login-input {
             display: block;
             width: 100%;
-            font-size: 2rem;
+            font-size: 0.9rem;
             padding: 0.5rem 1rem;
             box-shadow: none;
             border-color: #ccc;
@@ -168,6 +168,17 @@
             border-left-color: orange;
         }
 
+        .to_login_page {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .to_login_page a {
+            color: #999;
+            text-decoration: none;
+        }
+
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -179,8 +190,9 @@
 <div class="login">
     <header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
     <form class="login-form" th:method="post" th:action="@{/login}">
-        <input class="login-input" type="text" placeholder="Username" th:name="username"/>
-        <input class="login-input" type="password" placeholder="Password" th:name="password"/>
+        <input class="login-input" type="text" placeholder="ユーザ名" th:name="username" required>
+        <input class="login-input" type="password" placeholder="パスワード" th:name="password" required>
+        <div class="to_login_page"><a href="/signup">会員登録はこちらから</a></div>
         <button class="login-btn" type="submit">login</button>
     </form>
 </div>

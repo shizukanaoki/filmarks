@@ -329,6 +329,11 @@ public class BsSongCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSongTitle() { return doColumn("SONG_TITLE"); }
+        /**
+         * SONG_LYRICS: {TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnSongLyrics() { return doColumn("SONG_LYRICS"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -360,6 +365,23 @@ public class BsSongCB extends AbstractConditionBean {
                 }
             }
             return _album;
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from LYRICS_RECOMMENDATION where ...) as FOO_MAX} <br>
+         * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     recommendationCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     recommendationCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, LyricsRecommendation.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<LyricsRecommendationCB, SongCQ> derivedLyricsRecommendation() {
+            assertDerived("lyricsRecommendationList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LyricsRecommendationCB> sq, SongCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveLyricsRecommendationList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

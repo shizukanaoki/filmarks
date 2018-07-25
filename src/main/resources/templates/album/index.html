@@ -14,36 +14,37 @@
     <script type="text/javascript" src="/javascript/top_page.js"></script>
 </head>
 <body>
-        <!--<div sec:authorize="isAuthenticated()">-->
-            <!--<form th:action="@{/logout}" method="post">-->
-                <!--<input type="submit" value="Sign Out"/>-->
-            <!--</form>-->
-        <!--</div>-->
-        <div class="wrapper">
-            <ul class="sidebar">
-                <li class="sidebar_brand">
-                    <a href="">BLAND</a>
-                </li>
-                <li>
-                    <a href="">timeline</a>
-                </li>
-                <li>
-                    <a href="">favorites</a>
-                </li>
-            </ul>
-            <div class="sidebar_width">
+    <div class="wrapper">
+        <ul class="sidebar">
+            <li class="sidebar_brand">
+                <a href="">BLAND</a>
+            </li>
+            <li class="sidebar_active">
+                <a href="/">Recommendations</a>
+            </li>
+            <li>
+                <a href="/lyrics">Lyrics</a>
+            </li>
+            <li>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
+            </li>
+        </ul>
+        <div class="sidebar_width">
 
-            </div>
-            <div class="main">
-                <div class="products">
-                    <div class="product" th:each="album:${albums}">
-                        <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
-                            <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
-                        </a>
-                    </div>
+        </div>
+        <div class="main">
+            <div class="products">
+                <div class="product" th:each="album:${albums}">
+                    <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
+                        <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
 

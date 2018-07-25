@@ -19,7 +19,7 @@ import filmarks.dbflute.exentity.*;
  *     SONG_ID
  *
  * [column]
- *     SONG_ID, ALBUM_ID, SONG_TITLE
+ *     SONG_ID, ALBUM_ID, SONG_TITLE, SONG_LYRICS
  *
  * [sequence]
  *     
@@ -34,22 +34,24 @@ import filmarks.dbflute.exentity.*;
  *     ALBUM
  *
  * [referrer table]
- *     
+ *     LYRICS_RECOMMENDATION
  *
  * [foreign property]
  *     album
  *
  * [referrer property]
- *     
+ *     lyricsRecommendationList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer songId = entity.getSongId();
  * Integer albumId = entity.getAlbumId();
  * String songTitle = entity.getSongTitle();
+ * String songLyrics = entity.getSongLyrics();
  * entity.setSongId(songId);
  * entity.setAlbumId(albumId);
  * entity.setSongTitle(songTitle);
+ * entity.setSongLyrics(songLyrics);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -73,6 +75,9 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
 
     /** SONG_TITLE: {NotNull, VARCHAR(200)} */
     protected String _songTitle;
+
+    /** SONG_LYRICS: {TEXT(65535)} */
+    protected String _songLyrics;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -123,6 +128,26 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'. */
+    protected List<LyricsRecommendation> _lyricsRecommendationList;
+
+    /**
+     * [get] LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * @return The entity list of referrer property 'lyricsRecommendationList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<LyricsRecommendation> getLyricsRecommendationList() {
+        if (_lyricsRecommendationList == null) { _lyricsRecommendationList = newReferrerList(); }
+        return _lyricsRecommendationList;
+    }
+
+    /**
+     * [set] LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * @param lyricsRecommendationList The entity list of referrer property 'lyricsRecommendationList'. (NullAllowed)
+     */
+    public void setLyricsRecommendationList(List<LyricsRecommendation> lyricsRecommendationList) {
+        _lyricsRecommendationList = lyricsRecommendationList;
+    }
+
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
@@ -154,6 +179,8 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_album != null && _album.isPresent())
         { sb.append(li).append(xbRDS(_album, "album")); }
+        if (_lyricsRecommendationList != null) { for (LyricsRecommendation et : _lyricsRecommendationList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "lyricsRecommendationList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -166,6 +193,7 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
         sb.append(dm).append(xfND(_songId));
         sb.append(dm).append(xfND(_albumId));
         sb.append(dm).append(xfND(_songTitle));
+        sb.append(dm).append(xfND(_songLyrics));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -178,6 +206,8 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
         StringBuilder sb = new StringBuilder();
         if (_album != null && _album.isPresent())
         { sb.append(dm).append("album"); }
+        if (_lyricsRecommendationList != null && !_lyricsRecommendationList.isEmpty())
+        { sb.append(dm).append("lyricsRecommendationList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -250,5 +280,23 @@ public abstract class BsSong extends AbstractEntity implements DomainEntity {
     public void setSongTitle(String songTitle) {
         registerModifiedProperty("songTitle");
         _songTitle = songTitle;
+    }
+
+    /**
+     * [get] SONG_LYRICS: {TEXT(65535)} <br>
+     * @return The value of the column 'SONG_LYRICS'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getSongLyrics() {
+        checkSpecifiedProperty("songLyrics");
+        return _songLyrics;
+    }
+
+    /**
+     * [set] SONG_LYRICS: {TEXT(65535)} <br>
+     * @param songLyrics The value of the column 'SONG_LYRICS'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setSongLyrics(String songLyrics) {
+        registerModifiedProperty("songLyrics");
+        _songLyrics = songLyrics;
     }
 }

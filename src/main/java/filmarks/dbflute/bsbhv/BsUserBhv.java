@@ -1,25 +1,31 @@
 package filmarks.dbflute.bsbhv;
 
-import java.util.List;
-
-import org.dbflute.*;
-import org.dbflute.bhv.*;
+import filmarks.dbflute.bsbhv.loader.LoaderOfUser;
+import filmarks.dbflute.bsentity.dbmeta.UserDbm;
+import filmarks.dbflute.cbean.*;
+import filmarks.dbflute.exbhv.UserBhv;
+import filmarks.dbflute.exentity.*;
+import org.dbflute.Entity;
+import org.dbflute.bhv.AbstractBehaviorWritable;
+import org.dbflute.bhv.BehaviorSelector;
 import org.dbflute.bhv.core.BehaviorCommandInvoker;
-import org.dbflute.bhv.readable.*;
+import org.dbflute.bhv.readable.CBCall;
+import org.dbflute.bhv.readable.EntityRowHandler;
+import org.dbflute.bhv.referrer.LoadReferrerOption;
+import org.dbflute.bhv.referrer.NestedReferrerListGateway;
+import org.dbflute.bhv.referrer.ReferrerConditionSetupper;
+import org.dbflute.bhv.referrer.ReferrerLoaderHandler;
 import org.dbflute.bhv.writable.*;
-import org.dbflute.bhv.referrer.*;
-import org.dbflute.cbean.*;
+import org.dbflute.cbean.ConditionBean;
 import org.dbflute.cbean.chelper.HpSLSFunction;
-import org.dbflute.cbean.result.*;
+import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.exception.*;
 import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
-import org.dbflute.outsidesql.executor.*;
-import filmarks.dbflute.exbhv.*;
-import filmarks.dbflute.bsbhv.loader.*;
-import filmarks.dbflute.exentity.*;
-import filmarks.dbflute.bsentity.dbmeta.*;
-import filmarks.dbflute.cbean.*;
+import org.dbflute.outsidesql.executor.OutsideSqlAllFacadeExecutor;
+
+import java.util.List;
 
 /**
  * The behavior of USER as TABLE. <br>
@@ -43,13 +49,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, POST, USER_FOLLOWING
+ *     COMMENT, FAVORITE, LYRICS_RECOMMENDATION, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
+ *     commentList, favoriteList, lyricsRecommendationList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -512,6 +518,70 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
 
     protected NestedReferrerListGateway<Favorite> doLoadFavorite(List<User> userList, LoadReferrerOption<FavoriteCB, Favorite> option) {
         return helpLoadReferrerInternally(userList, option, "favoriteList");
+    }
+
+    /**
+     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
+     *     <span style="color: #553000">recommendationCB</span>.query().set...
+     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">userList</span>) {
+     *     ... = user.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param userList The entity list of user. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(List<User> userList, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
+        xassLRArg(userList, refCBLambda);
+        return doLoadLyricsRecommendation(userList, new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">user</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
+     *     <span style="color: #553000">recommendationCB</span>.query().set...
+     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">user</span>.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param user The entity of user. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(User user, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
+        xassLRArg(user, refCBLambda);
+        return doLoadLyricsRecommendation(xnewLRLs(user), new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<LyricsRecommendation> doLoadLyricsRecommendation(List<User> userList, LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation> option) {
+        return helpLoadReferrerInternally(userList, option, "lyricsRecommendationList");
     }
 
     /**

@@ -158,6 +158,79 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
     }
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select SONG_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of LyricsRecommendationList for 'exists'. (NotNull)
+     */
+    public void existsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSongId_ExistsReferrer_LyricsRecommendationList(cb.query());
+        registerExistsReferrer(cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select SONG_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SongId_NotExistsReferrer_LyricsRecommendationList for 'not exists'. (NotNull)
+     */
+    public void notExistsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSongId_NotExistsReferrer_LyricsRecommendationList(cb.query());
+        registerNotExistsReferrer(cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    public void xsderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "SONG_ID", "SONG_ID", pp, "lyricsRecommendationList", al, op);
+    }
+    public abstract String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedLyricsRecommendation()</span>.<span style="color: #CC4747">max</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     recommendationCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<LyricsRecommendationCB> derivedLyricsRecommendation() {
+        return xcreateQDRFunctionLyricsRecommendationList();
+    }
+    protected HpQDRFunction<LyricsRecommendationCB> xcreateQDRFunctionLyricsRecommendationList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveLyricsRecommendationList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepSongId_QueryDerivedReferrer_LyricsRecommendationList(cb.query()); String prpp = keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "SONG_ID", "SONG_ID", sqpp, "lyricsRecommendationList", rd, vl, prpp, op);
+    }
+    public abstract String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+    public abstract String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl);
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
      * SONG_ID: {PK, ID, NotNull, INT(10)}
      */
@@ -423,6 +496,159 @@ public abstract class AbstractBsSongCQ extends AbstractConditionQuery {
 
     protected void regSongTitle(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSongTitle(), "SONG_TITLE"); }
     protected abstract ConditionValue xgetCValueSongTitle();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_Equal(String songLyrics) {
+        doSetSongLyrics_Equal(fRES(songLyrics));
+    }
+
+    protected void doSetSongLyrics_Equal(String songLyrics) {
+        regSongLyrics(CK_EQ, songLyrics);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_NotEqual(String songLyrics) {
+        doSetSongLyrics_NotEqual(fRES(songLyrics));
+    }
+
+    protected void doSetSongLyrics_NotEqual(String songLyrics) {
+        regSongLyrics(CK_NES, songLyrics);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_GreaterThan(String songLyrics) {
+        regSongLyrics(CK_GT, fRES(songLyrics));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_LessThan(String songLyrics) {
+        regSongLyrics(CK_LT, fRES(songLyrics));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_GreaterEqual(String songLyrics) {
+        regSongLyrics(CK_GE, fRES(songLyrics));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_LessEqual(String songLyrics) {
+        regSongLyrics(CK_LE, fRES(songLyrics));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyricsList The collection of songLyrics as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_InScope(Collection<String> songLyricsList) {
+        doSetSongLyrics_InScope(songLyricsList);
+    }
+
+    protected void doSetSongLyrics_InScope(Collection<String> songLyricsList) {
+        regINS(CK_INS, cTL(songLyricsList), xgetCValueSongLyrics(), "SONG_LYRICS");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyricsList The collection of songLyrics as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     */
+    public void setSongLyrics_NotInScope(Collection<String> songLyricsList) {
+        doSetSongLyrics_NotInScope(songLyricsList);
+    }
+
+    protected void doSetSongLyrics_NotInScope(Collection<String> songLyricsList) {
+        regINS(CK_NINS, cTL(songLyricsList), xgetCValueSongLyrics(), "SONG_LYRICS");
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)} <br>
+     * <pre>e.g. setSongLyrics_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param songLyrics The value of songLyrics as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setSongLyrics_LikeSearch(String songLyrics, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setSongLyrics_LikeSearch(songLyrics, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)} <br>
+     * <pre>e.g. setSongLyrics_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param songLyrics The value of songLyrics as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setSongLyrics_LikeSearch(String songLyrics, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(songLyrics), xgetCValueSongLyrics(), "SONG_LYRICS", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setSongLyrics_NotLikeSearch(String songLyrics, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setSongLyrics_NotLikeSearch(songLyrics, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @param songLyrics The value of songLyrics as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setSongLyrics_NotLikeSearch(String songLyrics, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(songLyrics), xgetCValueSongLyrics(), "SONG_LYRICS", likeSearchOption);
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     */
+    public void setSongLyrics_IsNull() { regSongLyrics(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     */
+    public void setSongLyrics_IsNullOrEmpty() { regSongLyrics(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     */
+    public void setSongLyrics_IsNotNull() { regSongLyrics(CK_ISNN, DOBJ); }
+
+    protected void regSongLyrics(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSongLyrics(), "SONG_LYRICS"); }
+    protected abstract ConditionValue xgetCValueSongLyrics();
 
     // ===================================================================================
     //                                                                     ScalarCondition

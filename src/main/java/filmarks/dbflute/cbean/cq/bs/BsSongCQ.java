@@ -79,6 +79,20 @@ public class BsSongCQ extends AbstractBsSongCQ {
       return _songId; }
     protected ConditionValue xgetCValueSongId() { return xdfgetSongId(); }
 
+    public Map<String, LyricsRecommendationCQ> xdfgetSongId_ExistsReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_ExistsReferrer_LyricsRecommendationList"); }
+    public String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_ExistsReferrer_LyricsRecommendationList", sq); }
+
+    public Map<String, LyricsRecommendationCQ> xdfgetSongId_NotExistsReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_NotExistsReferrer_LyricsRecommendationList"); }
+    public String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_NotExistsReferrer_LyricsRecommendationList", sq); }
+
+    public Map<String, LyricsRecommendationCQ> xdfgetSongId_SpecifyDerivedReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_SpecifyDerivedReferrer_LyricsRecommendationList"); }
+    public String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_SpecifyDerivedReferrer_LyricsRecommendationList", sq); }
+
+    public Map<String, LyricsRecommendationCQ> xdfgetSongId_QueryDerivedReferrer_LyricsRecommendationList() { return xgetSQueMap("songId_QueryDerivedReferrer_LyricsRecommendationList"); }
+    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq) { return xkeepSQue("songId_QueryDerivedReferrer_LyricsRecommendationList", sq); }
+    public Map<String, Object> xdfgetSongId_QueryDerivedReferrer_LyricsRecommendationListParameter() { return xgetSQuePmMap("songId_QueryDerivedReferrer_LyricsRecommendationList"); }
+    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object pm) { return xkeepSQuePm("songId_QueryDerivedReferrer_LyricsRecommendationList", pm); }
+
     /**
      * Add order-by as ascend. <br>
      * SONG_ID: {PK, ID, NotNull, INT(10)}
@@ -132,6 +146,26 @@ public class BsSongCQ extends AbstractBsSongCQ {
      * @return this. (NotNull)
      */
     public BsSongCQ addOrderBy_SongTitle_Desc() { regOBD("SONG_TITLE"); return this; }
+
+    protected ConditionValue _songLyrics;
+    public ConditionValue xdfgetSongLyrics()
+    { if (_songLyrics == null) { _songLyrics = nCV(); }
+      return _songLyrics; }
+    protected ConditionValue xgetCValueSongLyrics() { return xdfgetSongLyrics(); }
+
+    /**
+     * Add order-by as ascend. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongLyrics_Asc() { regOBA("SONG_LYRICS"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * SONG_LYRICS: {TEXT(65535)}
+     * @return this. (NotNull)
+     */
+    public BsSongCQ addOrderBy_SongLyrics_Desc() { regOBD("SONG_LYRICS"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

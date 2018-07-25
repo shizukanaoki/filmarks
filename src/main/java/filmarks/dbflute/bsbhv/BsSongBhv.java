@@ -28,7 +28,7 @@ import filmarks.dbflute.cbean.*;
  *     SONG_ID
  *
  * [column]
- *     SONG_ID, ALBUM_ID, SONG_TITLE
+ *     SONG_ID, ALBUM_ID, SONG_TITLE, SONG_LYRICS
  *
  * [sequence]
  *     
@@ -43,13 +43,13 @@ import filmarks.dbflute.cbean.*;
  *     ALBUM
  *
  * [referrer table]
- *     
+ *     LYRICS_RECOMMENDATION
  *
  * [foreign property]
  *     album
  *
  * [referrer property]
- *     
+ *     lyricsRecommendationList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -359,6 +359,70 @@ public abstract class BsSongBhv extends AbstractBehaviorWritable<Song, SongCB> {
     public void load(Song song, ReferrerLoaderHandler<LoaderOfSong> loaderLambda) {
         xassLRArg(song, loaderLambda);
         loaderLambda.handle(new LoaderOfSong().ready(xnewLRAryLs(song), _behaviorSelector));
+    }
+
+    /**
+     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * <pre>
+     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">songList</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
+     *     <span style="color: #553000">recommendationCB</span>.query().set...
+     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Song song : <span style="color: #553000">songList</span>) {
+     *     ... = song.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSongId_InScope(pkList);
+     * cb.query().addOrderBy_SongId_Asc();
+     * </pre>
+     * @param songList The entity list of song. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(List<Song> songList, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
+        xassLRArg(songList, refCBLambda);
+        return doLoadLyricsRecommendation(songList, new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * <pre>
+     * <span style="color: #0000C0">songBhv</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">song</span>, <span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">recommendationCB</span>.setupSelect...
+     *     <span style="color: #553000">recommendationCB</span>.query().set...
+     *     <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">song</span>.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSongId_InScope(pkList);
+     * cb.query().addOrderBy_SongId_Asc();
+     * </pre>
+     * @param song The entity of song. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<LyricsRecommendation> loadLyricsRecommendation(Song song, ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
+        xassLRArg(song, refCBLambda);
+        return doLoadLyricsRecommendation(xnewLRLs(song), new LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<LyricsRecommendation> doLoadLyricsRecommendation(List<Song> songList, LoadReferrerOption<LyricsRecommendationCB, LyricsRecommendation> option) {
+        return helpLoadReferrerInternally(songList, option, "lyricsRecommendationList");
     }
 
     // ===================================================================================

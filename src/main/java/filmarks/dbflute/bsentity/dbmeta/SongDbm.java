@@ -46,6 +46,7 @@ public class SongDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Song)et).getSongId(), (et, vl) -> ((Song)et).setSongId(cti(vl)), "songId");
         setupEpg(_epgMap, et -> ((Song)et).getAlbumId(), (et, vl) -> ((Song)et).setAlbumId(cti(vl)), "albumId");
         setupEpg(_epgMap, et -> ((Song)et).getSongTitle(), (et, vl) -> ((Song)et).setSongTitle((String)vl), "songTitle");
+        setupEpg(_epgMap, et -> ((Song)et).getSongLyrics(), (et, vl) -> ((Song)et).setSongLyrics((String)vl), "songLyrics");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -78,9 +79,10 @@ public class SongDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnSongId = cci("SONG_ID", "SONG_ID", null, null, Integer.class, "songId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSongId = cci("SONG_ID", "SONG_ID", null, null, Integer.class, "songId", null, true, true, true, "INT", 10, 0, null, null, false, null, null, null, "lyricsRecommendationList", null, false);
     protected final ColumnInfo _columnAlbumId = cci("ALBUM_ID", "ALBUM_ID", null, null, Integer.class, "albumId", null, false, false, true, "INT", 10, 0, null, null, false, null, null, "album", null, null, false);
     protected final ColumnInfo _columnSongTitle = cci("SONG_TITLE", "SONG_TITLE", null, null, String.class, "songTitle", null, false, false, true, "VARCHAR", 200, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSongLyrics = cci("SONG_LYRICS", "SONG_LYRICS", null, null, String.class, "songLyrics", null, false, false, false, "TEXT", 65535, 0, null, null, false, null, null, null, null, null, false);
 
     /**
      * SONG_ID: {PK, ID, NotNull, INT(10)}
@@ -97,12 +99,18 @@ public class SongDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSongTitle() { return _columnSongTitle; }
+    /**
+     * SONG_LYRICS: {TEXT(65535)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnSongLyrics() { return _columnSongLyrics; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnSongId());
         ls.add(columnAlbumId());
         ls.add(columnSongTitle());
+        ls.add(columnSongLyrics());
         return ls;
     }
 
@@ -138,6 +146,14 @@ public class SongDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * LYRICS_RECOMMENDATION by SONG_ID, named 'lyricsRecommendationList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerLyricsRecommendationList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSongId(), LyricsRecommendationDbm.getInstance().columnSongId());
+        return cri("FK_LYRICS_RECOMMENDATION_SONG", "lyricsRecommendationList", this, LyricsRecommendationDbm.getInstance(), mp, false, "song");
+    }
 
     // ===================================================================================
     //                                                                        Various Info

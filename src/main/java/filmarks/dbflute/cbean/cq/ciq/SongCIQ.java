@@ -62,8 +62,19 @@ public class SongCIQ extends AbstractBsSongCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue xgetCValueSongId() { return _myCQ.xdfgetSongId(); }
+    public String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
     protected ConditionValue xgetCValueSongTitle() { return _myCQ.xdfgetSongTitle(); }
+    protected ConditionValue xgetCValueSongLyrics() { return _myCQ.xdfgetSongLyrics(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(SongCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
