@@ -39,7 +39,10 @@ public class FavoriteService {
         return favorite;
     }
 
+    @Transactional
     public void delete(Favorite favorite) {
         favoriteRepository.delete(favorite);
+        Post post = postRepository.findOne(favorite.getFavoriteId(), "Favorite", favorite.getUserId());
+        postRepository.delete(post.getPostId());
     }
 }

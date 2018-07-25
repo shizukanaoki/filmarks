@@ -20,4 +20,18 @@ public class PostRepository {
         postBhv.insert(post);
         return post;
     }
+
+    public void delete(int postId) {
+        Post post = postBhv.selectByPK(postId).get();
+        postBhv.delete(post);
+    }
+
+    public Post findOne(int targetId, String targetType, int userId) {
+        Post post = postBhv.selectEntity(cb -> {
+            cb.query().setTargetId_Equal(targetId);
+            cb.query().setTargetType_Equal(targetType);
+            cb.query().setUserId_Equal(userId);
+        }).get();
+        return post;
+    }
 }
