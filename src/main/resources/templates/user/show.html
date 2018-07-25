@@ -35,13 +35,13 @@
                 <a href="">follower</a>
             </li>
             <li th:if="${!isFollowing}">
-                <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                    <a href="javascript:form.submit()">follow</a>
+                <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">follow</button>
                 </form>
             </li>
             <li th:if="${isFollowing}">
-                <form name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                    <a href="javascript:form.submit()">unfollow</a>
+                <form class="follow_form" name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">unfollow</button>
                 </form>
             </li>
         </ul>

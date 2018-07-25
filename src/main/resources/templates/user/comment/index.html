@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/comment.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
 </head>
 <body>
 <div>
@@ -35,13 +37,13 @@
                 <a href="">follower</a>
             </li>
             <li th:if="${!isFollowing}">
-                <form name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                    <a href="javascript:form.submit()">follow</a>
+                <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">follow</button>
                 </form>
             </li>
             <li th:if="${isFollowing}">
-                <form name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                    <a href="javascript:form.submit()">unfollow</a>
+                <form class="follow_form" name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">unfollow</button>
                 </form>
             </li>
         </ul>

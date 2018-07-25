@@ -54,3 +54,24 @@ ul.sidebar {
 .checked {
     color: orange;
 }
+
+.follow_btn {
+    display: inline-block;
+    background-color: rgba(0,0,0,0);
+    width: 120px;
+    font-size: 16px;
+    text-decoration: none;
+    color: orange;
+    border: solid 1px orange;
+    padding: 8px 0;
+    transition: .4s;
+}
+
+.follow_btn:hover {
+    color: #333;
+    background-color: orange;
+}
+
+.follow_form {
+    text-align: center;
+}
