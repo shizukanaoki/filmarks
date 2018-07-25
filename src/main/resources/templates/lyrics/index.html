@@ -23,13 +23,16 @@
             <a href="">BLAND</a>
         </li>
         <li>
-            <a href="">timeline</a>
+            <a href="/">Recommendations</a>
+        </li>
+        <li class="sidebar_active">
+            <a href="/">Lyrics</a>
         </li>
         <li>
-            <a href="">favorites</a>
+            <a href="/timeline">Timeline</a>
         </li>
         <li>
-            <a href="">lyrics</a>
+            <a th:href="${'/users/' + user.getUserId()}">Mypage</a>
         </li>
     </ul>
     <div class="sidebar_width"></div>

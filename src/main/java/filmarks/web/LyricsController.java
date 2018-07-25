@@ -3,6 +3,7 @@ package filmarks.web;
 import filmarks.dbflute.exentity.*;
 import filmarks.service.LyricsRecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,8 @@ public class LyricsController {
     LyricsRecommendationService lyricsRecommendationService;
 
     @RequestMapping("/lyrics")
-    public ModelAndView index(ModelAndView mav) {
+    public ModelAndView index(@AuthenticationPrincipal User loginUser, ModelAndView mav) {
+        mav.addObject("user", loginUser);
         List<LyricsRecommendation> recommendations = lyricsRecommendationService.findAll();
         List<Map<String, String>> posts = new ArrayList<>();
 
