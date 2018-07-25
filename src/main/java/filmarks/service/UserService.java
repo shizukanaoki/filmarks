@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * Userに関係する操作を担当するクラス
  *
@@ -35,6 +37,14 @@ public class UserService implements UserDetailsService {
 
     public User findOne(int userId) throws EntityAlreadyDeletedException {
         return userRepository.findOne(userId);
+    }
+
+    public List<User> findFollowings(int userId) {
+        return userRepository.findFollowings(userId);
+    }
+
+    public List<User> findFollowers(int userId) {
+        return userRepository.findFollowers(userId);
     }
 
     public User create(User user) {

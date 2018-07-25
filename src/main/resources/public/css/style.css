@@ -12,6 +12,7 @@ ul.sidebar {
     width: 200px;
     background-color: #333;
     box-shadow: 8px 0px 8px -1px rgba(0,0,0,0.2);
+    z-index: 999;
 }
 
 .sidebar_width {
@@ -20,6 +21,7 @@ ul.sidebar {
 
 .sidebar>li {
     padding: 20px;
+    overflow-wrap: break-word;
 }
 
 .sidebar>li a {

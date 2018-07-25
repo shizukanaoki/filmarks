@@ -31,10 +31,10 @@
                 <a th:href="@{'/users/' + ${user.getUserId()} + '/comments'}">comments</a>
             </li>
             <li>
-                <a href="">following</a>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/followings'}">following</a>
             </li>
             <li>
-                <a href="">follower</a>
+                <a th:href="@{'/users/' + ${user.getUserId()} + '/followers'}">follower</a>
             </li>
             <li th:if="${!isFollowing}">
                 <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
