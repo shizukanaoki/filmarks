@@ -20,7 +20,8 @@
                 <a href="/" th:text="BLAND"></a>
             </li>
             <li>
-                <span class="sidebar_username" th:text="${user.getUsername()} + 'さん'"></span>
+                <div class="sidebar_username" th:text="${user.getUsername()}"></div>
+                <div class="sidebar_description">のマイページ</div>
             </li>
             <li class="sidebar_active">
                 <a th:href="@{'/users/' + ${user.getUserId()}}">favorites</a>
