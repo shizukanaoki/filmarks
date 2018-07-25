@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SongController {
 
     @Autowired
-    SongService songService;
+    private SongService songService;
 
     @RequestMapping("/songs/{songId}")
     public ModelAndView show(@ModelAttribute("form") LyricsRecommendationForm form, @PathVariable int songId, @AuthenticationPrincipal User user, ModelAndView mav) {

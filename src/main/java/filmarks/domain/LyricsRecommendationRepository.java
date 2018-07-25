@@ -14,9 +14,8 @@ public class LyricsRecommendationRepository {
     @Autowired
     LyricsRecommendationBhv lyricsRecommendationBhv;
 
-    public LyricsRecommendation save(LyricsRecommendation lyricsRecommendation) {
+    public void save(LyricsRecommendation lyricsRecommendation) {
         lyricsRecommendationBhv.insert(lyricsRecommendation);
-        return lyricsRecommendation;
     }
 
     public List<LyricsRecommendation> findAll() {

@@ -1,6 +1,11 @@
 package filmarks.web;
 
-import filmarks.dbflute.exentity.*;
+
+import filmarks.dbflute.exentity.Album;
+import filmarks.dbflute.exentity.Artist;
+import filmarks.dbflute.exentity.LyricsRecommendation;
+import filmarks.dbflute.exentity.Song;
+import filmarks.dbflute.exentity.User;
 import filmarks.service.LyricsRecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +25,7 @@ import java.util.Map;
 public class LyricsController {
 
     @Autowired
-    LyricsRecommendationService lyricsRecommendationService;
+    private LyricsRecommendationService lyricsRecommendationService;
 
     @RequestMapping("/lyrics")
     public ModelAndView index(@AuthenticationPrincipal User loginUser, ModelAndView mav) {

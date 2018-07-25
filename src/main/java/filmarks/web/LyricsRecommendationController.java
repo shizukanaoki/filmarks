@@ -33,14 +33,14 @@ public class LyricsRecommendationController {
 
     @RequestMapping("/songs/{songId}/lyricsRecommendation")
     public ModelAndView create(@ModelAttribute("form") @Validated LyricsRecommendationForm form, BindingResult result, @PathVariable int songId, @AuthenticationPrincipal User user) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
+            return new ModelAndView("redirect:/songs/" + songId);
+        } else {
             LyricsRecommendation recommendation = new LyricsRecommendation();
             recommendation.setSongId(songId);
             recommendation.setUserId(user.getUserId());
             recommendation.setLyrics(form.getLyrics());
             lyricsRecommendationService.create(recommendation);
-            return new ModelAndView("redirect:/songs/" + songId);
-        } else {
             return new ModelAndView("redirect:/songs/" + songId);
         }
     }

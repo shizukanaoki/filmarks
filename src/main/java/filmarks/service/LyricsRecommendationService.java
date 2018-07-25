@@ -13,9 +13,8 @@ public class LyricsRecommendationService {
     @Autowired
     LyricsRecommendationRepository lyricsRecommendationRepository;
 
-    public LyricsRecommendation create(LyricsRecommendation lyricsRecommendation) {
+    public void create(LyricsRecommendation lyricsRecommendation) {
         lyricsRecommendationRepository.save(lyricsRecommendation);
-        return lyricsRecommendation;
     }
 
     public List<LyricsRecommendation> findAll() {
