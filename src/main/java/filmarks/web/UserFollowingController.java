@@ -32,6 +32,7 @@ public class UserFollowingController {
 
     @RequestMapping(value = "/users/{userId}/followings", method = RequestMethod.GET)
     public ModelAndView followings(@PathVariable int userId, @AuthenticationPrincipal User loginUser, ModelAndView mav) {
+        mav.addObject("loginUser", loginUser);
         User user = userService.findOne(userId);
         mav.addObject("user", user);
         boolean isFollowing = userFollowingService.isFollowing(loginUser.getUserId(), user.getUserId());
@@ -44,6 +45,7 @@ public class UserFollowingController {
 
     @RequestMapping(value = "/users/{userId}/followers", method = RequestMethod.GET)
     public ModelAndView followers(@PathVariable int userId, @AuthenticationPrincipal User loginUser, ModelAndView mav) {
+        mav.addObject("loginUser", loginUser);
         User user = userService.findOne(userId);
         mav.addObject("user", user);
         boolean isFollowing = userFollowingService.isFollowing(loginUser.getUserId(), user.getUserId());

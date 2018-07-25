@@ -49,38 +49,48 @@
 
     </div>
     <div class="main">
-        <div class="follows">
-            <th:block th:each="following : ${followings}">
-                <th:block th:if="${!following.getFavoriteList().isEmpty()}">
-                    <th:block th:with="latestFavoritedAlbum = ${following.getFavoriteList().get(0).getAlbum().get()}">
-                        <div class="follow" th:style="|background-image: url(${'/image/album/' + latestFavoritedAlbum.getImageFileName()})|">
+        <th:block th:if="${!followings.isEmpty()}">
+            <div class="follows">
+                <th:block th:each="following : ${followings}">
+                    <th:block th:if="${!following.getFavoriteList().isEmpty()}">
+                        <th:block th:with="latestFavoritedAlbum = ${following.getFavoriteList().get(0).getAlbum().get()}">
+                            <div class="follow" th:style="|background-image: url(${'/image/album/' + latestFavoritedAlbum.getImageFileName()})|">
+                                <a th:href="${'/users/' + following.getUserId()}">
+                                    <div class="follow_mask">
+                                        <div class="follow_info">
+                                            <div th:text="${following.getUsername()}" class="follow_username"></div>
+                                            <div class="follow_info_bottom">
+                                                <div class="follow_info_bottom_title">favorite album</div>
+                                                <div th:text="${latestFavoritedAlbum.getAlbumTitle()}" class="follow_favorite_album_title"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${following.getFavoriteList().isEmpty()}">
+                        <div class="follow" style="background-image:url('/image/default.png')">
                             <a th:href="${'/users/' + following.getUserId()}">
                                 <div class="follow_mask">
                                     <div class="follow_info">
                                         <div th:text="${following.getUsername()}" class="follow_username"></div>
-                                        <div class="follow_info_bottom">
-                                            <div class="follow_info_bottom_title">favorite album</div>
-                                            <div th:text="${latestFavoritedAlbum.getAlbumTitle()}" class="follow_favorite_album_title"></div>
-                                        </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     </th:block>
                 </th:block>
-                <th:block th:if="${following.getFavoriteList().isEmpty()}">
-                    <div class="follow" style="background-image:url('/image/default.png')">
-                        <a th:href="${'/users/' + following.getUserId()}">
-                            <div class="follow_mask">
-                                <div class="follow_info">
-                                    <div th:text="${following.getUsername()}" class="follow_username"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+            </div>
+        </th:block>
+        <th:block  th:if="${followings.isEmpty()}">
+            <div class="suggestion">
+                フォローはいません。
+                <th:block th:if="${loginUser.equals(user)}">
+                    <br>気になる人をフォローしてみましょう。
                 </th:block>
-            </th:block>
-        </div>
+            </div>
+        </th:block>
     </div>
 </div>
 </body>

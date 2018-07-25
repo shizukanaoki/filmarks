@@ -49,13 +49,23 @@
         <div class="sidebar_width">
         </div>
         <div class="main">
-            <div class="products">
-                <div class="product" th:each="album:${albums}">
-                    <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
-                        <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
-                    </a>
+            <th:block th:if="${!albums.isEmpty()}">
+                <div class="products">
+                    <div class="product" th:each="album:${albums}">
+                        <a th:href="@{'/albums/' + ${album.getAlbumId()}}">
+                            <img th:src="@{'/image/album/' + ${album.getImageFileName()}}"/>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </th:block>
+            <th:block th:if="${albums.isEmpty()}">
+                <div class="suggestion">
+                    お気に入りに登録されたアルバムがありません。
+                    <th:block th:if="${loginUser.equals(user)}">
+                        <br>好きなアルバムをお気に入りに登録してみましょう。
+                    </th:block>
+                </div>
+            </th:block>
         </div>
     </div>
 </div>

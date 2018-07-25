@@ -90,3 +90,9 @@ ul.sidebar {
 .follow_form {
     text-align: center;
 }
+
+.suggestion {
+    padding: 40px;
+    font-size: 20px;
+    line-height: 3rem;
+}

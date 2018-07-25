@@ -51,23 +51,34 @@
         <div class="sidebar_width">
         </div>
         <div class="main">
-            <div class="comments">
-                <div th:each="comment: ${user.getCommentList()}" class="comment">
-                    <a th:href="${'/albums/' + comment.getAlbum().get().getAlbumId()}">
-                        <img th:src="${'/image/album/' + comment.getAlbum().get().getImageFileName()}" alt="">
-                    </a>
-                    <div class="comment_info">
-                        <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
-                        <div class="comment_rate">
-                            <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
-                                <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
-                                <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
-                            </th:block>
+            <th:block th:if="${!user.getCommentList().isEmpty()}">
+                <div class="comments">
+                    <div th:each="comment: ${user.getCommentList()}" class="comment">
+                        <a th:href="${'/albums/' + comment.getAlbum().get().getAlbumId()}">
+                            <img th:src="${'/image/album/' + comment.getAlbum().get().getImageFileName()}" alt="">
+                        </a>
+                        <div class="comment_info">
+                            <div class="comment_datetime" th:text="${#temporals.format(comment.getCommentCreatedAt(), 'yyyy/MM/dd HH:mm')}"></div>
+                            <div class="comment_rate">
+                                <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
+                                    <span th:if="${seq <= comment.getDisplayRate()}" class="fa fa-star checked"></span>
+                                    <span th:unless="${seq <= comment.getDisplayRate()}" class="fa fa-star"></span>
+                                </th:block>
+                            </div>
+                            <div class="comment_content" th:text="${comment.getContent()}"></div>
                         </div>
-                        <div class="comment_content" th:text="${comment.getContent()}"></div>
                     </div>
                 </div>
-            </div>
+            </th:block>
+            <th:block th:if="${user.getCommentList().isEmpty()}">
+                <div class="suggestion">
+                    投稿されたコメントはありません。
+                    <th:block th:if="${loginUser.equals(user)}">
+                        <br>アルバムにコメントをしてみましょう。
+                    </th:block>
+                </div>
+            </th:block>
+
         </div>
     </div>
 </div>
