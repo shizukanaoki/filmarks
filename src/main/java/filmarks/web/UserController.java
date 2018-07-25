@@ -57,15 +57,15 @@ public class UserController {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView create(@ModelAttribute("userForm") @Validated UserForm userForm, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
+            return new ModelAndView("redirect:/signup");
+        } else {
             User user = new User();
             user.setUsername(userForm.getUsername());
             user.setPassword(userForm.getPassword());
             userService.create(user);
             return new ModelAndView("redirect:/login");
-        } else {
-            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
         }
-        return new ModelAndView("redirect:/signup");
     }
 }
