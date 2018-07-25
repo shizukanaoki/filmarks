@@ -6,11 +6,16 @@ import org.dbflute.optional.OptionalEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * FavoriteのCRUDを担当するクラス
+ *
+ * @author naoki.shizuka
+ */
 @Repository
 public class FavoriteRepository {
 
     @Autowired
-    FavoriteBhv favoriteBhv;
+    private FavoriteBhv favoriteBhv;
 
     public OptionalEntity<Favorite> findByUserIdAndAlbumId(int userId, int albumId) {
         return favoriteBhv.selectEntity(cb -> {

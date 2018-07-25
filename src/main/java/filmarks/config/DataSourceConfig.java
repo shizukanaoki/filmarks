@@ -7,6 +7,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
+/**
+ * DataSourceを定義するクラス
+ * DBFluteがDBに接続するために必要となる
+ *
+ * @author naoki.shizuka
+ */
 @Configuration
 public class DataSourceConfig {
 
