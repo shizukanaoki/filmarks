@@ -1,25 +1,31 @@
 package filmarks.dbflute.bsbhv;
 
-import java.util.List;
-
-import org.dbflute.*;
-import org.dbflute.bhv.*;
+import filmarks.dbflute.bsbhv.loader.LoaderOfUser;
+import filmarks.dbflute.bsentity.dbmeta.UserDbm;
+import filmarks.dbflute.cbean.*;
+import filmarks.dbflute.exbhv.UserBhv;
+import filmarks.dbflute.exentity.*;
+import org.dbflute.Entity;
+import org.dbflute.bhv.AbstractBehaviorWritable;
+import org.dbflute.bhv.BehaviorSelector;
 import org.dbflute.bhv.core.BehaviorCommandInvoker;
-import org.dbflute.bhv.readable.*;
+import org.dbflute.bhv.readable.CBCall;
+import org.dbflute.bhv.readable.EntityRowHandler;
+import org.dbflute.bhv.referrer.LoadReferrerOption;
+import org.dbflute.bhv.referrer.NestedReferrerListGateway;
+import org.dbflute.bhv.referrer.ReferrerConditionSetupper;
+import org.dbflute.bhv.referrer.ReferrerLoaderHandler;
 import org.dbflute.bhv.writable.*;
-import org.dbflute.bhv.referrer.*;
-import org.dbflute.cbean.*;
+import org.dbflute.cbean.ConditionBean;
 import org.dbflute.cbean.chelper.HpSLSFunction;
-import org.dbflute.cbean.result.*;
+import org.dbflute.cbean.result.ListResultBean;
+import org.dbflute.cbean.result.PagingResultBean;
 import org.dbflute.exception.*;
 import org.dbflute.hook.CommonColumnAutoSetupper;
 import org.dbflute.optional.OptionalEntity;
-import org.dbflute.outsidesql.executor.*;
-import filmarks.dbflute.exbhv.*;
-import filmarks.dbflute.bsbhv.loader.*;
-import filmarks.dbflute.exentity.*;
-import filmarks.dbflute.bsentity.dbmeta.*;
-import filmarks.dbflute.cbean.*;
+import org.dbflute.outsidesql.executor.OutsideSqlAllFacadeExecutor;
+
+import java.util.List;
 
 /**
  * The behavior of USER as TABLE. <br>

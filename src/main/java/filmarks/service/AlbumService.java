@@ -20,4 +20,8 @@ public class AlbumService {
     public Album findOne(int albumId) {
         return albumRepository.findOne(albumId);
     }
+
+    public List<Album> findAlbumsByScope(List<Integer> ids) {
+        return albumRepository.findByScope(ids);
+    }
 }

@@ -34,4 +34,10 @@ public class AlbumRepository {
         });
         return album;
     }
+
+    public List<Album> findByScope(List<Integer> ids) {
+        return albumBhv.selectList(cb -> {
+            cb.query().setArtistId_InScope(ids);
+        });
+    }
 }
