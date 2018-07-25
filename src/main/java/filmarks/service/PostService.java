@@ -9,6 +9,7 @@ import org.dbflute.cbean.result.ListResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,10 @@ public class PostService {
         List<Integer> followingIds = user.getUserFollowingByFollowingIdList().stream()
                 .map(following -> following.getFollowerId())
                 .collect(Collectors.toList());
+
+        if (followingIds.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
 
         ListResultBean<Post> posts = postBhv.selectList(postCB -> {
             postCB.setupSelect_User();
