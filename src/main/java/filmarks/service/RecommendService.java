@@ -43,6 +43,7 @@ public class RecommendService {
 
         List<Integer> favoritedArtistIds = favorites.stream()
                 .map(favorite -> favorite.getAlbum().get().getArtistId())
+                .filter(artistId -> artistId != null)
                 .distinct()
                 .collect(Collectors.toList());
 
