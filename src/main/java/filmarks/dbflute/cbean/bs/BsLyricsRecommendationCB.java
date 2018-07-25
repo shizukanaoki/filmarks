@@ -18,22 +18,23 @@ import filmarks.dbflute.allcommon.ImplementedInvokerAssistant;
 import filmarks.dbflute.allcommon.ImplementedSqlClauseCreator;
 import filmarks.dbflute.cbean.*;
 import filmarks.dbflute.cbean.cq.*;
+import filmarks.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of USER.
+ * The base condition-bean of LYRICS_RECOMMENDATION.
  * @author DBFlute(AutoGenerator)
  */
-public class BsUserCB extends AbstractConditionBean {
+public class BsLyricsRecommendationCB extends AbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected UserCQ _conditionQuery;
+    protected LyricsRecommendationCQ _conditionQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsUserCB() {
+    public BsLyricsRecommendationCB() {
         if (DBFluteConfig.getInstance().isPagingCountLater()) {
             enablePagingCountLater();
         }
@@ -73,7 +74,7 @@ public class BsUserCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "USER";
+        return "LYRICS_RECOMMENDATION";
     }
 
     // ===================================================================================
@@ -81,35 +82,23 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param userId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param id : PK, ID, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public UserCB acceptPK(Integer userId) {
-        assertObjectNotNull("userId", userId);
-        BsUserCB cb = this;
-        cb.query().setUserId_Equal(userId);
-        return (UserCB)this;
-    }
-
-    /**
-     * Accept the query condition of unique key as equal.
-     * @param username : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return this. (NotNull)
-     */
-    public UserCB acceptUniqueOf(String username) {
-        assertObjectNotNull("username", username);
-        BsUserCB cb = this;
-        cb.query().setUsername_Equal(username);
-        return (UserCB)this;
+    public LyricsRecommendationCB acceptPK(Integer id) {
+        assertObjectNotNull("id", id);
+        BsLyricsRecommendationCB cb = this;
+        cb.query().setId_Equal(id);
+        return (LyricsRecommendationCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_UserId_Asc();
+        query().addOrderBy_Id_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_UserId_Desc();
+        query().addOrderBy_Id_Desc();
         return this;
     }
 
@@ -173,34 +162,34 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
-    public UserCQ query() {
+    public LyricsRecommendationCQ query() {
         assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
-    public UserCQ xdfgetConditionQuery() { // public for parameter comment and internal
+    public LyricsRecommendationCQ xdfgetConditionQuery() { // public for parameter comment and internal
         return doGetConditionQuery();
     }
 
-    protected UserCQ doGetConditionQuery() {
+    protected LyricsRecommendationCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected UserCQ createLocalCQ() {
+    protected LyricsRecommendationCQ createLocalCQ() {
         return xcreateCQ(null, getSqlClause(), getSqlClause().getBasePointAliasName(), 0);
     }
 
-    protected UserCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        UserCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected LyricsRecommendationCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        LyricsRecommendationCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
         cq.xsetBaseCB(this);
         return cq;
     }
 
-    protected UserCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        return new UserCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected LyricsRecommendationCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        return new LyricsRecommendationCQ(childQuery, sqlClause, aliasName, nestLevel);
     }
 
     /**
@@ -224,10 +213,10 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
-    public void union(UnionQuery<UserCB> unionCBLambda) {
-        final UserCB cb = new UserCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void union(UnionQuery<LyricsRecommendationCB> unionCBLambda) {
+        final LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final UserCQ cq = cb.query(); query().xsetUnionQuery(cq);
+        final LyricsRecommendationCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
 
     /**
@@ -241,15 +230,64 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union all'. (NotNull)
      */
-    public void unionAll(UnionQuery<UserCB> unionCBLambda) {
-        final UserCB cb = new UserCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void unionAll(UnionQuery<LyricsRecommendationCB> unionCBLambda) {
+        final LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final UserCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
+        final LyricsRecommendationCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
     }
 
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
+    protected SongNss _nssSong;
+    public SongNss xdfgetNssSong() {
+        if (_nssSong == null) { _nssSong = new SongNss(null); }
+        return _nssSong;
+    }
+    /**
+     * Set up relation columns to select clause. <br>
+     * SONG by my SONG_ID, named 'song'.
+     * <pre>
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Song()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">lyricsRecommendation</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">lyricsRecommendation</span>.<span style="color: #CC4747">getSong()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public SongNss setupSelect_Song() {
+        assertSetupSelectPurpose("song");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnSongId();
+        }
+        doSetupSelect(() -> query().querySong());
+        if (_nssSong == null || !_nssSong.hasConditionQuery())
+        { _nssSong = new SongNss(query().querySong()); }
+        return _nssSong;
+    }
+
+    /**
+     * Set up relation columns to select clause. <br>
+     * USER by my USER_ID, named 'user'.
+     * <pre>
+     * <span style="color: #0000C0">lyricsRecommendationBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_User()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">lyricsRecommendation</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">lyricsRecommendation</span>.<span style="color: #CC4747">getUser()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     */
+    public void setupSelect_User() {
+        assertSetupSelectPurpose("user");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnUserId();
+        }
+        doSetupSelect(() -> query().queryUser());
+    }
+
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -290,143 +328,96 @@ public class BsUserCB extends AbstractConditionBean {
         return _specification != null && _specification.hasSpecifiedColumn();
     }
 
-    public static class HpSpecification extends HpAbstractSpecification<UserCQ> {
-        public HpSpecification(ConditionBean baseCB, HpSpQyCall<UserCQ> qyCall
+    public static class HpSpecification extends HpAbstractSpecification<LyricsRecommendationCQ> {
+        protected SongCB.HpSpecification _song;
+        protected UserCB.HpSpecification _user;
+        public HpSpecification(ConditionBean baseCB, HpSpQyCall<LyricsRecommendationCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * USER_ID: {PK, ID, NotNull, INT(10)}
+         * ID: {PK, ID, NotNull, INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnId() { return doColumn("ID"); }
+        /**
+         * USER_ID: {IX, NotNull, INT(10), FK to USER}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * USERNAME: {UQ, NotNull, VARCHAR(100)}
+         * SONG_ID: {IX, NotNull, INT(10), FK to SONG}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnUsername() { return doColumn("USERNAME"); }
+        public SpecifiedColumn columnSongId() { return doColumn("SONG_ID"); }
         /**
-         * PASSWORD: {NotNull, VARCHAR(100)}
+         * LYRICS: {NotNull, TEXT(65535)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
+        public SpecifiedColumn columnLyrics() { return doColumn("LYRICS"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnUserId(); // PK
+            columnId(); // PK
+            if (qyCall().qy().hasConditionQuerySong()
+                    || qyCall().qy().xgetReferrerQuery() instanceof SongCQ) {
+                columnSongId(); // FK or one-to-one referrer
+            }
+            if (qyCall().qy().hasConditionQueryUser()
+                    || qyCall().qy().xgetReferrerQuery() instanceof UserCQ) {
+                columnUserId(); // FK or one-to-one referrer
+            }
         }
         @Override
-        protected String getTableDbName() { return "USER"; }
+        protected String getTableDbName() { return "LYRICS_RECOMMENDATION"; }
         /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from COMMENT where ...) as FOO_MAX} <br>
-         * COMMENT by USER_ID, named 'commentList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(commentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     commentCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     commentCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Comment.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
+         * Prepare to specify functions about relation table. <br>
+         * SONG by my SONG_ID, named 'song'.
+         * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public HpSDRFunction<CommentCB, UserCQ> derivedComment() {
-            assertDerived("commentList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<CommentCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveCommentList(fn, sq, al, op), _dbmetaProvider);
+        public SongCB.HpSpecification specifySong() {
+            assertRelation("song");
+            if (_song == null) {
+                _song = new SongCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQuerySong()
+                                    , () -> _qyCall.qy().querySong())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _song.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQuerySong()
+                      , () -> xsyncQyCall().qy().querySong()));
+                }
+            }
+            return _song;
         }
         /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from FAVORITE where ...) as FOO_MAX} <br>
-         * FAVORITE by USER_ID, named 'favoriteList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(favoriteCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     favoriteCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     favoriteCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Favorite.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
+         * Prepare to specify functions about relation table. <br>
+         * USER by my USER_ID, named 'user'.
+         * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public HpSDRFunction<FavoriteCB, UserCQ> derivedFavorite() {
-            assertDerived("favoriteList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<FavoriteCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveFavoriteList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from LYRICS_RECOMMENDATION where ...) as FOO_MAX} <br>
-         * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     recommendationCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     recommendationCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, LyricsRecommendation.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<LyricsRecommendationCB, UserCQ> derivedLyricsRecommendation() {
-            assertDerived("lyricsRecommendationList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LyricsRecommendationCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveLyricsRecommendationList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from POST where ...) as FOO_MAX} <br>
-         * POST by USER_ID, named 'postList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(postCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     postCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     postCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, Post.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<PostCB, UserCQ> derivedPost() {
-            assertDerived("postList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<PostCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderivePostList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from USER_FOLLOWING where ...) as FOO_MAX} <br>
-         * USER_FOLLOWING by FOLLOWER_ID, named 'userFollowingByFollowerIdList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     followingCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     followingCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, UserFollowing.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<UserFollowingCB, UserCQ> derivedUserFollowingByFollowerId() {
-            assertDerived("userFollowingByFollowerIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserFollowingCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveUserFollowingByFollowerIdList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from USER_FOLLOWING where ...) as FOO_MAX} <br>
-         * USER_FOLLOWING by FOLLOWING_ID, named 'userFollowingByFollowingIdList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(followingCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     followingCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     followingCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, UserFollowing.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<UserFollowingCB, UserCQ> derivedUserFollowingByFollowingId() {
-            assertDerived("userFollowingByFollowingIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserFollowingCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveUserFollowingByFollowingIdList(fn, sq, al, op), _dbmetaProvider);
+        public UserCB.HpSpecification specifyUser() {
+            assertRelation("user");
+            if (_user == null) {
+                _user = new UserCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryUser()
+                                    , () -> _qyCall.qy().queryUser())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _user.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryUser()
+                      , () -> xsyncQyCall().qy().queryUser()));
+                }
+            }
+            return _user;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)
          */
-        public HpSDRFunction<UserCB, UserCQ> myselfDerived() {
+        public HpSDRFunction<LyricsRecommendationCB, LyricsRecommendationCQ> myselfDerived() {
             assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LyricsRecommendationCB> sq, LyricsRecommendationCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
         }
     }
@@ -439,9 +430,9 @@ public class BsUserCB extends AbstractConditionBean {
      * This is very specialty so you can get the frontier spirit. Bon voyage!
      * @return The condition-bean for dream cruise, which is linked to main condition-bean.
      */
-    public UserCB dreamCruiseCB() {
-        UserCB cb = new UserCB();
-        cb.xsetupForDreamCruise((UserCB) this);
+    public LyricsRecommendationCB dreamCruiseCB() {
+        LyricsRecommendationCB cb = new LyricsRecommendationCB();
+        cb.xsetupForDreamCruise((LyricsRecommendationCB) this);
         return cb;
     }
 
@@ -466,15 +457,15 @@ public class BsUserCB extends AbstractConditionBean {
      * @param colCBLambda The callback for specify-query of left column. (NotNull)
      * @return The object for setting up operand and right column. (NotNull)
      */
-    public HpColQyOperand<UserCB> columnQuery(final SpecifyQuery<UserCB> colCBLambda) {
+    public HpColQyOperand<LyricsRecommendationCB> columnQuery(final SpecifyQuery<LyricsRecommendationCB> colCBLambda) {
         return xcreateColQyOperand((rightSp, operand) -> {
             return xcolqy(xcreateColumnQueryCB(), xcreateColumnQueryCB(), colCBLambda, rightSp, operand);
         });
     }
 
-    protected UserCB xcreateColumnQueryCB() {
-        UserCB cb = new UserCB();
-        cb.xsetupForColumnQuery((UserCB)this);
+    protected LyricsRecommendationCB xcreateColumnQueryCB() {
+        LyricsRecommendationCB cb = new LyricsRecommendationCB();
+        cb.xsetupForColumnQuery((LyricsRecommendationCB)this);
         return cb;
     }
 
@@ -494,8 +485,8 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param orCBLambda The callback for query of or-condition. (NotNull)
      */
-    public void orScopeQuery(OrQuery<UserCB> orCBLambda) {
-        xorSQ((UserCB)this, orCBLambda);
+    public void orScopeQuery(OrQuery<LyricsRecommendationCB> orCBLambda) {
+        xorSQ((LyricsRecommendationCB)this, orCBLambda);
     }
 
     /**
@@ -513,8 +504,8 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param andCBLambda The callback for query of and-condition. (NotNull)
      */
-    public void orScopeQueryAndPart(AndQuery<UserCB> andCBLambda) {
-        xorSQAP((UserCB)this, andCBLambda);
+    public void orScopeQueryAndPart(AndQuery<LyricsRecommendationCB> andCBLambda) {
+        xorSQAP((LyricsRecommendationCB)this, andCBLambda);
     }
 
     // ===================================================================================
@@ -544,11 +535,11 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                        ============
     @Override
     protected void xprepareSyncQyCall(ConditionBean mainCB) {
-        final UserCB cb;
+        final LyricsRecommendationCB cb;
         if (mainCB != null) {
-            cb = (UserCB)mainCB;
+            cb = (LyricsRecommendationCB)mainCB;
         } else {
-            cb = new UserCB();
+            cb = new LyricsRecommendationCB();
         }
         specify().xsetSyncQyCall(xcreateSpQyCall(() -> true, () -> cb.query()));
     }
@@ -557,8 +548,8 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                            Internal
     //                                                                            ========
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xgetConditionBeanClassNameInternally() { return UserCB.class.getName(); }
-    protected String xgetConditionQueryClassNameInternally() { return UserCQ.class.getName(); }
+    protected String xgetConditionBeanClassNameInternally() { return LyricsRecommendationCB.class.getName(); }
+    protected String xgetConditionQueryClassNameInternally() { return LyricsRecommendationCQ.class.getName(); }
     protected String xgetSubQueryClassNameInternally() { return SubQuery.class.getName(); }
     protected String xgetConditionOptionClassNameInternally() { return ConditionOption.class.getName(); }
 }

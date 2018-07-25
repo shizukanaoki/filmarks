@@ -12,21 +12,21 @@ import filmarks.dbflute.cbean.cq.bs.*;
 import filmarks.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of SONG.
+ * The condition-query for in-line of LYRICS_RECOMMENDATION.
  * @author DBFlute(AutoGenerator)
  */
-public class SongCIQ extends AbstractBsSongCQ {
+public class LyricsRecommendationCIQ extends AbstractBsLyricsRecommendationCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsSongCQ _myCQ;
+    protected BsLyricsRecommendationCQ _myCQ;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public SongCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
-                        , String aliasName, int nestLevel, BsSongCQ myCQ) {
+    public LyricsRecommendationCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
+                        , String aliasName, int nestLevel, BsLyricsRecommendationCQ myCQ) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
         _myCQ = myCQ;
         _foreignPropertyName = _myCQ.xgetForeignPropertyName(); // accept foreign property name
@@ -61,30 +61,20 @@ public class SongCIQ extends AbstractBsSongCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
+    protected ConditionValue xgetCValueId() { return _myCQ.xdfgetId(); }
+    protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
     protected ConditionValue xgetCValueSongId() { return _myCQ.xdfgetSongId(); }
-    public String keepSongId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
-    { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepSongId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
-    { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepSongId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
-    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepSongId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    protected ConditionValue xgetCValueAlbumId() { return _myCQ.xdfgetAlbumId(); }
-    protected ConditionValue xgetCValueSongTitle() { return _myCQ.xdfgetSongTitle(); }
-    protected ConditionValue xgetCValueSongLyrics() { return _myCQ.xdfgetSongLyrics(); }
+    protected ConditionValue xgetCValueLyrics() { return _myCQ.xdfgetLyrics(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
-    public String keepScalarCondition(SongCQ sq)
+    public String keepScalarCondition(LyricsRecommendationCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
-    public String keepSpecifyMyselfDerived(SongCQ sq)
+    public String keepSpecifyMyselfDerived(LyricsRecommendationCQ sq)
     { throwIICBOE("(Specify)MyselfDerived"); return null;}
-    public String keepQueryMyselfDerived(SongCQ sq)
+    public String keepQueryMyselfDerived(LyricsRecommendationCQ sq)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
     public String keepQueryMyselfDerivedParameter(Object vl)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
-    public String keepMyselfExists(SongCQ sq)
+    public String keepMyselfExists(LyricsRecommendationCQ sq)
     { throwIICBOE("MyselfExists"); return null;}
 
     protected void throwIICBOE(String name)
@@ -94,6 +84,6 @@ public class SongCIQ extends AbstractBsSongCQ {
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xinCB() { return SongCB.class.getName(); }
-    protected String xinCQ() { return SongCQ.class.getName(); }
+    protected String xinCB() { return LyricsRecommendationCB.class.getName(); }
+    protected String xinCQ() { return LyricsRecommendationCQ.class.getName(); }
 }

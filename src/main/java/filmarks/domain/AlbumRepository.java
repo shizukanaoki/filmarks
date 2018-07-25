@@ -23,7 +23,12 @@ public class AlbumRepository {
 
     public Album findOne(int albumId) {
         Album album = albumBhv.selectByPK(albumId).get();
-        albumBhv.loadFavorite(album, cb -> {});
+        albumBhv.loadFavorite(album, cb -> {
+            cb.addOrderBy_PK_Desc();
+        });
+        albumBhv.loadSong(album, cb -> {
+            cb.addOrderBy_PK_Asc();
+        });
         albumBhv.loadComment(album, cb -> {
             cb.setupSelect_User();
         });

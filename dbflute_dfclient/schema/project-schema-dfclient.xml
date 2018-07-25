@@ -92,6 +92,32 @@
             <index-column name="ALBUM_ID" position="1"/>
         </index>
     </table>
+    <table comment="NEW_TABLE" name="LYRICS_RECOMMENDATION"
+        schema="filmarks.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="ID" dbType="INT"
+            javaType="Integer" name="ID" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="????ID" dbType="INT" javaType="Integer"
+            name="USER_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="ID" dbType="INT" javaType="Integer"
+            name="SONG_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="??" dbType="TEXT" javaType="String"
+            name="LYRICS" required="true" size="65535" type="LONGVARCHAR"/>
+        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
+            foreignTable="SONG" name="FK_LYRICS_RECOMMENDATION_SONG">
+            <reference foreign="SONG_ID" local="SONG_ID"/>
+        </foreign-key>
+        <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
+            foreignTable="USER" name="FK_LYRICS_RECOMMENDATION_USER">
+            <reference foreign="USER_ID" local="USER_ID"/>
+        </foreign-key>
+        <index name="FK_LYRICS_RECOMMENDATION_SONG">
+            <index-column name="SONG_ID" position="1"/>
+        </index>
+        <index name="FK_LYRICS_RECOMMENDATION_USER">
+            <index-column name="USER_ID" position="1"/>
+        </index>
+    </table>
     <table comment="NEW_TABLE" name="POST"
         schema="filmarks.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="ID" dbType="INT"
@@ -127,6 +153,8 @@
             name="ALBUM_ID" required="true" size="10" type="INTEGER"/>
         <column comment="??" dbType="VARCHAR" javaType="String"
             name="SONG_TITLE" required="true" size="200" type="VARCHAR"/>
+        <column comment="" dbType="TEXT" javaType="String"
+            name="SONG_LYRICS" size="65535" type="LONGVARCHAR"/>
         <foreign-key foreignSchema="filmarks.$$NoNameSchema$$"
             foreignTable="ALBUM" name="FK_SONG_PRODUCT">
             <reference foreign="ALBUM_ID" local="ALBUM_ID"/>

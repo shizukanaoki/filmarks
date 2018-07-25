@@ -32,13 +32,13 @@ import filmarks.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, POST, USER_FOLLOWING
+ *     COMMENT, FAVORITE, LYRICS_RECOMMENDATION, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
+ *     commentList, favoriteList, lyricsRecommendationList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -151,6 +151,26 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         _favoriteList = favoriteList;
     }
 
+    /** LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'. */
+    protected List<LyricsRecommendation> _lyricsRecommendationList;
+
+    /**
+     * [get] LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
+     * @return The entity list of referrer property 'lyricsRecommendationList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<LyricsRecommendation> getLyricsRecommendationList() {
+        if (_lyricsRecommendationList == null) { _lyricsRecommendationList = newReferrerList(); }
+        return _lyricsRecommendationList;
+    }
+
+    /**
+     * [set] LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
+     * @param lyricsRecommendationList The entity list of referrer property 'lyricsRecommendationList'. (NullAllowed)
+     */
+    public void setLyricsRecommendationList(List<LyricsRecommendation> lyricsRecommendationList) {
+        _lyricsRecommendationList = lyricsRecommendationList;
+    }
+
     /** POST by USER_ID, named 'postList'. */
     protected List<Post> _postList;
 
@@ -244,6 +264,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { if (et != null) { sb.append(li).append(xbRDS(et, "commentList")); } } }
         if (_favoriteList != null) { for (Favorite et : _favoriteList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "favoriteList")); } } }
+        if (_lyricsRecommendationList != null) { for (LyricsRecommendation et : _lyricsRecommendationList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "lyricsRecommendationList")); } } }
         if (_postList != null) { for (Post et : _postList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "postList")); } } }
         if (_userFollowingByFollowerIdList != null) { for (UserFollowing et : _userFollowingByFollowerIdList)
@@ -273,6 +295,8 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
         { sb.append(dm).append("commentList"); }
         if (_favoriteList != null && !_favoriteList.isEmpty())
         { sb.append(dm).append("favoriteList"); }
+        if (_lyricsRecommendationList != null && !_lyricsRecommendationList.isEmpty())
+        { sb.append(dm).append("lyricsRecommendationList"); }
         if (_postList != null && !_postList.isEmpty())
         { sb.append(dm).append("postList"); }
         if (_userFollowingByFollowerIdList != null && !_userFollowingByFollowerIdList.isEmpty())

@@ -66,6 +66,8 @@ public class UserCIQ extends AbstractBsUserCQ {
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepUserId_ExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepUserId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepUserId_ExistsReferrer_PostList(PostCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepUserId_ExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq)
@@ -76,6 +78,8 @@ public class UserCIQ extends AbstractBsUserCQ {
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepUserId_NotExistsReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepUserId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepUserId_NotExistsReferrer_PostList(PostCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepUserId_NotExistsReferrer_UserFollowingByFollowerIdList(UserFollowingCQ sq)
@@ -85,6 +89,8 @@ public class UserCIQ extends AbstractBsUserCQ {
     public String keepUserId_SpecifyDerivedReferrer_CommentList(CommentCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepUserId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepUserId_SpecifyDerivedReferrer_PostList(PostCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
@@ -99,6 +105,10 @@ public class UserCIQ extends AbstractBsUserCQ {
     public String keepUserId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepUserId_QueryDerivedReferrer_FavoriteListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepUserId_QueryDerivedReferrer_PostList(PostCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }

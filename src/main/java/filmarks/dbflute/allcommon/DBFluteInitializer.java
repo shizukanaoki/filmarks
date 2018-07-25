@@ -104,8 +104,7 @@ public class DBFluteInitializer {
         return dataSourceFqcn.startsWith("org.apache.commons.dbcp.")
             || dataSourceFqcn.startsWith("org.apache.commons.dbcp2.")
             || dataSourceFqcn.startsWith("org.apache.tomcat.jdbc.pool.")
-            || dataSourceFqcn.startsWith("com.zaxxer.hikari.")
-            || dataSourceFqcn.startsWith("org.springframework.jdbc.datasource.");
+            || dataSourceFqcn.startsWith("com.zaxxer.hikari.");
     }
 
     /**

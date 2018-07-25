@@ -197,6 +197,25 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select USER_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of LyricsRecommendationList for 'exists'. (NotNull)
+     */
+    public void existsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_LyricsRecommendationList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepUserId_ExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select USER_ID from POST where ...)} <br>
      * POST by USER_ID, named 'postAsOne'.
      * <pre>
@@ -292,6 +311,25 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select USER_ID from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsLyricsRecommendation</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_LyricsRecommendationList for 'not exists'. (NotNull)
+     */
+    public void notExistsLyricsRecommendation(SubQuery<LyricsRecommendationCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_LyricsRecommendationList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "lyricsRecommendationList");
+    }
+    public abstract String keepUserId_NotExistsReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select USER_ID from POST where ...)} <br>
      * POST by USER_ID, named 'postAsOne'.
      * <pre>
@@ -362,6 +400,14 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "favoriteList", al, op);
     }
     public abstract String keepUserId_SpecifyDerivedReferrer_FavoriteList(FavoriteCQ sq);
+
+    public void xsderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_LyricsRecommendationList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "lyricsRecommendationList", al, op);
+    }
+    public abstract String keepUserId_SpecifyDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
 
     public void xsderivePostList(String fn, SubQuery<PostCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -440,6 +486,33 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserId_QueryDerivedReferrer_FavoriteList(FavoriteCQ sq);
     public abstract String keepUserId_QueryDerivedReferrer_FavoriteListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from LYRICS_RECOMMENDATION where ...)} <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedLyricsRecommendation()</span>.<span style="color: #CC4747">max</span>(recommendationCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     recommendationCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     recommendationCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<LyricsRecommendationCB> derivedLyricsRecommendation() {
+        return xcreateQDRFunctionLyricsRecommendationList();
+    }
+    protected HpQDRFunction<LyricsRecommendationCB> xcreateQDRFunctionLyricsRecommendationList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveLyricsRecommendationList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveLyricsRecommendationList(String fn, SubQuery<LyricsRecommendationCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LyricsRecommendationCB cb = new LyricsRecommendationCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_LyricsRecommendationList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_LyricsRecommendationListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "lyricsRecommendationList", rd, vl, prpp, op);
+    }
+    public abstract String keepUserId_QueryDerivedReferrer_LyricsRecommendationList(LyricsRecommendationCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_LyricsRecommendationListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>

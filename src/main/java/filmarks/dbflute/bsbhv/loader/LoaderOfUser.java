@@ -30,13 +30,13 @@ import filmarks.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     COMMENT, FAVORITE, POST, USER_FOLLOWING
+ *     COMMENT, FAVORITE, LYRICS_RECOMMENDATION, POST, USER_FOLLOWING
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     commentList, favoriteList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
+ *     commentList, favoriteList, lyricsRecommendationList, postList, userFollowingByFollowerIdList, userFollowingByFollowingIdList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -127,6 +127,40 @@ public class LoaderOfUser {
     public NestedReferrerLoaderGateway<LoaderOfFavorite> loadFavorite(ReferrerConditionSetupper<FavoriteCB> refCBLambda) {
         myBhv().loadFavorite(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerFavorite = refLs);
         return hd -> hd.handle(new LoaderOfFavorite().ready(_referrerFavorite, _selector));
+    }
+
+    protected List<LyricsRecommendation> _referrerLyricsRecommendation;
+
+    /**
+     * Load referrer of lyricsRecommendationList by the set-upper of referrer. <br>
+     * LYRICS_RECOMMENDATION by USER_ID, named 'lyricsRecommendationList'.
+     * <pre>
+     * <span style="color: #0000C0">userBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">userList</span>, <span style="color: #553000">userLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">userLoader</span>.<span style="color: #CC4747">loadLyricsRecommendation</span>(<span style="color: #553000">recommendationCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">recommendationCB</span>.setupSelect...
+     *         <span style="color: #553000">recommendationCB</span>.query().set...
+     *         <span style="color: #553000">recommendationCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">recommendationLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    recommendationLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (User user : <span style="color: #553000">userList</span>) {
+     *     ... = user.<span style="color: #CC4747">getLyricsRecommendationList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserId_InScope(pkList);
+     * cb.query().addOrderBy_UserId_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfLyricsRecommendation> loadLyricsRecommendation(ReferrerConditionSetupper<LyricsRecommendationCB> refCBLambda) {
+        myBhv().loadLyricsRecommendation(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerLyricsRecommendation = refLs);
+        return hd -> hd.handle(new LoaderOfLyricsRecommendation().ready(_referrerLyricsRecommendation, _selector));
     }
 
     protected List<Post> _referrerPost;
