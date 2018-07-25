@@ -22,13 +22,13 @@ import java.util.stream.Collectors;
 public class RecommendService {
 
     @Autowired
-    ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
     @Autowired
-    FavoriteRepository favoriteRepository;
+    private FavoriteRepository favoriteRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public List<Artist> findRecommendedArtists(User targetUser) {
         List<User> users = userRepository.findAll();
