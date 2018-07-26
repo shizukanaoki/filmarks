@@ -169,3 +169,13 @@ table.album_info_songs {
 .br-widget {
     margin-top: 15px;
 }
+
+
+.link {
+    color: #333;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: orange;
+}

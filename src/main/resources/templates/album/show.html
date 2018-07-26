@@ -89,7 +89,7 @@
             <ul class="comments">
                 <li class="comment" th:each="comment : ${album.getCommentList()}">
                     <div class="comment_username">
-                        <a th:text="${comment.getUser().get().getUsername()}" th:href="${'/users/' + comment.getUser().get().getUserId()}"></a>
+                        <a class="link" th:text="${comment.getUser().get().getUsername()}" th:href="${'/users/' + comment.getUser().get().getUserId()}"></a>
                     </div>
                     <div class="comment_rate">
                         <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
