@@ -49,11 +49,12 @@
 }
 
 .album_info_artist {
-    margin-top: 3px;
+    color: #333;
+    margin-top: 10px;
 }
 
 .album_info_rate {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .album_info_songs {
@@ -154,5 +155,18 @@ table.album_info_songs {
 }
 
 .comment_form .album_action_button {
+    margin-top: 15px;
+}
+
+.song_title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.song_title a:hover {
+    color: orange;
+}
+
+.br-widget {
     margin-top: 15px;
 }

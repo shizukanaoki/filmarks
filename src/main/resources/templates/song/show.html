@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/song.css">
+    <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -32,7 +34,9 @@
     <div class="main">
         <div class="song_info">
             <div class="song_info_left">
-                <img th:src="'/image/album/' + ${song.getAlbum().get().getImageFileName()}" width="200" height="200">
+                <a th:href="${'/albums/' + song.getAlbumId()}">
+                    <img th:src="'/image/album/' + ${song.getAlbum().get().getImageFileName()}" width="200" height="200">
+                </a>
             </div>
             <div class="song_info_right">
                 <div class="song_info_header">
@@ -55,16 +59,18 @@
                 <div>
                     <textarea class="form_lyrics" th:field="*{lyrics}"></textarea>
                 </div>
-                <div>
-                    <button class="form_submit" th:type="submit">投稿</button>
+                <div class="form_submit">
+                    <button class="form_submit_btn" th:type="submit">投稿</button>
                 </div>
                 <input type="hidden" th:field="*{songId}">
             </form>
         </div>
-        <h2 class="recommendations_title">RECOMMENDATIONS</h2>
+
         <div class="recommendations">
             <div class="recommendation" th:each="recommendation : ${song.getLyricsRecommendationList()}">
-                <div class="user_name" th:text="${recommendation.getUser().get().getUsername()}"></div>
+                <div class="user_name">
+                    <a th:href="${'/users/' + recommendation.getUser().get().getUserId()}" th:text="${recommendation.getUser().get().getUsername()}"></a>
+                </div>
                 <div class="recommendation_content">
                     <th:block th:each="str, stat : ${recommendation.getLyrics().split('\r\n|\r|\n', -1)}">
                         <th:block th:text="${str}"/>

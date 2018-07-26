@@ -22,7 +22,10 @@ public class AlbumRepository {
     }
 
     public Album findOne(int albumId) {
-        Album album = albumBhv.selectByPK(albumId).get();
+        Album album = albumBhv.selectEntity(cb -> {
+            cb.query().setAlbumId_Equal(albumId);
+            cb.setupSelect_Artist();
+        }).get();
         albumBhv.loadFavorite(album, cb -> {
             cb.addOrderBy_PK_Desc();
         });

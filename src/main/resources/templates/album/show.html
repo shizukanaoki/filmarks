@@ -67,8 +67,8 @@
             </div>
             <div class="album_info_right">
                 <div class="album_info_header">
-                    <h2 class="album_info_title">With the Beatles</h2>
-                    <p class="album_info_artist">beatles</p>
+                    <h2 th:text="${album.getAlbumTitle()}" class="album_info_title"></h2>
+                    <p th:text="${album.getArtist().get().getArtistName()}" class="album_info_artist"></p>
                 </div>
                 <p class="album_info_rate">
                     <th:block th:each="seq : ${#numbers.sequence(1, 5)}">
@@ -79,7 +79,7 @@
                 <table class="album_info_songs">
                     <tr th:each="song, stat : ${album.getSongList()}">
                         <td th:text="${stat.count + '.'}"></td>
-                        <td>
+                        <td class="song_title">
                             <a th:text="${song.getSongTitle()}" th:href="${'/songs/' + song.getSongId()}"></a>
                         </td>
                     </tr>

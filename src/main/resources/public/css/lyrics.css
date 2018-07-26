@@ -64,6 +64,11 @@
     text-align: right;
 }
 
+.username_description {
+    font-size: 10px;
+    color: #333;
+}
+
 .lyrics_info {
     text-align: center;
     margin-top: 30px;
@@ -88,4 +93,13 @@
 .song_title {
     font-size: 16px;
     margin-top: 10px;
+}
+
+.link {
+    color: #333;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: orange;
 }
