@@ -67,6 +67,7 @@ public class UserRepository {
         List<User> followings = user.getUserFollowingByFollowingIdList().stream()
                 .map(userFollowing -> userFollowing.getUserByFollowerId().get()).collect(Collectors.toList());
         userBhv.loadFavorite(followings, cb -> {
+            cb.query().addOrderBy_FavoriteCreatedAt_Desc();
             cb.setupSelect_Album();
         });
         return followings;
@@ -80,6 +81,7 @@ public class UserRepository {
         List<User> followers = user.getUserFollowingByFollowerIdList().stream()
                 .map(userFollowing -> userFollowing.getUserByFollowingId().get()).collect(Collectors.toList());
         userBhv.loadFavorite(followers, cb -> {
+            cb.query().addOrderBy_FavoriteCreatedAt_Desc();
             cb.setupSelect_Album();
         });
         return followers;
