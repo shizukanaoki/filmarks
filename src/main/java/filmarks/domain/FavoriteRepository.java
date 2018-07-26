@@ -32,6 +32,12 @@ public class FavoriteRepository {
         });
     }
 
+    public List<Favorite> findByUserId(int userId) {
+        return favoriteBhv.selectList(cb -> {
+            cb.query().setUserId_Equal(userId);
+        });
+    }
+
     public Favorite save(Favorite favorite) {
         favoriteBhv.insert(favorite);
         return favorite;

@@ -57,7 +57,7 @@
         <div class="recommendataion_form">
             <form th:action="@{'/songs/' + ${song.getSongId()} + '/lyricsRecommendation' }" th:object="${form}" th:method="post">
                 <div>
-                    <textarea class="form_lyrics" th:field="*{lyrics}"></textarea>
+                    <textarea class="form_lyrics" th:field="*{lyrics}" placeholder="好きなフレーズをコピーして投稿してみましょう&#13;&#10;投稿するとLyricsに表示されます"></textarea>
                 </div>
                 <div class="form_submit">
                     <button class="form_submit_btn" th:type="submit">投稿</button>

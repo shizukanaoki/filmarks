@@ -31,6 +31,11 @@ public class RecommendService {
     private UserRepository userRepository;
 
     public List<Artist> findRecommendedArtists(User targetUser) {
+        List<Favorite> targetUserFavorites = favoriteRepository.findByUserId(targetUser.getUserId());
+        if (targetUserFavorites.size() < 10) {
+            return Collections.EMPTY_LIST;
+        }
+
         List<User> users = userRepository.findAll();
 
         List<Favorite> favorites = favoriteRepository.findAll();
@@ -77,9 +82,17 @@ public class RecommendService {
             map.put(artists.get(k), scores.getEntry(0, k));
         }
 
-        return map.entrySet().stream()
+        List<Artist> sortedArtists = map.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+
+        if (sortedArtists.size() < 10) {
+            return Collections.EMPTY_LIST;
+        } else if (sortedArtists.size() < 20) {
+            return sortedArtists;
+        } else {
+            return sortedArtists.subList(0, 19);
+        }
     }
 }
