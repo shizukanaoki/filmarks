@@ -44,7 +44,13 @@ public class AlbumController {
         } else {
             albums = albumService.findAlbumsByScope(artistIds);
         }
+
         Collections.shuffle(albums);
+
+        if (albums.size() >= 100) {
+            albums = albums.subList(0,  99);
+        }
+        
         mav.addObject("albums", albums);
         mav.setViewName("album/index");
         return mav;
