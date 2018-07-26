@@ -14,7 +14,7 @@ public class SongRepository {
 
     public Song findOne(int songId) throws EntityAlreadyDeletedException {
         Song song = songBhv.selectEntity(cb -> {
-            cb.query().setAlbumId_Equal(songId);
+            cb.query().setSongId_Equal(songId);
             cb.setupSelect_Album().withArtist();
         }).get();
         songBhv.loadLyricsRecommendation(song, cb -> {
