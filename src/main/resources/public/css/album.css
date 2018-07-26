@@ -160,7 +160,6 @@ table.album_info_songs {
 
 .song_title a {
     color: #333;
-    text-decoration: none;
 }
 
 .song_title a:hover {

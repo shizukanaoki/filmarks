@@ -21,7 +21,7 @@
 <div class="wrapper">
     <ul class="sidebar">
         <li class="sidebar_brand">
-            <a href="/">BLAND</a>
+            <a href="/">RECO</a>
         </li>
         <li>
             <a href="/">Recommendations</a>
@@ -80,7 +80,8 @@
                     <tr th:each="song, stat : ${album.getSongList()}">
                         <td th:text="${stat.count + '.'}"></td>
                         <td class="song_title">
-                            <a th:text="${song.getSongTitle()}" th:href="${'/songs/' + song.getSongId()}"></a>
+                            <span th:if="${song.getSongLyrics() == null}" th:text="${song.getSongTitle()}"></span>
+                            <a th:if="${song.getSongLyrics() != null}" th:text="${song.getSongTitle()}" th:href="${'/songs/' + song.getSongId()}"></a>
                         </td>
                     </tr>
                 </table>
