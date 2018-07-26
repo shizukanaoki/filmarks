@@ -43,9 +43,11 @@ public class UserRepository {
     public User findOne(int userId) throws EntityAlreadyDeletedException {
         User user = userBhv.selectByPK(userId).get();
         userBhv.loadFavorite(user, cb -> {
+            cb.query().addOrderBy_FavoriteCreatedAt_Desc();
             cb.setupSelect_Album();
         });
         userBhv.loadComment(user, cb -> {
+            cb.query().addOrderBy_CommentCreatedAt_Desc();
             cb.setupSelect_Album();
         });
         userBhv.loadUserFollowingByFollowingId(user, cb -> {

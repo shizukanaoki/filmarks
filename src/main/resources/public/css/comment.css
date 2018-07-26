@@ -35,6 +35,11 @@
     overflow: scroll;
 }
 
+.comment_datetime {
+    color: #7e7e7e;
+    font-size: 10px;
+}
+
 .comment_rate {
     margin-top: 10px;
     font-size: 12px;
