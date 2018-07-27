@@ -57,14 +57,10 @@
     margin-top: 40px;
 }
 
-.album_info_songs {
-    margin-top: 20px;
-}
-
 table.album_info_songs {
     min-width: 400px;
     border-collapse:collapse;
-    margin:40px auto 0;
+    margin-top: 20px;
 }
 
 .album_info_songs td,th {
