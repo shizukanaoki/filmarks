@@ -34,16 +34,25 @@
         <li class="sidebar_active">
             <a th:href="@{'/users/' + ${user.getUserId()} + '/followers'}">Follower</a>
         </li>
-        <li th:if="${!isFollowing}">
-            <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                <button class="follow_btn" type="submit">follow</button>
-            </form>
-        </li>
-        <li th:if="${isFollowing}">
-            <form class="follow_form" name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
-                <button class="follow_btn" type="submit">unfollow</button>
-            </form>
-        </li>
+        <th:block th:if="${user.equals(loginUser)}">
+            <li>
+                <form class="follow_form" name="form" method="post" th:action="@{'/logout'}">
+                    <button class="follow_btn" type="submit">logout</button>
+                </form>
+            </li>
+        </th:block>
+        <th:block th:if="${!user.equals(loginUser)}">
+            <li th:if="${!isFollowing}">
+                <form class="follow_form" name="form" method="post" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">follow</button>
+                </form>
+            </li>
+            <li th:if="${isFollowing}">
+                <form class="follow_form" name="form" th:method="delete" th:action="@{'/relationships/' + ${user.getUserId()}}">
+                    <button class="follow_btn" type="submit">unfollow</button>
+                </form>
+            </li>
+        </th:block>
     </ul>
     <div class="sidebar_width">
 
