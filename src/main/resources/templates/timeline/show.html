@@ -48,7 +48,9 @@
                                     <a th:text="${post.getUser().get().getUsername()}" th:href="@{'/users/'} + ${post.getUser().get().getUserId()}"></a>
                                 </div>
                             </div>
-                            <div th:text="${post.getAlbum().getAlbumTitle()}" class="post_info_album_title"></div>
+                            <div class="post_info_album_title">
+                                <span th:text="${post.getAlbum().getAlbumTitle()}"></span>
+                            </div>
                             <div th:text="${post.getDescription()}" class="post_info_description"></div>
                             <div th:text="${post.getContent()}" class="post_info_content"></div>
                         </div>

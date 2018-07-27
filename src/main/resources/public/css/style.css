@@ -98,3 +98,13 @@ ul.sidebar {
     font-size: 20px;
     line-height: 3rem;
 }
+
+
+.link {
+    color: #333;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: orange;
+}
